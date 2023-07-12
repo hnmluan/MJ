@@ -55,14 +55,14 @@ public class UIMenuCtrl : InitMonoBehaviour
             panelActive = false;
         }
 
-        //SoundController.Instance.PlayVFX("sfx_button_press");
+        AudioController.Instance.PlayVFX("sfx_button_press");
     }
 
-    //public void ToggleMusic() => SoundController.Instance.ToggleMusic();
+    public void ToggleMusic() => AudioController.Instance.ToggleMusic();
 
-    //public void ToggleSFX() => SoundController.Instance.ToggleSFX();
+    public void ToggleSFX() => AudioController.Instance.ToggleSFX();
 
-    //public void MusicVolume() => SoundController.Instance.MusicVolume(_musicSlider.value);
+    public void MusicVolume() => AudioController.Instance.MusicVolume(_musicSlider.value);
 
-    // public void SFXVolume() => SoundController.Instance.SFXVolume(_sfxSlider.value);
+    public void SFXVolume() => AudioController.Instance.SFXVolume(_sfxSlider.value);
 }
