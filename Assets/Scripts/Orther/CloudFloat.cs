@@ -27,8 +27,13 @@ public class CloudFloat : MonoBehaviour
 
     private void Update()
     {
-        if (isWaitingTimeToStart) return;
+        if (isWaitingTimeToStart)
+        {
+            cloud.enabled = false;
+            return;
+        }
 
+        cloud.enabled = true;
         Move();
         ApplyOscillation();
         UpdateFade();
