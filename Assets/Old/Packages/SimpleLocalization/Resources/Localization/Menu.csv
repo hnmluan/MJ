@@ -1,0 +1,23 @@
+Key,English,Vietnamese
+Setting.Title,Game Setting,Cài đặt
+Setting.SFX,SFX:,Hiệu ứng:
+Setting.Music,Music:,Âm thanh:
+Setting.VOLUME,VOLUME,ÂM LƯỢNG
+Setting.LANGUAGE,LANGUAGE,NGÔN NGỮ
+Setting.English,English,Tiếng anh
+Setting.Vietnamese,Vietnamese,Tiếng việt
+,,
+Guide.Title,Game Guide,Hướng dẫn
+Guide.w.action,Move up,Di chuyển lên trên
+Guide.a.action,Move left,Di chuyển sang trái
+Guide.s.action,Move down,Di chuyển xuống dưới
+Guide.d.action,Move right,Di chuyển sang phảii
+Guide.i.action,Open inventory,Mở kho hàng
+Guide.z.action,Start conversation,Bắt đầu hội thoại
+Guide.space.action,Switch to next dialog,Chuyển đến hộp thoại kế
+Guide.Space,Space,Phím cách
+Guide.MOVE,------MOVE------,------DI CHUYỂN------
+Guide.EXTENSION,------EXTENSION------,------MỞ RỘNG------
+Guide.CONVERSATION,------CONVERSATION------,------HỘI THOẠI------
+,,
+Pause.Title,Pause,Tạm Dừng
