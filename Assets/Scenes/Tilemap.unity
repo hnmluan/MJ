@@ -36851,7 +36851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1ee0b3dc675694dbd7f2609d00d4b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCtrl: {fileID: 0}
+  playerCtrl: {fileID: 1298275781}
   speed: 8
   direction: {x: 0, y: 0}
   sfxTimer: 0
