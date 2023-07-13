@@ -30,13 +30,9 @@ public class PlayerConverse : PlayerAbstract
 
         Debug.DrawLine(transform.position, conversePosition, Color.red);
 
-        //Debug.Log("Npc");
-        //Debug.Log(facingDir);
-        //Debug.Log(interactPosition);
-
-        var collider = Physics2D.OverlapCircle(conversePosition, 0.2f, converseLayer);
+        Collider2D collider = Physics2D.OverlapCircle(conversePosition, 0.2f, converseLayer);
         Debug.Log(collider);
 
-        if (collider != null) collider.GetComponent<IInteractable>()?.Interact();
+        if (collider != null && !(GameController.Instance.State == GameState.Dialog)) collider.GetComponent<IInteractable>()?.Interact();
     }
 }

@@ -4,31 +4,29 @@ public class NPCConverse : NPCAbstract, IInteractable
 {
     public float detectionConversableRange = 2f;
 
+    public bool isPlayerInRange = false;
+
     [SerializeField] Dialog dialog;
 
-    public void Interact()
-    {
-        StartCoroutine(DialogCtrl.Instance.ShowDialog(dialog));
-    }
+    public void Interact() => StartCoroutine(DialogCtrl.Instance.ShowDialog(dialog));
 
     private void Update()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionConversableRange);
-        foreach (Collider collider in colliders)
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionConversableRange);
+        foreach (Collider2D collider in colliders)
         {
             if (collider.CompareTag("Player"))
             {
-                npcCtrl.DialogConversable.SetActive(true);
-                Debug.Log("Hello");
+                isPlayerInRange = true;
                 break;
             }
-            npcCtrl.DialogConversable.SetActive(false);
+            isPlayerInRange = false;
         }
+        npcCtrl.DialogConversable.SetActive(isPlayerInRange);
     }
 
     private void OnDrawGizmosSelected()
     {
-        // Vẽ hình cầu để hiển thị phạm vi phát hiện trong Scene view
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectionConversableRange);
     }

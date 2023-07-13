@@ -34,6 +34,7 @@ public class NPCMovement : NPCAbstract
         if (movePoints.Count == 0) return;
 
         transform.parent.position = movePoints[0].position;
+
         StartCoroutine(MoveToNextPoint());
     }
 
@@ -52,7 +53,7 @@ public class NPCMovement : NPCAbstract
                 Vector3 targetPosition = movePoints[currentPointIndex].position;
                 float distance = Vector3.Distance(transform.position, targetPosition);
 
-                while (distance > 0.01f)
+                while (distance > 0.1f)
                 {
                     MoveTowardsTarget(targetPosition);
                     distance = Vector3.Distance(transform.position, targetPosition);
