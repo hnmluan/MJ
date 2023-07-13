@@ -22,7 +22,7 @@ public class CameraFollow : InitMonoBehaviour
 
     protected virtual void LoadPlayer()
     {
-        tagert = GameObject.Find("Player").gameObject.transform;
+        tagert = GameObject.Find("PlayerConverse").gameObject.transform;
     }
 
     private void FixedUpdate()
@@ -41,8 +41,8 @@ public class CameraFollow : InitMonoBehaviour
                 map_y * hight * 2,
                 cam.transform.position.z),
             t);
-        Debug.Log("tagert.position.x" + tagert.position.x);
-        Debug.Log("round = " + Rouned((tagert.position.x - wight) / (2 * wight)));
+        //Debug.Log("tagert.position.x" + tagert.position.x);
+        //Debug.Log("round = " + Rouned((tagert.position.x - wight) / (2 * wight)));
 
     }
 

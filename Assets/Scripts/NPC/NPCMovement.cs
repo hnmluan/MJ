@@ -41,13 +41,13 @@ public class NPCMovement : NPCAbstract
     {
         while (true)
         {
+            if (GameController.Instance.State == GameState.Dialog) SetMovingState(false);
+            else SetMovingState(true);
+
             if (isMoving)
             {
-                if (currentPointIndex >= movePoints.Count)
-                {
-                    // Nếu đã di chuyển hết danh sách, quay lại điểm đầu tiên
-                    currentPointIndex = 0;
-                }
+                if (currentPointIndex >= movePoints.Count) currentPointIndex = 0;
+
 
                 Vector3 targetPosition = movePoints[currentPointIndex].position;
                 float distance = Vector3.Distance(transform.position, targetPosition);
@@ -59,7 +59,6 @@ public class NPCMovement : NPCAbstract
                     yield return null;
                 }
 
-                // Đạt đến điểm tiếp theo, chuyển sang trạng thái đứng yên
                 SetMovingState(false);
                 yield return new WaitForSeconds(standingTime);
                 SetMovingState(true);
