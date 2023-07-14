@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5027949289357565361}
   - component: {fileID: 8648630211345642818}
   - component: {fileID: 7517465043828463942}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Noodle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

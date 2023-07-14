@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3138542863193290110}
   - component: {fileID: 2156671196580087868}
   - component: {fileID: 3258012542469185020}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Kitchen 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}

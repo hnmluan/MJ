@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3157969389251563740}
   - component: {fileID: 5223627303352337905}
   - component: {fileID: 1033583002193368100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2895039323782766948}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.1357327, y: 0.68465424, z: 0.15811998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

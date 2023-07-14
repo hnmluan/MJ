@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 86829535238495411}
   - component: {fileID: 5964181355302776419}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Vent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4769446638257504926}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.805733, y: -1.1753464, z: 0.15811998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
