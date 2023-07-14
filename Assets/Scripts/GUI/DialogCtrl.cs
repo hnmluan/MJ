@@ -17,6 +17,9 @@ public class DialogCtrl : InitMonoBehaviour
     [SerializeField] protected LocalizedDialog localizedDialog;
     public LocalizedDialog LocalizedDialog { get => localizedDialog; }
 
+    [SerializeField] protected Image faceset;
+    public Image Faceset { get => faceset; }
+
     [SerializeField] protected int lettersPerSecond = 40;
 
     public event Action OnShowDialog, OnHideDialog;
@@ -26,6 +29,43 @@ public class DialogCtrl : InitMonoBehaviour
     int currentLocalizationKeys = 0;
 
     bool isTyping;
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadDialogBox();
+        this.LoadDialogText();
+        this.LoadFaceset();
+        this.LoadLocalizedDialog();
+    }
+
+    private void LoadFaceset()
+    {
+        if (this.faceset != null) return;
+        this.faceset = dialogBox.GetComponentInChildren<Image>(); ;
+        Debug.Log(transform.name + ": LoadFaceset", gameObject);
+    }
+
+    private void LoadDialogText()
+    {
+        if (this.dialogText != null) return;
+        this.dialogText = dialogBox.GetComponentInChildren<Text>();
+        Debug.Log(transform.name + ": LoadDialogText", gameObject);
+    }
+
+    private void LoadLocalizedDialog()
+    {
+        if (this.localizedDialog != null) return;
+        this.localizedDialog = dialogBox.GetComponentInChildren<LocalizedDialog>();
+        Debug.Log(transform.name + ": LoadLocalizedDialog", gameObject);
+    }
+
+    private void LoadDialogBox()
+    {
+        if (this.dialogBox != null) return;
+        this.dialogBox = transform.Find("DialogBox").gameObject;
+        Debug.Log(transform.name + ": LoadDialogBox", gameObject);
+    }
 
     protected override void Awake()
     {
@@ -43,7 +83,9 @@ public class DialogCtrl : InitMonoBehaviour
         OnShowDialog?.Invoke();
 
         this.dialog = dialog;
+
         dialogBox.SetActive(true);
+
         StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialog.LocalizationKeys[0])));
     }
 
@@ -52,6 +94,7 @@ public class DialogCtrl : InitMonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space) && !isTyping)
         {
             ++currentLocalizationKeys;
+
             if (currentLocalizationKeys < dialog.LocalizationKeys.Count)
             {
                 StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialog.LocalizationKeys[currentLocalizationKeys])));
@@ -81,32 +124,5 @@ public class DialogCtrl : InitMonoBehaviour
         isTyping = false;
     }
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadDialogBox();
-        this.LoadDialogText();
-        this.LoadLocalizedDialog();
-    }
 
-    private void LoadDialogText()
-    {
-        if (this.dialogText != null) return;
-        this.dialogText = dialogBox.GetComponentInChildren<Text>();
-        Debug.Log(transform.name + ": LoadDialogText", gameObject);
-    }
-
-    private void LoadLocalizedDialog()
-    {
-        if (this.localizedDialog != null) return;
-        this.localizedDialog = dialogBox.GetComponentInChildren<LocalizedDialog>();
-        Debug.Log(transform.name + ": LoadLocalizedDialog", gameObject);
-    }
-
-    private void LoadDialogBox()
-    {
-        if (this.dialogBox != null) return;
-        this.dialogBox = transform.Find("DialogBox").gameObject;
-        Debug.Log(transform.name + ": LoadDialogBox", gameObject);
-    }
 }
