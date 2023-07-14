@@ -37,8 +37,12 @@ public class CameraFollow : InitMonoBehaviour
 
     private void FixedUpdate()
     {
-        map_x = Mathf.Abs(tagert.position.x) < map_wight ? 0 : Rouned((tagert.position.x > 0 ? tagert.position.x + map_wight / (2 * map_wight) : tagert.position.x - map_wight) / (2 * map_wight));
-        map_y = Mathf.Abs(tagert.position.y) < map_height ? 0 : Rouned((tagert.position.y > 0 ? tagert.position.y + map_height / (2 * map_wight) : tagert.position.y - map_height) / (2 * map_height));
+        int x = (int)(Mathf.Sign(tagert.position.x)) * Mathf.CeilToInt(Mathf.Abs(Mathf.Abs(tagert.position.x) - map_wight) / (2 * map_wight));
+        int y = (int)(Mathf.Sign(tagert.position.y)) * Mathf.CeilToInt(Mathf.Abs(Mathf.Abs(tagert.position.y) - map_height) / (2 * map_height));
+
+        map_x = Mathf.Abs(tagert.position.x) < map_wight ? 0 : x;
+        map_y = Mathf.Abs(tagert.position.y) < map_height ? 0 : y;
+
 
         cam.transform.position = Vector3.Lerp(
             cam.transform.position,
@@ -48,8 +52,4 @@ public class CameraFollow : InitMonoBehaviour
                 cam.transform.position.z),
             Time.deltaTime * speed);
     }
-
-    private int Rouned(float number) => number > 0 ? Mathf.CeilToInt(number) - 1 : Mathf.FloorToInt(number) + 1;
-
-
 }
