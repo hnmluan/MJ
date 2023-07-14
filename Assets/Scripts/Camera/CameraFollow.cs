@@ -3,13 +3,13 @@
 public class CameraFollow : InitMonoBehaviour
 {
     [SerializeField] private Transform tagert;
-    public float speed = 1f;
+
     [SerializeField] private Transform cam;
-    private float t = 0f;
 
-    float hight = 6f;
+    public float speed = 1f;
 
-    float wight = 10.5f;
+    float map_height = 6f;
+    float map_wight = 10.5f;
 
     public int map_x;
     public int map_y;
@@ -17,39 +17,39 @@ public class CameraFollow : InitMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadPlayer();
+        this.LoadPlayer();
+        this.LoadCamera();
     }
 
     protected virtual void LoadPlayer()
     {
-        tagert = GameObject.Find("PlayerConverse").gameObject.transform;
+        if (this.tagert != null) return;
+        tagert = GameObject.Find("Player").gameObject.transform;
+        Debug.Log(transform.name + ": LoadPlayer", gameObject);
+    }
+
+    protected virtual void LoadCamera()
+    {
+        if (this.cam != null) return;
+        cam = GameObject.Find("Main Camera").gameObject.transform;
+        Debug.Log(transform.name + ": LoadCamera", gameObject);
     }
 
     private void FixedUpdate()
     {
-        t += Time.deltaTime * speed;
-
-        map_x = Mathf.Abs(tagert.position.x) < wight ? 0 : Rouned((tagert.position.x > 0 ? tagert.position.x + wight / (2 * wight) : tagert.position.x - wight) / (2 * wight));
-        map_y = Mathf.Abs(tagert.position.y) < hight ? 0 : Rouned((tagert.position.y > 0 ? tagert.position.y + hight / (2 * wight) : tagert.position.y - hight) / (2 * hight));
-
-
+        map_x = Mathf.Abs(tagert.position.x) < map_wight ? 0 : Rouned((tagert.position.x > 0 ? tagert.position.x + map_wight / (2 * map_wight) : tagert.position.x - map_wight) / (2 * map_wight));
+        map_y = Mathf.Abs(tagert.position.y) < map_height ? 0 : Rouned((tagert.position.y > 0 ? tagert.position.y + map_height / (2 * map_wight) : tagert.position.y - map_height) / (2 * map_height));
 
         cam.transform.position = Vector3.Lerp(
             cam.transform.position,
             new Vector3(
-                map_x * wight * 2,
-                map_y * hight * 2,
+                map_x * map_wight * 2,
+                map_y * map_height * 2,
                 cam.transform.position.z),
-            t);
-        //Debug.Log("tagert.position.x" + tagert.position.x);
-        //Debug.Log("round = " + Rouned((tagert.position.x - wight) / (2 * wight)));
-
+            Time.deltaTime * speed);
     }
 
-    private int Rouned(float number)
-    {
-        return number > 0 ? Mathf.CeilToInt(number) : Mathf.FloorToInt(number) + 1;
-    }
+    private int Rouned(float number) => number > 0 ? Mathf.CeilToInt(number) : Mathf.FloorToInt(number) + 1;
 
 
 }
