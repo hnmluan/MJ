@@ -12,6 +12,8 @@ public class PlayerMovement : PlayerAbstract
 
     private void Update()
     {
+        if (GameController.Instance.State != GameState.FreeRoam) return;
+
         GetDirection();
 
         SetAnimation();

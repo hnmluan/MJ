@@ -24158,8 +24158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagert: {fileID: 1298275777}
-  speed: 10
   cam: {fileID: 1031364696}
+  speed: 0.05
   map_x: 0
   map_y: 0
 --- !u!4 &1038651255 stripped
@@ -25450,6 +25450,73 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8326370759844356215, guid: 1d2d8c4939d4c3649bbd4393f8e341be, type: 3}
   m_PrefabInstance: {fileID: 1087155849}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1087454651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1087454653}
+  - component: {fileID: 1087454652}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1087454652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087454651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec230e0e03ba034ba097026ef566d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jsonFileName: dialogue
+  dialogueData:
+    characters:
+    - name: CUTEO
+      tasks:
+      - taskName: Task 1
+        texts:
+        - Guide.w.action
+        - Guide.a.action
+      - taskName: Task 2
+        texts:
+        - How's your day going?
+        - What do you think of this place?
+    - name: Jane
+      tasks:
+      - taskName: Task 1
+        texts:
+        - Hi, nice to meet you!
+        - What are you up to?
+      - taskName: Task 2
+        texts:
+        - Do you like this game?
+        - Have you seen any interesting sights?
+--- !u!4 &1087454653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087454651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 165.52905, y: 49.598885, z: -0.28867215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1088508634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 712503093154132559, guid: 3756e4fc1d5d2474a9f1b1a9b002c7d8, type: 3}
@@ -42222,7 +42289,6 @@ Transform:
   m_Children:
   - {fileID: 766439004}
   - {fileID: 1636095645}
-  - {fileID: 2030773169}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -42276,7 +42342,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.4334135}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -42287,7 +42353,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.94582176}
   m_EdgeRadius: 0
 --- !u!1001 &1299407468
 PrefabInstance:
@@ -58878,54 +58944,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initPosition: {x: 0, y: 0, z: 0}
---- !u!1 &2030773168
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2030773169}
-  - component: {fileID: 2030773170}
-  m_Layer: 0
-  m_Name: Converse
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2030773169
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030773168}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1298275777}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030773170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030773168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aebd413cf2c272f4b91812d14e870bf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCtrl: {fileID: 1298275781}
-  converseLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!1001 &2031208784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59207,11 +59225,19 @@ MonoBehaviour:
   npcCtrl: {fileID: 577779183}
   detectionConversableRange: 2
   isPlayerInRange: 0
-  dialog:
-    localizationKeys:
-    - Guide.MOVE
-    - Guide.MOVE
-    - Guide.EXTENSION
+  npcDialog:
+    taskDialogs:
+    - taskDialogName: task_1
+      localizationKeys:
+      - Guide.a.action
+      - Guide.s.action
+      - Guide.d.action
+    - taskDialogName: 
+      localizationKeys: []
+    - taskDialogName: 
+      localizationKeys: []
+  isConverable: 0
+  dialogsToShow: []
 --- !u!61 &2055186519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -65186,6 +65212,7 @@ MonoBehaviour:
   localizedDialog: {fileID: 5252783745646071506}
   faceset: {fileID: 2411113043300943759}
   lettersPerSecond: 40
+  dialogsToShow: []
 --- !u!222 &2411113042964800980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -66423,7 +66450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &2411113043300943758
 CanvasRenderer:
   m_ObjectHideFlags: 0
