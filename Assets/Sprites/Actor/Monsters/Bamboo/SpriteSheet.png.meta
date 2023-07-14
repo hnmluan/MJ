@@ -129,7 +129,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpriteSheet_0
+      name: 1
       rect:
         serializedVersion: 2
         x: 0
@@ -150,7 +150,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_1
+      name: 5
       rect:
         serializedVersion: 2
         x: 16
@@ -171,7 +171,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_2
+      name: 9
       rect:
         serializedVersion: 2
         x: 32
@@ -192,7 +192,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_3
+      name: 13
       rect:
         serializedVersion: 2
         x: 48
@@ -213,7 +213,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_4
+      name: 2
       rect:
         serializedVersion: 2
         x: 0
@@ -234,7 +234,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_5
+      name: 6
       rect:
         serializedVersion: 2
         x: 16
@@ -255,7 +255,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_6
+      name: 10
       rect:
         serializedVersion: 2
         x: 32
@@ -276,7 +276,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_7
+      name: 14
       rect:
         serializedVersion: 2
         x: 48
@@ -297,7 +297,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_8
+      name: 3
       rect:
         serializedVersion: 2
         x: 0
@@ -318,7 +318,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_9
+      name: 7
       rect:
         serializedVersion: 2
         x: 16
@@ -339,7 +339,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_10
+      name: 11
       rect:
         serializedVersion: 2
         x: 32
@@ -360,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_11
+      name: 15
       rect:
         serializedVersion: 2
         x: 48
@@ -381,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_12
+      name: 4
       rect:
         serializedVersion: 2
         x: 0
@@ -402,7 +402,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_13
+      name: 8
       rect:
         serializedVersion: 2
         x: 16
@@ -423,7 +423,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_14
+      name: 12
       rect:
         serializedVersion: 2
         x: 32
@@ -444,7 +444,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_15
+      name: 16
       rect:
         serializedVersion: 2
         x: 48
@@ -475,22 +475,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpriteSheet_13: -1991635064
-      SpriteSheet_5: 230173861
-      SpriteSheet_4: 1686503372
-      SpriteSheet_7: 1250262230
-      SpriteSheet_8: -839370193
-      SpriteSheet_2: -1314239836
-      SpriteSheet_6: -71062093
-      SpriteSheet_14: 1171989780
-      SpriteSheet_0: -1391039458
-      SpriteSheet_1: -958785279
-      SpriteSheet_10: -1928929293
-      SpriteSheet_15: 1136572635
-      SpriteSheet_3: 1166706437
-      SpriteSheet_12: -1865596337
-      SpriteSheet_9: 1510121715
-      SpriteSheet_11: 1009492928
+      3: -839370193
+      8: -1991635064
+      11: -1928929293
+      12: 1171989780
+      2: 1686503372
+      6: 230173861
+      9: -1314239836
+      4: -1865596337
+      5: -958785279
+      16: 1136572635
+      14: 1250262230
+      13: 1166706437
+      1: -1391039458
+      7: 1510121715
+      10: -71062093
+      15: 1009492928
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -49,7 +49,7 @@ public class CameraFollow : InitMonoBehaviour
             Time.deltaTime * speed);
     }
 
-    private int Rouned(float number) => number > 0 ? Mathf.CeilToInt(number) : Mathf.FloorToInt(number) + 1;
+    private int Rouned(float number) => number > 0 ? Mathf.CeilToInt(number) - 1 : Mathf.FloorToInt(number) + 1;
 
 
 }
