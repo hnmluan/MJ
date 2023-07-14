@@ -20,7 +20,7 @@ public class MonsterChasePlayer : ChasePlayer
     protected override void Update()
     {
         base.Update();
-        SetAnimation(moveDirection);
+        SetAnimation((transform.position - player.transform.position).normalized);
     }
 
     private void SetAnimation(Vector3 moveDirection)
@@ -32,5 +32,4 @@ public class MonsterChasePlayer : ChasePlayer
         monsterCtrl.Animator.SetFloat("Y", y);
         monsterCtrl.Animator.SetBool("isWalking", this.isMoving);
     }
-
 }

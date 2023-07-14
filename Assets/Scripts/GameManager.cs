@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 public enum GameState { FreeRoam, Dialog, Battle, Setting }
-public class GameController : InitMonoBehaviour
+public class GameManager : InitMonoBehaviour
 {
-    private static GameController instance;
-    public static GameController Instance { get => instance; }
+    private static GameManager instance;
+    public static GameManager Instance { get => instance; }
 
     [SerializeField] protected GameState state = GameState.FreeRoam;
     public GameState State { get => state; }
@@ -13,8 +13,8 @@ public class GameController : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (GameController.instance != null) Debug.LogError("Only 1 GameController allow to exist");
-        GameController.instance = this;
+        if (GameManager.instance != null) Debug.LogError("Only 1 GameManager allow to exist");
+        GameManager.instance = this;
     }
 
     protected override void Start()

@@ -35,7 +35,7 @@ public class NPCConverse : NPCAbstract, IInteractable
 
         if (isPlayerInRange)
         {
-            if (Input.GetKeyUp(KeyCode.C) & GameController.Instance.State != GameState.Dialog) Interact();
+            if (Input.GetKeyUp(KeyCode.C) & GameManager.Instance.State != GameState.Dialog) Interact();
         }
     }
 

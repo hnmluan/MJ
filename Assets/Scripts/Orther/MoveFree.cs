@@ -102,9 +102,7 @@ public class MoveFree : InitMonoBehaviour
 
             moveDirection = (targetPosition - transform.position).normalized;
 
-            float moveSpeed = 5f * Time.deltaTime;
-
-            transform.parent.position += moveDirection * moveSpeed;
+            transform.parent.position += moveDirection * 5f * Time.deltaTime;
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {

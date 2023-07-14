@@ -12,7 +12,7 @@ public class PlayerMovement : PlayerAbstract
 
     private void Update()
     {
-        if (GameController.Instance.State != GameState.FreeRoam) return;
+        if (GameManager.Instance.State != GameState.FreeRoam) return;
 
         GetDirection();
 

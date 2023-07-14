@@ -11,7 +11,9 @@ public class ChasePlayer : InitMonoBehaviour
     [SerializeField] protected int currentWaypointIndex;
     [SerializeField] protected bool isMoving;
     [SerializeField] protected float offsetPlayer = 1;
-    [SerializeField] protected Vector3 moveDirection;
+    [SerializeField] protected Vector3 direction;
+    [SerializeField] protected Vector3 targetPosition;
+    [SerializeField] protected float offset = 0.1f;
 
     protected override void LoadComponents()
     {
@@ -39,7 +41,6 @@ public class ChasePlayer : InitMonoBehaviour
         seeker = GetComponent<Seeker>();
         isMoving = false;
 
-
         StartCoroutine(MoveToPlayerRoutine());
     }
 
@@ -49,7 +50,7 @@ public class ChasePlayer : InitMonoBehaviour
         {
             if (player != null) MoveTo(player.transform.position);
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitUntil(() => !isMoving);
         }
     }
 
@@ -78,19 +79,19 @@ public class ChasePlayer : InitMonoBehaviour
     {
         if (isMoving && currentPath != null)
         {
-            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, player.transform.position) <= offsetPlayer)
+            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.parent.position, player.transform.position) <= offsetPlayer)
             {
                 isMoving = false;
                 return;
             }
 
-            Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
-            moveDirection = (targetPosition - transform.position).normalized;
-            float moveSpeed = 5f * Time.deltaTime;
+            targetPosition = currentPath.vectorPath[currentWaypointIndex];
 
-            transform.parent.position += moveDirection * moveSpeed;
+            direction = (targetPosition - transform.parent.position).normalized;
 
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            transform.parent.position += direction * 5f * Time.deltaTime;
+
+            if (Vector3.Distance(transform.parent.position, targetPosition) < offset)
             {
                 currentWaypointIndex++;
             }

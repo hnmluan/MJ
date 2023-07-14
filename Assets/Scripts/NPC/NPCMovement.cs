@@ -42,7 +42,7 @@ public class NPCMovement : NPCAbstract
     {
         while (true)
         {
-            if (GameController.Instance.State == GameState.Dialog) SetMovingState(false);
+            if (GameManager.Instance.State == GameState.Dialog) SetMovingState(false);
             else SetMovingState(true);
 
             if (isMoving)
