@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class NPCConverse : NPCAbstract, IInteractable
 {
@@ -6,9 +7,17 @@ public class NPCConverse : NPCAbstract, IInteractable
 
     public bool isPlayerInRange = false;
 
-    [SerializeField] Dialog dialog;
+    [SerializeField] NPCDialog npcDialog;
 
-    public void Interact() => StartCoroutine(DialogCtrl.Instance.ShowDialog(dialog));
+    public bool isConverable = false;
+
+    public List<string> dialogsToShow;
+
+    public void Interact()
+    {
+        if (IsConverable())
+            StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow));
+    }
 
     private void Update()
     {
@@ -23,6 +32,17 @@ public class NPCConverse : NPCAbstract, IInteractable
             isPlayerInRange = false;
         }
         npcCtrl.DialogConversable.SetActive(isPlayerInRange);
+
+        if (isPlayerInRange)
+        {
+            if (Input.GetKeyUp(KeyCode.C) & GameController.Instance.State != GameState.Dialog) Interact();
+        }
+    }
+
+    private bool IsConverable()
+    {
+        dialogsToShow = npcDialog.GetLocalizationKeysForTask("task_1");
+        return dialogsToShow.Count != 0;
     }
 
     private void OnDrawGizmosSelected()

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ public class DialogCtrl : InitMonoBehaviour
 
     public event Action OnShowDialog, OnHideDialog;
 
-    Dialog dialog;
+    public List<String> dialogsToShow;
 
     int currentLocalizationKeys = 0;
 
@@ -76,17 +77,17 @@ public class DialogCtrl : InitMonoBehaviour
         DialogCtrl.instance = this;
     }
 
-    public IEnumerator ShowDialog(Dialog dialog)
+    public IEnumerator ShowDialog(List<String> dialogsToShow)
     {
         yield return new WaitForEndOfFrame();
 
         OnShowDialog?.Invoke();
 
-        this.dialog = dialog;
+        this.dialogsToShow = dialogsToShow;
 
         dialogBox.SetActive(true);
 
-        StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialog.LocalizationKeys[0])));
+        StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialogsToShow[0])));
     }
 
     public void HandleUpdate()
@@ -95,9 +96,9 @@ public class DialogCtrl : InitMonoBehaviour
         {
             ++currentLocalizationKeys;
 
-            if (currentLocalizationKeys < dialog.LocalizationKeys.Count)
+            if (currentLocalizationKeys < dialogsToShow.Count)
             {
-                StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialog.LocalizationKeys[currentLocalizationKeys])));
+                StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialogsToShow[currentLocalizationKeys])));
             }
             else
             {
