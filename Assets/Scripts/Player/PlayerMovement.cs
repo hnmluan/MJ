@@ -4,7 +4,7 @@ public class PlayerMovement : PlayerAbstract
 {
     [SerializeField] protected float speed = 8;
 
-    [SerializeField] protected Vector2 direction;
+    [SerializeField] public Vector2 direction;
 
     [SerializeField] protected float sfxWalkTimer = 0f;
 

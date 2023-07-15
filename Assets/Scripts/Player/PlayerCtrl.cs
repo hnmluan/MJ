@@ -15,8 +15,8 @@ public class PlayerCtrl : InitMonoBehaviour
     //[SerializeField] protected PlayerAttack playerAttack;
     //public PlayerAttack PlayerAttack { get => playerAttack; }
 
-    //[SerializeField] protected PlayerMovement playerMovement;
-    //public PlayerMovement PlayerMovement { get => playerMovement; }
+    [SerializeField] protected PlayerMovement playerMovement;
+    public PlayerMovement PlayerMovement { get => playerMovement; }
 
     //[SerializeField] protected PlayerInteract playerInteract;
     //public PlayerInteract PlayerInteract { get => playerInteract; }
@@ -42,7 +42,7 @@ public class PlayerCtrl : InitMonoBehaviour
         base.LoadComponents();
         this.LoadAnimator();
         //this.LoadPlayerAttack();
-        //this.LoadPlayerMovement();
+        this.LoadPlayerMovement();
         //this.LoadPlayerInteract();
         this.LoadHPBar();
         this.LoadPlayerSprite();
@@ -71,12 +71,12 @@ public class PlayerCtrl : InitMonoBehaviour
     //    Debug.Log(transform.name + ": LoadPlayerAttack", gameObject);
     //}
 
-    //protected virtual void LoadPlayerMovement()
-    //{
-    //    if (this.playerMovement != null) return;
-    //    this.playerMovement = transform.GetComponentInChildren<PlayerMovement>();
-    //    Debug.Log(transform.name + ": LoadPlayerMovement", gameObject);
-    //}
+    protected virtual void LoadPlayerMovement()
+    {
+        if (this.playerMovement != null) return;
+        this.playerMovement = transform.GetComponentInChildren<PlayerMovement>();
+        Debug.Log(transform.name + ": LoadPlayerMovement", gameObject);
+    }
 
     //protected virtual void LoadPlayerInteract()
     //{
