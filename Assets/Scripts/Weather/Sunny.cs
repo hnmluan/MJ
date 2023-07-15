@@ -1,9 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Sunny : InitMonoBehaviour
+public class Sunny : Weather
 {
     private static Sunny instance;
     public static Sunny Instance { get => instance; }
+
+    public int numberOfClound = 20;
+
+    public int numberOfLeaf = 20;
+
+    public float spawnInterval = 0.5f;
+
+    private float timer = 0f;
+
+    public List<string> cloundNames;
+
+    public List<string> leafNames;
 
     protected override void Awake()
     {
@@ -12,8 +25,17 @@ public class Sunny : InitMonoBehaviour
         Sunny.instance = this;
     }
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
+        timer += Time.deltaTime;
 
+        if (timer >= spawnInterval)
+        {
+            SpawnWeatherElements(cloundNames, numberOfClound);
+
+            SpawnWeatherElements(leafNames, numberOfLeaf);
+
+            timer = 0f;
+        }
     }
 }

@@ -2,16 +2,16 @@
 using UnityEngine;
 
 
-public class Rain : InitMonoBehaviour
+public class Rain : Weather
 {
     private static Rain instance;
     public static Rain Instance { get => instance; }
 
-    public int numberOfRaindrops = 20; // Số lượng giọt mưa cần spawn
+    public int numberOfRaindrops = 20;
 
-    public int numberOfRainOnFloor = 20; // Số lượng giọt mưa cần spawn
+    public int numberOfRainOnFloor = 20;
 
-    public float spawnInterval = 0.5f; // Khoảng thời gian giữa các lần spawn
+    public float spawnInterval = 0.5f;
 
     private float timer = 0f;
 
@@ -26,42 +26,18 @@ public class Rain : InitMonoBehaviour
         Rain.instance = this;
     }
 
-    public void HandleUpdate()
+    public override void HandleUpdate()
     {
         timer += Time.deltaTime;
 
         if (timer >= spawnInterval)
         {
-            for (int i = 0; i < numberOfRaindrops; i++)
-            {
-                Transform rainDrop = WeatherSpawner.Instance.Spawn(rainNames[Random.Range(0, rainNames.Count - 1)], GetRandomPointInGame(), Quaternion.identity);
-                if (rainDrop == null) return;
-                rainDrop.gameObject.SetActive(true);
-            }
+            SpawnWeatherElements(rainNames, numberOfRaindrops);
 
-            for (int i = 0; i < numberOfRainOnFloor; i++)
-            {
-
-                Transform rainOnFloor = WeatherSpawner.Instance.Spawn(rainOnFloorNames[Random.Range(0, rainOnFloorNames.Count - 1)], GetRandomPointInGame(), Quaternion.identity);
-                if (rainOnFloor == null) return;
-                rainOnFloor.gameObject.SetActive(true);
-            }
+            SpawnWeatherElements(rainOnFloorNames, numberOfRainOnFloor);
 
             timer = 0f;
         }
-    }
-
-    public Vector3 GetRandomPointInGame()
-    {
-        float screenWidth = Screen.width;
-        float screenHeight = Screen.height;
-
-        Vector3 randomPosition = new Vector3(Random.Range(0, screenWidth * 2), Random.Range(0, screenHeight * 2), 0);
-
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(randomPosition);
-        worldPosition.z = 0;
-
-        return worldPosition;
     }
 }
 

@@ -20,7 +20,7 @@ public class WeatherManager : InitMonoBehaviour
     private void Update()
     {
         if (state == WeatherState.Rain) Rain.Instance.HandleUpdate();
-        else if (state == WeatherState.Sunny) Rain.Instance.HandleUpdate();
+        else if (state == WeatherState.Sunny) Sunny.Instance.HandleUpdate();
 
     }
 
