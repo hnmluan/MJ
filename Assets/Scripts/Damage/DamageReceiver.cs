@@ -5,8 +5,8 @@ public class DamageReceiver : InitMonoBehaviour
 {
     [Header("Damage Receiver")]
     [SerializeField] protected SphereCollider sphereCollider;
-    [SerializeField] protected float hp = 10;
-    [SerializeField] protected float hpMax = 10;
+    [SerializeField] protected float hp = 100;
+    [SerializeField] protected float hpMax = 100;
     [SerializeField] protected bool isDead = false;
 
 
