@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCtrl: {fileID: 1298275781}
+  weaponName: Darts
 --- !u!4 &45789699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5300445039104640518, guid: e1ac9977555afaa41801bf620866b5d2, type: 3}
@@ -38722,7 +38723,7 @@ GameObject:
   - component: {fileID: 1536894707}
   - component: {fileID: 1536894708}
   m_Layer: 0
-  m_Name: PoolDamageSender
+  m_Name: PoolDamageObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
