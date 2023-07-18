@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MakeSound : InitMonoBehaviour
+public class AnimalMakeSound : InitMonoBehaviour
 {
     [SerializeField] protected Transform player;
 
@@ -41,7 +41,8 @@ public class MakeSound : InitMonoBehaviour
 
         if (timer > timeToSpawnSound)
         {
-            AudioController.Instance.PlayVFX("chicken_sound");
+            AudioController.Instance.AnimalVolume(CountVolumeByDistance(AudioController.Instance.SFXVolume()));
+            AudioController.Instance.PlayAnimalSound("chicken_sound");
             timer = 0;
             RandomTimeToSpawnSound();
         }
@@ -57,4 +58,6 @@ public class MakeSound : InitMonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, maxDistance);
     }
+
+    private float CountVolumeByDistance(float volume) => volume * (1 - CountDistanceToPlayer() / maxDistance);
 }

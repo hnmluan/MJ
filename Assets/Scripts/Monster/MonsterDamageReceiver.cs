@@ -15,7 +15,7 @@ public class MonsterDamageReceiver : DamageReceiver
     {
         if (this.monsterCtrl != null) return;
         this.monsterCtrl = transform.parent.GetComponent<MonsterCtrl>();
-        Debug.Log(transform.name + ": LoadMonsterCtrl", gameObject);
+        Debug.Log(transform.name + ": LoadAnimalCtrl", gameObject);
     }
 
     protected override void OnDead()
@@ -26,7 +26,7 @@ public class MonsterDamageReceiver : DamageReceiver
     public override void Deduct(int deduct)
     {
         base.Deduct(deduct);
-        //monsterCtrl.HPBarSprite.value = (hp / hpMax);
-        //monsterCtrl.HealthBlink.StartBinkCoroutine(monsterCtrl.EnemySprite);
+        //animalCtrl.HPBarSprite.value = (hp / hpMax);
+        //animalCtrl.HealthBlink.StartBinkCoroutine(animalCtrl.EnemySprite);
     }
 }

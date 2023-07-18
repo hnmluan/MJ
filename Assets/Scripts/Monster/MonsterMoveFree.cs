@@ -14,16 +14,16 @@ public class MonsterMoveFree : MoveFree
     {
         if (monsterCtrl != null) return;
         monsterCtrl = transform.parent.GetComponent<MonsterCtrl>();
-        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
+        Debug.Log(transform.name + ": LoadAnimalCtrl", gameObject);
     }
 
     protected override void Update()
     {
         base.Update();
-        SetAnimation(moveDirection);
+        SetAnimation();
     }
 
-    private void SetAnimation(Vector3 moveDirection)
+    private void SetAnimation()
     {
         float x = moveDirection.x;
         float y = moveDirection.y;
