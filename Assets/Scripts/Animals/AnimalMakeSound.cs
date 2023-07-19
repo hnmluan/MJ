@@ -44,7 +44,7 @@ public class AnimalMakeSound : InitMonoBehaviour
         if (timer > timeToSpawnSound)
         {
             AudioController.Instance.AnimalVolume(CountVolumeByDistance(AudioController.Instance.SFXVolume()));
-            AudioController.Instance.PlayAnimalSound(   soundName);
+            AudioController.Instance.PlayAnimalSound("soundName");
             timer = 0;
             RandomTimeToSpawnSound();
         }
