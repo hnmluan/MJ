@@ -14,6 +14,8 @@ public class AnimalMakeSound : InitMonoBehaviour
 
     [SerializeField] private float timeToSpawnSound;
 
+    [SerializeField] public string soundName;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -42,7 +44,7 @@ public class AnimalMakeSound : InitMonoBehaviour
         if (timer > timeToSpawnSound)
         {
             AudioController.Instance.AnimalVolume(CountVolumeByDistance(AudioController.Instance.SFXVolume()));
-            AudioController.Instance.PlayAnimalSound("chicken_sound");
+            AudioController.Instance.PlayAnimalSound("soundName");
             timer = 0;
             RandomTimeToSpawnSound();
         }

@@ -1,9 +1,11 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimalCtrl : InitMonoBehaviour
 {
     [SerializeField] protected Animator animator;
     public Animator Animator { get => animator; }
+
+    public RuntimeAnimatorController animatorController;
 
     [SerializeField] protected Transform model;
     public Transform Model { get => model; }
@@ -12,6 +14,7 @@ public class AnimalCtrl : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadAnimator();
+        this.LoadAnimatorController();
         this.LoadModel();
     }
 
@@ -20,6 +23,13 @@ public class AnimalCtrl : InitMonoBehaviour
         if (this.animator != null) return;
         this.animator = transform.GetComponentInChildren<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
+    }
+
+    protected virtual void LoadAnimatorController()
+    {
+        if (this.animator != null && animatorController != null) return;
+        animator.runtimeAnimatorController = animatorController;
+        Debug.Log(transform.name + ": LoadAnimatorController", gameObject);
     }
 
     protected virtual void LoadModel()

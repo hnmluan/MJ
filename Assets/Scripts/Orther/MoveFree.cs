@@ -59,9 +59,9 @@ public class MoveFree : InitMonoBehaviour
         Vector3 size = collider.bounds.size;
 
         Vector3 randomPoint = center + new Vector3(
-            (Random.value - 0.5f) * size.x,
-            (Random.value - 0.5f) * size.y,
-            (Random.value - 0.5f) * size.z
+            (Random.value - 0.55f) * size.x,
+            (Random.value - 0.55f) * size.y,
+            (Random.value - 0.55f) * size.z
         );
 
         return randomPoint;
