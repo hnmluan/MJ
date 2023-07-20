@@ -60,4 +60,6 @@ public class PlayerMovement : PlayerAbstract
         else
             playerCtrl.Animator.SetBool("isWalking", false);
     }
+
+    public void MoveToPoint(Vector3 loadToPositionOnSence) => gameObject.transform.parent.position = loadToPositionOnSence;
 }

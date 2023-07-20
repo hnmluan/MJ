@@ -46,7 +46,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.52222633, y: -1.5158973}
+  m_Offset: {x: -0.75424576, y: -3.2244058}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 17.202774, y: 3.8869295}
+  m_Size: {x: 17.666813, y: 7.8945436}
   m_EdgeRadius: 0
 --- !u!114 &962218707833181200
 MonoBehaviour:
@@ -85,7 +85,7 @@ GameObject:
   m_Layer: 0
   m_Name: Cat
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962218707840372492}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 22.32, y: -9.56, z: -0.33331293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8945885200603353821}
+  animatorController: {fileID: 0}
   model: {fileID: 8945885200474798417}
 --- !u!1 &962218709514587668
 GameObject:
@@ -132,7 +133,7 @@ GameObject:
   - component: {fileID: 962218709514587669}
   - component: {fileID: 962218709514587670}
   m_Layer: 0
-  m_Name: MakeSound
+  m_Name: MakeSoundAnimal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,6 +172,7 @@ MonoBehaviour:
   minTimeToSpawnSound: 2
   maxTimeToSpawnSound: 3
   timeToSpawnSound: 0
+  soundName: 
 --- !u!1 &962218709533546886
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,7 +352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8945885200474798417
 Transform:
   m_ObjectHideFlags: 0
@@ -380,7 +382,7 @@ GameObject:
   - component: {fileID: 8945885200603353820}
   - component: {fileID: 8945885200603353821}
   m_Layer: 9
-  m_Name: Cat
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -442,7 +444,7 @@ SpriteRenderer:
   m_SortingLayerID: -1972899539
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -626974169, guid: ef43183ac89cb2e47b1e8a9790276c3e, type: 3}
+  m_Sprite: {fileID: -236079123, guid: 83e133c014c4c8f4085b040b630b6275, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -4,15 +4,30 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(BoxCollider2D))]
 public class SwitchScene : InitMonoBehaviour
 {
-    public BoxCollider2D boxCollider2D;
-    public string targetScene;
+    protected BoxCollider2D boxCollider2D;
+
+    public string loadToScence;
+
+    public Vector3 loadToPositionOnSence;
+
+    protected override void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene mới đã được tải!");
+        PlayerCtrl.Instance.PlayerMovement.MoveToPoint(loadToPositionOnSence);
+        CameraCtrl.Instance.CameraMovement.ResetPositionCamera();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("hello");
-            SceneManager.LoadSceneAsync(targetScene);
+            SceneManager.LoadScene(loadToScence);
         }
     }
 

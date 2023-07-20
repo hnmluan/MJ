@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 
-public class CameraFollow : InitMonoBehaviour
+public class CameraMovement : CameraAbstract
 {
     [SerializeField] private Transform tagert;
-
-    [SerializeField] private Transform cam;
 
     public float speed = 1f;
 
@@ -14,12 +12,15 @@ public class CameraFollow : InitMonoBehaviour
     public int map_x;
     public int map_y;
 
+    public Vector3 cameraPosition;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadPlayer();
-        this.LoadCamera();
     }
+
+    protected override void Start() => ResetPositionCamera();
 
     protected virtual void LoadPlayer()
     {
@@ -28,28 +29,30 @@ public class CameraFollow : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadPlayer", gameObject);
     }
 
-    protected virtual void LoadCamera()
+    private void FixedUpdate()
     {
-        if (this.cam != null) return;
-        cam = GameObject.Find("Main Camera").gameObject.transform;
-        Debug.Log(transform.name + ": LoadCamera", gameObject);
+        computeCameraPosition();
+        transform.parent.position = Vector3.Lerp(transform.parent.position, cameraPosition, Time.deltaTime * speed);
     }
 
-    private void FixedUpdate()
+    void computeMapCoordinateFromPlayerPosition()
     {
         int x = (int)(Mathf.Sign(tagert.position.x)) * Mathf.CeilToInt(Mathf.Abs(Mathf.Abs(tagert.position.x) - map_wight) / (2 * map_wight));
         int y = (int)(Mathf.Sign(tagert.position.y)) * Mathf.CeilToInt(Mathf.Abs(Mathf.Abs(tagert.position.y) - map_height) / (2 * map_height));
 
         map_x = Mathf.Abs(tagert.position.x) < map_wight ? 0 : x;
         map_y = Mathf.Abs(tagert.position.y) < map_height ? 0 : y;
+    }
 
+    void computeCameraPosition()
+    {
+        computeMapCoordinateFromPlayerPosition();
+        cameraPosition = new Vector3(map_x * map_wight * 2, map_y * map_height * 2, transform.parent.position.z);
+    }
 
-        cam.transform.position = Vector3.Lerp(
-            cam.transform.position,
-            new Vector3(
-                map_x * map_wight * 2,
-                map_y * map_height * 2,
-                cam.transform.position.z),
-            Time.deltaTime * speed);
+    public void ResetPositionCamera()
+    {
+        computeCameraPosition();
+        transform.parent.position = cameraPosition;
     }
 }
