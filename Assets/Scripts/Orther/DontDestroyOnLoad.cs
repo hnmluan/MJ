@@ -3,6 +3,7 @@
 public class DontDestroyOnLoad : MonoBehaviour
 {
     private static DontDestroyOnLoad instance;
+    public DontDestroyOnLoad Instance { get => instance; }
 
     private void Awake()
     {
@@ -16,5 +17,11 @@ public class DontDestroyOnLoad : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+        if (instance == this) return;
+        Destroy(gameObject);
     }
 }
