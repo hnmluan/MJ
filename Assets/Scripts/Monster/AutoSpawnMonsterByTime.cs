@@ -7,54 +7,21 @@ public class AutoSpawnMonsterByTime : MonoBehaviour
 
     public Transform monster;
 
-    public int timeToSpawnAfterDie = 1;
+    public float spawnDelay = 5f;
 
-    public bool isFirst = true;
+    private void Start() => StartCoroutine(SpawnEnemy());
 
-    private void Awake()
-    {
-        if (isFirst)
-        {
-            isFirst = false;
-            Spawn();
-            Debug.Log("hello");
-        }
-    }
-
-    private void Start()
-    {
-        StartCoroutine(Spawn02());
-    }
-
-    private IEnumerator Spawn01()
-    {
-        if (monster.gameObject.activeSelf == false && isFirst == false)
-        {
-            Debug.Log("die");
-            yield return new WaitForSeconds(timeToSpawnAfterDie);
-            Spawn();
-        }
-    }
-
-    private IEnumerator Spawn02()
+    IEnumerator SpawnEnemy()
     {
         while (true)
         {
-            if (monster.gameObject.activeSelf == false)
-                yield return new WaitForSeconds(timeToSpawnAfterDie);
             Spawn();
+
+            yield return new WaitUntil(() => monster == null || !monster.gameObject.activeSelf);
+
+            yield return new WaitForSeconds(spawnDelay);
         }
     }
-
-    private void Update()
-    {
-        if (monster == null || monster.gameObject.activeSelf == false)
-        {
-
-        }
-        Debug.Log(monster.gameObject.activeSelf);
-    }
-
 
     public void Spawn()
     {
