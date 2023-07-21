@@ -5,6 +5,9 @@ public class MonsterCtrl : InitMonoBehaviour
     [SerializeField] protected Animator animator;
     public Animator Animator { get => animator; }
 
+    [SerializeField] protected SpriteRenderer model;
+    public SpriteRenderer Model { get => model; }
+
     [SerializeField] protected MonsterDespawn monsterDespawn;
     public MonsterDespawn MonsterDespawn { get => monsterDespawn; }
 
@@ -13,6 +16,14 @@ public class MonsterCtrl : InitMonoBehaviour
         base.LoadComponents();
         this.LoadAnimator();
         this.LoadMonsterDespawn();
+        this.LoadModel();
+    }
+
+    private void LoadModel()
+    {
+        if (this.model != null) return;
+        this.model = transform.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 
     protected virtual void LoadMonsterDespawn()

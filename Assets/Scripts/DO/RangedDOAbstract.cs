@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public abstract class DOAbstract : InitMonoBehaviour
+public abstract class RangedDOAbstract : InitMonoBehaviour
 {
     [Header("Projectile Abtract")]
-    [SerializeField] protected DOCtrl doCtrl;
-    public DOCtrl DOCtrl { get => doCtrl; }
+    [SerializeField] protected RangedDOCtrl doCtrl;
+    public RangedDOCtrl DOCtrl { get => doCtrl; }
 
     protected override void LoadComponents()
     {
@@ -15,7 +15,7 @@ public abstract class DOAbstract : InitMonoBehaviour
     protected virtual void LoadDamageReceiver()
     {
         if (this.doCtrl != null) return;
-        this.doCtrl = transform.parent.GetComponent<DOCtrl>();
+        this.doCtrl = transform.parent.GetComponent<RangedDOCtrl>();
         Debug.Log(transform.name + ": LoadDamageReceiver", gameObject);
     }
 }

@@ -1,11 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SphereCollider))]
+[RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class DODamageSender : DamageSender
+public class MeleeDODamageSender : DamageSender
 {
-    [SerializeField] protected DOCtrl doCtrl;
-    [SerializeField] protected SphereCollider sphereCollider;
+    [SerializeField] protected RangedDOCtrl doCtrl;
+    [SerializeField] protected BoxCollider boxCollider;
     [SerializeField] protected Rigidbody _rigidbody;
 
     protected override void LoadComponents()
@@ -18,10 +18,9 @@ public class DODamageSender : DamageSender
 
     protected virtual void LoadCollider()
     {
-        if (this.sphereCollider != null) return;
-        this.sphereCollider = GetComponent<SphereCollider>();
-        this.sphereCollider.isTrigger = true;
-        this.sphereCollider.radius = 0.05f;
+        if (this.boxCollider != null) return;   
+        this.boxCollider = GetComponent<BoxCollider>();
+        this.boxCollider.isTrigger = true;
         Debug.Log(transform.name + ": LoadCollider", gameObject);
     }
 
@@ -36,17 +35,9 @@ public class DODamageSender : DamageSender
     protected virtual void LoadDOCtrl()
     {
         if (this.doCtrl != null) return;
-        this.doCtrl = transform.parent.GetComponent<DOCtrl>();
+        this.doCtrl = transform.parent.GetComponent<RangedDOCtrl>();
         Debug.Log(transform.name + ": LoadDOCtrl", gameObject);
     }
-
-    public override void Send(DamageReceiver damageReceiver)
-    {
-        base.Send(damageReceiver);
-        this.DestroyDO();
-    }
-
-    protected virtual void DestroyDO() => this.doCtrl.DespawnDO.DespawnObject();
 
     protected virtual void OnTriggerEnter(Collider other) => this.doCtrl.DamageSender.Send(other.transform);
 }

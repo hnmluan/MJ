@@ -2,15 +2,16 @@ using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class DOImpart : DOAbstract
+public class RangedDODamageSender : DamageSender
 {
-    [Header("DO Impart")]
+    [SerializeField] protected RangedDOCtrl doCtrl;
     [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected Rigidbody _rigidbody;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadDOCtrl();
         this.LoadCollider();
         this.LoadRigibody();
     }
@@ -32,8 +33,20 @@ public class DOImpart : DOAbstract
         Debug.Log(transform.name + ": LoadRigibody", gameObject);
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    protected virtual void LoadDOCtrl()
     {
-        this.doCtrl.DamageSender.Send(other.transform);
+        if (this.doCtrl != null) return;
+        this.doCtrl = transform.parent.GetComponent<RangedDOCtrl>();
+        Debug.Log(transform.name + ": LoadDOCtrl", gameObject);
     }
+
+    public override void Send(DamageReceiver damageReceiver)
+    {
+        base.Send(damageReceiver);
+        this.DestroyDO();
+    }
+
+    protected virtual void DestroyDO() => this.doCtrl.DespawnDO.DespawnObject();
+
+    protected virtual void OnTriggerEnter(Collider other) => this.doCtrl.DamageSender.Send(other.transform);
 }

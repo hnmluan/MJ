@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DOCtrl : InitMonoBehaviour
+public class RangedDOCtrl : InitMonoBehaviour
 {
     [SerializeField] protected DamageSender damageSender;
     public DamageSender DamageSender { get => damageSender; }

@@ -2,6 +2,6 @@ public class DespawnDO : DespawnByTime
 {
     public override void DespawnObject()
     {
-        DOSpawner.Instance.Despawn(transform.parent);
+        RangedDOSpawner.Instance.Despawn(transform.parent);
     }
 }

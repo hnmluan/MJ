@@ -15,10 +15,7 @@ public class DamageSender : InitMonoBehaviour
         this.Send(damageReceiver);
     }
 
-    public virtual void Send(DamageReceiver damageReceiver)
-    {
-        damageReceiver.Deduct(this.damage);
-    }
+    public virtual void Send(DamageReceiver damageReceiver) => damageReceiver.Deduct(this.damage);
 
     protected override void OnEnable() => isDameFromPlayer = false;
 }

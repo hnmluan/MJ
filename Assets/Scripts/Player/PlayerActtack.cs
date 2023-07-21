@@ -9,7 +9,7 @@ public class PlayerActtack : PlayerAbstract
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Quaternion bulletRotation = Quaternion.LookRotation(Vector3.forward, new Vector2(playerCtrl.Animator.GetFloat("X"), playerCtrl.Animator.GetFloat("Y")));
-            Transform damageObject = DOSpawner.Instance.Spawn(weaponName, transform.position, bulletRotation);
+            Transform damageObject = RangedDOSpawner.Instance.Spawn(weaponName, transform.position, bulletRotation);
             if (damageObject == null) return;
             damageObject.gameObject.SetActive(true);
 
