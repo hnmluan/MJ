@@ -37,7 +37,7 @@ public class MeleeAttack : MonoBehaviour
         DamageSender damageReceiver = projectile.GetComponentInChildren<DamageSender>();
         damageReceiver.isDameFromPlayer = true;
 
-        AudioController.Instance.PlayVFX("sfx_fire");
+        AudioController.Instance.PlayVFX("sfx_acttack_melee");
     }
 
     private void Attack(string projectileName) => SpawnDO(projectileName, transform.position, GetQuaternionToMouse());

@@ -41,6 +41,7 @@ public class MonsterDamageReceiver : DamageReceiver
     {
         base.Deduct(deduct);
         PlayBloodLossAnimation();
+        AudioController.Instance.PlayVFX("sfx_loss_hp");
         monsterCtrl.HeathBar.value = (hp / hpMax);
     }
 
