@@ -36,11 +36,9 @@ public class ChasePlayer : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadSeeker", gameObject);
     }
 
-    protected override void Start()
+    protected override void OnEnable()
     {
-        seeker = GetComponent<Seeker>();
         isMoving = false;
-
         StartCoroutine(MoveToPlayerRoutine());
     }
 
