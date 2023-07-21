@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterCtrl : InitMonoBehaviour
 {
@@ -11,12 +12,23 @@ public class MonsterCtrl : InitMonoBehaviour
     [SerializeField] protected MonsterDespawn monsterDespawn;
     public MonsterDespawn MonsterDespawn { get => monsterDespawn; }
 
+    [SerializeField] protected Slider heathBar;
+    public Slider HeathBar { get => heathBar; }
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadAnimator();
         this.LoadMonsterDespawn();
         this.LoadModel();
+        this.LoadHeathBar();
+    }
+
+    protected virtual void LoadHeathBar()
+    {
+        if (this.heathBar != null) return;
+        this.heathBar = transform.GetComponentInChildren<Slider>();
+        Debug.Log(transform.name + ": LoadHeathBar", gameObject);
     }
 
     private void LoadModel()

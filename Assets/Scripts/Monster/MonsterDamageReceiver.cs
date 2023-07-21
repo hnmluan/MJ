@@ -21,6 +21,13 @@ public class MonsterDamageReceiver : DamageReceiver
         this.LoadMonsterCtrl();
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        monsterCtrl.HeathBar.value = hpMax;
+        monsterCtrl.Model.enabled = true;
+    }
+
     protected virtual void LoadMonsterCtrl()
     {
         if (this.monsterCtrl != null) return;
@@ -34,12 +41,13 @@ public class MonsterDamageReceiver : DamageReceiver
     {
         base.Deduct(deduct);
         PlayBloodLossAnimation();
+        monsterCtrl.HeathBar.value = (hp / hpMax);
     }
 
     private void PlayBloodLossAnimation()
     {
         if (monsterCtrl.Model == null) return;
-        StartCoroutine(BloodLossAnimation());
+        if (hp != 0) StartCoroutine(BloodLossAnimation());
     }
 
     private IEnumerator BloodLossAnimation()

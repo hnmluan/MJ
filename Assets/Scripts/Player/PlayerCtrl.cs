@@ -89,7 +89,7 @@ public class PlayerCtrl : InitMonoBehaviour
     {
         if (this.hpBar != null) return;
         this.hpBar = transform.GetComponentInChildren<Slider>();
-        Debug.Log(transform.name + ": LoadHPBarSprite", gameObject);
+        Debug.Log(transform.name + ": LoadHeathBar", gameObject);
     }
 
     protected virtual void LoadPlayerSprite()

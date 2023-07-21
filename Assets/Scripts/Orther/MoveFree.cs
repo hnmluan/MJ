@@ -33,11 +33,15 @@ public class MoveFree : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadSeeker", gameObject);
     }
 
-    protected override void Start()
-    {
-        seeker = GetComponent<Seeker>();
-        isMoving = false;
+    //protected override void Start()
+    //{
+    //    isMoving = false;
+    //    StartCoroutine(MoveToRandomPointRoutine());
+    //}
 
+    protected override void OnEnable()
+    {
+        isMoving = false;
         StartCoroutine(MoveToRandomPointRoutine());
     }
 
