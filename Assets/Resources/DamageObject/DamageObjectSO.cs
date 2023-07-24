@@ -16,4 +16,6 @@ public class DamageObjectSO : ScriptableObject
     public int damage;
 
     public string discription;
+
+    public float fireRate;
 }

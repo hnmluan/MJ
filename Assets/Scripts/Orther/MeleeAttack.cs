@@ -1,29 +1,56 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : PlayerAbstract
 {
-    [SerializeField] protected float fireRate = 0.2f;
+    //[Header("------------Other Settings------------")][Space(10)]
 
-    protected bool canFire = true;
+    [SerializeField] protected string damageObjectName = "Bow";
 
-    public string damageObjectName;
+    [SerializeField] protected bool canAttack = true;
+
+    [SerializeField] protected DamageObjectSO damageObjectSO;
+
+    [SerializeField] protected Transform leftWeaponInAttack;
+
+    [SerializeField] protected Transform rightWeaponInAttack;
+
+    [SerializeField] protected Transform upWeaponInAttack;
+
+    [SerializeField] protected Transform downWeaponInAttack;
+
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadDamageObjectSO();
+    }
+
+    protected virtual void LoadDamageObjectSO()
+    {
+        if (this.damageObjectSO != null) return;
+        string resPath = "DamageObject/Ranged/" + damageObjectName;
+        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPath);
+        Debug.LogWarning(transform.name + ": LoadDamageObjectSO " + resPath, gameObject);
+    }
 
     private void Update()
     {
-        if (canFire)
+        LoadDamageObjectSO();
+        if (canAttack)
             if (Input.GetMouseButton(0))
             {
+                Debug.LogWarning(DetermineDirection(GetQuaternionToMouse()).name);
                 Attack(damageObjectName);
-                StartCoroutine(FireCoolDown());
+                StartCoroutine(AttackCoolDown());
             }
     }
 
-    private IEnumerator FireCoolDown()
+    private IEnumerator AttackCoolDown()
     {
-        canFire = false;
-        yield return new WaitForSeconds(fireRate);
-        canFire = true;
+        canAttack = false;
+        yield return new WaitForSeconds(damageObjectSO.fireRate);
+        canAttack = true;
     }
 
     private void SpawnDamageObject(string damageObjectName, Vector3 positon, Quaternion quaternion)
@@ -38,7 +65,7 @@ public class MeleeAttack : MonoBehaviour
         AudioController.Instance.PlayVFX("sfx_acttack_melee");
     }
 
-    private void Attack(string projectileName) => SpawnDamageObject(projectileName, transform.position, GetQuaternionToMouse());
+    private void Attack(string projectileName) => SpawnDamageObject(projectileName, DetermineDirection(GetQuaternionToMouse()).position, GetQuaternionToMouse());
 
     private Quaternion GetQuaternionToMouse()
     {
@@ -51,4 +78,33 @@ public class MeleeAttack : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
     }
+
+    private Transform DetermineDirection(Quaternion rotation)
+    {
+        // Extract the angle from the Quaternion using eulerAngles
+        float angle = rotation.eulerAngles.z;
+        Debug.LogWarning(angle);
+
+
+        // Define the angle thresholds to determine directions
+        float upThreshold = 45f;
+        float downThreshold = 135f;
+        float leftThreshold = -135f;
+        float rightThreshold = -45f;
+
+        // Wrap angle to [0, 360] range
+        if (angle < 0f)
+            angle += 360f;
+
+        // Determine the direction based on the angle
+        if (angle > -upThreshold && angle <= upThreshold)
+            return upWeaponInAttack;
+        else if (angle > upThreshold && angle <= downThreshold)
+            return downWeaponInAttack;
+        else if (angle > downThreshold || angle <= leftThreshold)
+            return leftWeaponInAttack;
+        else
+            return rightWeaponInAttack;
+    }
+
 }

@@ -23,7 +23,7 @@ public class RangedDOCtrl : InitMonoBehaviour
     {
         if (this.damageObjectSO != null) return;
         string resPath = "DamageObject/Ranged/" + transform.name;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPath);
+        this.damageObjectSO = Resources.Load<RangedSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadDamageObjectSO " + resPath, gameObject);
     }
 
