@@ -4,14 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class RangedDODamageSender : DamageSender
 {
-    [SerializeField] protected RangedDOCtrl doCtrl;
+    [SerializeField] protected RangedDOCtrl rangedDOCtrl;
+
     [SerializeField] protected SphereCollider sphereCollider;
+
     [SerializeField] protected Rigidbody _rigidbody;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadDOCtrl();
+        this.LoadRangedDOCtrl();
         this.LoadCollider();
         this.LoadRigibody();
     }
@@ -33,11 +35,11 @@ public class RangedDODamageSender : DamageSender
         Debug.Log(transform.name + ": LoadRigibody", gameObject);
     }
 
-    protected virtual void LoadDOCtrl()
+    protected virtual void LoadRangedDOCtrl()
     {
-        if (this.doCtrl != null) return;
-        this.doCtrl = transform.parent.GetComponent<RangedDOCtrl>();
-        Debug.Log(transform.name + ": LoadDOCtrl", gameObject);
+        if (this.rangedDOCtrl != null) return;
+        this.rangedDOCtrl = transform.parent.GetComponent<RangedDOCtrl>();
+        Debug.Log(transform.name + ": LoadRangedDOCtrl", gameObject);
     }
 
     public override void Send(DamageReceiver damageReceiver)
@@ -46,7 +48,7 @@ public class RangedDODamageSender : DamageSender
         this.DestroyDO();
     }
 
-    protected virtual void DestroyDO() => this.doCtrl.DespawnDO.DespawnObject();
+    protected virtual void DestroyDO() => this.rangedDOCtrl.DespawnDO.DespawnObject();
 
-    protected virtual void OnTriggerEnter(Collider other) => this.doCtrl.DamageSender.Send(other.transform);
+    protected virtual void OnTriggerEnter(Collider other) => this.rangedDOCtrl.DamageSender.Send(other.transform);
 }

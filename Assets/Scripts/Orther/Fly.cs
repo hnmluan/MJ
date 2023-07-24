@@ -1,12 +1,9 @@
 using UnityEngine;
 
-public class Fly : MonoBehaviour
+public class Fly : InitMonoBehaviour
 {
-    [SerializeField] protected int movespeed = 8;
-    [SerializeField] protected Vector3 direction = Vector3.right;
+    [SerializeField] protected float movespeed = 8;
+    protected Vector3 direction = Vector3.right;
 
-    void Update()
-    {
-        transform.parent.Translate(this.direction * this.movespeed * Time.deltaTime);
-    }
+    void Update() => transform.parent.Translate(this.direction * this.movespeed * Time.deltaTime);
 }

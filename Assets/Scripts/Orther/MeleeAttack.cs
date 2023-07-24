@@ -7,16 +7,14 @@ public class MeleeAttack : MonoBehaviour
 
     protected bool canFire = true;
 
-    //[SerializeField] protected int numProjectiles = 8;
-
-    public string DOName;
+    public string damageObjectName;
 
     private void Update()
     {
         if (canFire)
             if (Input.GetMouseButton(0))
             {
-                Attack(DOName);
+                Attack(damageObjectName);
                 StartCoroutine(FireCoolDown());
             }
     }
@@ -28,19 +26,19 @@ public class MeleeAttack : MonoBehaviour
         canFire = true;
     }
 
-    private void SpawnDO(string projectileName, Vector3 positon, Quaternion quaternion)
+    private void SpawnDamageObject(string damageObjectName, Vector3 positon, Quaternion quaternion)
     {
-        Transform projectile = RangedDOSpawner.Instance.Spawn(projectileName, positon, quaternion);
-        if (projectile == null) return;
-        projectile.gameObject.SetActive(true);
+        Transform damageObject = DamageObjectSpawner.Instance.Spawn(damageObjectName, positon, quaternion);
+        if (damageObject == null) return;
+        damageObject.gameObject.SetActive(true);
 
-        DamageSender damageReceiver = projectile.GetComponentInChildren<DamageSender>();
+        DamageSender damageReceiver = damageObject.GetComponentInChildren<DamageSender>();
         damageReceiver.isDameFromPlayer = true;
 
         AudioController.Instance.PlayVFX("sfx_acttack_melee");
     }
 
-    private void Attack(string projectileName) => SpawnDO(projectileName, transform.position, GetQuaternionToMouse());
+    private void Attack(string projectileName) => SpawnDamageObject(projectileName, transform.position, GetQuaternionToMouse());
 
     private Quaternion GetQuaternionToMouse()
     {
@@ -53,17 +51,4 @@ public class MeleeAttack : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
     }
-
-    //private void FireBurstAroundPlayer(string projectileName, int numProjectiles)
-    //{
-    //    float angleStep = 360f / numProjectiles;
-    //    float currentAngle = 0f;
-
-    //    for (int i = 0; i < numProjectiles; i++)
-    //    {
-    //        Quaternion projectileRotation = Quaternion.AngleAxis(currentAngle, Vector3.forward);
-    //        SpawnDO(projectileName, transform.position, projectileRotation);
-    //        currentAngle += angleStep;
-    //    }
-    //}
 }

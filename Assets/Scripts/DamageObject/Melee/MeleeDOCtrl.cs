@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RangedDOCtrl : InitMonoBehaviour
+public class MeleeDOCtrl : InitMonoBehaviour
 {
     [SerializeField] protected DamageSender damageSender;
     public DamageSender DamageSender { get => damageSender; }
@@ -28,5 +28,4 @@ public class RangedDOCtrl : InitMonoBehaviour
         this.despawnDO = transform.GetComponentInChildren<DespawnDO>();
         Debug.Log(transform.name + ": LoadDespawnDO", gameObject);
     }
-
 }
