@@ -11,13 +11,25 @@ public class MeleeAttack : PlayerAbstract
 
     [SerializeField] protected DamageObjectSO damageObjectSO;
 
-    [SerializeField] protected Transform leftWeaponInAttack;
+    [Header("------------Weapon In Hand------------")]
+    [Space(10)]
 
-    [SerializeField] protected Transform rightWeaponInAttack;
+    [SerializeField] protected Transform leftWeaponInHand;
 
-    [SerializeField] protected Transform upWeaponInAttack;
+    [SerializeField] protected Transform rightWeaponInHand;
 
-    [SerializeField] protected Transform downWeaponInAttack;
+    [SerializeField] protected Transform upWeaponInHand;
+
+    [SerializeField] protected Transform downWeaponInHand;
+
+    [SerializeField] protected Transform weaponInHand;
+
+    [Header("------------Weapon In Attack------------")]
+    [Space(10)]
+
+    [SerializeField] protected float rotationSpeed = 200f;
+
+    [SerializeField] protected float circleRadius = 0.5f;
 
 
     protected override void LoadComponents()
@@ -37,13 +49,18 @@ public class MeleeAttack : PlayerAbstract
     private void Update()
     {
         LoadDamageObjectSO();
+
         if (canAttack)
             if (Input.GetMouseButton(0))
             {
-                Debug.LogWarning(DetermineDirection(GetQuaternionToMouse()).name);
                 Attack(damageObjectName);
                 StartCoroutine(AttackCoolDown());
             }
+
+        if (Input.GetMouseButton(0))
+            SetPositionWeaponInAttack();
+        else
+            SetPositionWeaponInHand();
     }
 
     private IEnumerator AttackCoolDown()
@@ -65,9 +82,9 @@ public class MeleeAttack : PlayerAbstract
         AudioController.Instance.PlayVFX("sfx_acttack_melee");
     }
 
-    private void Attack(string projectileName) => SpawnDamageObject(projectileName, DetermineDirection(GetQuaternionToMouse()).position, GetQuaternionToMouse());
+    private void Attack(string projectileName) => SpawnDamageObject(projectileName, weaponInHand.position, GetQuaternionToMouse());
 
-    private Quaternion GetQuaternionToMouse()
+    public Vector3 GetDirectionToMouse()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = -Camera.main.transform.position.z;
@@ -75,36 +92,39 @@ public class MeleeAttack : PlayerAbstract
         Vector3 direction = target - transform.position;
         direction.z = 0;
         direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        return direction;
+    }
+
+    private Quaternion GetQuaternionToMouse()
+    {
+        float angle = Mathf.Atan2(GetDirectionToMouse().y, GetDirectionToMouse().x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    private Transform DetermineDirection(Quaternion rotation)
+    public void SetPositionWeaponInAttack()
     {
-        // Extract the angle from the Quaternion using eulerAngles
-        float angle = rotation.eulerAngles.z;
-        Debug.LogWarning(angle);
-
-
-        // Define the angle thresholds to determine directions
-        float upThreshold = 45f;
-        float downThreshold = 135f;
-        float leftThreshold = -135f;
-        float rightThreshold = -45f;
-
-        // Wrap angle to [0, 360] range
-        if (angle < 0f)
-            angle += 360f;
-
-        // Determine the direction based on the angle
-        if (angle > -upThreshold && angle <= upThreshold)
-            return upWeaponInAttack;
-        else if (angle > upThreshold && angle <= downThreshold)
-            return downWeaponInAttack;
-        else if (angle > downThreshold || angle <= leftThreshold)
-            return leftWeaponInAttack;
-        else
-            return rightWeaponInAttack;
+        float angle = Mathf.Atan2(GetDirectionToMouse().y, GetDirectionToMouse().x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        weaponInHand.rotation = Quaternion.RotateTowards(weaponInHand.rotation, rotation, rotationSpeed * Time.deltaTime);
+        weaponInHand.localScale = new Vector3(1, 1, 1);
+        Vector3 circularPosition = transform.position + Quaternion.Euler(0, 0, angle) * Vector3.right * circleRadius;
+        weaponInHand.position = circularPosition;
     }
 
+    public Transform GetPositionWeaponInHand()
+    {
+        if (playerCtrl.Animator.GetFloat("X") == 1) return rightWeaponInHand;
+        else if (playerCtrl.Animator.GetFloat("X") == -1) return leftWeaponInHand;
+        else if (playerCtrl.Animator.GetFloat("Y") == 1) return upWeaponInHand;
+        else return downWeaponInHand;
+    }
+
+    public void SetPositionWeaponInHand()
+    {
+        weaponInHand.position = GetPositionWeaponInHand().position;
+        weaponInHand.rotation = Quaternion.Euler(0f, 0f, 0f);
+        weaponInHand.localScale = new Vector3(1, 1, 1);
+        if (playerCtrl.Animator.GetFloat("X") == -1) weaponInHand.localScale = new Vector3(-1, 1, 1);
+
+    }
 }
