@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class RangedDOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected DamageObjectSO damageObjectSO;
-    public DamageObjectSO DamageObjectSO => damageObjectSO;
+    [SerializeField] protected RangedSO rangedDOSO;
+    public RangedSO RangedDOSO => rangedDOSO;
 
     [SerializeField] protected SpriteRenderer modelSpriteRenderer;
     public SpriteRenderer ModelSpriteRenderer => modelSpriteRenderer;
@@ -16,7 +16,6 @@ public class RangedDOCtrl : InitMonoBehaviour
 
     [SerializeField] protected RangedDODespawn despawnDO;
     public RangedDODespawn DespawnDO { get => despawnDO; }
-
 
     protected override void LoadComponents()
     {
@@ -35,18 +34,18 @@ public class RangedDOCtrl : InitMonoBehaviour
 
     protected override void ResetValue()
     {
-        if (this.damageObjectSO == null) return;
-        modelSpriteRenderer.sprite = damageObjectSO.spriteInAttack;
-        rangedDamageObjectMovement.movespeed = damageObjectSO.speed;
-        damageSender.damage = damageObjectSO.damage;
-        despawnDO.despawnTime = damageObjectSO.range / damageObjectSO.speed;
+        if (this.rangedDOSO == null) return;
+        modelSpriteRenderer.sprite = rangedDOSO.spriteInAttack;
+        rangedDamageObjectMovement.movespeed = rangedDOSO.speed;
+        damageSender.damage = rangedDOSO.damage;
+        despawnDO.despawnTime = rangedDOSO.range / rangedDOSO.speed;
     }
 
     protected virtual void LoadRangedDOSO()
     {
-        if (this.damageObjectSO != null) return;
+        if (this.rangedDOSO != null) return;
         string resPath = "DamageObject/Ranged/" + transform.name;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPath);
+        this.rangedDOSO = Resources.Load<RangedSO>(resPath);
         Debug.Log(transform.name + ": LoadRangedDOSO " + resPath, gameObject);
     }
 

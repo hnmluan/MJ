@@ -3545,11 +3545,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 816883775}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f2afce25f6597643a2dcafb72031593, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f3dbd5324a519247800c9a5855ea489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationAngle: 90
-  rotationTime: 0.5
+  timeMove: 0.5
 --- !u!1 &845301920
 GameObject:
   m_ObjectHideFlags: 0
@@ -3734,9 +3734,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a7c3cccff8e34190f3b47898f34a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meleeDOSO: {fileID: 11400000, guid: e873b4b68cbe48b4eafececa5d473d76, type: 2}
+  modelSpriteRenderer: {fileID: 742759817}
+  meleeDamageObjectMovement: {fileID: 816883777}
   damageSender: {fileID: 1280202396}
   despawnDO: {fileID: 1798062297}
-  damageObjectSO: {fileID: 11400000, guid: e873b4b68cbe48b4eafececa5d473d76, type: 2}
 --- !u!1 &931449366
 GameObject:
   m_ObjectHideFlags: 0
@@ -23511,8 +23513,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1280202394}
   - component: {fileID: 1280202397}
-  - component: {fileID: 1280202396}
   - component: {fileID: 1280202395}
+  - component: {fileID: 1280202396}
   m_Layer: 0
   m_Name: DamageSender
   m_TagString: Untagged
@@ -23560,7 +23562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c4f89284559c8478cae597862f0c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   isDameFromPlayer: 0
   meleeDOCtrl: {fileID: 914297061}
   boxCollider: {fileID: 1280202395}
@@ -35228,7 +35230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970b918a4c22d724db09d9b39daadfcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageObjectSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
+  rangedDOSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
   modelSpriteRenderer: {fileID: 7061487583060224823}
   rangedDamageObjectMovement: {fileID: 7061487584035834622}
   damageSender: {fileID: 7061487582786118904}

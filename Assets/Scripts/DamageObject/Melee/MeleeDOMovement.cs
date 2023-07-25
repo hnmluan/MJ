@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeMovement : MonoBehaviour
+public class MeleeDOMovement : MonoBehaviour
 {
     public float rotationAngle = 90f;
-    public float rotationTime = 5f;
+    public float timeMove = 5f;
 
     private void OnEnable() => StartCoroutine(RotateAndDestroyObject());
 
@@ -15,9 +15,9 @@ public class MeleeMovement : MonoBehaviour
         Quaternion startRotation = transform.parent.rotation * Quaternion.Euler(0f, 0f, rotationAngle / 2);
         Quaternion targetRotation = transform.parent.rotation * Quaternion.Euler(0f, 0f, -rotationAngle / 2);
 
-        while (elapsedTime < rotationTime)
+        while (elapsedTime < timeMove)
         {
-            float t = elapsedTime / rotationTime;
+            float t = elapsedTime / timeMove;
             transform.parent.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
             elapsedTime += Time.deltaTime;
             yield return null;
