@@ -19,4 +19,4 @@ MonoBehaviour:
   speed: 16
   damage: 2
   discription: 
-  fireRate: 0.2
+  attackRate: 0.7

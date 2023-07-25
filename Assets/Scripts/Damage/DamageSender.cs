@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DamageSender : InitMonoBehaviour
 {
-    [SerializeField] protected int damage = 1;
+    [SerializeField] public int damage = 1;
 
     [SerializeField] public bool isDameFromPlayer;
 

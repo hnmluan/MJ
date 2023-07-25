@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class MeleeMovement : MonoBehaviour
 {
-    public float rotationAngle = 90f; // Góc quay
-    public float rotationTime = 5f; // Thời gian quay (giây)
+    public float rotationAngle = 90f;
+    public float rotationTime = 5f;
 
     private void OnEnable() => StartCoroutine(RotateAndDestroyObject());
 
@@ -22,8 +22,5 @@ public class MeleeMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // Khi hoàn thành quay, hủy đối tượng
-        //Destroy(transform.parent.gameObject);
     }
 }

@@ -3736,6 +3736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageSender: {fileID: 1280202396}
   despawnDO: {fileID: 1798062297}
+  damageObjectSO: {fileID: 11400000, guid: e873b4b68cbe48b4eafececa5d473d76, type: 2}
 --- !u!1 &931449366
 GameObject:
   m_ObjectHideFlags: 0
@@ -23788,13 +23789,15 @@ MonoBehaviour:
   damageObjectName: Bow
   canAttack: 1
   damageObjectSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
+  isMelee: 0
   leftWeaponInHand: {fileID: 953342060}
   rightWeaponInHand: {fileID: 2109870546}
   upWeaponInHand: {fileID: 1541398572}
   downWeaponInHand: {fileID: 41882279}
   weaponInHand: {fileID: 598260570}
+  weaponInHandSprite: {fileID: 598260571}
   rotationSpeed: 2000
-  circleRadius: 0.4
+  circleRadius: 0.5
 --- !u!4 &1749254975
 Transform:
   m_ObjectHideFlags: 0
@@ -33898,7 +33901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e0904e2e476d343863f53efa35a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   isDameFromPlayer: 0
   rangedDOCtrl: {fileID: 7061487583631609841}
   sphereCollider: {fileID: 7061487582786118910}
@@ -34055,7 +34058,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7061487583060224822}
   - component: {fileID: 7061487583060224823}
-  - component: {fileID: 7061487583060224824}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -34130,20 +34132,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7061487583060224824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061487583060224817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95605d4df75572949805682ca31889f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rangedDOCtrl: {fileID: 7061487583631609841}
-  rangedDOSprite: {fileID: 7061487583060224823}
 --- !u!4 &7061487583072235748
 Transform:
   m_ObjectHideFlags: 0
@@ -35176,7 +35164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   despawnTime: 0.5
-  rangedDOCtrl: {fileID: 7061487583631609841}
 --- !u!1 &7061487583602651842
 GameObject:
   m_ObjectHideFlags: 0
@@ -35241,9 +35228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970b918a4c22d724db09d9b39daadfcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageObjectSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
+  modelSpriteRenderer: {fileID: 7061487583060224823}
+  rangedDamageObjectMovement: {fileID: 7061487584035834622}
   damageSender: {fileID: 7061487582786118904}
   despawnDO: {fileID: 7061487583546341690}
-  damageObjectSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
 --- !u!1 &7061487583631609843
 GameObject:
   m_ObjectHideFlags: 0
@@ -36449,7 +36438,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movespeed: 16
-  rangedDOCtrl: {fileID: 7061487583631609841}
 --- !u!114 &7061487584074895516
 MonoBehaviour:
   m_ObjectHideFlags: 0

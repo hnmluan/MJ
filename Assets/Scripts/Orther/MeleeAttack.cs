@@ -11,6 +11,8 @@ public class MeleeAttack : PlayerAbstract
 
     [SerializeField] protected DamageObjectSO damageObjectSO;
 
+    [SerializeField] protected bool isMelee;
+
     [Header("------------Weapon In Hand------------")]
     [Space(10)]
 
@@ -24,10 +26,12 @@ public class MeleeAttack : PlayerAbstract
 
     [SerializeField] protected Transform weaponInHand;
 
+    [SerializeField] protected SpriteRenderer weaponInHandSprite;
+
     [Header("------------Weapon In Attack------------")]
     [Space(10)]
 
-    [SerializeField] protected float rotationSpeed = 200f;
+    [SerializeField] protected float rotationSpeed = 2000f;
 
     [SerializeField] protected float circleRadius = 0.5f;
 
@@ -36,14 +40,76 @@ public class MeleeAttack : PlayerAbstract
     {
         base.LoadComponents();
         this.LoadDamageObjectSO();
+        this.LoadWeaponInHandSprite();
+        this.LoadLeftWeaponInHand();
+        this.LoadRightWeaponInHand();
+        this.LoadUpWeaponInHand();
+        this.LoadDownWeaponInHand();
+        this.LoadWeaponInHand();
+    }
+
+    private void LoadWeaponInHand()
+    {
+        if (this.weaponInHand != null) return;
+        weaponInHand = transform.Find("WeaponInHand");
+        Debug.Log(transform.name + ": LoadWeaponInHand " + gameObject);
+    }
+
+    private void LoadDownWeaponInHand()
+    {
+        if (this.downWeaponInHand != null) return;
+        downWeaponInHand = transform.Find("Down");
+        Debug.Log(transform.name + ": LoadDownWeaponInHand " + gameObject);
+    }
+
+    private void LoadUpWeaponInHand()
+    {
+        if (this.upWeaponInHand != null) return;
+        upWeaponInHand = transform.Find("Up");
+        Debug.Log(transform.name + ": LoadUpWeaponInHand " + gameObject);
+    }
+
+    private void LoadRightWeaponInHand()
+    {
+        if (this.rightWeaponInHand != null) return;
+        rightWeaponInHand = transform.Find("Right");
+        Debug.Log(transform.name + ": LoadRightWeaponInHand " + gameObject);
+    }
+
+    private void LoadLeftWeaponInHand()
+    {
+        if (this.leftWeaponInHand != null) return;
+        leftWeaponInHand = transform.Find("Left");
+        Debug.Log(transform.name + ": LoadLeftWeaponInHand " + gameObject);
+    }
+
+    protected void LoadWeaponInHandSprite()
+    {
+        if (this.damageObjectSO == null) return;
+        weaponInHandSprite = transform.GetComponentInChildren<SpriteRenderer>();
+        weaponInHandSprite.sprite = damageObjectSO.spriteInHand;
+        Debug.Log(transform.name + ": LoadWeaponInHandSprite " + gameObject);
     }
 
     protected virtual void LoadDamageObjectSO()
     {
         if (this.damageObjectSO != null) return;
-        string resPath = "DamageObject/Ranged/" + damageObjectName;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPath);
-        Debug.LogWarning(transform.name + ": LoadDamageObjectSO " + resPath, gameObject);
+        string resPathRanged = "DamageObject/Ranged/" + damageObjectName;
+        string resPathMelee = "DamageObject/Melee/" + damageObjectName;
+        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathRanged);
+        if (this.damageObjectSO != null)
+        {
+            Debug.Log(transform.name + ": LoadRangedDOSO " + resPathRanged, gameObject);
+            isMelee = false;
+            return;
+        }
+        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee);
+        if (this.damageObjectSO != null)
+        {
+            Debug.Log(transform.name + ": LoadRangedDOSO " + resPathMelee, gameObject);
+            isMelee = true;
+            return;
+        }
     }
 
     private void Update()
@@ -51,14 +117,24 @@ public class MeleeAttack : PlayerAbstract
         LoadDamageObjectSO();
 
         if (canAttack)
+        {
             if (Input.GetMouseButton(0))
             {
                 Attack(damageObjectName);
                 StartCoroutine(AttackCoolDown());
             }
+        }
+
 
         if (Input.GetMouseButton(0))
-            SetPositionWeaponInAttack();
+        {
+            if (isMelee) weaponInHandSprite.enabled = false;
+            if (!isMelee)
+            {
+                weaponInHandSprite.enabled = true;
+                SetPositionWeaponInAttack();
+            }
+        }
         else
             SetPositionWeaponInHand();
     }
@@ -66,7 +142,7 @@ public class MeleeAttack : PlayerAbstract
     private IEnumerator AttackCoolDown()
     {
         canAttack = false;
-        yield return new WaitForSeconds(damageObjectSO.fireRate);
+        yield return new WaitForSeconds(damageObjectSO.attackRate);
         canAttack = true;
     }
 
@@ -125,6 +201,5 @@ public class MeleeAttack : PlayerAbstract
         weaponInHand.rotation = Quaternion.Euler(0f, 0f, 0f);
         weaponInHand.localScale = new Vector3(1, 1, 1);
         if (playerCtrl.Animator.GetFloat("X") == -1) weaponInHand.localScale = new Vector3(-1, 1, 1);
-
     }
 }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8ee4033f2cf1b4eaacbba1781f2ed9, type: 3}
+  m_Name: Lance
+  m_EditorClassIdentifier: 
+  damageObjectName: Lance
+  spriteInHand: {fileID: 21300000, guid: c0142e0cee11c994ea9219f14e4ab053, type: 3}
+  spriteInAttack: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
+  range: 1.5
+  speed: 0
+  damage: 2
+  discription: 
+  fireRate: 0.5

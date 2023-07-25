@@ -2,7 +2,7 @@
 
 public class DespawnByTime : Despawn
 {
-    [SerializeField] protected float despawnTime = 4f;
+    [SerializeField] public float despawnTime = 4f;
 
     protected float timer = 0f;
 
