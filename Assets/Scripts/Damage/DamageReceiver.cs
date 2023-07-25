@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class DamageReceiver : InitMonoBehaviour
+public abstract class DamageReceiver : InitMonoBehaviour
 {
     [Header("Damage Receiver")]
     [SerializeField] protected SphereCollider sphereCollider;
@@ -10,10 +10,7 @@ public class DamageReceiver : InitMonoBehaviour
     [SerializeField] protected bool isDead = false;
 
 
-    protected override void OnEnable()
-    {
-        this.Reborn();
-    }
+    protected override void OnEnable() => this.Reborn();
 
     protected override void LoadComponents()
     {
@@ -65,8 +62,5 @@ public class DamageReceiver : InitMonoBehaviour
         this.OnDead();
     }
 
-    protected virtual void OnDead()
-    {
-    }
-
+    protected abstract void OnDead();
 }

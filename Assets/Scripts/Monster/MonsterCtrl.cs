@@ -15,6 +15,9 @@ public class MonsterCtrl : InitMonoBehaviour
     [SerializeField] protected Slider heathBar;
     public Slider HeathBar { get => heathBar; }
 
+    [SerializeField] protected EnemySO enemySO;
+    public EnemySO EnemySO => enemySO;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -22,6 +25,15 @@ public class MonsterCtrl : InitMonoBehaviour
         this.LoadMonsterDespawn();
         this.LoadModel();
         this.LoadHeathBar();
+        this.LoadEnemySO();
+    }
+
+    protected virtual void LoadEnemySO()
+    {
+        if (this.enemySO != null) return;
+        string resPath = "Enemy/" + transform.name;
+        this.enemySO = Resources.Load<EnemySO>(resPath);
+        Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
     }
 
     protected virtual void LoadHeathBar()

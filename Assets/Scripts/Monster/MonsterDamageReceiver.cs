@@ -7,7 +7,7 @@ public class MonsterDamageReceiver : DamageReceiver
 
     [SerializeField] protected MonsterCtrl monsterCtrl;
 
-    [Header("Blood Loss Animation")]
+    [Header("Blood Loss Effect")]
 
     [SerializeField] protected int blinkCount = 3;
 
@@ -21,13 +21,6 @@ public class MonsterDamageReceiver : DamageReceiver
         this.LoadMonsterCtrl();
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        monsterCtrl.HeathBar.value = hpMax;
-        monsterCtrl.Model.enabled = true;
-    }
-
     protected virtual void LoadMonsterCtrl()
     {
         if (this.monsterCtrl != null) return;
@@ -35,23 +28,43 @@ public class MonsterDamageReceiver : DamageReceiver
         Debug.Log(transform.name + ": LoadAnimalCtrl", gameObject);
     }
 
-    protected override void OnDead() => this.monsterCtrl.MonsterDespawn.DespawnObject();
+    protected override void OnDead()
+    {
+        this.OnDeadFX();
+        this.OnDeadDrop();
+        this.monsterCtrl.MonsterDespawn.DespawnObject();
+    }
+
+    protected virtual void OnDeadDrop()
+    {
+        Vector3 dropPos = transform.position;
+        Quaternion dropRot = transform.rotation;
+        ItemDropSpawner.Instance.Drop(this.monsterCtrl.EnemySO.dropList, dropPos, dropRot);
+    }
+
+    protected virtual void OnDeadFX() { }
+
+    public override void Reborn()
+    {
+        monsterCtrl.Model.enabled = true;
+        this.hpMax = this.monsterCtrl.EnemySO.hpMax;
+        base.Reborn();
+        UpdateHeathBar();
+    }
 
     public override void Deduct(int deduct)
     {
         base.Deduct(deduct);
-        PlayBloodLossAnimation();
+        PlayBloodLossEffect();
+        UpdateHeathBar();
         AudioController.Instance.PlayVFX("sfx_loss_hp");
-        monsterCtrl.HeathBar.value = (hp / hpMax);
     }
 
-    private void PlayBloodLossAnimation()
-    {
-        if (monsterCtrl.Model == null) return;
-        if (hp != 0) StartCoroutine(BloodLossAnimation());
-    }
+    private void UpdateHeathBar() => monsterCtrl.HeathBar.value = (hp / hpMax);
 
-    private IEnumerator BloodLossAnimation()
+    private void PlayBloodLossEffect() { if (hp != 0 && monsterCtrl.Model != null) StartCoroutine(BloodLossEffect()); }
+
+    private IEnumerator BloodLossEffect()
     {
         for (int i = 0; i < blinkCount; i++)
         {

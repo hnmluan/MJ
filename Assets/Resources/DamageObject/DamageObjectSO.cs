@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageObject", menuName = "ScriptableObjects/DamageObject")]
 public class DamageObjectSO : ScriptableObject
 {
     public string damageObjectName;

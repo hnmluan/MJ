@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Ranged", menuName = "ScriptableObjects/DamageObject/Ranged")]
+[CreateAssetMenu(fileName = "Ranged", menuName = "SO/DamageObject/Ranged")]
 public class RangedSO : DamageObjectSO
 {
 }
