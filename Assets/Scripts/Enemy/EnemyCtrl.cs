@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MonsterCtrl : InitMonoBehaviour
+public class EnemyCtrl : InitMonoBehaviour
 {
     [SerializeField] protected Animator animator;
     public Animator Animator { get => animator; }
@@ -9,8 +9,8 @@ public class MonsterCtrl : InitMonoBehaviour
     [SerializeField] protected SpriteRenderer model;
     public SpriteRenderer Model { get => model; }
 
-    [SerializeField] protected MonsterDespawn monsterDespawn;
-    public MonsterDespawn MonsterDespawn { get => monsterDespawn; }
+    [SerializeField] protected EnemyDespawn enemyDespawn;
+    public EnemyDespawn EnemyDespawn { get => enemyDespawn; }
 
     [SerializeField] protected Slider heathBar;
     public Slider HeathBar { get => heathBar; }
@@ -22,7 +22,7 @@ public class MonsterCtrl : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadAnimator();
-        this.LoadMonsterDespawn();
+        this.LoadEnemyDespawn();
         this.LoadModel();
         this.LoadHeathBar();
         this.LoadEnemySO();
@@ -50,11 +50,11 @@ public class MonsterCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 
-    protected virtual void LoadMonsterDespawn()
+    protected virtual void LoadEnemyDespawn()
     {
-        if (this.monsterDespawn != null) return;
-        this.monsterDespawn = transform.GetComponentInChildren<MonsterDespawn>();
-        Debug.Log(transform.name + ": LoadMonsterDespawn", gameObject);
+        if (this.enemyDespawn != null) return;
+        this.enemyDespawn = transform.GetComponentInChildren<EnemyDespawn>();
+        Debug.Log(transform.name + ": LoadEnemyDespawn", gameObject);
     }
 
     protected virtual void LoadAnimator()

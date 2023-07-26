@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class MonsterChasePlayer : ChasePlayer
+public class EnemyChasePlayer : ChasePlayer
 {
-    [SerializeField] protected MonsterCtrl monsterCtrl;
+    [SerializeField] protected EnemyCtrl enemyCtrl;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        LoadMonsterCtrl();
+        LoadEnemyCtrl();
     }
 
-    protected virtual void LoadMonsterCtrl()
+    protected virtual void LoadEnemyCtrl()
     {
-        if (monsterCtrl != null) return;
-        monsterCtrl = transform.parent.GetComponent<MonsterCtrl>();
+        if (enemyCtrl != null) return;
+        enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
         Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
     }
 
@@ -28,8 +28,8 @@ public class MonsterChasePlayer : ChasePlayer
         float x = moveDirection.x;
         float y = moveDirection.y;
 
-        monsterCtrl.Animator.SetFloat("X", x);
-        monsterCtrl.Animator.SetFloat("Y", y);
-        monsterCtrl.Animator.SetBool("isWalking", this.isMoving);
+        enemyCtrl.Animator.SetFloat("X", x);
+        enemyCtrl.Animator.SetFloat("Y", y);
+        enemyCtrl.Animator.SetBool("isWalking", this.isMoving);
     }
 }

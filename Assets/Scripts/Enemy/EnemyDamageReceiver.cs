@@ -1,11 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class MonsterDamageReceiver : DamageReceiver
+public class EnemyDamageReceiver : DamageReceiver
 {
-    [Header("Monster")]
+    [Header("Enemy")]
 
-    [SerializeField] protected MonsterCtrl monsterCtrl;
+    [SerializeField] protected EnemyCtrl enemyCtrl;
 
     [Header("Blood Loss Effect")]
 
@@ -18,13 +18,13 @@ public class MonsterDamageReceiver : DamageReceiver
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadMonsterCtrl();
+        this.LoadEnemyCtrl();
     }
 
-    protected virtual void LoadMonsterCtrl()
+    protected virtual void LoadEnemyCtrl()
     {
-        if (this.monsterCtrl != null) return;
-        this.monsterCtrl = transform.parent.GetComponent<MonsterCtrl>();
+        if (this.enemyCtrl != null) return;
+        this.enemyCtrl = transform.parent.GetComponent<EnemyCtrl>();
         Debug.Log(transform.name + ": LoadAnimalCtrl", gameObject);
     }
 
@@ -32,22 +32,22 @@ public class MonsterDamageReceiver : DamageReceiver
     {
         this.OnDeadFX();
         this.OnDeadDrop();
-        this.monsterCtrl.MonsterDespawn.DespawnObject();
+        this.enemyCtrl.EnemyDespawn.DespawnObject();
     }
 
     protected virtual void OnDeadDrop()
     {
         Vector3 dropPos = transform.position;
         Quaternion dropRot = transform.rotation;
-        ItemDropSpawner.Instance.Drop(this.monsterCtrl.EnemySO.dropList, dropPos, dropRot);
+        ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropList, dropPos, dropRot);
     }
 
     protected virtual void OnDeadFX() { }
 
     public override void Reborn()
     {
-        monsterCtrl.Model.enabled = true;
-        this.hpMax = this.monsterCtrl.EnemySO.hpMax;
+        enemyCtrl.Model.enabled = true;
+        this.hpMax = this.enemyCtrl.EnemySO.hpMax;
         base.Reborn();
         UpdateHeathBar();
     }
@@ -60,23 +60,23 @@ public class MonsterDamageReceiver : DamageReceiver
         AudioController.Instance.PlayVFX("sfx_loss_hp");
     }
 
-    private void UpdateHeathBar() => monsterCtrl.HeathBar.value = (hp / hpMax);
+    private void UpdateHeathBar() => enemyCtrl.HeathBar.value = (hp / hpMax);
 
-    private void PlayBloodLossEffect() { if (hp != 0 && monsterCtrl.Model != null) StartCoroutine(BloodLossEffect()); }
+    private void PlayBloodLossEffect() { if (hp != 0 && enemyCtrl.Model != null) StartCoroutine(BloodLossEffect()); }
 
     private IEnumerator BloodLossEffect()
     {
         for (int i = 0; i < blinkCount; i++)
         {
-            monsterCtrl.Model.enabled = true;
+            enemyCtrl.Model.enabled = true;
 
             yield return new WaitForSeconds(blinkDuration);
 
-            monsterCtrl.Model.enabled = false;
+            enemyCtrl.Model.enabled = false;
 
             yield return new WaitForSeconds(blinkInterval);
         }
 
-        monsterCtrl.Model.enabled = true;
+        enemyCtrl.Model.enabled = true;
     }
 }

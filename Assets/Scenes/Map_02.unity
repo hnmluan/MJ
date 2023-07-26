@@ -154,6 +154,131 @@ Transform:
   m_Father: {fileID: 1749254975}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &46322124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46322125}
+  - component: {fileID: 46322128}
+  - component: {fileID: 46322127}
+  - component: {fileID: 46322126}
+  m_Layer: 0
+  m_Name: ItemLooter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &46322125
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46322124}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 77740168}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &46322126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46322124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89cdd89e22a61b4bb03bcbf242a9852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 77740169}
+  _collider: {fileID: 46322128}
+  _rigidbody: {fileID: 46322127}
+--- !u!54 &46322127
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46322124}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &46322128
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46322124}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &77740167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 77740168}
+  - component: {fileID: 77740169}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &77740168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77740167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 46322125}
+  m_Father: {fileID: 7061487583094871843}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &77740169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77740167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24d409030a91284eb02d845a7e26845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSlot: 70
+  items: []
 --- !u!1001 &137390542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3097,6 +3222,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: enemyName
+      value: Bamboo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: spawnDelay
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
 --- !u!4 &617874659 stripped
@@ -3447,6 +3580,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -3490,6 +3627,14 @@ PrefabInstance:
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: enemyName
+      value: Bamboo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: spawnDelay
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
@@ -3638,6 +3783,66 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &780549081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 780549082}
+  - component: {fileID: 780549084}
+  - component: {fileID: 780549083}
+  m_Layer: 0
+  m_Name: ItemPickupable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &780549082
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780549081}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 970346906}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &780549083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780549081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6f50c23803d1f468b6c23c92d83051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemCtrl: {fileID: 970346907}
+  _collider: {fileID: 780549084}
+--- !u!135 &780549084
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780549081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &816883775
 GameObject:
   m_ObjectHideFlags: 0
@@ -3948,6 +4153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 970346906}
+  - component: {fileID: 970346907}
   m_Layer: 0
   m_Name: GoldOre
   m_TagString: Untagged
@@ -3969,9 +4175,23 @@ Transform:
   m_Children:
   - {fileID: 313201222}
   - {fileID: 1509311755}
+  - {fileID: 780549082}
   m_Father: {fileID: 1390648765}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &970346907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970346905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9530028921aa0584dac4c16073e91932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemDespawn: {fileID: 1509311756}
 --- !u!1 &987691715
 GameObject:
   m_ObjectHideFlags: 0
@@ -23936,10 +24156,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1509311754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a90ea2df899fc84ea45f908fa973eb2, type: 3}
+  m_Script: {fileID: 11500000, guid: ab6b09d9da014ba42bcd728f83c4e6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 2
+  despawnTime: 5
 --- !u!1 &1515753119
 GameObject:
   m_ObjectHideFlags: 0
@@ -24052,7 +24272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749254973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.405, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24124,6 +24344,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -24167,6 +24391,14 @@ PrefabInstance:
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: enemyName
+      value: Bamboo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: spawnDelay
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
@@ -24286,7 +24518,7 @@ MonoBehaviour:
   hp: 0
   hpMax: 10
   isDead: 0
-  monsterCtrl: {fileID: 7061487583819731806}
+  enemyCtrl: {fileID: 0}
   blinkCount: 1
   blinkDuration: 0.1
   blinkInterval: 0.1
@@ -24387,6 +24619,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -24430,6 +24666,14 @@ PrefabInstance:
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: enemyName
+      value: Bamboo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299483, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: spawnDelay
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
@@ -34705,8 +34949,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7061487583094871843}
   - component: {fileID: 7061487583094871840}
-  - component: {fileID: 7061487583094871847}
   - component: {fileID: 7061487583094871844}
+  - component: {fileID: 7061487583094871847}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -34730,6 +34974,7 @@ Transform:
   - {fileID: 7061487582769929343}
   - {fileID: 1749254975}
   - {fileID: 7061487584004271971}
+  - {fileID: 77740168}
   m_Father: {fileID: 7061487584190449521}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34746,7 +34991,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.4334135}
+  m_Offset: {x: -0.0000009536743, y: 0.07990217}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -34757,7 +35002,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.94582176}
+  m_Size: {x: 0.87703896, y: 0.93557453}
   m_EdgeRadius: 0
 --- !u!114 &7061487583094871847
 MonoBehaviour:
@@ -35552,7 +35797,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7061487583645099193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36094,7 +36339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7061487583921723139}
   model: {fileID: 7061487583921723136}
-  monsterDespawn: {fileID: 6546741381576642171}
+  enemyDespawn: {fileID: 0}
   heathBar: {fileID: 845301922}
   enemySO: {fileID: 11400000, guid: e7d50d7217c8f054b9cfebc9b4c41348, type: 2}
 --- !u!1 &7061487583859742257
@@ -37660,7 +37905,7 @@ MonoBehaviour:
   currentWaypointIndex: 0
   isMoving: 0
   moveDirection: {x: 0, y: 0, z: 0}
-  monsterCtrl: {fileID: 7061487583819731806}
+  enemyCtrl: {fileID: 0}
 --- !u!4 &7061487584634778202
 Transform:
   m_ObjectHideFlags: 0
@@ -37871,7 +38116,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   offset: 0.1
-  monsterCtrl: {fileID: 7061487583819731806}
+  enemyCtrl: {fileID: 0}
 --- !u!1 &7061487584664317984
 GameObject:
   m_ObjectHideFlags: 0
