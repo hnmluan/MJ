@@ -6,9 +6,12 @@ public class PlayerMovement : PlayerAbstract
 
     [SerializeField] public Vector2 direction;
 
-    [SerializeField] protected float sfxWalkTimer = 0f;
+    [Header("Movement SFX")]
+    [Space(10)]
 
-    [SerializeField] protected float sfxWalkInterval = 0.2f;
+    [SerializeField] protected float sfxTimer = 0f;
+
+    [SerializeField] protected float sfxInterval = 0.2f;
 
     private void Update()
     {
@@ -21,7 +24,6 @@ public class PlayerMovement : PlayerAbstract
         if (direction != Vector2.zero)
         {
             Move();
-
             PlayWalkSFX();
         };
     }
@@ -37,13 +39,13 @@ public class PlayerMovement : PlayerAbstract
 
     private void PlayWalkSFX()
     {
-        sfxWalkTimer += Time.deltaTime;
+        sfxTimer += Time.deltaTime;
 
-        if (sfxWalkTimer >= sfxWalkInterval)
+        if (sfxTimer >= sfxInterval)
         {
             AudioController.Instance.PlayVFX("sfx_walk");
 
-            sfxWalkTimer = 0f;
+            sfxTimer = 0f;
         }
     }
 

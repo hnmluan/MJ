@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MeleeAttack : PlayerAbstract
+public class PlayerAttack : PlayerAbstract
 {
     //[Header("------------Other Settings------------")][Space(10)]
 
-    [SerializeField] protected string damageObjectName = "Bow";
+    [SerializeField] protected string damageObjectName = "Lance";
 
     [SerializeField] protected bool canAttack = true;
 
@@ -114,14 +114,12 @@ public class MeleeAttack : PlayerAbstract
 
     private void Update()
     {
-        LoadDamageObjectSO();
-
         if (canAttack)
         {
             if (Input.GetMouseButton(0))
             {
                 Attack(damageObjectName);
-                StartCoroutine(AttackCoolDown());
+                StartCoroutine(IntervalAttackCountdown());
             }
         }
 
@@ -136,15 +134,17 @@ public class MeleeAttack : PlayerAbstract
             }
         }
         else
-            SetPositionWeaponInHand();
+            InHand();
     }
 
-    private IEnumerator AttackCoolDown()
+    private IEnumerator IntervalAttackCountdown()
     {
         canAttack = false;
-        yield return new WaitForSeconds(damageObjectSO.attackRate);
+        yield return new WaitForSeconds(getIntervalAttack());
         canAttack = true;
     }
+
+    private float getIntervalAttack() => damageObjectSO is RangedSO ? ((RangedSO)damageObjectSO).fireRate : (((MeleeSO)damageObjectSO).timeAttack);
 
     private void SpawnDamageObject(string damageObjectName, Vector3 positon, Quaternion quaternion)
     {
@@ -190,12 +190,12 @@ public class MeleeAttack : PlayerAbstract
     public Transform GetPositionWeaponInHand()
     {
         if (playerCtrl.Animator.GetFloat("X") == 1) return rightWeaponInHand;
-        else if (playerCtrl.Animator.GetFloat("X") == -1) return leftWeaponInHand;
-        else if (playerCtrl.Animator.GetFloat("Y") == 1) return upWeaponInHand;
-        else return downWeaponInHand;
+        if (playerCtrl.Animator.GetFloat("X") == -1) return leftWeaponInHand;
+        if (playerCtrl.Animator.GetFloat("Y") == 1) return upWeaponInHand;
+        return downWeaponInHand;
     }
 
-    public void SetPositionWeaponInHand()
+    public void InHand()
     {
         weaponInHand.position = GetPositionWeaponInHand().position;
         weaponInHand.rotation = Quaternion.Euler(0f, 0f, 0f);

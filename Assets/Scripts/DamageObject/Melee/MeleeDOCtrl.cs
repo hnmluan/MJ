@@ -36,7 +36,7 @@ public class MeleeDOCtrl : InitMonoBehaviour
     {
         if (this.meleeDOSO == null) return;
         modelSpriteRenderer.sprite = meleeDOSO.spriteInAttack;
-        meleeDamageObjectMovement.timeMove = meleeDOSO.speed;
+        meleeDamageObjectMovement.timeMove = meleeDOSO.timeAttack;
         damageSender.damage = meleeDOSO.damage;
         meleeDamageObjectMovement.timeMove = meleeDOSO.timeAttack;
         despawnDO.despawnTime = meleeDOSO.timeAttack;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DamageObjectSO : ScriptableObject
+public abstract class DamageObjectSO : ScriptableObject
 {
     public string damageObjectName;
 
@@ -10,11 +10,7 @@ public class DamageObjectSO : ScriptableObject
 
     public float range;
 
-    public float speed;
-
     public int damage;
 
     public string discription;
-
-    public float attackRate;
 }
