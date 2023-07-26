@@ -36390,7 +36390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7061487583921723139}
   model: {fileID: 7061487583921723136}
-  enemyDespawn: {fileID: 0}
+  enemyDespawn: {fileID: 6546741381576642171}
   heathBar: {fileID: 845301922}
   enemySO: {fileID: 11400000, guid: e7d50d7217c8f054b9cfebc9b4c41348, type: 2}
 --- !u!1 &7061487583859742257

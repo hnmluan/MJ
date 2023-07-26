@@ -25,6 +25,7 @@ public class Inventory : InitMonoBehaviour
         int itemMaxStack;
         int addMore;
         ItemInventory itemExist;
+
         for (int i = 0; i < this.maxSlot; i++)
         {
             itemExist = this.GetItemNotFullStack(itemCode);

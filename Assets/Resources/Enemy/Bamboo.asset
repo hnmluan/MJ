@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
   m_Name: Bamboo
   m_EditorClassIdentifier: 
+  itemCode: 1
+  itemType: 1
   enemyName: Bamboo
   hpMax: 10
   dropList:
@@ -19,3 +21,4 @@ MonoBehaviour:
     dropRate: 10
     minDrop: 0
     maxDrop: 0
+  discription: 

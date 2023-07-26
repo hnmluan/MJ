@@ -15,8 +15,11 @@ public class EnemyCtrl : InitMonoBehaviour
     [SerializeField] protected Slider heathBar;
     public Slider HeathBar { get => heathBar; }
 
-    [SerializeField] protected EnemySO enemySO;
-    public EnemySO EnemySO => enemySO;
+    [SerializeField] protected EnemyProfileSO enemySO;
+    public EnemyProfileSO EnemySO => enemySO;
+
+    [SerializeField] protected DamageReceiver damageReceiver;
+    public DamageReceiver DamageReceiver => damageReceiver;
 
     protected override void LoadComponents()
     {
@@ -32,7 +35,7 @@ public class EnemyCtrl : InitMonoBehaviour
     {
         if (this.enemySO != null) return;
         string resPath = "Enemy/" + transform.name;
-        this.enemySO = Resources.Load<EnemySO>(resPath);
+        this.enemySO = Resources.Load<EnemyProfileSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
     }
 
