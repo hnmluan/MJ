@@ -3,13 +3,16 @@ using UnityEngine;
 
 public class Inventory : InitMonoBehaviour
 {
-    [SerializeField] protected int maxSlot = 70;
+    [SerializeField] protected int maxSlot = 7;
     [SerializeField] protected List<ItemInventory> items;
+    public List<ItemInventory> Items => items;
 
     protected override void Start()
     {
         base.Start();
-        this.AddItem(ItemCode.IronOre, 21);
+        this.AddItem(ItemCode.CopperSword, 1);
+        this.AddItem(ItemCode.GoldOre, 3);
+        this.AddItem(ItemCode.IronOre, 34);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
@@ -60,7 +63,6 @@ public class Inventory : InitMonoBehaviour
         return false;
     }
 
-
     protected virtual int GetMaxStack(ItemInventory itemInventory)
     {
         if (itemInventory == null) return 0;
@@ -108,6 +110,50 @@ public class Inventory : InitMonoBehaviour
         };
 
         return itemInventory;
+    }
+
+    public virtual bool ItemCheck(ItemCode itemCode, int numberCheck)
+    {
+        int totalCount = this.ItemTotalCount(itemCode);
+        return totalCount >= numberCheck;
+    }
+
+    public virtual int ItemTotalCount(ItemCode itemCode)
+    {
+        int totalCount = 0;
+        foreach (ItemInventory itemInventory in this.items)
+        {
+            if (itemInventory.itemProfile.itemCode != itemCode) continue;
+            totalCount += itemInventory.itemCount;
+        }
+
+        return totalCount;
+    }
+
+    public virtual void DeductItem(ItemCode itemCode, int deductCount)
+    {
+        ItemInventory itemInventory;
+        int deduct;
+        for (int i = this.items.Count - 1; i >= 0; i--)
+        {
+            if (deductCount <= 0) break;
+
+            itemInventory = this.items[i];
+            if (itemInventory.itemProfile.itemCode != itemCode) continue;
+
+            if (deductCount > itemInventory.itemCount)
+            {
+                deduct = itemInventory.itemCount;
+                deductCount -= itemInventory.itemCount;
+            }
+            else
+            {
+                deduct = deductCount;
+                deductCount = 0;
+            }
+
+            itemInventory.itemCount -= deduct;
+        }
     }
 
 
