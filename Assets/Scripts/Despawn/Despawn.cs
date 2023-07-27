@@ -1,9 +1,6 @@
 public abstract class Despawn : InitMonoBehaviour
 {
-    protected virtual void FixedUpdate()
-    {
-        this.Despawning();
-    }
+    protected virtual void FixedUpdate() => this.Despawning();
 
     protected virtual void Despawning()
     {
@@ -11,10 +8,7 @@ public abstract class Despawn : InitMonoBehaviour
         this.DespawnObject();
     }
 
-    public virtual void DespawnObject()
-    {
-        Destroy(transform.parent.gameObject);
-    }
+    public virtual void DespawnObject() => Destroy(transform.parent.gameObject);
 
     protected abstract bool CanDespawn();
 }

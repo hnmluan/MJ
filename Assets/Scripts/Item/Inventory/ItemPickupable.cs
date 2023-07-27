@@ -22,7 +22,7 @@ public class ItemPickupable : ItemAbstract
         Debug.LogWarning(transform.name + " LoadTrigger", gameObject);
     }
 
-    public static ItemCode String2ItemCode(string itemName)
+    public static ItemCode StringToItemCode(string itemName)
     {
         try
         {
@@ -35,7 +35,7 @@ public class ItemPickupable : ItemAbstract
         };
     }
 
-    public virtual ItemCode GetItemCode() => ItemPickupable.String2ItemCode(transform.parent.name);
+    public virtual ItemCode GetItemCode() => ItemPickupable.StringToItemCode(transform.parent.name);
 
     public virtual void Picked() => this.ItemCtrl.ItemDespawn.DespawnObject();
 

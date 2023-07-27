@@ -14,7 +14,7 @@ public abstract class MeleeAttack : Attack
 
     protected override void PlayAttack()
     {
-        damageObject = MeleeDOSpawner.Instance.Spawn(damageObjectName, transform.position, GetQuatanion());
+        damageObject = DOSpawner.Instance.Spawn(damageObjectName, transform.position, GetQuatanion());
         if (damageObject == null) return;
         damageObject.gameObject.SetActive(true);
     }

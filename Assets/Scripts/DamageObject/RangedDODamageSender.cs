@@ -10,5 +10,5 @@ public class RangedDODamageSender : DODamageSender
 
     protected virtual void DestroyDO() => this.damageObjectCtrl.DamageObjectDespawn.DespawnObject();
 
-    protected virtual void OnTriggerEnter(Collider other) => this.damageObjectCtrl.D0DamageSender.Send(other.transform);
+    protected virtual void OnTriggerEnter(Collider other) => this.damageObjectCtrl.DamageObjectDamageSender.Send(other.transform);
 }
