@@ -4124,11 +4124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9a7c3cccff8e34190f3b47898f34a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageObjectSR: {fileID: 742759817}
+  damageObjectDamageSender: {fileID: 1280202396}
+  damageObjectDespawn: {fileID: 1798062297}
   meleeDOSO: {fileID: 11400000, guid: e873b4b68cbe48b4eafececa5d473d76, type: 2}
-  modelSpriteRenderer: {fileID: 742759817}
   meleeDamageObjectMovement: {fileID: 816883777}
-  damageSender: {fileID: 1280202396}
-  despawnDO: {fileID: 1798062297}
 --- !u!1 &931449366
 GameObject:
   m_ObjectHideFlags: 0
@@ -23952,6 +23952,7 @@ GameObject:
   - component: {fileID: 1280202394}
   - component: {fileID: 1280202397}
   - component: {fileID: 1280202395}
+  - component: {fileID: 1280202398}
   - component: {fileID: 1280202396}
   m_Layer: 0
   m_Name: DamageSender
@@ -24000,11 +24001,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c4f89284559c8478cae597862f0c57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
   isDameFromPlayer: 0
-  meleeDOCtrl: {fileID: 914297061}
-  boxCollider: {fileID: 1280202395}
-  _rigidbody: {fileID: 1280202397}
+  damageObjectCtrl: {fileID: 914297061}
+  sphereCollider: {fileID: 1280202398}
+  rb: {fileID: 1280202397}
 --- !u!54 &1280202397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24021,6 +24022,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!135 &1280202398
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280202393}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1306262061
 GameObject:
   m_ObjectHideFlags: 0
@@ -24566,11 +24580,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 8274429942850376938}
-  hp: 0
+  hp: 20
   hpMax: 10
   isDead: 0
-  enemyCtrl: {fileID: 0}
-  blinkCount: 1
+  enemyCtrl: {fileID: 7061487583819731806}
+  blinkCount: 3
   blinkDuration: 0.1
   blinkInterval: 0.1
 --- !u!114 &261432918977001118
@@ -34461,39 +34475,6 @@ Transform:
   m_Father: {fileID: 7061487583094871843}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7061487582786118904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061487582786118906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e0904e2e476d343863f53efa35a263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2
-  isDameFromPlayer: 0
-  rangedDOCtrl: {fileID: 7061487583631609841}
-  sphereCollider: {fileID: 7061487582786118910}
-  _rigidbody: {fileID: 7061487582786118905}
---- !u!54 &7061487582786118905
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7061487582786118906}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &7061487582786118906
 GameObject:
   m_ObjectHideFlags: 0
@@ -34504,8 +34485,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7061487582786118907}
   - component: {fileID: 7061487582786118910}
-  - component: {fileID: 7061487582786118905}
-  - component: {fileID: 7061487582786118904}
+  - component: {fileID: 7061487582786118909}
+  - component: {fileID: 7061487582786118908}
   m_Layer: 0
   m_Name: DamageSender
   m_TagString: Untagged
@@ -34528,7 +34509,24 @@ Transform:
   m_Father: {fileID: 7061487583631609840}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &7061487582786118910
+--- !u!114 &7061487582786118908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061487582786118906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28e0904e2e476d343863f53efa35a263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  isDameFromPlayer: 0
+  damageObjectCtrl: {fileID: 7061487583631609841}
+  sphereCollider: {fileID: 7061487582786118909}
+  rb: {fileID: 7061487582786118910}
+--- !u!135 &7061487582786118909
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34539,8 +34537,24 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0.18536949, z: 0}
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &7061487582786118910
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061487582786118906}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7061487582849789249
 GameObject:
   m_ObjectHideFlags: 0
@@ -35802,11 +35816,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970b918a4c22d724db09d9b39daadfcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageObjectSR: {fileID: 7061487583060224823}
+  damageObjectDamageSender: {fileID: 7061487582786118908}
+  damageObjectDespawn: {fileID: 7061487583546341690}
   rangedDOSO: {fileID: 11400000, guid: 28e37625b13e5934fb01f171167f5990, type: 2}
-  modelSpriteRenderer: {fileID: 7061487583060224823}
   rangedDamageObjectMovement: {fileID: 7061487584035834622}
-  damageSender: {fileID: 7061487582786118904}
-  despawnDO: {fileID: 7061487583546341690}
 --- !u!1 &7061487583631609843
 GameObject:
   m_ObjectHideFlags: 0
@@ -36393,7 +36407,7 @@ MonoBehaviour:
   enemyDespawn: {fileID: 6546741381576642171}
   heathBar: {fileID: 845301922}
   enemySO: {fileID: 11400000, guid: e7d50d7217c8f054b9cfebc9b4c41348, type: 2}
-  damageReceiver: {fileID: 0}
+  damageReceiver: {fileID: 50910645110550267}
 --- !u!1 &7061487583859742257
 GameObject:
   m_ObjectHideFlags: 0
@@ -37957,7 +37971,7 @@ MonoBehaviour:
   currentWaypointIndex: 0
   isMoving: 0
   moveDirection: {x: 0, y: 0, z: 0}
-  enemyCtrl: {fileID: 0}
+  enemyCtrl: {fileID: 7061487583819731806}
 --- !u!4 &7061487584634778202
 Transform:
   m_ObjectHideFlags: 0
@@ -38168,7 +38182,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   offset: 0.1
-  enemyCtrl: {fileID: 0}
+  enemyCtrl: {fileID: 7061487583819731806}
 --- !u!1 &7061487584664317984
 GameObject:
   m_ObjectHideFlags: 0
@@ -38539,7 +38553,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.40312564
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0.12443006, z: 0}
 --- !u!114 &8406223767065316203
 MonoBehaviour:

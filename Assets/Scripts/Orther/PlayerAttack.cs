@@ -99,14 +99,14 @@ public class PlayerAttack : PlayerAbstract
         this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathRanged);
         if (this.damageObjectSO != null)
         {
-            Debug.Log(transform.name + ": LoadRangedDOSO " + resPathRanged, gameObject);
+            Debug.Log(transform.name + ": LoadDamageObjectSO " + resPathRanged, gameObject);
             isMelee = false;
             return;
         }
         this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee);
         if (this.damageObjectSO != null)
         {
-            Debug.Log(transform.name + ": LoadRangedDOSO " + resPathMelee, gameObject);
+            Debug.Log(transform.name + ": LoadDamageObjectSO " + resPathMelee, gameObject);
             isMelee = true;
             return;
         }

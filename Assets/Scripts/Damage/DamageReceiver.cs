@@ -6,7 +6,7 @@ public abstract class DamageReceiver : InitMonoBehaviour
     [Header("Damage Receiver")]
     [SerializeField] protected SphereCollider sphereCollider;
     [SerializeField] protected float hp = 20;
-    [SerializeField] protected float hpMax = 20;
+    [SerializeField] public float hpMax = 20;
     [SerializeField] protected bool isDead = false;
 
 

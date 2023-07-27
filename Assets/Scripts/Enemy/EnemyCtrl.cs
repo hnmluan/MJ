@@ -29,6 +29,13 @@ public class EnemyCtrl : InitMonoBehaviour
         this.LoadModel();
         this.LoadHeathBar();
         this.LoadEnemySO();
+        this.LoadDamageReceiver();
+    }
+
+    protected override void ResetValue()
+    {
+        if (enemySO == null) return;
+        damageReceiver.hpMax = enemySO.hpMax;
     }
 
     protected virtual void LoadEnemySO()
@@ -65,5 +72,12 @@ public class EnemyCtrl : InitMonoBehaviour
         if (this.animator != null) return;
         this.animator = transform.GetComponentInChildren<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
+    }
+
+    protected virtual void LoadDamageReceiver()
+    {
+        if (this.damageReceiver != null) return;
+        this.damageReceiver = transform.GetComponentInChildren<DamageReceiver>();
+        Debug.Log(transform.name + ": LoadDamageReceiver", gameObject);
     }
 }

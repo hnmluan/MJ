@@ -4,10 +4,9 @@ using UnityEngine;
 public class MeleeDOMovement : MonoBehaviour
 {
     public float rotationAngle = 90f;
-    public float timeMove = 5f;
+    public float timeMove = 0.5f;
 
     private void OnEnable() => StartCoroutine(RotateAndDestroyObject());
-
 
     private IEnumerator RotateAndDestroyObject()
     {
