@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8ee4033f2cf1b4eaacbba1781f2ed9, type: 3}
+  m_Script: {fileID: 11500000, guid: 32d8752021c866144965b072453e4ea0, type: 3}
   m_Name: Lance
   m_EditorClassIdentifier: 
+  damageObjectCode: 1
+  damageObjectType: 1
   damageObjectName: Lance
   spriteInHand: {fileID: 21300000, guid: c0142e0cee11c994ea9219f14e4ab053, type: 3}
   spriteInAttack: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
-  range: 1.5
-  speed: 0
-  damage: 2
+  range: 2
+  damage: 20
   discription: 
+  speed: 3
+  attackTime: 0.5
   attackRate: 0.5
-  timeAttack: 0.5

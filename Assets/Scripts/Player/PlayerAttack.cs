@@ -1,11 +1,18 @@
-﻿using System.Collections;
-using UnityEngine;
-
-public class PlayerAttack : PlayerAbstract
+﻿public class PlayerAttack : MeleeAttackByMouse
 {
+    protected override void PlayAttack()
+    {
+        base.PlayAttack();
+        DamageSender damageReceiver = damageObject.GetComponentInChildren<DamageSender>();
+        damageReceiver.isDameFromPlayer = true;
+        AudioController.Instance.PlayVFX("sfx_acttack_melee");
+    }
+
+
+
     //[Header("------------Other Settings------------")][Space(10)]
 
-    [SerializeField] protected string damageObjectName = "Lance";
+    /*[SerializeField] protected string damageObjectName = "Lance";
 
     [SerializeField] protected bool canAttack = true;
 
@@ -123,7 +130,6 @@ public class PlayerAttack : PlayerAbstract
             }
         }
 
-
         if (Input.GetMouseButton(0))
         {
             if (isMelee) weaponInHandSprite.enabled = false;
@@ -148,7 +154,7 @@ public class PlayerAttack : PlayerAbstract
 
     private void SpawnDamageObject(string damageObjectName, Vector3 positon, Quaternion quaternion)
     {
-        Transform damageObject = DamageObjectSpawner.Instance.Spawn(damageObjectName, positon, quaternion);
+        Transform damageObject = MeleeDOSpawner.Instance.Spawn(damageObjectName, positon, quaternion);
         if (damageObject == null) return;
         damageObject.gameObject.SetActive(true);
 
@@ -201,5 +207,5 @@ public class PlayerAttack : PlayerAbstract
         weaponInHand.rotation = Quaternion.Euler(0f, 0f, 0f);
         weaponInHand.localScale = new Vector3(1, 1, 1);
         if (playerCtrl.Animator.GetFloat("X") == -1) weaponInHand.localScale = new Vector3(-1, 1, 1);
-    }
+    }*/
 }

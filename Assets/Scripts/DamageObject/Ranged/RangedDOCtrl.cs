@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class RangedDOCtrl : DOCtrl
 {
-    [SerializeField] protected RangedSO rangedDOSO;
-    public RangedSO RangedDOSO => rangedDOSO;
+    [SerializeField] protected DamageObjectSO rangedDOSO;
+    public DamageObjectSO RangedDOSO => rangedDOSO;
 
     [SerializeField] protected RangedDOMovement rangedDamageObjectMovement;
     public RangedDOMovement RangedDamageObjectMovement => rangedDamageObjectMovement;
@@ -28,7 +28,7 @@ public class RangedDOCtrl : DOCtrl
     {
         if (this.rangedDOSO != null) return;
         string resPath = "DamageObject/Ranged/" + transform.name;
-        this.rangedDOSO = Resources.Load<RangedSO>(resPath);
+        this.rangedDOSO = Resources.Load<DamageObjectSO>(resPath);
         Debug.Log(transform.name + ": LoadDamageObjectSO " + resPath, gameObject);
     }
 

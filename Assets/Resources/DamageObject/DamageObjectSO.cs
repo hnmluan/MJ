@@ -1,7 +1,12 @@
 using UnityEngine;
 
-public abstract class DamageObjectSO : ScriptableObject
+[CreateAssetMenu(fileName = "DamageObject", menuName = "SO/DamageObjectSO")]
+public class DamageObjectSO : ScriptableObject
 {
+    public DamageObjectCode damageObjectCode = DamageObjectCode.NoDamageObject;
+
+    public DamageObjectType damageObjectType = DamageObjectType.NoType;
+
     public string damageObjectName;
 
     public Sprite spriteInHand;
@@ -13,4 +18,10 @@ public abstract class DamageObjectSO : ScriptableObject
     public int damage;
 
     public string discription;
+
+    public float speed;
+
+    public float attackTime;
+
+    public float attackRate;
 }

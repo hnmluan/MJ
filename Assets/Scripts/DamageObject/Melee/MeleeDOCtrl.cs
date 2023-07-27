@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MeleeDOCtrl : DOCtrl
 {
-    [SerializeField] protected MeleeSO meleeDOSO;
-    public MeleeSO MeleeDOSO => meleeDOSO;
+    [SerializeField] protected DamageObjectSO meleeDOSO;
+    public DamageObjectSO MeleeDOSO => meleeDOSO;
 
     [SerializeField] protected MeleeDOMovement meleeDamageObjectMovement;
     public MeleeDOMovement MeleeDamageObjectMovement => meleeDamageObjectMovement;
@@ -19,17 +19,17 @@ public class MeleeDOCtrl : DOCtrl
     {
         if (this.meleeDOSO == null) return;
         doSR.sprite = meleeDOSO.spriteInAttack;
-        meleeDamageObjectMovement.timeMove = meleeDOSO.timeAttack;
+        meleeDamageObjectMovement.timeMove = meleeDOSO.attackTime;
         doDamageSender.damage = meleeDOSO.damage;
-        meleeDamageObjectMovement.timeMove = meleeDOSO.timeAttack;
-        DamageObjectDespawn.despawnTime = meleeDOSO.timeAttack;
+        meleeDamageObjectMovement.timeMove = meleeDOSO.attackTime;
+        DamageObjectDespawn.despawnTime = meleeDOSO.attackTime;
     }
 
     protected void LoadMeleeDOSO()
     {
         if (this.meleeDOSO != null) return;
         string resPath = "DamageObject/Melee/" + transform.name;
-        this.meleeDOSO = Resources.Load<MeleeSO>(resPath);
+        this.meleeDOSO = Resources.Load<DamageObjectSO>(resPath);
         Debug.Log(transform.name + ": LoadMeleeDOSO " + resPath, gameObject);
     }
 
