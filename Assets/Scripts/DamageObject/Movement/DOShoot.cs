@@ -6,7 +6,11 @@ public class DOShoot : DOMovement
 
     [SerializeField] protected Vector3 direction = Vector3.right;
 
-    protected override void ResetValue() => movespeed = damageObjectCtrl.DamageObjectSO.speed;
-
     protected override void Move() => transform.parent.Translate(this.direction * this.movespeed * Time.deltaTime);
+
+    public override void ResetMotionParameters()
+    {
+        base.ResetMotionParameters();
+        this.movespeed = damageObjectCtrl.DamageObjectSO.speed;
+    }
 }

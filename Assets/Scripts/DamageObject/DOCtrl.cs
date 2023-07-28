@@ -17,6 +17,9 @@ public class DOCtrl : InitMonoBehaviour
     [SerializeField] protected DOMovement damageObjectMovement;
     public DOMovement DamageObjectMovement { get => damageObjectMovement; }
 
+    [SerializeField] protected Transform attacker;
+    public Transform Attacker => attacker;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -32,9 +35,12 @@ public class DOCtrl : InitMonoBehaviour
         if (this.damageObjectSO == null) return;
         damageObjectSR.sprite = damageObjectSO.spriteInAttack;
         damageObjectDamageSender.SetDamage(damageObjectSO.damage);
-        DamageObjectDespawn.despawnTime = damageObjectSO.attackTime;
-        damageObjectMovement.SetTimeMovement(damageObjectSO.attackTime);
+        damageObjectDespawn.SetTimeDespawn(damageObjectSO.attackTime);
+        damageObjectMovement.ResetMotionParameters();
     }
+
+    public virtual void SetAttacker(Transform attacker) => this.attacker = attacker;
+
     private void LoadDamageObjectMovement()
     {
         if (this.damageObjectMovement != null) return;
@@ -66,11 +72,12 @@ public class DOCtrl : InitMonoBehaviour
     {
         if (this.damageObjectSO != null) return;
         string resPathMelee = "DamageObject/Melee/" + transform.name;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee);
-        Debug.Log(transform.name + ": LoadMeleeDOSO " + resPathMelee, gameObject);
-        if (damageObjectSO != null) return;
         string resPathRanged = "DamageObject/Ranged/" + transform.name;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathRanged);
-        Debug.Log(transform.name + ": LoadMeleeDOSO " + resPathRanged, gameObject);
+
+        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
+        string resPath = Resources.Load<DamageObjectSO>(resPathMelee) != null ? resPathMelee : resPathRanged;
+
+        Debug.Log(transform.name + ": LoadMeleeDOSO" + resPath, gameObject);
     }
+
 }

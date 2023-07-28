@@ -4021,7 +4021,7 @@ MonoBehaviour:
   damageObjectCtrl: {fileID: 0}
   timeMovement: 0.5
   timer: 0
-  rotationAngle: 90
+  rotationSlash: 90
 --- !u!1 &845301920
 GameObject:
   m_ObjectHideFlags: 0
@@ -4211,6 +4211,7 @@ MonoBehaviour:
   damageObjectDamageSender: {fileID: 1280202396}
   damageObjectDespawn: {fileID: 1798062297}
   damageObjectMovement: {fileID: 816883778}
+  attacker: {fileID: 7061487583094871843}
 --- !u!1 &931449366
 GameObject:
   m_ObjectHideFlags: 0
@@ -24036,8 +24037,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fb3b217e5a471489870737f9b91677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 0.5
-  timer: 0
 --- !u!1 &1280202393
 GameObject:
   m_ObjectHideFlags: 0
@@ -24562,6 +24561,7 @@ MonoBehaviour:
   damageObjectDamageSender: {fileID: 108901702}
   damageObjectDespawn: {fileID: 0}
   damageObjectMovement: {fileID: 0}
+  attacker: {fileID: 0}
 --- !u!1 &2086156952
 GameObject:
   m_ObjectHideFlags: 0
@@ -24606,8 +24606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650864aaf7e3cfc4e826457942d6bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageObjectName: 
-  damageObjectSO: {fileID: 0}
+  damageObjectName: Lance
+  damageObjectSO: {fileID: 11400000, guid: 656189f8244d7fc4bace9a965799b5af, type: 2}
   damageObject: {fileID: 0}
   timer: 0
 --- !u!1 &2087380894

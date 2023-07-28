@@ -8,7 +8,7 @@ public abstract class DOMovement : DOAbstract
 
     protected override void OnEnable() => timer = 0;
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (CanMove()) Move();
     }
@@ -17,5 +17,5 @@ public abstract class DOMovement : DOAbstract
 
     protected bool CanMove() => timer + Time.deltaTime < timeMovement;
 
-    public void SetTimeMovement(float timeMovement) => this.timeMovement = timeMovement;
+    public virtual void ResetMotionParameters() => this.timeMovement = damageObjectCtrl.DamageObjectSO.attackTime;
 }
