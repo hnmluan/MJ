@@ -51,5 +51,9 @@ public class DODamageSender : DamageSender
 
     protected virtual void DestroyDO() => this.damageObjectCtrl.DamageObjectDespawn.DespawnObject();
 
-    protected virtual void OnTriggerEnter(Collider other) => this.damageObjectCtrl.DODamageSender.Send(other.transform);
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.parent == this.damageObjectCtrl.Attacker) return;
+        this.damageObjectCtrl.DODamageSender.Send(other.transform);
+    }
 }

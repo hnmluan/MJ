@@ -1,27 +1,46 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class Attack : InitMonoBehaviour
 {
-    [SerializeField] protected bool isShooting = false;
-    [SerializeField] protected float shootDelay = 0.2f;
-    [SerializeField] protected float shootTimer = 0f;
+    [SerializeField] protected DamageObjectCode damageObject = DamageObjectCode.NoDamageObject;
 
-    [SerializeField] protected string damageObjectName;
+    [SerializeField] protected bool isAttacking = false;
 
-    [SerializeField] protected DamageObjectSO damageObjectSO;
+    [SerializeField] protected float attackDelay = 0.2f;
 
-    protected override void LoadComponents()
+    [SerializeField] protected float attackTimer = 0f;
+
+    void Update() => this.IsAttacking();
+
+    private void FixedUpdate() => this.Attacking();
+
+    protected virtual void Attacking()
     {
-        base.LoadComponents();
-        this.LoadDamageObjectSO();
+        this.attackTimer += Time.fixedDeltaTime;
+
+        if (!this.isAttacking) return;
+        if (GetDamageObjectSO() == null) return;
+        attackDelay = GetDamageObjectSO().attackRate;
+        if (this.attackTimer < attackDelay) return;
+        this.attackTimer = 0;
+
+        Vector3 spawnPos = transform.position;
+        Quaternion rotation = transform.parent.rotation;
+        Transform damageObject = DOSpawner.Instance.Spawn(this.damageObject.ToString(), spawnPos, GetRotation());
+        if (damageObject == null) return;
+
+        damageObject.gameObject.SetActive(true);
+        DOCtrl doCtrl = damageObject.GetComponent<DOCtrl>();
+        doCtrl.SetAttacker(transform.parent);
     }
 
-    protected virtual void Update()
+    private DamageObjectSO GetDamageObjectSO()
     {
-        if (CanAttack()) PlayAttack();
+        string resPathMelee = "DamageObject/Melee/" + this.damageObject.ToString();
+        string resPathRanged = "DamageObject/Ranged/" + this.damageObject.ToString();
+        return Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
     }
 
-    protected abstract void LoadDamageObjectSO();
-    protected abstract void PlayAttack();
-    protected abstract bool CanAttack();
+    protected abstract bool IsAttacking();
+    protected abstract Quaternion GetRotation();
 }

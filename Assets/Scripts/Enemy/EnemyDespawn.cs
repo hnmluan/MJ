@@ -1,9 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyDespawn : MonoBehaviour
 {
-    public void DespawnObject()
-    {
-        EnemySpawner.Instance.Despawn(transform.parent);
-    }
+    public void DespawnObject() => EnemySpawner.Instance.Despawn(transform.parent);
 }

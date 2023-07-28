@@ -3,30 +3,32 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public class ChasePlayer : InitMonoBehaviour
+public class MoveToTagert : InitMonoBehaviour
 {
-    [SerializeField] protected GameObject player;
+    [SerializeField] protected Transform target;
+
     [SerializeField] protected Seeker seeker;
+
     [SerializeField] protected Path currentPath;
+
     [SerializeField] protected int currentWaypointIndex;
+
     [SerializeField] protected bool isMoving;
-    [SerializeField] protected float offsetPlayer = 1;
+
+    [SerializeField] protected float offsetTarget = 1;
+
     [SerializeField] protected Vector3 direction;
+
     [SerializeField] protected Vector3 targetPosition;
-    [SerializeField] protected float offset = 0.1f;
+
+    [SerializeField] protected float offsetNodePath = 0.1f;
+
+    [SerializeField] protected bool isTouchPlayer;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadSeeker();
-        this.LoadPlayer();
-    }
-
-    private void LoadPlayer()
-    {
-        if (this.player != null) return;
-        player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log(transform.name + ": LoadPlayer", gameObject);
     }
 
     protected virtual void LoadSeeker()
@@ -46,7 +48,7 @@ public class ChasePlayer : InitMonoBehaviour
     {
         while (true)
         {
-            if (player != null) MoveTo(player.transform.position);
+            if (target != null) MoveTo(target.position);
 
             yield return new WaitUntil(() => !isMoving);
         }
@@ -77,9 +79,12 @@ public class ChasePlayer : InitMonoBehaviour
     {
         if (isMoving && currentPath != null)
         {
-            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.parent.position, player.transform.position) <= offsetPlayer)
+            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.parent.position, target.transform.position) <= offsetTarget)
             {
+                isTouchPlayer = true;
+
                 isMoving = false;
+
                 return;
             }
 
@@ -89,7 +94,7 @@ public class ChasePlayer : InitMonoBehaviour
 
             transform.parent.position += direction * 5f * Time.deltaTime;
 
-            if (Vector3.Distance(transform.parent.position, targetPosition) < offset)
+            if (Vector3.Distance(transform.parent.position, targetPosition) < offsetNodePath)
             {
                 currentWaypointIndex++;
             }

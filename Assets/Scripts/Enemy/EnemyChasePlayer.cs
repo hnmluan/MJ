@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyChasePlayer : ChasePlayer
+public class EnemyChasePlayer : MoveToTagert
 {
     [SerializeField] protected EnemyCtrl enemyCtrl;
 
@@ -20,7 +20,7 @@ public class EnemyChasePlayer : ChasePlayer
     protected override void Update()
     {
         base.Update();
-        SetAnimation((transform.position - player.transform.position).normalized);
+        SetAnimation((transform.position - target.position).normalized);
     }
 
     private void SetAnimation(Vector3 moveDirection)

@@ -406,6 +406,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5429f2754d794354c8fef20619b42336, type: 3}
+--- !u!1 &202120211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 202120212}
+  - component: {fileID: 202120213}
+  m_Layer: 0
+  m_Name: Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &202120212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202120211}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7061487583819731801}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &202120213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202120211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1bc6bd1eb67db4468d6c42bdbc5eff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageObject: 2
+  isAttacking: 0
+  attackDelay: 0.2
+  attackTimer: 0
+  target: {fileID: 7061487583094871843}
+  distance: Infinity
+  rangeAttack: 3
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &313201221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,9 +3276,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageObjectCtrl: {fileID: 2078346159}
-  timeMovement: 0
+  timeMovement: 0.5
   timer: 0
-  movespeed: 0
+  movespeed: 16
   direction: {x: 1, y: 0, z: 0}
 --- !u!1 &573936397
 GameObject:
@@ -3731,7 +3783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
@@ -4229,7 +4281,7 @@ MonoBehaviour:
   doDamageSender: {fileID: 1280202399}
   damageObjectDespawn: {fileID: 1798062297}
   damageObjectMovement: {fileID: 816883778}
-  attacker: {fileID: 7061487583094871843}
+  attacker: {fileID: 0}
 --- !u!1 &931449366
 GameObject:
   m_ObjectHideFlags: 0
@@ -24052,10 +24104,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212299751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8240ee50b8625da4bb2f7456d9b0fa9b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a63973d870cb3d44a2d5df1e4ef0b53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 4
+  despawnTime: 0.5
 --- !u!1 &1280202393
 GameObject:
   m_ObjectHideFlags: 0
@@ -24433,7 +24485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
@@ -24578,7 +24630,7 @@ MonoBehaviour:
   doSO: {fileID: 11400000, guid: d6999081de879a946822206bb4fdc3af, type: 2}
   doSR: {fileID: 573936398}
   doDamageSender: {fileID: 108901705}
-  damageObjectDespawn: {fileID: 0}
+  damageObjectDespawn: {fileID: 1212299753}
   damageObjectMovement: {fileID: 561261219}
   attacker: {fileID: 0}
 --- !u!1 &2086156952
@@ -24590,7 +24642,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2086156953}
-  - component: {fileID: 2086156954}
   - component: {fileID: 2086156955}
   m_Layer: 0
   m_Name: Attack
@@ -24614,25 +24665,6 @@ Transform:
   m_Father: {fileID: 7061487583094871843}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2086156954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2086156952}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 650864aaf7e3cfc4e826457942d6bec5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShooting: 0
-  shootDelay: 0.2
-  shootTimer: 0
-  damageObjectName: Lance
-  damageObjectSO: {fileID: 11400000, guid: 656189f8244d7fc4bace9a965799b5af, type: 2}
-  damageObject: {fileID: 0}
-  timer: 0
 --- !u!114 &2086156955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24645,7 +24677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b2aeb701f94a64fae1ed79480444b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageObject: 1
+  damageObject: 2
   isAttacking: 0
   attackDelay: 0.2
   attackTimer: 0
@@ -24799,7 +24831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
@@ -36238,6 +36270,7 @@ Transform:
   - {fileID: 7061487584634778202}
   - {fileID: 6060562586617215144}
   - {fileID: 2876594722345708484}
+  - {fileID: 202120212}
   m_Father: {fileID: 3775414404728784562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37980,14 +38013,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c71ce4453302c4c809644130788726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7061487583094871842}
+  target: {fileID: 7061487583094871843}
   seeker: {fileID: 7061487584650104481}
   currentWaypointIndex: 0
   isMoving: 0
-  offsetPlayer: 1
+  offsetTarget: 1
   direction: {x: 0, y: 0, z: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  offset: 0.1
+  offsetNodePath: 0.1
+  isTouchPlayer: 0
   enemyCtrl: {fileID: 7061487583819731806}
 --- !u!1 &7061487584664317984
 GameObject:
