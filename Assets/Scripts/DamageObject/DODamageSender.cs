@@ -41,4 +41,15 @@ public class DODamageSender : DamageSender
         this.damageObjectCtrl = transform.parent.GetComponent<DOCtrl>();
         Debug.Log(transform.name + ": LoadDamageObjectCtrl", gameObject);
     }
+
+    public override void Send(DamageReceiver damageReceiver)
+    {
+        base.Send(damageReceiver);
+        if (damageObjectCtrl.DOSO.damageObjectType == DamageObjectType.Melee) return;
+        this.DestroyDO();
+    }
+
+    protected virtual void DestroyDO() => this.damageObjectCtrl.DamageObjectDespawn.DespawnObject();
+
+    protected virtual void OnTriggerEnter(Collider other) => this.damageObjectCtrl.DODamageSender.Send(other.transform);
 }

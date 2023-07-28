@@ -2,6 +2,10 @@ using UnityEngine;
 
 public abstract class Attack : InitMonoBehaviour
 {
+    [SerializeField] protected bool isShooting = false;
+    [SerializeField] protected float shootDelay = 0.2f;
+    [SerializeField] protected float shootTimer = 0f;
+
     [SerializeField] protected string damageObjectName;
 
     [SerializeField] protected DamageObjectSO damageObjectSO;

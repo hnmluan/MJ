@@ -12,8 +12,6 @@ public class DamageSender : InitMonoBehaviour
     {
         DamageReceiver damageReceiver = obj.GetComponentInChildren<DamageReceiver>();
         if (damageReceiver == null) return;
-        if (damageReceiver.transform.parent.CompareTag("Player") && isDameFromPlayer) return;
-        if (damageReceiver.transform.parent.CompareTag("Enemy") && !isDameFromPlayer) return;
         this.Send(damageReceiver);
     }
 

@@ -16,7 +16,7 @@
 
     [SerializeField] protected bool canAttack = true;
 
-    [SerializeField] protected DamageObjectSO damageObjectSO;
+    [SerializeField] protected DOSO doSO;
 
     [SerializeField] protected bool isMelee;
 
@@ -46,7 +46,7 @@
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadDamageObjectSO();
+        this.GetDamageObjectSO();
         this.LoadWeaponInHandSprite();
         this.LoadLeftWeaponInHand();
         this.LoadRightWeaponInHand();
@@ -92,28 +92,28 @@
 
     protected void LoadWeaponInHandSprite()
     {
-        if (this.damageObjectSO == null) return;
+        if (this.doSO == null) return;
         weaponInHandSprite = transform.GetComponentInChildren<SpriteRenderer>();
-        weaponInHandSprite.sprite = damageObjectSO.spriteInHand;
+        weaponInHandSprite.sprite = doSO.spriteInHand;
         Debug.Log(transform.name + ": LoadWeaponInHandSprite " + gameObject);
     }
 
-    protected virtual void LoadDamageObjectSO()
+    protected virtual void GetDamageObjectSO()
     {
-        if (this.damageObjectSO != null) return;
+        if (this.doSO != null) return;
         string resPathRanged = "DamageObject/Ranged/" + damageObjectName;
         string resPathMelee = "DamageObject/Melee/" + damageObjectName;
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathRanged);
-        if (this.damageObjectSO != null)
+        this.doSO = Resources.Load<DOSO>(resPathRanged);
+        if (this.doSO != null)
         {
-            Debug.Log(transform.name + ": LoadDamageObjectSO " + resPathRanged, gameObject);
+            Debug.Log(transform.name + ": GetDamageObjectSO " + resPathRanged, gameObject);
             isMelee = false;
             return;
         }
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee);
-        if (this.damageObjectSO != null)
+        this.doSO = Resources.Load<DOSO>(resPathMelee);
+        if (this.doSO != null)
         {
-            Debug.Log(transform.name + ": LoadDamageObjectSO " + resPathMelee, gameObject);
+            Debug.Log(transform.name + ": GetDamageObjectSO " + resPathMelee, gameObject);
             isMelee = true;
             return;
         }
@@ -150,7 +150,7 @@
         canAttack = true;
     }
 
-    private float getIntervalAttack() => damageObjectSO is RangedSO ? ((RangedSO)damageObjectSO).fireRate : (((MeleeSO)damageObjectSO).timeAttack);
+    private float getIntervalAttack() => doSO is RangedSO ? ((RangedSO)doSO).fireRate : (((MeleeSO)doSO).timeAttack);
 
     private void SpawnDamageObject(string damageObjectName, Vector3 positon, Quaternion quaternion)
     {

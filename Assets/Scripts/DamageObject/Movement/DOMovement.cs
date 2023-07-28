@@ -17,5 +17,5 @@ public abstract class DOMovement : DOAbstract
 
     protected bool CanMove() => timer + Time.deltaTime < timeMovement;
 
-    public virtual void ResetMotionParameters() => this.timeMovement = damageObjectCtrl.DamageObjectSO.attackTime;
+    public virtual void ResetMotionParameters() => this.timeMovement = damageObjectCtrl.DOSO.attackTime;
 }

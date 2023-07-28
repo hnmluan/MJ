@@ -32,7 +32,7 @@ public abstract class MeleeAttack : Attack
         if (this.damageObjectSO != null) return;
         string resPathMelee = "DamageObject/Melee/" + damageObjectName;
         this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee);
-        Debug.Log(transform.name + ": LoadDamageObjectSO " + resPathMelee, gameObject);
+        Debug.Log(transform.name + ": GetDamageObjectSO " + resPathMelee, gameObject);
     }
 
     protected float GetTimeAttack() => damageObjectSO.attackTime;

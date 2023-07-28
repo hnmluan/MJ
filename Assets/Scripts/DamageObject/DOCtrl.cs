@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected DamageObjectSO damageObjectSO;
-    public DamageObjectSO DamageObjectSO => damageObjectSO;
+    [SerializeField] protected DamageObjectSO doSO;
+    public DamageObjectSO DOSO => doSO;
 
-    [SerializeField] protected SpriteRenderer damageObjectSR;
-    public SpriteRenderer DamageObjectSR => damageObjectSR;
+    [SerializeField] protected SpriteRenderer doSR;
+    public SpriteRenderer DOSR => doSR;
 
-    [SerializeField] protected DamageSender damageObjectDamageSender;
-    public DamageSender DamageObjectDamageSender { get => damageObjectDamageSender; }
+    [SerializeField] protected DamageSender doDamageSender;
+    public DamageSender DODamageSender { get => doDamageSender; }
 
     [SerializeField] protected DespawnByTime damageObjectDespawn;
     public DespawnByTime DamageObjectDespawn { get => damageObjectDespawn; }
@@ -32,10 +32,10 @@ public class DOCtrl : InitMonoBehaviour
 
     protected override void ResetValue()
     {
-        if (this.damageObjectSO == null) return;
-        damageObjectSR.sprite = damageObjectSO.spriteInAttack;
-        damageObjectDamageSender.SetDamage(damageObjectSO.damage);
-        damageObjectDespawn.SetTimeDespawn(damageObjectSO.attackTime);
+        if (this.doSO == null) return;
+        doSR.sprite = doSO.spriteInAttack;
+        doDamageSender.SetDamage(doSO.damage);
+        damageObjectDespawn.SetTimeDespawn(doSO.attackTime);
         damageObjectMovement.ResetMotionParameters();
     }
 
@@ -50,15 +50,15 @@ public class DOCtrl : InitMonoBehaviour
 
     protected void LoadDamageObjectSR()
     {
-        if (this.damageObjectSR != null) return;
-        this.damageObjectSR = transform.GetComponentInChildren<SpriteRenderer>();
+        if (this.doSR != null) return;
+        this.doSR = transform.GetComponentInChildren<SpriteRenderer>();
         Debug.Log(transform.name + ": LoadDamageObjectSR ", gameObject);
     }
 
     protected virtual void LoadDamageObjectDamageSender()
     {
-        if (this.damageObjectDamageSender != null) return;
-        this.damageObjectDamageSender = transform.GetComponentInChildren<DamageSender>();
+        if (this.doDamageSender != null) return;
+        this.doDamageSender = transform.GetComponentInChildren<DamageSender>();
         Debug.Log(transform.name + ": LoadDamageObjectDamageSender", gameObject);
     }
 
@@ -70,11 +70,11 @@ public class DOCtrl : InitMonoBehaviour
     }
     private void LoadDamageObjectSO()
     {
-        if (this.damageObjectSO != null) return;
+        if (this.doSO != null) return;
         string resPathMelee = "DamageObject/Melee/" + transform.name;
         string resPathRanged = "DamageObject/Ranged/" + transform.name;
 
-        this.damageObjectSO = Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
+        this.doSO = Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
         string resPath = Resources.Load<DamageObjectSO>(resPathMelee) != null ? resPathMelee : resPathRanged;
 
         Debug.Log(transform.name + ": LoadMeleeDOSO" + resPath, gameObject);

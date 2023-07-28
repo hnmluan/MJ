@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 108901701}
   - component: {fileID: 108901704}
   - component: {fileID: 108901703}
-  - component: {fileID: 108901702}
+  - component: {fileID: 108901705}
   m_Layer: 0
   m_Name: DamageSender
   m_TagString: Untagged
@@ -287,23 +287,6 @@ Transform:
   m_Father: {fileID: 2078346158}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &108901702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 108901700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28e0904e2e476d343863f53efa35a263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2
-  isDameFromPlayer: 0
-  damageObjectCtrl: {fileID: 0}
-  sphereCollider: {fileID: 108901703}
-  rb: {fileID: 108901704}
 --- !u!135 &108901703
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -333,6 +316,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &108901705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108901700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3287f7f9d696004c817c4cd572e78e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  isDameFromPlayer: 0
+  damageObjectCtrl: {fileID: 2078346159}
+  sphereCollider: {fileID: 108901703}
+  rb: {fileID: 108901704}
 --- !u!1001 &137390542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3188,6 +3188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 561261218}
+  - component: {fileID: 561261219}
   m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
@@ -3210,6 +3211,23 @@ Transform:
   m_Father: {fileID: 2078346158}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &561261219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561261216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f6a0b5a35866a49ad5845c2848a91a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageObjectCtrl: {fileID: 2078346159}
+  timeMovement: 0
+  timer: 0
+  movespeed: 0
+  direction: {x: 1, y: 0, z: 0}
 --- !u!1 &573936397
 GameObject:
   m_ObjectHideFlags: 0
@@ -4206,9 +4224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb97846e1776eb54486ef0c44281aa2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageObjectSO: {fileID: 11400000, guid: 656189f8244d7fc4bace9a965799b5af, type: 2}
-  damageObjectSR: {fileID: 742759817}
-  damageObjectDamageSender: {fileID: 1280202396}
+  doSO: {fileID: 11400000, guid: 656189f8244d7fc4bace9a965799b5af, type: 2}
+  doSR: {fileID: 742759817}
+  doDamageSender: {fileID: 1280202399}
   damageObjectDespawn: {fileID: 1798062297}
   damageObjectMovement: {fileID: 816883778}
   attacker: {fileID: 7061487583094871843}
@@ -24034,9 +24052,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212299751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2fb3b217e5a471489870737f9b91677, type: 3}
+  m_Script: {fileID: 11500000, guid: 8240ee50b8625da4bb2f7456d9b0fa9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  despawnTime: 4
 --- !u!1 &1280202393
 GameObject:
   m_ObjectHideFlags: 0
@@ -24049,7 +24068,7 @@ GameObject:
   - component: {fileID: 1280202397}
   - component: {fileID: 1280202395}
   - component: {fileID: 1280202398}
-  - component: {fileID: 1280202396}
+  - component: {fileID: 1280202399}
   m_Layer: 0
   m_Name: DamageSender
   m_TagString: Untagged
@@ -24085,23 +24104,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3071872, y: 0.29213428, z: 1}
   m_Center: {x: 0.721222, y: 0.0066781044, z: 0}
---- !u!114 &1280202396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280202393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c4f89284559c8478cae597862f0c57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
-  isDameFromPlayer: 0
-  damageObjectCtrl: {fileID: 0}
-  sphereCollider: {fileID: 1280202398}
-  rb: {fileID: 1280202397}
 --- !u!54 &1280202397
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24131,6 +24133,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.6409121
   m_Center: {x: 0.70645326, y: 0, z: 0}
+--- !u!114 &1280202399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280202393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3287f7f9d696004c817c4cd572e78e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
+  isDameFromPlayer: 0
+  damageObjectCtrl: {fileID: 914297062}
+  sphereCollider: {fileID: 1280202398}
+  rb: {fileID: 1280202397}
 --- !u!1 &1306262061
 GameObject:
   m_ObjectHideFlags: 0
@@ -24556,11 +24575,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb97846e1776eb54486ef0c44281aa2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageObjectSO: {fileID: 11400000, guid: d6999081de879a946822206bb4fdc3af, type: 2}
-  damageObjectSR: {fileID: 573936398}
-  damageObjectDamageSender: {fileID: 108901702}
+  doSO: {fileID: 11400000, guid: d6999081de879a946822206bb4fdc3af, type: 2}
+  doSR: {fileID: 573936398}
+  doDamageSender: {fileID: 108901705}
   damageObjectDespawn: {fileID: 0}
-  damageObjectMovement: {fileID: 0}
+  damageObjectMovement: {fileID: 561261219}
   attacker: {fileID: 0}
 --- !u!1 &2086156952
 GameObject:
@@ -24572,6 +24591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2086156953}
   - component: {fileID: 2086156954}
+  - component: {fileID: 2086156955}
   m_Layer: 0
   m_Name: Attack
   m_TagString: Untagged
@@ -24601,15 +24621,34 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2086156952}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 650864aaf7e3cfc4e826457942d6bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShooting: 0
+  shootDelay: 0.2
+  shootTimer: 0
   damageObjectName: Lance
   damageObjectSO: {fileID: 11400000, guid: 656189f8244d7fc4bace9a965799b5af, type: 2}
   damageObject: {fileID: 0}
   timer: 0
+--- !u!114 &2086156955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086156952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b2aeb701f94a64fae1ed79480444b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageObject: 1
+  isAttacking: 0
+  attackDelay: 0.2
+  attackTimer: 0
 --- !u!1 &2087380894
 GameObject:
   m_ObjectHideFlags: 0

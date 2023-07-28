@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageObject", menuName = "SO/DamageObjectSO")]
+[CreateAssetMenu(fileName = "DamageObject", menuName = "SO/DOSO")]
 public class DamageObjectSO : ScriptableObject
 {
     public DamageObjectCode damageObjectCode = DamageObjectCode.NoDamageObject;
