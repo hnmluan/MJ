@@ -77,27 +77,21 @@ public class MoveToTagert : InitMonoBehaviour
 
     protected virtual void Update()
     {
+
         if (isMoving && currentPath != null)
         {
-            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.parent.position, target.transform.position) <= offsetTarget)
+            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
             {
                 isTouchPlayer = true;
-
                 isMoving = false;
-
                 return;
             }
 
             targetPosition = currentPath.vectorPath[currentWaypointIndex];
-
             direction = (targetPosition - transform.parent.position).normalized;
-
             transform.parent.position += direction * 5f * Time.deltaTime;
 
-            if (Vector3.Distance(transform.parent.position, targetPosition) < offsetNodePath)
-            {
-                currentWaypointIndex++;
-            }
+            if (Vector3.Distance(transform.parent.position, targetPosition) < offsetNodePath) currentWaypointIndex++;
         }
     }
 }
