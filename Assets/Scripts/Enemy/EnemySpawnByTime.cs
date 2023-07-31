@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AutoSpawnEnemyByTime : MonoBehaviour
+public class EnemySpawnByTime : MonoBehaviour
 {
-    public string enemyName;
+    public EnemyCode enemyCode = EnemyCode.NoEnemy;
 
     public Transform enemy;
 
@@ -16,16 +16,14 @@ public class AutoSpawnEnemyByTime : MonoBehaviour
         while (true)
         {
             Spawn();
-
             yield return new WaitUntil(() => enemy == null || !enemy.gameObject.activeSelf);
-
             yield return new WaitForSeconds(spawnDelay);
         }
     }
 
     public void Spawn()
     {
-        enemy = EnemySpawner.Instance.Spawn(enemyName, transform.position, Quaternion.identity);
+        enemy = EnemySpawner.Instance.Spawn(enemyCode.ToString(), transform.position, Quaternion.identity);
         if (enemy == null) return;
         enemy.gameObject.SetActive(true);
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackByMouse : Attack
+public class ObjAttackByMouse : ObjAttack
 {
     protected override Quaternion GetRotation() => GetQuaternionToMouse();
 

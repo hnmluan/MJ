@@ -15,8 +15,7 @@ public class NPCConverse : NPCAbstract, IInteractable
 
     public void Interact()
     {
-        if (IsConverable())
-            StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow));
+        if (IsConverable()) StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow));
     }
 
     private void Update()

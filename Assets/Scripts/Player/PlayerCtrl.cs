@@ -12,8 +12,8 @@ public class PlayerCtrl : InitMonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
     public Rigidbody2D Rb { get => rb; }
 
-    //[SerializeField] protected PlayerAttack playerAttack;
-    //public PlayerAttack PlayerAttack { get => playerAttack; }
+    [SerializeField] protected ObjAttack objAttack;
+    public ObjAttack ObjAttack { get => objAttack; }
 
     [SerializeField] protected PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement { get => playerMovement; }
@@ -41,7 +41,7 @@ public class PlayerCtrl : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadAnimator();
-        //this.LoadPlayerAttack();
+        this.LoadPlayerAttack();
         this.LoadPlayerMovement();
         //this.LoadPlayerInteract();
         this.LoadHPBar();
@@ -64,12 +64,12 @@ public class PlayerCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadRigidbody2D", gameObject);
     }
 
-    //protected virtual void LoadPlayerAttack()
-    //{
-    //    if (this.playerAttack != null) return;
-    //    this.playerAttack = transform.GetComponentInChildren<PlayerAttack>();
-    //    Debug.Log(transform.name + ": LoadPlayerAttack", gameObject);
-    //}
+    protected virtual void LoadPlayerAttack()
+    {
+        if (this.objAttack != null) return;
+        this.objAttack = transform.GetComponentInChildren<ObjAttack>();
+        Debug.Log(transform.name + ": LoadPlayerAttack", gameObject);
+    }
 
     protected virtual void LoadPlayerMovement()
     {

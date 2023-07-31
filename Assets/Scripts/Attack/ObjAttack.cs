@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public abstract class Attack : InitMonoBehaviour
+public abstract class ObjAttack : InitMonoBehaviour
 {
     [SerializeField] protected DamageObjectCode damageObject = DamageObjectCode.NoDamageObject;
 
@@ -10,6 +11,8 @@ public abstract class Attack : InitMonoBehaviour
 
     [SerializeField] protected float attackTimer = 0f;
 
+    [SerializeField] protected List<IObjAttackObserver> observers = new List<IObjAttackObserver>();
+
     void Update() => this.IsAttacking();
 
     private void FixedUpdate() => this.Attacking();
@@ -18,12 +21,24 @@ public abstract class Attack : InitMonoBehaviour
     {
         this.attackTimer += Time.fixedDeltaTime;
 
-        if (!this.isAttacking) return;
+        if (!this.isAttacking)
+        {
+            this.OnWithoutAttack();
+            return;
+        }
+
         if (GetDamageObjectSO() == null) return;
         attackDelay = GetDamageObjectSO().attackRate;
         if (this.attackTimer < attackDelay) return;
         this.attackTimer = 0;
 
+        this.OnAttacking();
+
+        SpawnDamageObject();
+    }
+
+    private void SpawnDamageObject()
+    {
         Vector3 spawnPos = transform.position;
         Quaternion rotation = transform.parent.rotation;
         Transform damageObject = DOSpawner.Instance.Spawn(this.damageObject.ToString(), spawnPos, GetRotation());
@@ -34,7 +49,7 @@ public abstract class Attack : InitMonoBehaviour
         doCtrl.SetAttacker(transform.parent);
     }
 
-    private DamageObjectSO GetDamageObjectSO()
+    public DamageObjectSO GetDamageObjectSO()
     {
         string resPathMelee = "DamageObject/Melee/" + this.damageObject.ToString();
         string resPathRanged = "DamageObject/Ranged/" + this.damageObject.ToString();
@@ -42,5 +57,18 @@ public abstract class Attack : InitMonoBehaviour
     }
 
     protected abstract bool IsAttacking();
+
     protected abstract Quaternion GetRotation();
+
+    public virtual void AddObserver(IObjAttackObserver observer) => this.observers.Add(observer);
+
+    protected virtual void OnAttacking()
+    {
+        foreach (IObjAttackObserver observer in this.observers) observer.OnAttacking();
+    }
+
+    protected virtual void OnWithoutAttack()
+    {
+        foreach (IObjAttackObserver observer in this.observers) observer.OnWithoutAttack();
+    }
 }
