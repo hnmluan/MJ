@@ -28555,6 +28555,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 2229666875675299476, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2229666875675299482, guid: 10e131b41c88d454ca2090b238f88617, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -51754,10 +51758,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCtrl: {fileID: 1508093026}
   detectionConversableRange: 2
-  converseLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  collider: {fileID: 1635115643}
+  trigger: {fileID: 0}
 --- !u!58 &1635115643
 CircleCollider2D:
   m_ObjectHideFlags: 0

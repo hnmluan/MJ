@@ -18,31 +18,13 @@ public class NPCConverse : NPCAbstract, IInteractable
         if (IsConverable()) StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow));
     }
 
-    private void Update()
-    {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, detectionConversableRange);
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.CompareTag("Player"))
-            {
-                isPlayerInRange = true;
-                break;
-            }
-            isPlayerInRange = false;
-        }
-        npcCtrl.DialogConversable.SetActive(isPlayerInRange);
-
-        if (isPlayerInRange)
-        {
-            if (Input.GetKeyUp(KeyCode.C) & GameManager.Instance.State != GameState.Dialog) Interact();
-        }
-    }
-
     private bool IsConverable()
     {
         dialogsToShow = npcDialog.GetLocalizationKeysForTask("task_1");
         return dialogsToShow.Count != 0;
     }
+
+    public void ToggleCommunicativeSign(bool isActive) => npcCtrl.DialogConversable.SetActive(isActive);
 
     private void OnDrawGizmosSelected()
     {
