@@ -36,14 +36,14 @@ public class DialogCtrl : InitMonoBehaviour
         base.LoadComponents();
         this.LoadDialogBox();
         this.LoadDialogText();
-        this.LoadFaceset();
         this.LoadLocalizedDialog();
+        this.LoadFaceset();
     }
 
     private void LoadFaceset()
     {
         if (this.faceset != null) return;
-        this.faceset = dialogBox.GetComponentInChildren<Image>(); ;
+        this.faceset = dialogBox.transform.Find("Faceset").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadFaceset", gameObject);
     }
 
@@ -77,7 +77,7 @@ public class DialogCtrl : InitMonoBehaviour
         DialogCtrl.instance = this;
     }
 
-    public IEnumerator ShowDialog(List<String> dialogsToShow)
+    public IEnumerator ShowDialog(List<String> dialogsToShow, Sprite faceset)
     {
         yield return new WaitForEndOfFrame();
 
@@ -88,6 +88,8 @@ public class DialogCtrl : InitMonoBehaviour
         dialogBox.SetActive(true);
 
         StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialogsToShow[0])));
+
+        Faceset.sprite = faceset;
     }
 
     public void HandleUpdate()

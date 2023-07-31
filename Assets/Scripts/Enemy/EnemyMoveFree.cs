@@ -17,11 +17,7 @@ public class EnemyMoveFree : MoveFree
         Debug.Log(transform.name + ": LoadAnimalCtrl", gameObject);
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        SetAnimation();
-    }
+    protected void FixUpdate() => SetAnimation();
 
     private void SetAnimation()
     {

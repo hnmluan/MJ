@@ -3,32 +3,32 @@ using UnityEngine;
 
 public class NPCConverse : NPCAbstract, IInteractable
 {
-    public float detectionConversableRange = 2f;
+    [SerializeField] protected float conversableRange = 2f;
 
-    public bool isPlayerInRange = false;
+    [SerializeField] protected bool isConverable = false;
 
-    [SerializeField] NPCDialog npcDialog;
-
-    public bool isConverable = false;
-
-    public List<string> dialogsToShow;
+    [SerializeField] protected List<string> dialogsToShow;
 
     public void Interact()
     {
-        if (IsConverable()) StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow));
+        if (IsConverable()) StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow, npcCtrl.NPCSO.faceset));
     }
 
     private bool IsConverable()
     {
-        dialogsToShow = npcDialog.GetLocalizationKeysForTask("task_1");
+        dialogsToShow = npcCtrl.NPCSO.npcDialog.GetLocalizationKeysForTask("task_1");
+        //nếu không có lời thoại nào của npc trong nhiệm vụ đó thì không thể giao tiếp
         return dialogsToShow.Count != 0;
     }
 
-    public void ToggleCommunicativeSign(bool isActive) => npcCtrl.DialogConversable.SetActive(isActive);
+    public void ToggleCommunicativeSign(bool isActive)
+    {
+        if (IsConverable()) npcCtrl.DialogConversable.SetActive(isActive);
+    }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionConversableRange);
+        Gizmos.DrawWireSphere(transform.position, conversableRange);
     }
 }

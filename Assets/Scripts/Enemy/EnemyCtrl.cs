@@ -53,7 +53,7 @@ public class EnemyCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadHeathBar", gameObject);
     }
 
-    private void LoadModel()
+    protected virtual void LoadModel()
     {
         if (this.model != null) return;
         this.model = transform.GetComponentInChildren<SpriteRenderer>();

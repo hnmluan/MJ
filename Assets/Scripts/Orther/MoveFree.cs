@@ -1,9 +1,10 @@
 using Pathfinding;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public class MoveFree : InitMonoBehaviour
+public abstract class MoveFree : InitMonoBehaviour
 {
     [SerializeField] protected Collider2D movementArea;
     [SerializeField] protected Seeker seeker;
@@ -23,6 +24,9 @@ public class MoveFree : InitMonoBehaviour
     {
         if (this.movementArea != null) return;
         this.movementArea = transform.GetComponentInChildren<Collider2D>();
+        if (this.movementArea == null) return;
+        movementArea.AddComponent<FixedPosition>();
+        movementArea.isTrigger = true;
         Debug.Log(transform.name + ": LoadMovementArea", gameObject);
     }
 
