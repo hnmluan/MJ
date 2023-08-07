@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyMoveFree : MoveFree
+public class EnemyMoveFree : ObjMoveFree
 {
     [SerializeField] protected EnemyCtrl enemyCtrl;
 
@@ -21,8 +21,8 @@ public class EnemyMoveFree : MoveFree
 
     private void SetAnimation()
     {
-        float x = moveDirection.x;
-        float y = moveDirection.y;
+        float x = direction.x;
+        float y = direction.y;
 
         enemyCtrl.Animator.SetFloat("X", x);
         enemyCtrl.Animator.SetFloat("Y", y);

@@ -10,9 +10,9 @@ public class Inventory : InitMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        this.AddItem(ItemCode.CopperSword, 1);
-        this.AddItem(ItemCode.GoldOre, 3);
-        this.AddItem(ItemCode.IronOre, 34);
+        //this.AddItem(ItemCode.CopperSword, 1);
+        //this.AddItem(ItemCode.GoldOre, 3);
+        //this.AddItem(ItemCode.IronOre, 34);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)

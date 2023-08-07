@@ -53,10 +53,16 @@ public abstract class Spawner : InitMonoBehaviour
             return null;
         }
 
+        return this.Spawn(prefab, spawnPos, rotation);
+    }
+
+    public virtual Transform Spawn(Transform prefab, Vector3 spawnPos, Quaternion rotation)
+    {
         Transform newPrefab = this.GetObjectFromPool(prefab);
         newPrefab.SetPositionAndRotation(spawnPos, rotation);
 
-        newPrefab.parent = this.holder;
+        newPrefab.SetParent(this.holder);
+
         return newPrefab;
     }
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AttackByDistance : ObjAttack
+public class ObjAttackByDistance : ObjAttack
 {
     [Header("ObjAttack by Distance")]
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyChasePlayer : MoveToTagert
+public class EnemyMoveToPlayer : ObjMoveToPlayer
 {
     [SerializeField] protected EnemyCtrl enemyCtrl;
 

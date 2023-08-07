@@ -47,22 +47,18 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void Reborn()
     {
         enemyCtrl.Model.enabled = true;
-        this.hpMax = this.enemyCtrl.EnemySO.hpMax;
+        this.HPMax = this.enemyCtrl.EnemySO.hpMax;
         base.Reborn();
-        UpdateHeathBar();
     }
 
     public override void Deduct(int deduct)
     {
         base.Deduct(deduct);
         PlayBloodLossEffect();
-        UpdateHeathBar();
         AudioController.Instance.PlayVFX("sfx_loss_hp");
     }
 
-    private void UpdateHeathBar() => enemyCtrl.HeathBar.value = (hp / hpMax);
-
-    private void PlayBloodLossEffect() { if (hp != 0 && enemyCtrl.Model != null) StartCoroutine(BloodLossEffect()); }
+    private void PlayBloodLossEffect() { if (HP != 0 && enemyCtrl.Model != null) StartCoroutine(BloodLossEffect()); }
 
     private IEnumerator BloodLossEffect()
     {

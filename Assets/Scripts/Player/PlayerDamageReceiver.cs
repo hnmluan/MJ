@@ -25,7 +25,7 @@ public class PlayerDamageReceiver : DamageReceiver
     public override void Deduct(int deduct)
     {
         base.Deduct(deduct);
-        // playerCtrl.HPBar.value = (hp / hpMax);
+        // playerCtrl.EnemyHPBar.value = (hp / hpMax);
     }
 
 

@@ -14,6 +14,15 @@ public class NPCCtrl : InitMonoBehaviour
     [SerializeField] protected NPCSO npcSO;
     public NPCSO NPCSO => npcSO;
 
+    [SerializeField] protected NPCConverse npcConverse;
+    public NPCConverse NPCConverse => npcConverse;
+
+    [SerializeField] protected ObjMoveToPlayer objMoveToPlayer;
+    public ObjMoveToPlayer ObjMoveToPlayer => objMoveToPlayer;
+
+    [SerializeField] protected ObjMoveFree objMoveFree;
+    public ObjMoveFree ObjMoveFree => objMoveFree;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -21,6 +30,9 @@ public class NPCCtrl : InitMonoBehaviour
         this.LoadNPCSprite();
         this.LoadDialogConversable();
         this.LoadNPCSO();
+        this.LoadNPCConverse();
+        this.LoadObjMoveToPlayer();
+        this.LoadObjMoveFree();
     }
 
     protected virtual void LoadAnimator()
@@ -42,6 +54,27 @@ public class NPCCtrl : InitMonoBehaviour
         if (this.dialogConversable != null) return;
         this.dialogConversable = GameObject.Find("CommunicativeSign"); ;
         Debug.Log(transform.name + ": LoadDialogConversable", gameObject);
+    }
+
+    protected virtual void LoadNPCConverse()
+    {
+        if (this.npcConverse != null) return;
+        this.npcConverse = transform.GetComponentInChildren<NPCConverse>();
+        Debug.Log(transform.name + ": LoadNPCConverse", gameObject);
+    }
+
+    protected virtual void LoadObjMoveToPlayer()
+    {
+        if (this.objMoveToPlayer != null) return;
+        this.objMoveToPlayer = transform.GetComponentInChildren<ObjMoveToPlayer>();
+        Debug.Log(transform.name + ": LoadObjMoveToPlayer", gameObject);
+    }
+
+    protected virtual void LoadObjMoveFree()
+    {
+        if (this.objMoveFree != null) return;
+        this.objMoveFree = transform.GetComponentInChildren<ObjMoveFree>();
+        Debug.Log(transform.name + ": LoadObjMoveFree", gameObject);
     }
 
     protected virtual void LoadNPCSO()

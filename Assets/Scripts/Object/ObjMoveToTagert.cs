@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public class MoveToTagert : InitMonoBehaviour
+public class ObjMoveToTagert : InitMonoBehaviour
 {
     [SerializeField] protected Transform target;
 
@@ -23,7 +23,7 @@ public class MoveToTagert : InitMonoBehaviour
 
     [SerializeField] protected float offsetNodePath = 0.1f;
 
-    [SerializeField] protected bool isTouchPlayer;
+    [SerializeField] protected bool isTouchTagret;
 
     protected override void LoadComponents()
     {
@@ -41,10 +41,10 @@ public class MoveToTagert : InitMonoBehaviour
     protected override void OnEnable()
     {
         isMoving = false;
-        StartCoroutine(MoveToPlayerRoutine());
+        StartCoroutine(MoveToTagretRoutine());
     }
 
-    private IEnumerator MoveToPlayerRoutine()
+    private IEnumerator MoveToTagretRoutine()
     {
         while (true)
         {
@@ -82,7 +82,7 @@ public class MoveToTagert : InitMonoBehaviour
         {
             if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
             {
-                isTouchPlayer = true;
+                isTouchTagret = true;
                 isMoving = false;
                 return;
             }

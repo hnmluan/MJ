@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyCtrl : InitMonoBehaviour
 {
@@ -11,9 +10,6 @@ public class EnemyCtrl : InitMonoBehaviour
 
     [SerializeField] protected EnemyDespawn enemyDespawn;
     public EnemyDespawn EnemyDespawn { get => enemyDespawn; }
-
-    [SerializeField] protected Slider heathBar;
-    public Slider HeathBar { get => heathBar; }
 
     [SerializeField] protected EnemyProfileSO enemySO;
     public EnemyProfileSO EnemySO => enemySO;
@@ -27,7 +23,6 @@ public class EnemyCtrl : InitMonoBehaviour
         this.LoadAnimator();
         this.LoadEnemyDespawn();
         this.LoadModel();
-        this.LoadHeathBar();
         this.LoadEnemySO();
         this.LoadDamageReceiver();
     }
@@ -35,7 +30,7 @@ public class EnemyCtrl : InitMonoBehaviour
     protected override void ResetValue()
     {
         if (enemySO == null) return;
-        damageReceiver.hpMax = enemySO.hpMax;
+        damageReceiver.HPMax = enemySO.hpMax;
     }
 
     protected virtual void LoadEnemySO()
@@ -44,13 +39,6 @@ public class EnemyCtrl : InitMonoBehaviour
         string resPath = "Enemy/" + transform.name;
         this.enemySO = Resources.Load<EnemyProfileSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
-    }
-
-    protected virtual void LoadHeathBar()
-    {
-        if (this.heathBar != null) return;
-        this.heathBar = transform.GetComponentInChildren<Slider>();
-        Debug.Log(transform.name + ": LoadHeathBar", gameObject);
     }
 
     protected virtual void LoadModel()

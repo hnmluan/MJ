@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AnimalMoveFree : MoveFree
+public class AnimalMoveFree : ObjMoveFree
 {
     [SerializeField] protected AnimalCtrl animalCtrl;
 
@@ -25,7 +25,7 @@ public class AnimalMoveFree : MoveFree
 
     private void SetAnimation()
     {
-        float x = moveDirection.x;
+        float x = direction.x;
         animalCtrl.Animator.SetBool("isMoving", this.isMoving);
         if (x == 0) return;
         if (x > 0)

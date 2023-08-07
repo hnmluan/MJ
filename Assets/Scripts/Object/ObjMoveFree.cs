@@ -4,14 +4,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public abstract class MoveFree : InitMonoBehaviour
+public abstract class ObjMoveFree : InitMonoBehaviour
 {
     [SerializeField] protected Collider2D movementArea;
     [SerializeField] protected Seeker seeker;
     [SerializeField] protected Path currentPath;
     [SerializeField] protected int currentWaypointIndex;
     [SerializeField] protected bool isMoving;
-    [SerializeField] protected Vector3 moveDirection;
+    [SerializeField] protected Vector3 direction;
 
     protected override void LoadComponents()
     {
@@ -108,9 +108,9 @@ public abstract class MoveFree : InitMonoBehaviour
 
             Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
 
-            moveDirection = (targetPosition - transform.position).normalized;
+            direction = (targetPosition - transform.position).normalized;
 
-            transform.parent.position += moveDirection * 5f * Time.deltaTime;
+            transform.parent.position += direction * 5f * Time.deltaTime;
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {

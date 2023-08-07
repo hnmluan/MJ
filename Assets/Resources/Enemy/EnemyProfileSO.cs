@@ -8,6 +8,6 @@ public class EnemyProfileSO : ScriptableObject
     public EnemyType itemType = EnemyType.NoType;
     public string enemyName = "no-name";
     public int hpMax = 2;
-    public List<DropRate> dropListItem;
+    public List<ItemDropRate> dropListItem;
     public string discription;
 }

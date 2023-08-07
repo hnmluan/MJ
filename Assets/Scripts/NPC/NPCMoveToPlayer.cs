@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class NPCMovement : ObjMoveFree
+public class NPCMoveToPlayer : ObjMoveToPlayer
 {
     [SerializeField] protected NPCCtrl npcCtrl;
 
@@ -14,7 +14,7 @@ public class NPCMovement : ObjMoveFree
     {
         if (npcCtrl != null) return;
         npcCtrl = transform.parent.GetComponent<NPCCtrl>();
-        Debug.Log(transform.name + ": LoadNPCCtrl", gameObject);
+        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
     }
 
     protected override void Update()
@@ -27,6 +27,6 @@ public class NPCMovement : ObjMoveFree
     {
         npcCtrl.Animator.SetFloat("X", direction.x);
         npcCtrl.Animator.SetFloat("Y", direction.y);
-        npcCtrl.Animator.SetBool("isWalking", this.isMoving);
+        npcCtrl.Animator.SetBool("isWalking", !this.isTouchTagret);
     }
 }
