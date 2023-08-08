@@ -7,6 +7,8 @@ Setting.LANGUAGE,LANGUAGE,NGÔN NGỮ
 Setting.English,English,Tiếng anh
 Setting.Vietnamese,Vietnamese,Tiếng việt
 ,,
+Inventory.Title,Inventory,Kho hàng
+,,
 Guide.Title,Game Guide,Hướng dẫn
 Guide.w.action,Move up,Di chuyển lên trên
 Guide.a.action,Move left,Di chuyển sang trái

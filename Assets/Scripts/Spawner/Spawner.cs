@@ -11,14 +11,14 @@ public abstract class Spawner : InitMonoBehaviour
     protected override void LoadComponents()
     {
         this.LoadPrefabs();
-        this.LoadHodler();
+        this.LoadHolder();
     }
 
-    protected virtual void LoadHodler()
+    protected virtual void LoadHolder()
     {
         if (this.holder != null) return;
         this.holder = transform.Find("Holder");
-        Debug.Log(transform.name + ": LoadHodler", gameObject);
+        Debug.Log(transform.name + ": LoadHolder", gameObject);
     }
 
 

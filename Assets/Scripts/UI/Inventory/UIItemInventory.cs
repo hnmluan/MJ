@@ -1,0 +1,54 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIItemInventory : InitMonoBehaviour
+{
+    [Header("UI Item Inventory")]
+
+    [SerializeField] protected Text itemName;
+    public Text ItemName => itemName;
+
+    [SerializeField] protected Text itemNumber;
+    public Text ItemNumer => itemNumber;
+
+    [SerializeField] protected Image itemImage;
+    public Image Image => itemImage;
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadItemName();
+        this.LoadItemNumer();
+        this.LoadItemImage();
+    }
+
+    private void LoadItemImage()
+    {
+        if (this.itemImage != null) return;
+        this.itemImage = transform.Find("Image").GetComponent<Image>();
+        Debug.Log(transform.name + ": LoadItemImage", gameObject);
+    }
+
+    protected virtual void LoadItemName()
+    {
+        if (this.itemName != null) return;
+        this.itemName = transform.Find("ItemName").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadItemName", gameObject);
+    }
+
+    protected virtual void LoadItemNumer()
+    {
+        if (this.itemNumber != null) return;
+        this.itemNumber = transform.Find("Quantity").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadItemNumer", gameObject);
+    }
+
+    public virtual void ShowItem(ItemInventory item)
+    {
+        this.itemName.text = item.itemProfile.itemName;
+        this.itemNumber.text = item.itemCount.ToString();
+        if (item.itemProfile.itemSprite == null) return;
+        this.itemImage.sprite = item.itemProfile.itemSprite;
+
+    }
+}

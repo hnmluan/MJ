@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class UIInventory : InitMonoBehaviour
+public class UIInventory : UIInventoryAbstract
 {
+    [Header("UI Inventory")]
     private static UIInventory instance;
     public static UIInventory Instance => instance;
 
-    protected bool isOpen = false;
+    protected bool isOpen = true;
 
     protected override void Awake()
     {
@@ -17,7 +19,14 @@ public class UIInventory : InitMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        this.Close();
+        //this.Close();
+
+        InvokeRepeating(nameof(this.ShowItem), 1, 1);
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        //this.ShowItem();
     }
 
     public virtual void Toggle()
@@ -29,13 +38,30 @@ public class UIInventory : InitMonoBehaviour
 
     public virtual void Open()
     {
-        gameObject.SetActive(true);
+        this.inventoryCtrl.gameObject.SetActive(true);
         this.isOpen = true;
     }
 
     public virtual void Close()
     {
-        gameObject.SetActive(false);
+        this.inventoryCtrl.gameObject.SetActive(false);
         this.isOpen = false;
+    }
+
+    protected virtual void ShowItem()
+    {
+        if (!this.isOpen) return;
+
+        this.ClearItems();
+
+        List<ItemInventory> items = PlayerCtrl.Instance.Inventory.Items;
+        UIInvItemSpawner spawner = this.inventoryCtrl.UIInvItemSpawner;
+
+        foreach (ItemInventory item in items) spawner.SpawnItem(item);
+    }
+
+    protected virtual void ClearItems()
+    {
+        this.inventoryCtrl.UIInvItemSpawner.ClearItems();
     }
 }
