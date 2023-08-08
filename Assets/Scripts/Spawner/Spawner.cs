@@ -94,6 +94,7 @@ public abstract class Spawner : InitMonoBehaviour
 
     public virtual void Despawn(Transform obj)
     {
+        if (this.poolObjs.Contains(obj)) return;
         this.poolObjs.Add(obj);
         obj.gameObject.SetActive(false);
     }
