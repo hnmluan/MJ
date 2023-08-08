@@ -1,10 +1,17 @@
 using Assets.SimpleLocalization;
 using UnityEngine;
 
-public class MutilLanguage : MonoBehaviour
+public class MutilLanguage : InitMonoBehaviour
 {
-    private void Awake()
+    private static MutilLanguage instance;
+    public static MutilLanguage Instance => instance;
+
+    protected override void Awake()
     {
+        base.Awake();
+        if (MutilLanguage.instance != null) Debug.LogError("Only 1 MutilLanguage allow to exist");
+        MutilLanguage.instance = this;
+
         LocalizationManager.Read();
 
         switch (Application.systemLanguage)
