@@ -63440,6 +63440,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127ab75436a7bf3478b3587806f58522, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemInventory:
+    itemId: 
+    itemProfile: {fileID: 0}
+    itemCount: 0
+    maxStack: 7
+    upgradeLevel: 0
   itemName: {fileID: 1482923966}
   itemNumber: {fileID: 1296873786}
   itemImage: {fileID: 362236236}
@@ -72968,6 +72974,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDespawn: {fileID: 4543232283949944555}
+  itemInventory:
+    itemId: 
+    itemProfile: {fileID: 0}
+    itemCount: 0
+    maxStack: 7
+    upgradeLevel: 0
 --- !u!4 &4543232282337237629
 Transform:
   m_ObjectHideFlags: 0
@@ -73265,15 +73277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSlot: 7
-  items:
-  - itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
-    itemCount: 3
-    maxStack: 7
-    upgradeLevel: 0
-  - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
-    itemCount: 3
-    maxStack: 7
-    upgradeLevel: 0
+  items: []
 --- !u!4 &4543232282822456175
 Transform:
   m_ObjectHideFlags: 0

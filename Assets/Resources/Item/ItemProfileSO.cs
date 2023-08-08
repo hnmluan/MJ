@@ -10,4 +10,17 @@ public class ItemProfileSO : ScriptableObject
     public Sprite itemSprite;
     public int defaultMaxStack = 7;
     public List<ItemRecipe> upgradeLevels;
+
+    public static ItemProfileSO FindByItemCode(ItemCode itemCode)
+    {
+        var profiles = Resources.LoadAll("Item", typeof(ItemProfileSO));
+        foreach (ItemProfileSO profile in profiles)
+        {
+            if (profile.itemCode != itemCode) continue;
+            return profile;
+        }
+        return null;
+    }
 }
+
+

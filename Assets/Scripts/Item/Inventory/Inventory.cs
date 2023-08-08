@@ -11,8 +11,8 @@ public class Inventory : InitMonoBehaviour
     {
         base.Start();
         //this.AddItem(ItemCode.CopperSword, 1);
-        //this.AddItem(ItemCode.GoldOre, 3);
-        //this.AddItem(ItemCode.IronOre, 34);
+        this.AddItem(ItemCode.GoldOre, 3);
+        this.AddItem(ItemCode.IronOre, 4);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
@@ -106,6 +106,7 @@ public class Inventory : InitMonoBehaviour
     {
         ItemInventory itemInventory = new ItemInventory
         {
+            itemId = ItemInventory.RandomId(),
             itemProfile = itemProfile,
             maxStack = itemProfile.defaultMaxStack
         };
