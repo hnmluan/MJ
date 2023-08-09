@@ -15,8 +15,12 @@ MonoBehaviour:
   itemCode: 1
   itemType: 1
   enemyName: Bamboo
-  hpMax: 10
+  hpMax: 1
   dropListItem:
   - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
-    dropRate: 50000
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+    dropRate: 100000
   discription: 

@@ -34,14 +34,14 @@ public class UIItemInventory : InitMonoBehaviour
     protected virtual void LoadItemName()
     {
         if (this.itemName != null) return;
-        this.itemName = transform.Find("ItemName").GetComponent<Text>();
+        this.itemName = transform.Find("NameBox").Find("ItemName").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
     protected virtual void LoadItemNumer()
     {
         if (this.itemNumber != null) return;
-        this.itemNumber = transform.Find("Quantity").GetComponent<Text>();
+        this.itemNumber = transform.Find("QuantityBox").Find("Quantity").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadItemNumer", gameObject);
     }
 
