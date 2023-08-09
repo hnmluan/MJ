@@ -6,40 +6,40 @@ using UnityEngine;
 
 namespace Assets.SimpleLocalization
 {
-	/// <summary>
-	/// Localization manager.
-	/// </summary>
+    /// <summary>
+    /// Localization manager.
+    /// </summary>
     public static class LocalizationManager
     {
-		/// <summary>
-		/// Fired when localization changed.
-		/// </summary>
-        public static event Action LocalizationChanged = () => { }; 
+        /// <summary>
+        /// Fired when localization changed.
+        /// </summary>
+        public static event Action LocalizationChanged = () => { };
 
         public static readonly Dictionary<string, Dictionary<string, string>> Dictionary = new Dictionary<string, Dictionary<string, string>>();
         private static string _language = "English";
 
-		/// <summary>
-		/// Get or set language.
-		/// </summary>
+        /// <summary>
+        /// Get or set language.
+        /// </summary>
         public static string Language
         {
             get => _language;
             set { _language = value; LocalizationChanged(); }
         }
 
-		/// <summary>
-		/// Set default language.
-		/// </summary>
+        /// <summary>
+        /// Set default language.
+        /// </summary>
         public static void AutoLanguage()
         {
             Language = "English";
         }
 
-		/// <summary>
-		/// Read localization spreadsheets.
-		/// </summary>
-		public static void Read(string path = "Localization")
+        /// <summary>
+        /// Read localization spreadsheets.
+        /// </summary>
+        public static void Read(string path = "Localization")
         {
             if (Dictionary.Count > 0) return;
 
@@ -52,27 +52,27 @@ namespace Assets.SimpleLocalization
 
                 foreach (Match match in matches)
                 {
-					text = text.Replace(match.Value, match.Value.Replace("\"", null).Replace(",", "[_comma_]").Replace("\n", "[_newline_]"));
+                    text = text.Replace(match.Value, match.Value.Replace("\"", null).Replace(",", "[_comma_]").Replace("\n", "[_newline_]"));
                 }
 
                 // Making uGUI line breaks to work in asian texts.
                 text = text.Replace("。", "。 ").Replace("、", "、 ").Replace("：", "： ").Replace("！", "！ ").Replace("（", " （").Replace("）", "） ").Trim();
 
                 var lines = text.Split('\n').Where(i => i != "").ToList();
-				var languages = lines[0].Split(',').Select(i => i.Trim()).ToList();
+                var languages = lines[0].Split(',').Select(i => i.Trim()).ToList();
 
-				for (var i = 1; i < languages.Count; i++)
+                for (var i = 1; i < languages.Count; i++)
                 {
                     if (!Dictionary.ContainsKey(languages[i]))
                     {
                         Dictionary.Add(languages[i], new Dictionary<string, string>());
                     }
                 }
-				
+
                 for (var i = 1; i < lines.Count; i++)
                 {
-					var columns = lines[i].Split(',').Select(j => j.Trim()).Select(j => j.Replace("[_quote_]", "\"").Replace("[_comma_]", ",").Replace("[_newline_]", "\n")).ToList();
-					var key = columns[0];
+                    var columns = lines[i].Split(',').Select(j => j.Trim()).Select(j => j.Replace("[_quote_]", "\"").Replace("[_comma_]", ",").Replace("[_newline_]", "\n")).ToList();
+                    var key = columns[0];
 
                     if (key == "") continue;
 
@@ -110,6 +110,7 @@ namespace Assets.SimpleLocalization
 
             if (missed)
             {
+                Debug.LogWarning(localizationKey);
                 Debug.LogWarning($"Translation not found: {localizationKey} ({Language}).");
 
                 return Dictionary["English"].ContainsKey(localizationKey) ? Dictionary["English"][localizationKey] : localizationKey;
@@ -118,10 +119,10 @@ namespace Assets.SimpleLocalization
             return Dictionary[Language][localizationKey];
         }
 
-	    /// <summary>
-	    /// Get localized value by localization key.
-	    /// </summary>
-		public static string Localize(string localizationKey, params object[] args)
+        /// <summary>
+        /// Get localized value by localization key.
+        /// </summary>
+        public static string Localize(string localizationKey, params object[] args)
         {
             var pattern = Localize(localizationKey);
 

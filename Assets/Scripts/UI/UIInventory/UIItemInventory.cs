@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,7 +49,16 @@ public class UIItemInventory : InitMonoBehaviour
     public virtual void ShowItem(ItemInventory item)
     {
         this.itemInventory = item;
-        this.itemName.text = this.itemInventory.itemProfile.itemName;
+        // this.itemName.GetComponent<LocalizedText>().LocalizationKey = "Item." + this.itemInventory.itemProfile.itemName.Replace(" ", "");
+
+        //this.itemName.text = this.itemInventory.itemProfile.itemName.Replace(" ", "").Replace("\t", "");
+        //Debug.Log(this.itemInventory.itemProfile.itemName.Replace(" ", ""));
+
+
+        //this.itemName.text = this.itemInventory.itemProfile.itemName;
+        string name = "Item." + this.itemInventory.itemProfile.itemName.Replace(" ", "");
+        this.itemName.GetComponent<LocalizedText>().LocalizationKey = name;
+        this.itemName.GetComponent<LocalizedText>().Localize();
         this.itemNumber.text = this.itemInventory.itemCount.ToString();
         this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
 

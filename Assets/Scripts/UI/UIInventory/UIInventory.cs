@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class UIInventory : UIInventoryAbstract
@@ -26,6 +26,7 @@ public class UIInventory : UIInventoryAbstract
         this.Close();
 
         InvokeRepeating(nameof(this.ShowItems), 1, 1);
+       // this.ShowItems();
     }
 
     protected virtual void FixedUpdate()
@@ -61,10 +62,7 @@ public class UIInventory : UIInventoryAbstract
         List<ItemInventory> items = PlayerCtrl.Instance.Inventory.Items;
         UIInvItemSpawner spawner = this.inventoryCtrl.UIInvItemSpawner;
 
-        foreach (ItemInventory item in items)
-        {
-            spawner.SpawnItem(item);
-        }
+        foreach (ItemInventory item in items) spawner.SpawnItem(item);
 
         this.SortItems();
     }
@@ -79,37 +77,32 @@ public class UIInventory : UIInventoryAbstract
         if (this.inventorySort == InventorySort.NoSort) return;
 
         int itemCount = this.inventoryCtrl.Content.childCount;
-        Transform currentItem, nextItem;
-        UIItemInventory currentUIItem, nextUIItem;
-        ItemProfileSO currentProfile, nextProfile;
-        string currentName, nextName;
-        int currentCount, nextCount;
-
         bool isSorting = false;
+
         for (int i = 0; i < itemCount - 1; i++)
         {
-            currentItem = this.inventoryCtrl.Content.GetChild(i);
-            nextItem = this.inventoryCtrl.Content.GetChild(i + 1);
+            Transform currentItem = this.inventoryCtrl.Content.GetChild(i);
+            Transform nextItem = this.inventoryCtrl.Content.GetChild(i + 1);
 
-            currentUIItem = currentItem.GetComponent<UIItemInventory>();
-            nextUIItem = nextItem.GetComponent<UIItemInventory>();
+            UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
+            UIItemInventory nextUIItem = nextItem.GetComponent<UIItemInventory>();
 
-            currentProfile = currentUIItem.ItemInventory.itemProfile;
-            nextProfile = nextUIItem.ItemInventory.itemProfile;
+            ItemProfileSO currentProfile = currentUIItem.ItemInventory.itemProfile;
+            ItemProfileSO nextProfile = nextUIItem.ItemInventory.itemProfile;
 
             bool isSwap = false;
 
             switch (this.inventorySort)
             {
                 case InventorySort.ByName:
-                    currentName = currentProfile.itemName;
-                    nextName = nextProfile.itemName;
-                    isSwap = string.Compare(currentName, nextName) == -1;
+                    string currentName = currentProfile.itemName;
+                    string nextName = nextProfile.itemName;
+                    isSwap = string.Compare(currentName, nextName) == 1; // Đổi từ -1 thành 1 để đảo ngược thứ tự
                     break;
                 case InventorySort.ByQuantity:
-                    currentCount = currentUIItem.ItemInventory.itemCount;
-                    nextCount = nextUIItem.ItemInventory.itemCount;
-                    isSwap = currentCount > nextCount;
+                    int currentCount = currentUIItem.ItemInventory.itemCount;
+                    int nextCount = nextUIItem.ItemInventory.itemCount;
+                    isSwap = currentCount < nextCount; // Đổi dấu > thành <
                     break;
             }
 
@@ -120,14 +113,19 @@ public class UIInventory : UIInventoryAbstract
             }
         }
 
-        if (isSorting) this.SortItems();
+        if (isSorting)
+        {
+            this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
+        }
     }
+
 
 
     protected virtual void SwapItems(Transform currentItem, Transform nextItem)
     {
         int currentIndex = currentItem.GetSiblingIndex();
         int nextIndex = nextItem.GetSiblingIndex();
+        Debug.Log("Swap");
 
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);

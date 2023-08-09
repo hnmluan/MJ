@@ -1,5 +1,8 @@
 Key,English,Vietnamese
 Inventory.sort,Sort By,Sắp xếp
-Inventory.sortName,Name,Name
-Inventory.sortQuantity,Quantity,Quantity
+Inventory.sortName,Name,Tên
+Inventory.sortQuantity,Quantity,Số lượng
 Inventory.Title,Inventory,Kho hàng
+Inventory.Name,Name:,Tên:
+Inventory.Type,Type:,Loại:
+Inventory.Quantity,Quantity:,Số lượng:

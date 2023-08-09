@@ -17,14 +17,8 @@ namespace Assets.SimpleLocalization
             LocalizationManager.LocalizationChanged += Localize;
         }
 
-        public void OnDestroy()
-        {
-            LocalizationManager.LocalizationChanged -= Localize;
-        }
+        public void OnDestroy() => LocalizationManager.LocalizationChanged -= Localize;
 
-        protected virtual void Localize()
-        {
-            GetComponent<Text>().text = LocalizationManager.Localize(LocalizationKey);
-        }
+        public virtual void Localize() => GetComponent<Text>().text = LocalizationManager.Localize(LocalizationKey);
     }
 }
