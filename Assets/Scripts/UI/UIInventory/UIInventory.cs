@@ -8,7 +8,10 @@ public class UIInventory : UIInventoryAbstract
     public static UIInventory Instance => instance;
 
     protected bool isOpen = true;
+
     [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
+
+    public void SetInventorySort(InventorySort inventorySort) => this.inventorySort = inventorySort;
 
     protected override void Awake()
     {
