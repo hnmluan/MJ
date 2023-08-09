@@ -13,8 +13,8 @@ public class Inventory : InitMonoBehaviour
         //this.AddItem(ItemCode.CopperSword, 1);
         this.AddItem(ItemCode.GoldOre, 3);
         this.AddItem(ItemCode.IronOre, 4);
-        this.AddItem(ItemCode.GoldOre, 12);
-
+        this.AddItem(ItemCode.GoldOre, 5);
+        this.AddItem(ItemCode.CopperSword, 1);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
