@@ -13,7 +13,7 @@ public class NPCConverse : NPCAbstract, IInteractable
 
     protected override void Start()
     {
-        DialogCtrl.Instance.OnHideDialog += () => this.isInConversation = false;
+        UIDialog.Instance.OnHideDialog += () => this.isInConversation = false;
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class NPCConverse : NPCAbstract, IInteractable
     public void Interact()
     {
         if (!IsConverable()) return;
-        StartCoroutine(DialogCtrl.Instance.ShowDialog(dialogsToShow, npcCtrl.NPCSO.faceset));
+        StartCoroutine(UIDialog.Instance.ShowDialog(dialogsToShow, npcCtrl.NPCSO.faceset));
         isInConversation = true;
 
     }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,15 +18,12 @@ public class DialogCtrl : InitMonoBehaviour
     [SerializeField] protected Image faceset;
     public Image Faceset { get => faceset; }
 
-    [SerializeField] protected int lettersPerSecond = 40;
-
-    public event Action OnShowDialog, OnHideDialog;
-
-    public List<String> dialogsToShow;
-
-    int currentLocalizationKeys = 0;
-
-    bool isTyping;
+    protected override void Awake()
+    {
+        base.Awake();
+        if (DialogCtrl.instance != null) Debug.LogError("Only 1 DialogCtrl allow to exist");
+        DialogCtrl.instance = this;
+    }
 
     protected override void LoadComponents()
     {
@@ -68,64 +62,7 @@ public class DialogCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadDialogBox", gameObject);
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
 
-        if (DialogCtrl.instance != null) Debug.LogError("Only 1 DialogCtrl allow to exist");
-
-        DialogCtrl.instance = this;
-    }
-
-    public IEnumerator ShowDialog(List<String> dialogsToShow, Sprite faceset)
-    {
-        yield return new WaitForEndOfFrame();
-
-        OnShowDialog?.Invoke();
-
-        this.dialogsToShow = dialogsToShow;
-
-        dialogBox.SetActive(true);
-
-        StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialogsToShow[0])));
-
-        Faceset.sprite = faceset;
-    }
-
-    public void HandleUpdate()
-    {
-        if (Input.GetKeyUp(KeyCode.Space) && !isTyping)
-        {
-            ++currentLocalizationKeys;
-
-            if (currentLocalizationKeys < dialogsToShow.Count)
-            {
-                StartCoroutine(TypeDialog(LocalizedDialog.GetDialogLocalizedText(dialogsToShow[currentLocalizationKeys])));
-            }
-            else
-            {
-                dialogBox.SetActive(false);
-                currentLocalizationKeys = 0;
-                OnHideDialog?.Invoke();
-            }
-        }
-    }
-
-    public IEnumerator TypeDialog(string text)
-    {
-        isTyping = true;
-
-        dialogText.text = "";
-
-        foreach (var letter in text.ToCharArray())
-        {
-            dialogText.text += letter;
-
-            yield return new WaitForSeconds(1f / lettersPerSecond);
-        }
-
-        isTyping = false;
-    }
 
 
 }

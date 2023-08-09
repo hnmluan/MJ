@@ -19,13 +19,13 @@ public class GameManager : InitMonoBehaviour
 
     protected override void Start()
     {
-        DialogCtrl.Instance.OnShowDialog += () =>
+        UIDialog.Instance.OnShowDialog += () =>
         {
             previousState = state;
             state = GameState.Dialog;
         };
 
-        DialogCtrl.Instance.OnHideDialog += () =>
+        UIDialog.Instance.OnHideDialog += () =>
         {
             if (state == GameState.Dialog)
             {
@@ -53,19 +53,17 @@ public class GameManager : InitMonoBehaviour
 
     private void Update()
     {
-        if (state == GameState.FreeRoam)
+        switch (state)
         {
-        }
-        else if (state == GameState.Dialog)
-        {
-            DialogCtrl.Instance.HandleUpdate();
-        }
-        else if (state == GameState.Setting)
-        {
-        }
-        else if (state == GameState.Battle)
-        {
-
+            case GameState.Dialog:
+                UIDialog.Instance.HandleUpdate();
+                break;
+            case GameState.FreeRoam:
+                break;
+            case GameState.Battle:
+                break;
+            case GameState.Setting:
+                break;
         }
     }
 }
