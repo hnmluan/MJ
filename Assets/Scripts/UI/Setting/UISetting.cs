@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class UISetting : InitMonoBehaviour
 {
+    [Header("UI Setting")]
     private static UISetting instance;
     public static UISetting Instance => instance;
 
-    protected bool isOpen = false;
+    protected bool isOpen = true;
 
     protected override void Awake()
     {
