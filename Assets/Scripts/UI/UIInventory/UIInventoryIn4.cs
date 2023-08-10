@@ -1,4 +1,5 @@
 using Assets.SimpleLocalization;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,6 +51,7 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.LoadBtnUseItemAll();
 
     }
+
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
@@ -77,12 +79,14 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.itemType = transform.Find("Information").Find("TypeItem").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadItemType", gameObject);
     }
+
     protected virtual void LoadBtnUseItem()
     {
         if (this.btnUseItem != null) return;
         this.btnUseItem = transform.GetComponentInChildren<BtnUseItem>();
         Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
     }
+
     protected virtual void LoadBtnUseItemAll()
     {
         if (this.btnUseItemAll != null) return;
@@ -103,20 +107,31 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
     }
 
+    public virtual void ClickUseItem()
+    {
+        Drop(itemInventory.itemProfile.dropListItem);
+        PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        ShowIn4(itemInventory);
+        if (itemInventory.itemCount == 0) ResetIn4();
+    }
+
+    public virtual void ClickUseItemAll()
+    {
+        Drop(itemInventory.itemProfile.dropListItem);
+        PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        ResetIn4();
+    }
+
     private void ShowButton()
     {
         btnUseItem.transform.gameObject.SetActive(true);
-        btnUseItem.Click += () => { };
         BtnUseItemAll.transform.gameObject.SetActive(true);
-        BtnUseItemAll.Click += () => { };
     }
 
     private void HideButton()
     {
         btnUseItem.transform.gameObject.SetActive(false);
-        btnUseItem.Click += () => { };
         BtnUseItemAll.transform.gameObject.SetActive(false);
-        BtnUseItemAll.Click += () => { };
     }
 
     private bool CanUse() => itemInventory.itemProfile.dropListItem.Count != 0;
@@ -132,4 +147,48 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.itemNumber.text = "";
         this.itemImage.sprite = null;
     }
+
+    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
+    {
+        List<ItemDropRate> dropItems = new List<ItemDropRate>();
+
+        if (dropList.Count < 1) return dropItems;
+
+        dropItems = this.DropItems(dropList);
+        foreach (ItemDropRate itemDropRate in dropItems)
+        {
+            ItemCode itemCode = itemDropRate.itemSO.itemCode;
+            PlayerCtrl.Instance.Inventory.AddItem(itemCode, 1);
+        }
+
+        return dropItems;
+    }
+
+    protected virtual List<ItemDropRate> DropItems(List<ItemDropRate> items)
+    {
+        List<ItemDropRate> droppedItems = new List<ItemDropRate>();
+
+        float rate, itemRate;
+        int itemDropMore;
+
+        foreach (ItemDropRate item in items)
+        {
+            rate = Random.Range(0, 1f);
+            itemRate = item.dropRate / 100000f;
+
+            itemDropMore = Mathf.FloorToInt(itemRate);
+            if (itemDropMore > 0)
+            {
+                itemRate -= itemDropMore;
+                for (int i = 0; i < itemDropMore; i++)
+                {
+                    droppedItems.Add(item);
+                }
+            }
+        }
+
+        return droppedItems;
+    }
+
+
 }

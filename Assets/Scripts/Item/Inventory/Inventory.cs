@@ -19,8 +19,9 @@ public class Inventory : InitMonoBehaviour
         this.AddItem(ItemCode.GoldOre, 3);
         this.AddItem(ItemCode.IronOre, 4);
         this.AddItem(ItemCode.GoldOre, 5);
+        this.DeductItem(ItemCode.GoldOre, 8);
         this.AddItem(ItemCode.CopperSword, 1);
-        this.AddItem(ItemCode.GoldenMirror, 1);
+        this.AddItem(ItemCode.GoldenMirror, 20);
         this.AddItem(ItemCode.CopperSword, 100);
     }
 
@@ -175,7 +176,10 @@ public class Inventory : InitMonoBehaviour
 
             itemInventory.itemCount -= deduct;
         }
+        RemoveEmptySlot();
     }
+
+    public virtual void RemoveEmptySlot() => items.RemoveAll(item => item.itemCount == 0);
 
 
 
