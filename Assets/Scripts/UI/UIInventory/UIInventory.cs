@@ -26,7 +26,7 @@ public class UIInventory : UIInventoryAbstract
         this.Close();
 
         InvokeRepeating(nameof(this.ShowItems), 1, 1);
-       // this.ShowItems();
+        // this.ShowItems();
     }
 
     protected virtual void FixedUpdate()
@@ -125,7 +125,6 @@ public class UIInventory : UIInventoryAbstract
     {
         int currentIndex = currentItem.GetSiblingIndex();
         int nextIndex = nextItem.GetSiblingIndex();
-        Debug.Log("Swap");
 
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);

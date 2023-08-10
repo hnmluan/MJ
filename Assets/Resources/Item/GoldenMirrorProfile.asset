@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1009659d85167b746be70807c878b473, type: 3}
+  m_Name: GoldenMirrorProfile
+  m_EditorClassIdentifier: 
+  itemCode: 4
+  itemType: 3
+  itemName: Golden Mirror
+  itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
+  defaultMaxStack: 10
+  upgradeLevels: []
+  dropListItem:
+  - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+    dropRate: 100000

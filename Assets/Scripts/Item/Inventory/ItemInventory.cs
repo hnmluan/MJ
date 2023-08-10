@@ -5,7 +5,7 @@ public class ItemInventory
     public string itemId;
     public ItemProfileSO itemProfile;
     public int itemCount = 0;
-    public int maxStack = 7;
+    public int maxStack = 30;
     public int upgradeLevel = 0;
 
     public static string RandomId() => RandomStringGenerator.Generate(27);

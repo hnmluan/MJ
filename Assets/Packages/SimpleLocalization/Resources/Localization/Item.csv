@@ -1,9 +1,8 @@
 Key,English,Vietnamese
 Item.Type.Resource,Resource,Tài nguyên
 Item.Type.Equiment,Equiment,Thiết bị
-,,
-,,
-,,
+Item.Type.Mirror,MysteryBox,Hộp quà bí ẩn
 Item.CopperSword,Copper Sword,Kiếm đồng
 Item.GoldOre,Gold Ore,Quặn vàng
 Item.IronOre,Iron Ore,Quặn sắt
+Item.GoldenMirror,Golden Mirror,Gương vàng

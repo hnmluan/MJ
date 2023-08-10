@@ -16,5 +16,5 @@ MonoBehaviour:
   itemType: 2
   itemName: Copper Sword
   itemSprite: {fileID: 21300000, guid: 89c03580abfeafe43878448037716d51, type: 3}
-  defaultMaxStack: 7
+  defaultMaxStack: 10
   upgradeLevels: []

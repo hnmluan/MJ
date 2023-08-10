@@ -3,22 +3,31 @@ using UnityEngine;
 
 public class Inventory : InitMonoBehaviour
 {
-    [SerializeField] protected int maxSlot = 7;
+    [SerializeField] private int maxSlot = 30;
+    public int MaxSlot => maxSlot;
+
+    [SerializeField] private int maxItemCout = 100;
+    public int MaxItemCout => maxItemCout;
+
     [SerializeField] protected List<ItemInventory> items;
     public List<ItemInventory> Items => items;
+
 
     protected override void Start()
     {
         base.Start();
-        //this.AddItem(ItemCode.CopperSword, 1);
         this.AddItem(ItemCode.GoldOre, 3);
         this.AddItem(ItemCode.IronOre, 4);
         this.AddItem(ItemCode.GoldOre, 5);
         this.AddItem(ItemCode.CopperSword, 1);
+        this.AddItem(ItemCode.GoldenMirror, 1);
+        this.AddItem(ItemCode.CopperSword, 100);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
+        if (GetCurrentItemCount() + addCount > maxItemCout) return false;
+
 
         ItemProfileSO itemProfile = this.GetItemProfile(itemCode);
 
@@ -60,16 +69,24 @@ public class Inventory : InitMonoBehaviour
         return true;
     }
 
-    protected virtual bool IsInventoryFull()
+    protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCoutFull();
+
+    public virtual bool IsInventorySlotFull() => GetCurrentSlot() >= this.maxSlot;
+
+    public virtual bool IsInventoryCoutFull() => GetCurrentItemCount() >= this.maxItemCout;
+
+    public virtual int GetCurrentSlot() => this.items.Count;
+
+    public virtual int GetCurrentItemCount()
     {
-        if (this.items.Count >= this.maxSlot) return true;
-        return false;
+        int itemCout = 0;
+        foreach (ItemInventory item in items) itemCout += item.itemCount;
+        return itemCout;
     }
 
     protected virtual int GetMaxStack(ItemInventory itemInventory)
     {
         if (itemInventory == null) return 0;
-
         return itemInventory.maxStack;
     }
 

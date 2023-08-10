@@ -24,6 +24,12 @@ public class UIInventoryIn4 : InitMonoBehaviour
     [SerializeField] protected Image itemImage;
     public Image Image => itemImage;
 
+    [SerializeField] protected BtnUseItem btnUseItem;
+    public BtnUseItem BtnUseItem => btnUseItem;
+
+    [SerializeField] protected BtnUseItemAll btnUseItemAll;
+    public BtnUseItemAll BtnUseItemAll => btnUseItemAll;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,6 +46,9 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.LoadItemNumer();
         this.LoadItemImage();
         this.LoadItemType();
+        this.LoadBtnUseItem();
+        this.LoadBtnUseItemAll();
+
     }
     private void LoadItemImage()
     {
@@ -68,21 +77,53 @@ public class UIInventoryIn4 : InitMonoBehaviour
         this.itemType = transform.Find("Information").Find("TypeItem").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadItemType", gameObject);
     }
+    protected virtual void LoadBtnUseItem()
+    {
+        if (this.btnUseItem != null) return;
+        this.btnUseItem = transform.GetComponentInChildren<BtnUseItem>();
+        Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
+    }
+    protected virtual void LoadBtnUseItemAll()
+    {
+        if (this.btnUseItemAll != null) return;
+        this.btnUseItemAll = transform.GetComponentInChildren<BtnUseItemAll>();
+        Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
+    }
 
     public virtual void ShowIn4(ItemInventory item)
     {
         this.itemInventory = item;
+        HideButton();
+        if (CanUse()) this.ShowButton();
         this.itemName.GetComponent<LocalizedText>().LocalizationKey = "Item." + this.itemInventory.itemProfile.itemName.Replace(" ", "");
         this.itemName.GetComponent<LocalizedText>().Localize();
         this.itemType.GetComponent<LocalizedText>().LocalizationKey = "Item.Type." + this.itemInventory.itemProfile.itemType.ToString().Replace(" ", "");
         this.itemType.GetComponent<LocalizedText>().Localize();
         this.itemNumber.text = this.itemInventory.itemCount.ToString();
         this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
-
     }
+
+    private void ShowButton()
+    {
+        btnUseItem.transform.gameObject.SetActive(true);
+        btnUseItem.Click += () => { };
+        BtnUseItemAll.transform.gameObject.SetActive(true);
+        BtnUseItemAll.Click += () => { };
+    }
+
+    private void HideButton()
+    {
+        btnUseItem.transform.gameObject.SetActive(false);
+        btnUseItem.Click += () => { };
+        BtnUseItemAll.transform.gameObject.SetActive(false);
+        BtnUseItemAll.Click += () => { };
+    }
+
+    private bool CanUse() => itemInventory.itemProfile.dropListItem.Count != 0;
 
     public virtual void ResetIn4()
     {
+        HideButton();
         this.itemInventory = new ItemInventory();
         this.itemName.GetComponent<LocalizedText>().LocalizationKey = "";
         this.itemName.GetComponent<LocalizedText>().Localize();

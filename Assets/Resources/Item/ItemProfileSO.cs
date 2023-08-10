@@ -5,11 +5,18 @@ using UnityEngine;
 public class ItemProfileSO : ScriptableObject
 {
     public ItemCode itemCode = ItemCode.NoItem;
+
     public ItemType itemType = ItemType.NoType;
+
     public string itemName = "no-name";
+
     public Sprite itemSprite;
-    public int defaultMaxStack = 7;
+
+    public int defaultMaxStack = 10;
+
     public List<ItemRecipe> upgradeLevels;
+
+    public List<ItemDropRate> dropListItem;
 
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
     {
