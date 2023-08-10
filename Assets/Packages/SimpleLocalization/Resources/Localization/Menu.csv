@@ -6,9 +6,6 @@ Setting.VOLUME,VOLUME,ÂM LƯỢNG
 Setting.LANGUAGE,LANGUAGE,NGÔN NGỮ
 Setting.English,English,Tiếng anh
 Setting.Vietnamese,Vietnamese,Tiếng việt
-,,
-,,
-,,
 Guide.Title,Game Guide,Hướng dẫn
 Guide.w.action,Move up,Di chuyển lên trên
 Guide.a.action,Move left,Di chuyển sang trái
@@ -18,8 +15,8 @@ Guide.i.action,Open inventory,Mở kho hàng
 Guide.z.action,Start conversation,Bắt đầu hội thoại
 Guide.space.action,Switch to next dialog,Chuyển đến hộp thoại kế
 Guide.Space,Space,Phím cách
-Guide.MOVE,------MOVE------,------DI CHUYỂN------
-Guide.EXTENSION,------EXTENSION------,------MỞ RỘNG------
-Guide.CONVERSATION,------CONVERSATION------,------HỘI THOẠI------
-,,
+Guide.move,------MOVE------,------DI CHUYỂN------
+Guide.extention,------EXTENSION------,------MỞ RỘNG------
+Guide.conversation,------CONVERSATION------,------HỘI THOẠI------
 Pause.Title,Pause,Tạm Dừng
+Congratulation,Congratulation,Chức mừng

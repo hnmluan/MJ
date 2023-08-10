@@ -1,7 +1,5 @@
-using Assets.SimpleLocalization;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIInventoryIn4 : InitMonoBehaviour
 {
@@ -10,20 +8,8 @@ public class UIInventoryIn4 : InitMonoBehaviour
     private static UIInventoryIn4 instance;
     public static UIInventoryIn4 Instance => instance;
 
-    [SerializeField] protected ItemInventory itemInventory;
+    [SerializeField] protected ItemInventory itemInventory = null;
     public ItemInventory ItemInventory => itemInventory;
-
-    [SerializeField] protected Text itemName;
-    public Text ItemName => itemName;
-
-    [SerializeField] protected Text itemNumber;
-    public Text ItemNumer => itemNumber;
-
-    [SerializeField] protected Text itemType;
-    public Text ItemType => itemType;
-
-    [SerializeField] protected Image itemImage;
-    public Image Image => itemImage;
 
     [SerializeField] protected BtnUseItem btnUseItem;
     public BtnUseItem BtnUseItem => btnUseItem;
@@ -38,46 +24,13 @@ public class UIInventoryIn4 : InitMonoBehaviour
         UIInventoryIn4.instance = this;
     }
 
-    protected override void OnDisable() => this.ResetIn4();
+    protected override void OnDisable() => this.SetEmptyUIInfor();
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadItemName();
-        this.LoadItemNumer();
-        this.LoadItemImage();
-        this.LoadItemType();
         this.LoadBtnUseItem();
         this.LoadBtnUseItemAll();
-
-    }
-
-    private void LoadItemImage()
-    {
-        if (this.itemImage != null) return;
-        this.itemImage = transform.Find("Image").Find("ImageItem").GetComponent<Image>();
-        Debug.Log(transform.name + ": LoadItemImage", gameObject);
-    }
-
-    protected virtual void LoadItemName()
-    {
-        if (this.itemName != null) return;
-        this.itemName = transform.Find("Information").Find("NameItem").GetComponent<Text>();
-        Debug.Log(transform.name + ": LoadItemName", gameObject);
-    }
-
-    protected virtual void LoadItemNumer()
-    {
-        if (this.itemNumber != null) return;
-        this.itemNumber = transform.Find("Information").Find("QuantityItem").GetComponent<Text>();
-        Debug.Log(transform.name + ": LoadItemNumer", gameObject);
-    }
-
-    protected virtual void LoadItemType()
-    {
-        if (this.itemType != null) return;
-        this.itemType = transform.Find("Information").Find("TypeItem").GetComponent<Text>();
-        Debug.Log(transform.name + ": LoadItemType", gameObject);
     }
 
     protected virtual void LoadBtnUseItem()
@@ -94,32 +47,36 @@ public class UIInventoryIn4 : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
     }
 
-    public virtual void ShowIn4(ItemInventory item)
+    public virtual void ResetUIInfor(ItemInventory item)
     {
         this.itemInventory = item;
         HideButton();
         if (CanUse()) this.ShowButton();
-        this.itemName.GetComponent<LocalizedText>().LocalizationKey = "Item." + this.itemInventory.itemProfile.itemName.Replace(" ", "");
-        this.itemName.GetComponent<LocalizedText>().Localize();
-        this.itemType.GetComponent<LocalizedText>().LocalizationKey = "Item.Type." + this.itemInventory.itemProfile.itemType.ToString().Replace(" ", "");
-        this.itemType.GetComponent<LocalizedText>().Localize();
-        this.itemNumber.text = this.itemInventory.itemCount.ToString();
-        this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
+    }
+
+    public virtual void SetEmptyUIInfor()
+    {
+        HideButton();
+        this.itemInventory = null;
     }
 
     public virtual void ClickUseItem()
     {
         Drop(itemInventory.itemProfile.dropListItem);
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        ShowIn4(itemInventory);
-        if (itemInventory.itemCount == 0) ResetIn4();
+        ResetUIInfor(itemInventory);
+        if (itemInventory.itemCount == 0) SetEmptyUIInfor();
     }
 
-    public virtual void ClickUseItemAll()
+    public virtual void ClickUseAllItem()
     {
-        Drop(itemInventory.itemProfile.dropListItem);
+        for (int i = 0; i < itemInventory.itemCount; i++)
+        {
+            Debug.Log(i);
+            Drop(itemInventory.itemProfile.dropListItem);
+        }
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        ResetIn4();
+        SetEmptyUIInfor();
     }
 
     private void ShowButton()
@@ -136,17 +93,7 @@ public class UIInventoryIn4 : InitMonoBehaviour
 
     private bool CanUse() => itemInventory.itemProfile.dropListItem.Count != 0;
 
-    public virtual void ResetIn4()
-    {
-        HideButton();
-        this.itemInventory = new ItemInventory();
-        this.itemName.GetComponent<LocalizedText>().LocalizationKey = "";
-        this.itemName.GetComponent<LocalizedText>().Localize();
-        this.itemType.GetComponent<LocalizedText>().LocalizationKey = "";
-        this.itemType.GetComponent<LocalizedText>().Localize();
-        this.itemNumber.text = "";
-        this.itemImage.sprite = null;
-    }
+
 
     public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
     {
@@ -189,6 +136,4 @@ public class UIInventoryIn4 : InitMonoBehaviour
 
         return droppedItems;
     }
-
-
 }

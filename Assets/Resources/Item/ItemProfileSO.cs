@@ -12,11 +12,14 @@ public class ItemProfileSO : ScriptableObject
 
     public Sprite itemSprite;
 
+    public string discription;
+
     public int defaultMaxStack = 10;
 
     public List<ItemRecipe> upgradeLevels;
 
     public List<ItemDropRate> dropListItem;
+
 
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
     {
