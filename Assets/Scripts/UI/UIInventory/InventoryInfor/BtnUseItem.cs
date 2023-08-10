@@ -1,4 +1,4 @@
 public class BtnUseItem : BaseButton
 {
-    protected override void OnClick() => UIInventoryIn4.Instance.ClickUseItem();
+    protected override void OnClick() => UIInvIn4.Instance.ClickUseItem();
 }

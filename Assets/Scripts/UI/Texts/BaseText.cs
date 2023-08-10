@@ -16,7 +16,6 @@ public abstract class BaseText : InitMonoBehaviour
     {
         if (this.text != null) return;
         this.text = GetComponent<Text>();
-        Debug.LogWarning(transform.name + ": LoadText", gameObject);
+        Debug.LogWarning(transform.name + ": LoadImage", gameObject);
     }
-
 }

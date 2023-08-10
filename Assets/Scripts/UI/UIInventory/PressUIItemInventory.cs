@@ -5,6 +5,6 @@ public class PressUIItemInventory : PressUI
     {
         ItemInventory itemInventory = this.GetComponent<UIItemInventory>().ItemInventory;
         if (itemInventory == null) return;
-        UIInventoryIn4.Instance.ResetUIInfor(itemInventory);
+        UIInvIn4.Instance.ResetUIInfor(itemInventory);
     }
 }

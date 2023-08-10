@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIInventoryIn4 : InitMonoBehaviour
+public class UIInvIn4 : InitMonoBehaviour
 {
     [Header("UI Inventory Information")]
 
-    private static UIInventoryIn4 instance;
-    public static UIInventoryIn4 Instance => instance;
+    private static UIInvIn4 instance;
+    public static UIInvIn4 Instance => instance;
 
     [SerializeField] protected ItemInventory itemInventory = null;
     public ItemInventory ItemInventory => itemInventory;
@@ -20,8 +20,8 @@ public class UIInventoryIn4 : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIInventoryIn4.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
-        UIInventoryIn4.instance = this;
+        if (UIInvIn4.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
+        UIInvIn4.instance = this;
     }
 
     protected override void OnDisable() => this.SetEmptyUIInfor();
@@ -70,11 +70,7 @@ public class UIInventoryIn4 : InitMonoBehaviour
 
     public virtual void ClickUseAllItem()
     {
-        for (int i = 0; i < itemInventory.itemCount; i++)
-        {
-            Debug.Log(i);
-            Drop(itemInventory.itemProfile.dropListItem);
-        }
+        for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.dropListItem);
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInfor();
     }
@@ -92,8 +88,6 @@ public class UIInventoryIn4 : InitMonoBehaviour
     }
 
     private bool CanUse() => itemInventory.itemProfile.dropListItem.Count != 0;
-
-
 
     public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
     {
