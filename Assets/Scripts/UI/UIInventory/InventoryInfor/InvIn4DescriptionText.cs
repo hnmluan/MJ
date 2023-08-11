@@ -1,5 +1,7 @@
 using Assets.SimpleLocalization;
+using UnityEngine;
 
+[RequireComponent(typeof(LocalizedText))]
 public class InvIn4DescriptionText : BaseText
 {
     protected virtual void FixedUpdate() => this.UpdateText();

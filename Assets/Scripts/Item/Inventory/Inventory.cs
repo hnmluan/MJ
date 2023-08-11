@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Inventory : InitMonoBehaviour
 {
-    [SerializeField] private int maxSlot = 30;
+    [SerializeField] private int maxSlot = 100;
     public int MaxSlot => maxSlot;
 
     [SerializeField] private int maxItemCout = 100;
@@ -22,12 +22,12 @@ public class Inventory : InitMonoBehaviour
         this.DeductItem(ItemCode.GoldOre, 8);
         this.AddItem(ItemCode.CopperSword, 1);
         this.AddItem(ItemCode.GoldenMirror, 20);
-        this.AddItem(ItemCode.CopperSword, 100);
+        this.AddItem(ItemCode.CopperSword, 100000);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
-        if (GetCurrentItemCount() + addCount > maxItemCout) return false;
+        //if (GetCurrentItemCount() + addCount > maxItemCout) return false;
 
 
         ItemProfileSO itemProfile = this.GetItemProfile(itemCode);

@@ -11,11 +11,11 @@ public class UIInvIn4 : InitMonoBehaviour
     [SerializeField] protected ItemInventory itemInventory = null;
     public ItemInventory ItemInventory => itemInventory;
 
-    [SerializeField] protected BtnUseItem btnUseItem;
-    public BtnUseItem BtnUseItem => btnUseItem;
+    [SerializeField] protected BtnInvUseItem btnUseItem;
+    public BtnInvUseItem BtnUseItem => btnUseItem;
 
-    [SerializeField] protected BtnUseItemAll btnUseItemAll;
-    public BtnUseItemAll BtnUseItemAll => btnUseItemAll;
+    [SerializeField] protected BtnInvUseAllItem btnUseItemAll;
+    public BtnInvUseAllItem BtnUseItemAll => btnUseItemAll;
 
     protected override void Awake()
     {
@@ -36,14 +36,14 @@ public class UIInvIn4 : InitMonoBehaviour
     protected virtual void LoadBtnUseItem()
     {
         if (this.btnUseItem != null) return;
-        this.btnUseItem = transform.GetComponentInChildren<BtnUseItem>();
+        this.btnUseItem = transform.GetComponentInChildren<BtnInvUseItem>();
         Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
     }
 
     protected virtual void LoadBtnUseItemAll()
     {
         if (this.btnUseItemAll != null) return;
-        this.btnUseItemAll = transform.GetComponentInChildren<BtnUseItemAll>();
+        this.btnUseItemAll = transform.GetComponentInChildren<BtnInvUseAllItem>();
         Debug.Log(transform.name + ": LoadBtnUseItem", gameObject);
     }
 
@@ -121,10 +121,7 @@ public class UIInvIn4 : InitMonoBehaviour
             if (itemDropMore > 0)
             {
                 itemRate -= itemDropMore;
-                for (int i = 0; i < itemDropMore; i++)
-                {
-                    droppedItems.Add(item);
-                }
+                for (int i = 0; i < itemDropMore; i++) droppedItems.Add(item);
             }
         }
 
