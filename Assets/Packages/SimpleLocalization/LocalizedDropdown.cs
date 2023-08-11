@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 namespace Assets.SimpleLocalization
 {
-	/// <summary>
-	/// Localize dropdown component.
-	/// </summary>
+    /// <summary>
+    /// Localize dropdown component.
+    /// </summary>
     [RequireComponent(typeof(Dropdown))]
     public class LocalizedDropdown : MonoBehaviour
     {
@@ -24,17 +24,17 @@ namespace Assets.SimpleLocalization
 
         private void Localize()
         {
-	        var dropdown = GetComponent<Dropdown>();
+            var dropdown = GetComponent<Dropdown>();
 
-			for (var i = 0; i < LocalizationKeys.Length; i++)
-	        {
-		        dropdown.options[i].text = LocalizationManager.Localize(LocalizationKeys[i]);
-	        }
+            for (var i = 0; i < LocalizationKeys.Length; i++)
+            {
+                dropdown.options[i].text = LocalizationManager.Localize(LocalizationKeys[i]);
+            }
 
-	        if (dropdown.value < LocalizationKeys.Length)
-	        {
-		        dropdown.captionText.text = LocalizationManager.Localize(LocalizationKeys[dropdown.value]);
-	        }
+            if (dropdown.value < LocalizationKeys.Length)
+            {
+                dropdown.captionText.text = LocalizationManager.Localize(LocalizationKeys[dropdown.value]);
+            }
         }
     }
 }

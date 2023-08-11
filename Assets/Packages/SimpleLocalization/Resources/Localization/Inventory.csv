@@ -7,3 +7,4 @@ Inventory.Name,Name:,Tên:
 Inventory.Type,Type:,Loại:
 Inventory.Quantity,Quantity:,Số lượng:
 Inventory.Slot,Slot:,Số ô:
+Inventory.filter,Filter By,Lọc bởi:

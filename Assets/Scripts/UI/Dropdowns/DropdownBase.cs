@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class BaseDropdown : InitMonoBehaviour
 {
     [Header("Base Dropdown")]
-    [SerializeField] protected Dropdown slider;
+    [SerializeField] protected Dropdown dropdown;
 
     protected override void Start()
     {
@@ -25,12 +25,12 @@ public abstract class BaseDropdown : InitMonoBehaviour
 
     protected virtual void LoadDropdown()
     {
-        if (this.slider != null) return;
-        this.slider = GetComponent<Dropdown>();
+        if (this.dropdown != null) return;
+        this.dropdown = GetComponent<Dropdown>();
         Debug.LogWarning(transform.name + ": LoadDropdown", gameObject);
     }
 
-    protected virtual void AddOnClickEvent() => this.slider.onValueChanged.AddListener(this.OnChanged);
+    protected virtual void AddOnClickEvent() => this.dropdown.onValueChanged.AddListener(this.OnChanged);
 
     protected abstract void OnChanged(int option);
 }

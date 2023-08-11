@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UIInventory : UIInventoryAbstract
@@ -11,7 +12,10 @@ public class UIInventory : UIInventoryAbstract
 
     [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
 
+    [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
+
     public void SetInventorySort(InventorySort inventorySort) => this.inventorySort = inventorySort;
+    public void SetInventoryFilter(ItemType inventoryFilter) => this.inventoryFilter = inventoryFilter;
 
     protected override void Awake()
     {
@@ -60,6 +64,9 @@ public class UIInventory : UIInventoryAbstract
         this.ClearItems();
 
         List<ItemInventory> items = PlayerCtrl.Instance.Inventory.Items;
+
+        items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
+
         UIInvItemSpawner spawner = this.inventoryCtrl.UIInvItemSpawner;
 
         foreach (ItemInventory item in items) spawner.SpawnItem(item);

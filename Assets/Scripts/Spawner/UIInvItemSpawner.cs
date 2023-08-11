@@ -35,10 +35,7 @@ public class UIInvItemSpawner : Spawner
 
     public virtual void ClearItems()
     {
-        foreach (Transform item in this.holder)
-        {
-            this.Despawn(item);
-        }
+        foreach (Transform item in this.holder) this.Despawn(item);
     }
 
     public virtual void SpawnItem(ItemInventory item)
