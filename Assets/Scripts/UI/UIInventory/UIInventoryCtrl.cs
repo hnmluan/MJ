@@ -2,12 +2,22 @@ using UnityEngine;
 
 public class UIInventoryCtrl : InitMonoBehaviour
 {
+    private static UIInventoryCtrl instance;
+    public static UIInventoryCtrl Instance => instance;
+
     [Header("Inv Item Spawner")]
     [SerializeField] protected Transform content;
     public Transform Content => content;
 
     [SerializeField] protected UIInvItemSpawner invItemSpawner;
     public UIInvItemSpawner UIInvItemSpawner => invItemSpawner;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIInventoryCtrl.instance != null) Debug.LogError("Only 1 UIInventoryCtrl allow to exist");
+        UIInventoryCtrl.instance = this;
+    }
 
     protected override void LoadComponents()
     {

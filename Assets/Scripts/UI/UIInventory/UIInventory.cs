@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : UIInventoryAbstract
+public class UIInventory : InitMonoBehaviour
 {
     [Header("UI Inventory")]
     private static UIInventory instance;
@@ -30,12 +30,6 @@ public class UIInventory : UIInventoryAbstract
         this.Close();
 
         InvokeRepeating(nameof(this.ShowItems), 1, 1);
-        // this.ShowItems();
-    }
-
-    protected virtual void FixedUpdate()
-    {
-        //this.ShowItem();
     }
 
     public virtual void Toggle()
@@ -47,13 +41,13 @@ public class UIInventory : UIInventoryAbstract
 
     public virtual void Open()
     {
-        this.inventoryCtrl.gameObject.SetActive(true);
+        UIInventoryCtrl.Instance.gameObject.SetActive(true);
         this.isOpen = true;
     }
 
     public virtual void Close()
     {
-        this.inventoryCtrl.gameObject.SetActive(false);
+        UIInventoryCtrl.Instance.gameObject.SetActive(false);
         this.isOpen = false;
     }
 
@@ -67,29 +61,24 @@ public class UIInventory : UIInventoryAbstract
 
         items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
 
-        UIInvItemSpawner spawner = this.inventoryCtrl.UIInvItemSpawner;
-
-        foreach (ItemInventory item in items) spawner.SpawnItem(item);
+        foreach (ItemInventory item in items) UIInvItemSpawner.Instance.SpawnItem(item);
 
         this.SortItems();
     }
 
-    protected virtual void ClearItems()
-    {
-        this.inventoryCtrl.UIInvItemSpawner.ClearItems();
-    }
+    protected virtual void ClearItems() => UIInvItemSpawner.Instance.ClearItems();
 
     protected virtual void SortItems()
     {
         if (this.inventorySort == InventorySort.NoSort) return;
 
-        int itemCount = this.inventoryCtrl.Content.childCount;
+        int itemCount = UIInventoryCtrl.Instance.Content.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currentItem = this.inventoryCtrl.Content.GetChild(i);
-            Transform nextItem = this.inventoryCtrl.Content.GetChild(i + 1);
+            Transform currentItem = UIInventoryCtrl.Instance.Content.GetChild(i);
+            Transform nextItem = UIInventoryCtrl.Instance.Content.GetChild(i + 1);
 
             UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
             UIItemInventory nextUIItem = nextItem.GetComponent<UIItemInventory>();
@@ -125,8 +114,6 @@ public class UIInventory : UIInventoryAbstract
             this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
         }
     }
-
-
 
     protected virtual void SwapItems(Transform currentItem, Transform nextItem)
     {
