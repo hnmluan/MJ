@@ -8,12 +8,21 @@ public class InvIn4NameText : BaseText
 
     protected virtual void UpdateText()
     {
-        if (UIInvIn4.Instance.ItemInventory == null)
+        try
+        {
+            if (UIInvIn4.Instance.ItemInventory == null)
+            {
+                GetComponent<LocalizedText>().LocalizationKey = "empty";
+                GetComponent<LocalizedText>().Localize();
+                return;
+            }
+            GetComponent<LocalizedText>().LocalizationKey = "Item." + UIInvIn4.Instance.ItemInventory.itemProfile.itemName.Replace(" ", "");
+            GetComponent<LocalizedText>().Localize();
+        }
+        catch (System.Exception)
         {
             GetComponent<LocalizedText>().LocalizationKey = "empty";
-            return;
+            GetComponent<LocalizedText>().Localize();
         }
-        GetComponent<LocalizedText>().LocalizationKey = "Item." + UIInvIn4.Instance.ItemInventory.itemProfile.itemName.Replace(" ", "");
-        GetComponent<LocalizedText>().Localize();
     }
 }

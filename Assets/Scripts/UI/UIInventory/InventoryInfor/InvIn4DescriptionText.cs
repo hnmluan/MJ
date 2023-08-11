@@ -8,12 +8,27 @@ public class InvIn4DescriptionText : BaseText
 
     protected virtual void UpdateText()
     {
-        if (UIInvIn4.Instance.ItemInventory == null)
+        try
         {
-            GetComponent<LocalizedText>().LocalizationKey = "empty";
-            return;
+            if (UIInvIn4.Instance.ItemInventory == null)
+            {
+                GetComponent<LocalizedText>().LocalizationKey = "empty";
+                GetComponent<LocalizedText>().Localize();
+                return;
+            }
+            GetComponent<LocalizedText>().LocalizationKey = "Item.Description";
+            GetComponent<LocalizedText>().Localize();
         }
-        GetComponent<LocalizedText>().LocalizationKey = "Item.Description";
+        catch (System.Exception)
+        {
+
+            throw;
+        }
+    }
+
+    protected override void OnDisable()
+    {
+        GetComponent<LocalizedText>().LocalizationKey = "empty";
         GetComponent<LocalizedText>().Localize();
     }
 }

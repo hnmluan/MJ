@@ -10,12 +10,19 @@ public class InvInf4QuantityText : BaseText
 
     protected virtual void UpdateText()
     {
-        if (UIInvIn4.Instance.ItemInventory == null)
+        try
         {
-            GetComponent<LocalizedText>().LocalizationKey = "empty";
-            return;
+            if (UIInvIn4.Instance.ItemInventory == null)
+            {
+                text.text = "0";
+                return;
+            }
+            text.text = UIInvIn4.Instance.ItemInventory.itemCount.ToString();
         }
-        GetComponent<LocalizedText>().LocalizationKey = "Item." + UIInvIn4.Instance.ItemInventory.itemProfile.itemName.Replace(" ", "");
-        GetComponent<LocalizedText>().Localize();
+        catch (System.Exception)
+        {
+            text.text = "0";
+        }
+
     }
 }
