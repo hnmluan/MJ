@@ -62,7 +62,7 @@ public class UIInvIn4 : InitMonoBehaviour
 
     public virtual void ClickUseItem()
     {
-        Drop(itemInventory.itemProfile.dropListItem);
+        Drop(itemInventory.itemProfile.listItemCanGet);
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, 1);
         ResetUIInfor(itemInventory);
         if (itemInventory.itemCount == 0) SetEmptyUIInfor();
@@ -70,7 +70,7 @@ public class UIInvIn4 : InitMonoBehaviour
 
     public virtual void ClickUseAllItem()
     {
-        for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.dropListItem);
+        for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInfor();
     }
@@ -87,7 +87,7 @@ public class UIInvIn4 : InitMonoBehaviour
         BtnUseItemAll.transform.gameObject.SetActive(false);
     }
 
-    private bool CanUse() => itemInventory.itemProfile.dropListItem.Count != 0;
+    private bool CanUse() => itemInventory.itemProfile.listItemCanGet.Count != 0;
 
     public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
     {

@@ -8,9 +8,6 @@ public class UIShop : InitMonoBehaviour
     private static UIShop instance;
     public static UIShop Instance => instance;
 
-    [SerializeField] private List<ItemInventory> listItemToSale;
-    public List<ItemInventory> ListItemToSale => listItemToSale;
-
     [SerializeField] private DateTime timelineToRestItem;
     public DateTime TimelineToRestItem => timelineToRestItem;
 
@@ -28,9 +25,9 @@ public class UIShop : InitMonoBehaviour
 
     protected override void Start()
     {
-        listItemToSale = new List<ItemInventory>(PlayerCtrl.Instance.Inventory.Items);
-        this.ResetItemInShop();
+        this.ResetItems();
         timelineToRestItem = DateTime.Now;
+        ItemProfileSO.FindByItemCode(ItemCode.NoItem);
 
         base.Start();
         this.Close();
@@ -57,13 +54,12 @@ public class UIShop : InitMonoBehaviour
         this.isOpen = false;
     }
 
-    public virtual void ResetItemInShop()
+    public virtual void ResetItems()
     {
         if (!this.isOpen) return;
-
         this.ClearItems();
 
-        foreach (ItemInventory item in ListItemToSale) UIShopItemSpawner.Instance.SpawnItem(item);
+        foreach (ItemShop item in GetRandomNumberList(10)) UIShopItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
@@ -72,7 +68,7 @@ public class UIShop : InitMonoBehaviour
     {
         if (GetDeltaTimeReset() > intervalRestItem)
         {
-            ResetItemInShop();
+            ResetItems();
             UpdateTimelineToRestItem();
         }
     }
@@ -88,5 +84,18 @@ public class UIShop : InitMonoBehaviour
         TimeSpan timeDifference = DateTime.Now - timelineToRestItem;
         int timeDifferenceInSeconds = (int)timeDifference.TotalSeconds;
         return timeDifferenceInSeconds;
+    }
+
+    public static List<ItemShop> GetRandomNumberList(int quantity)
+    {
+        List<ItemShop> listItemShop = new List<ItemShop>();
+
+        for (int i = 0; i < quantity; i++)
+        {
+            ItemShop randomItemShop = ItemShop.GetRandomItemShopExcludingNoItem();
+            listItemShop.Add(randomItemShop);
+        }
+
+        return listItemShop;
     }
 }

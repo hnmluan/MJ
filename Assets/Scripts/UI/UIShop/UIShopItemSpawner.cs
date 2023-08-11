@@ -38,7 +38,7 @@ public class UIShopItemSpawner : Spawner
         foreach (Transform item in this.holder) this.Despawn(item);
     }
 
-    public virtual void SpawnItem(ItemInventory item)
+    public virtual void SpawnItem(ItemShop item)
     {
         Transform uiItem = this.shopCtrl.UIShopItemSpawner.Spawn(UIShopItemSpawner.normalItem, Vector3.zero, Quaternion.identity);
         uiItem.transform.localScale = new Vector3(1, 1, 1);

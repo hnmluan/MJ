@@ -21,7 +21,7 @@ public class BtnBuyItem : BaseButton
     protected override void OnClick()
     {
         if (uiItemShop == null) return;
-        PlayerCtrl.Instance.Inventory.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.itemCount);
+        PlayerCtrl.Instance.Inventory.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.quantity);
         uiItemShop.SoldOut.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
 

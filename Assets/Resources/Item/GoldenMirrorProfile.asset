@@ -16,12 +16,22 @@ MonoBehaviour:
   itemType: 3
   itemName: Golden Mirror
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
+  discription: 
   defaultMaxStack: 10
   upgradeLevels: []
-  dropListItem:
+  listItemCanGet:
   - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
     dropRate: 100000
   - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
     dropRate: 100000
   - itemSO: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
     dropRate: 100000
+  priceToBuy:
+    minValue: 1
+    maxValue: 2
+  priceToSale:
+    minValue: 1
+    maxValue: 2
+  quantityToBy:
+    minValue: 5
+    maxValue: 6

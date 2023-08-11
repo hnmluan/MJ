@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,8 +19,13 @@ public class ItemProfileSO : ScriptableObject
 
     public List<ItemRecipe> upgradeLevels;
 
-    public List<ItemDropRate> dropListItem;
+    public List<ItemDropRate> listItemCanGet;
 
+    public IntRange priceToBuy;
+
+    public IntRange priceToSale;
+
+    public IntRange quantityToBy;
 
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
     {
@@ -30,6 +36,21 @@ public class ItemProfileSO : ScriptableObject
             return profile;
         }
         return null;
+    }
+
+    public static ItemCode GetRandomItemCodeExcludingNoItem()
+    {
+        ItemCode[] itemCode = (ItemCode[])Enum.GetValues(typeof(ItemCode));
+        ItemCode randomItemCode;
+
+        System.Random random = new System.Random();
+
+        do
+        {
+            randomItemCode = itemCode[random.Next(itemCode.Length)];
+        } while (randomItemCode == ItemCode.NoItem);
+
+        return randomItemCode;
     }
 }
 

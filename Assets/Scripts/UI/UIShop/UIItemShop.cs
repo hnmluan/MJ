@@ -7,8 +7,8 @@ public class UIItemShop : InitMonoBehaviour
     [SerializeField] protected bool isSoldOut;
     public bool IsSoldOut => isSoldOut;
 
-    [SerializeField] protected ItemInventory itemShop;
-    public ItemInventory ItemShop => itemShop;
+    [SerializeField] protected ItemShop itemShop;
+    public ItemShop ItemShop => itemShop;
 
     [SerializeField] protected Text itemName;
     public Text ItemName => itemName;
@@ -70,13 +70,13 @@ public class UIItemShop : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemNumer", gameObject);
     }
 
-    public virtual void ShowItem(ItemInventory item)
+    public virtual void ShowItem(ItemShop item)
     {
         this.itemShop = item;
         string name = "Item." + this.itemShop.itemProfile.itemName.Replace(" ", "");
         this.itemName.GetComponent<LocalizedText>().LocalizationKey = name;
         this.itemName.GetComponent<LocalizedText>().Localize();
-        this.itemNumber.text = this.itemShop.itemCount.ToString();
+        this.itemNumber.text = this.itemShop.quantity.ToString();
         this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
         this.buyButton.gameObject.SetActive(true);
         this.soldOut.gameObject.SetActive(false);
