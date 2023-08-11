@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIShop : InitMonoBehaviour
@@ -6,6 +7,15 @@ public class UIShop : InitMonoBehaviour
     [Header("UI Shop")]
     private static UIShop instance;
     public static UIShop Instance => instance;
+
+    [SerializeField] private List<ItemInventory> listItemToSale;
+    public List<ItemInventory> ListItemToSale => listItemToSale;
+
+    [SerializeField] private DateTime timelineToRestItem;
+    public DateTime TimelineToRestItem => timelineToRestItem;
+
+    [SerializeField] private int intervalRestItem;
+    public int IntervalRestItem => intervalRestItem;
 
     protected bool isOpen = true;
 
@@ -18,11 +28,15 @@ public class UIShop : InitMonoBehaviour
 
     protected override void Start()
     {
+        listItemToSale = new List<ItemInventory>(PlayerCtrl.Instance.Inventory.Items);
+        this.ResetItemInShop();
+        timelineToRestItem = DateTime.Now;
+
         base.Start();
         this.Close();
-
-        InvokeRepeating(nameof(this.ShowItems), 1, 1);
     }
+
+    private void Update() => CheckTimeToResetItem();
 
     public virtual void Toggle()
     {
@@ -43,17 +57,36 @@ public class UIShop : InitMonoBehaviour
         this.isOpen = false;
     }
 
-    protected virtual void ShowItems()
+    public virtual void ResetItemInShop()
     {
         if (!this.isOpen) return;
 
         this.ClearItems();
 
-        List<ItemInventory> items = new List<ItemInventory>(PlayerCtrl.Instance.Inventory.Items);
-
-        foreach (ItemInventory item in items) UIShopItemSpawner.Instance.SpawnItem(item);
+        foreach (ItemInventory item in ListItemToSale) UIShopItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
 
+    private void CheckTimeToResetItem()
+    {
+        if (GetDeltaTimeReset() > intervalRestItem)
+        {
+            ResetItemInShop();
+            UpdateTimelineToRestItem();
+        }
+    }
+
+    private void UpdateTimelineToRestItem()
+    {
+        int times = GetDeltaTimeReset() / intervalRestItem;
+        timelineToRestItem = timelineToRestItem.AddSeconds(times * intervalRestItem);
+    }
+
+    public int GetDeltaTimeReset()
+    {
+        TimeSpan timeDifference = DateTime.Now - timelineToRestItem;
+        int timeDifferenceInSeconds = (int)timeDifference.TotalSeconds;
+        return timeDifferenceInSeconds;
+    }
 }

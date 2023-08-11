@@ -12,17 +12,18 @@ public class Inventory : InitMonoBehaviour
     [SerializeField] protected List<ItemInventory> items;
     public List<ItemInventory> Items => items;
 
-
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
         this.AddItem(ItemCode.GoldOre, 3);
         this.AddItem(ItemCode.IronOre, 4);
         this.AddItem(ItemCode.GoldOre, 5);
-        this.DeductItem(ItemCode.GoldOre, 8);
         this.AddItem(ItemCode.CopperSword, 1);
         this.AddItem(ItemCode.GoldenMirror, 20);
-        this.AddItem(ItemCode.CopperSword, 100000);
+        this.AddItem(ItemCode.CopperSword, 100);
+    }
+    protected override void Start()
+    {
+        base.Start();
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)

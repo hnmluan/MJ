@@ -4,7 +4,9 @@ using UnityEngine.UI;
 
 public class UIItemShop : InitMonoBehaviour
 {
-    [Header("UI Item Shop")]
+    [SerializeField] protected bool isSoldOut;
+    public bool IsSoldOut => isSoldOut;
+
     [SerializeField] protected ItemInventory itemShop;
     public ItemInventory ItemShop => itemShop;
 
@@ -14,8 +16,14 @@ public class UIItemShop : InitMonoBehaviour
     [SerializeField] protected Text itemNumber;
     public Text ItemNumer => itemNumber;
 
+    [SerializeField] protected Text soldOut;
+    public Text SoldOut => soldOut;
+
     [SerializeField] protected Image itemImage;
     public Image Image => itemImage;
+
+    [SerializeField] protected Button buyButton;
+    public Button BuyButton => buyButton;
 
     protected override void LoadComponents()
     {
@@ -23,13 +31,29 @@ public class UIItemShop : InitMonoBehaviour
         this.LoadItemName();
         this.LoadItemNumer();
         this.LoadItemImage();
+        this.LoadItemBuy();
+        this.LoadSoldOut();
+    }
+
+    private void LoadItemBuy()
+    {
+        if (this.buyButton != null) return;
+        this.buyButton = transform.Find("Buy").GetComponent<Button>();
+        Debug.Log(transform.name + ": LoadItemBuy", gameObject);
+    }
+
+    private void LoadSoldOut()
+    {
+        if (this.soldOut != null) return;
+        this.soldOut = transform.Find("Soldout").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadSoldOut", gameObject);
     }
 
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
         this.itemImage = transform.Find("Image").GetComponent<Image>();
-        Debug.Log(transform.name + ": LoadItemImage", gameObject);
+        Debug.Log(transform.name + ": LoadItemInvtory", gameObject);
     }
 
     protected virtual void LoadItemName()
@@ -54,5 +78,8 @@ public class UIItemShop : InitMonoBehaviour
         this.itemName.GetComponent<LocalizedText>().Localize();
         this.itemNumber.text = this.itemShop.itemCount.ToString();
         this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
+        this.buyButton.gameObject.SetActive(true);
+        this.soldOut.gameObject.SetActive(false);
+        this.isSoldOut = false;
     }
 }
