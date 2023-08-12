@@ -22,8 +22,12 @@ public class BtnBuyItem : BaseButton
     {
         if (uiItemShop == null) return;
         PlayerCtrl.Instance.Inventory.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.quantity);
-        uiItemShop.SoldOut.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
+        if (Wallet.Instance.DeductGoldenBalance(uiItemShop.ItemShop.price))
+        {
+            uiItemShop.SoldOut.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+        };
+
 
     }
 }

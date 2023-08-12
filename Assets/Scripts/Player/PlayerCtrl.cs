@@ -30,9 +30,6 @@ public class PlayerCtrl : InitMonoBehaviour
     [SerializeField] protected Inventory inventory;
     public Inventory Inventory { get => inventory; }
 
-    //[SerializeField] protected HealthBlink healthBlink;
-    //public HealthBlink HealthBlink { get => healthBlink; }
-
     protected override void Awake()
     {
         base.Awake();

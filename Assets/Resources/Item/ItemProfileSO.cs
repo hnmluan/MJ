@@ -21,6 +21,8 @@ public class ItemProfileSO : ScriptableObject
 
     public List<ItemDropRate> listItemCanGet;
 
+    public List<ItemPrice> price;
+
     public IntRange priceToBuy;
 
     public IntRange priceToSale;

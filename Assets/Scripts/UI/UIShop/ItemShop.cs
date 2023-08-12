@@ -5,6 +5,7 @@ public class ItemShop : MonoBehaviour
     public ItemProfileSO itemProfile;
     public int quantity = 0;
     public int price = 0;
+    public CurrencyCode currency = CurrencyCode.NoCurrency;
 
     public static ItemShop GetRandomItemShopExcludingNoItem()
     {

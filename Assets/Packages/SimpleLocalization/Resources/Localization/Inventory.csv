@@ -8,3 +8,5 @@ Inventory.Type,Type:,Loại:
 Inventory.Quantity,Quantity:,Số lượng:
 Inventory.Slot,Slot:,Số ô:
 Inventory.filter,Filter By,Lọc bởi:
+Wallet.SilverText,Silver,Bạc: 
+Wallet.GoldText,Gold,Vàng:
