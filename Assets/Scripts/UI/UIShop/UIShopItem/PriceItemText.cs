@@ -23,7 +23,7 @@ public class PriceItemText : BaseText
         try
         {
             if (uiItemShop == null) { text.text = ""; }
-            text.text = uiItemShop.ItemShop.itemPrice.price.ToString();
+            text.text = "x" + uiItemShop.ItemShop.price.ToString();
         }
         catch (System.Exception)
         {

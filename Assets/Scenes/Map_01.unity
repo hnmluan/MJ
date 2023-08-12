@@ -20621,8 +20621,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 342431502}
   m_HandleRect: {fileID: 342431501}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9310345
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24265,7 +24265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &727077742
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24342,6 +24342,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSoldOut: 0
+  itemShop:
+    itemProfile: {fileID: 0}
+    quantity: 0
+    price: 0
+    itemPrice:
+      price: 0
+      currencyCode: 0
   itemName: {fileID: 1966192157}
   itemNumber: {fileID: 837648646}
   soldOut: {fileID: 823987696}
@@ -84777,8 +84784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a287f65750cdd1a4c933e3dc2004b44b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 4543232282822456174}
-  maxLevel: 9
 --- !u!4 &4543232283090857754
 Transform:
   m_ObjectHideFlags: 0

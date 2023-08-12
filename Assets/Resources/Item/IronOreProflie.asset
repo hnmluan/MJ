@@ -32,8 +32,8 @@ MonoBehaviour:
     minValue: 1
     maxValue: 2
   quantityToBuy:
-    minValue: 0
-    maxValue: 0
+    minValue: 2
+    maxValue: 9
   priceToSale:
     minValue: 3
     maxValue: 4

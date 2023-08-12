@@ -85,10 +85,15 @@ public class UIItemShop : InitMonoBehaviour
     {
         this.itemShop = item;
         string name = "Item." + this.itemShop.itemProfile.itemName.Replace(" ", "");
+
         this.itemName.GetComponent<LocalizedText>().LocalizationKey = name;
+
         this.itemName.GetComponent<LocalizedText>().Localize();
+
         this.itemNumber.text = this.itemShop.quantity.ToString();
+
         this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
+
         this.buyButton.gameObject.SetActive(true);
         this.soldOut.gameObject.SetActive(false);
         this.isSoldOut = false;

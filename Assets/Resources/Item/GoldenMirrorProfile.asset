@@ -38,8 +38,8 @@ MonoBehaviour:
     minValue: 1
     maxValue: 2
   quantityToBuy:
-    minValue: 0
-    maxValue: 0
+    minValue: 4
+    maxValue: 7
   priceToSale:
     minValue: 1
     maxValue: 2

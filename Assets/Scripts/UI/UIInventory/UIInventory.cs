@@ -14,8 +14,16 @@ public class UIInventory : InitMonoBehaviour
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
-    public void SetInventorySort(InventorySort inventorySort) => this.inventorySort = inventorySort;
-    public void SetInventoryFilter(ItemType inventoryFilter) => this.inventoryFilter = inventoryFilter;
+    public void SetInventorySort(InventorySort inventorySort)
+    {
+        this.inventorySort = inventorySort;
+        this.ShowItems();
+    }
+    public void SetInventoryFilter(ItemType inventoryFilter)
+    {
+        this.inventoryFilter = inventoryFilter;
+        this.ShowItems();
+    }
 
     protected override void Awake()
     {
@@ -27,6 +35,7 @@ public class UIInventory : InitMonoBehaviour
     protected override void Start()
     {
         base.Start();
+        ShowItems();
         this.Close();
 
         InvokeRepeating(nameof(this.ShowItems), 1, 1);
@@ -51,7 +60,7 @@ public class UIInventory : InitMonoBehaviour
         this.isOpen = false;
     }
 
-    protected virtual void ShowItems()
+    public virtual void ShowItems()
     {
         if (!this.isOpen) return;
 
@@ -102,6 +111,32 @@ public class UIInventory : InitMonoBehaviour
                     break;
             }
 
+            // Sắp xếp theo tiêu chí phụ (nếu có) khi không có swap theo tiêu chí chính
+            if (!isSwap)
+            {
+                switch (this.inventorySort)
+                {
+                    case InventorySort.ByName:
+                        // Sắp xếp theo số lượng nếu cùng tên
+                        if (currentProfile.itemName == nextProfile.itemName)
+                        {
+                            int currentCount = currentUIItem.ItemInventory.itemCount;
+                            int nextCount = nextUIItem.ItemInventory.itemCount;
+                            isSwap = currentCount < nextCount;
+                        }
+                        break;
+                    case InventorySort.ByQuantity:
+                        // Sắp xếp theo tên nếu cùng số lượng
+                        if (currentUIItem.ItemInventory.itemCount == nextUIItem.ItemInventory.itemCount)
+                        {
+                            string currentName = currentProfile.itemName;
+                            string nextName = nextProfile.itemName;
+                            isSwap = string.Compare(currentName, nextName) == 1;
+                        }
+                        break;
+                }
+            }
+
             if (isSwap)
             {
                 this.SwapItems(currentItem, nextItem);
@@ -109,11 +144,9 @@ public class UIInventory : InitMonoBehaviour
             }
         }
 
-        if (isSorting)
-        {
-            this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
-        }
+        if (isSorting) this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
     }
+
 
     protected virtual void SwapItems(Transform currentItem, Transform nextItem)
     {

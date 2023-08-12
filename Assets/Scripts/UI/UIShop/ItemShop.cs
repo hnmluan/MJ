@@ -1,7 +1,11 @@
-﻿public class ItemShop
+﻿using System;
+
+[Serializable]
+public class ItemShop
 {
     public ItemProfileSO itemProfile;
     public int quantity = 0;
+    public int price = 0;
     public ItemPriceShop itemPrice;
 
     public static ItemShop GetRandomItemShopExcludingNoItem()
@@ -11,6 +15,7 @@
         newItemShop.itemProfile = GetRandomItemProfileSO();
         newItemShop.quantity = GetRandomItemQuantity(newItemShop.itemProfile);
         newItemShop.itemPrice = GetRandomItemPrice(newItemShop.itemProfile);
+        newItemShop.price = newItemShop.quantity * newItemShop.itemPrice.price;
 
         return newItemShop;
     }

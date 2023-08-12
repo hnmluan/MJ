@@ -23,14 +23,14 @@ public class BtnBuyItem : BaseButton
         try
         {
             if (uiItemShop == null) return;
-
+            int price = uiItemShop.ItemShop.itemPrice.price * uiItemShop.ItemShop.quantity;
             switch (uiItemShop.ItemShop.itemPrice.currencyCode)
             {
                 case CurrencyCode.Gold:
-                    if (Wallet.Instance.DeductGoldenBalance(uiItemShop.ItemShop.itemPrice.price)) BuyItem();
+                    if (Wallet.Instance.DeductGoldenBalance(price)) BuyItem();
                     break;
                 case CurrencyCode.Silver:
-                    if (Wallet.Instance.DeductSilverBalance(uiItemShop.ItemShop.itemPrice.price)) BuyItem();
+                    if (Wallet.Instance.DeductSilverBalance(price)) BuyItem();
                     break;
                 default:
                     break;
