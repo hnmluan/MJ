@@ -3,5 +3,17 @@ Shop.Title,Shop,Cửa hàng
 Shop.Buy,Buy,Mua
 Shop.Soldout,Sold out,Bán hết
 Shop.CoutTimeDown,The store will refresh itself in:,Cửa hàng sẽ tự làm mới sau:
-Shop.Greeting,Have a nice day !!!! :))))),Chúc một buổi sáng tốt lành <br>!!!! :)))))
 Shop.Promotion,Don't forget the happy hour from 1am to 3pm.,Đừng quên khung giờ khuyến mãi từ 1h đến 3h chiều.
+Shop.Greeting1,Have a nice day !,Chúc một buổi sáng tốt lành !
+Shop.Greeting2,Welcome to my store! What can I help you with today?,Chào mừng đến với cửa hàng của tôi! Có gì tôi có thể giúp bạn hôm nay?
+Shop.Greeting3,Hi! Look around and pick what you need.,Chào bạn! Hãy nhìn xung quanh và chọn những thứ bạn cần.
+Shop.Greeting4,Welcome back. What's exciting for you?,Chào mừng bạn quay trở lại. Có gì đang hứng thú với bạn?
+Shop.Greeting5,Be sure to check out our new items. They update daily!,Hãy nhớ kiểm tra các mặt hàng mới của chúng tôi. Chúng luôn cập nhật hàng ngày!
+Shop.Greeting6,Thank you for coming. Please consider carefully before deciding to buy!,Cảm ơn bạn đã đến. Hãy xem xét cẩn thận trước khi quyết định mua sắm nhé!
+Shop.Greeting7,"If you have any questions, just ask me. I'm here to assist you.","Nếu bạn có bất kỳ câu hỏi nào, hãy cứ hỏi tôi. Tôi ở đây để hỗ trợ bạn."
+Shop.Greeting8,Our store has something for everyone. You're sure to find something interesting.,Cửa hàng của chúng tôi có đủ mọi thứ cho mọi người. Chắc chắn bạn sẽ tìm thấy một điều gì đó thú vị.
+Shop.Greeting9,Discover the great things we have to offer. Check out our merchandise section!,Khám phá những điều tuyệt vời mà chúng tôi có để cung cấp. Hãy tham khảo mục hàng hóa của chúng tôi!
+Shop.Greeting10,I've been waiting for this moment. Take a look and choose what you really want.,Tôi đã chờ đợi lúc này. Hãy xem xét và lựa chọn những thứ bạn thực sự muốn.
+Shop.Greeting11,Thank you for coming. Have a nice shopping experience!,Cảm ơn bạn đã đến. Chúc bạn có trải nghiệm mua sắm vui vẻ!
+Shop.Reset,Reset the store with,Đặt lại cửa hàng với 
+Shop.ResetButton,RESET,ĐẶT LẠI

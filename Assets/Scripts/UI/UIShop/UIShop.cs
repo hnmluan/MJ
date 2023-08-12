@@ -8,11 +8,14 @@ public class UIShop : InitMonoBehaviour
     private static UIShop instance;
     public static UIShop Instance => instance;
 
-    [SerializeField] private DateTime timelineToRestItem;
-    public DateTime TimelineToRestItem => timelineToRestItem;
+    [SerializeField] private DateTime lastTimeRestItem;
+    public DateTime TimelineToRestItem => lastTimeRestItem;
 
-    [SerializeField] private int intervalRestItem;
+    [SerializeField] private int intervalRestItem = 100;
     public int IntervalRestItem => intervalRestItem;
+
+    [SerializeField] private int numberOfItems = 10;
+    public int NumberOfItems => numberOfItems;
 
     protected bool isOpen = true;
 
@@ -26,7 +29,7 @@ public class UIShop : InitMonoBehaviour
     protected override void Start()
     {
         this.ResetItems();
-        timelineToRestItem = DateTime.Now;
+        lastTimeRestItem = DateTime.Now;
         ItemProfileSO.FindByItemCode(ItemCode.NoItem);
 
         base.Start();
@@ -59,7 +62,7 @@ public class UIShop : InitMonoBehaviour
         if (!this.isOpen) return;
         this.ClearItems();
 
-        foreach (ItemShop item in GetRandomNumberList(10)) UIShopItemSpawner.Instance.SpawnItem(item);
+        foreach (ItemShop item in GetRandomNumberList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
@@ -76,12 +79,15 @@ public class UIShop : InitMonoBehaviour
     private void UpdateTimelineToRestItem()
     {
         int times = GetDeltaTimeReset() / intervalRestItem;
-        timelineToRestItem = timelineToRestItem.AddSeconds(times * intervalRestItem);
+
+        UpdateLastTimeRestItem(lastTimeRestItem.AddSeconds(times * intervalRestItem));
     }
+
+    public void UpdateLastTimeRestItem(DateTime time) => this.lastTimeRestItem = time;
 
     public int GetDeltaTimeReset()
     {
-        TimeSpan timeDifference = DateTime.Now - timelineToRestItem;
+        TimeSpan timeDifference = DateTime.Now - lastTimeRestItem;
         int timeDifferenceInSeconds = (int)timeDifference.TotalSeconds;
         return timeDifferenceInSeconds;
     }

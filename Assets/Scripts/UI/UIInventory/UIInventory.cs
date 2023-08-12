@@ -19,6 +19,7 @@ public class UIInventory : InitMonoBehaviour
         this.inventorySort = inventorySort;
         this.ShowItems();
     }
+
     public void SetInventoryFilter(ItemType inventoryFilter)
     {
         this.inventoryFilter = inventoryFilter;
@@ -38,7 +39,7 @@ public class UIInventory : InitMonoBehaviour
         ShowItems();
         this.Close();
 
-        InvokeRepeating(nameof(this.ShowItems), 1, 1);
+        //InvokeRepeating(nameof(this.ShowItems), 1, 1);
     }
 
     public virtual void Toggle()
@@ -51,6 +52,7 @@ public class UIInventory : InitMonoBehaviour
     public virtual void Open()
     {
         UIInventoryCtrl.Instance.gameObject.SetActive(true);
+        ShowItems();
         this.isOpen = true;
     }
 
@@ -147,7 +149,6 @@ public class UIInventory : InitMonoBehaviour
         if (isSorting) this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
     }
 
-
     protected virtual void SwapItems(Transform currentItem, Transform nextItem)
     {
         int currentIndex = currentItem.GetSiblingIndex();
@@ -156,5 +157,4 @@ public class UIInventory : InitMonoBehaviour
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
-
 }

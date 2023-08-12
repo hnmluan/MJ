@@ -66,6 +66,7 @@ public class UIInvIn4 : InitMonoBehaviour
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, 1);
         ResetUIInfor(itemInventory);
         if (itemInventory.itemCount == 0) SetEmptyUIInfor();
+        UIInventory.Instance.ShowItems();
     }
 
     public virtual void ClickUseAllItem()
@@ -73,6 +74,7 @@ public class UIInvIn4 : InitMonoBehaviour
         for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
         PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInfor();
+        UIInventory.Instance.ShowItems();
     }
 
     private void ShowButton()
