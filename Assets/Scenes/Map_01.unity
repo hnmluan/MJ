@@ -20621,8 +20621,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 342431502}
   m_HandleRect: {fileID: 342431501}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9310345
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -24342,11 +24342,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSoldOut: 0
-  itemShop: {fileID: 0}
   itemName: {fileID: 1966192157}
   itemNumber: {fileID: 837648646}
   soldOut: {fileID: 823987696}
   itemImage: {fileID: 906698407}
+  currencyImage: {fileID: 926137444}
   buyButton: {fileID: 113541360}
 --- !u!1 &732419607
 GameObject:

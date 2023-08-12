@@ -20,7 +20,10 @@ public class UIItemShop : InitMonoBehaviour
     public Text SoldOut => soldOut;
 
     [SerializeField] protected Image itemImage;
-    public Image Image => itemImage;
+    public Image ItemImage => itemImage;
+
+    [SerializeField] protected Image currencyImage;
+    public Image CurrencyImage => currencyImage;
 
     [SerializeField] protected Button buyButton;
     public Button BuyButton => buyButton;
@@ -31,8 +34,16 @@ public class UIItemShop : InitMonoBehaviour
         this.LoadItemName();
         this.LoadItemNumer();
         this.LoadItemImage();
+        this.LoadCurrencyImage();
         this.LoadItemBuy();
         this.LoadSoldOut();
+    }
+
+    private void LoadCurrencyImage()
+    {
+        if (this.currencyImage != null) return;
+        this.currencyImage = transform.Find("Buy").Find("Currency").GetComponent<Image>();
+        Debug.Log(transform.name + ": LoadItemBuy", gameObject);
     }
 
     private void LoadItemBuy()
@@ -81,5 +92,6 @@ public class UIItemShop : InitMonoBehaviour
         this.buyButton.gameObject.SetActive(true);
         this.soldOut.gameObject.SetActive(false);
         this.isSoldOut = false;
+        this.currencyImage.sprite = CurrencyProfileSO.FindByItemCode(this.itemShop.itemPrice.currencyCode).currencySprite;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BaseImage : InitMonoBehaviour
 {
-    [Header("Base Image")]
+    [Header("Base ItemImage")]
     [SerializeField] protected Image image;
 
     protected override void LoadComponents()

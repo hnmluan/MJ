@@ -17,17 +17,16 @@ public class ItemProfileSO : ScriptableObject
 
     public int defaultMaxStack = 10;
 
-    public List<ItemRecipe> upgradeLevels;
-
     public List<ItemDropRate> listItemCanGet;
 
     public List<ItemPrice> price;
 
     public IntRange priceToBuy;
 
+    public IntRange quantityToBuy;
+
     public IntRange priceToSale;
 
-    public IntRange quantityToBy;
 
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
     {

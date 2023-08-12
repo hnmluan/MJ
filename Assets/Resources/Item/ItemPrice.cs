@@ -1,7 +1,6 @@
-using UnityEngine;
-
-public class ItemPrice : MonoBehaviour
+[System.Serializable]
+public class ItemPrice
 {
-    CurrencyCode currencyCode = CurrencyCode.NoCurrency;
-    IntRange rangePrice;
+    public CurrencyCode currencyCode = CurrencyCode.NoCurrency;
+    public IntRange rangePrice;
 }

@@ -28,7 +28,7 @@ public class UIItemInventory : InitMonoBehaviour
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
-        this.itemImage = transform.Find("Image").GetComponent<Image>();
+        this.itemImage = transform.Find("ItemImage").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadItemInvtory", gameObject);
     }
 

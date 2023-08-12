@@ -1,20 +1,35 @@
-﻿using UnityEngine;
-
-public class ItemShop : MonoBehaviour
+﻿public class ItemShop
 {
     public ItemProfileSO itemProfile;
     public int quantity = 0;
-    public int price = 0;
-    public CurrencyCode currency = CurrencyCode.NoCurrency;
+    public ItemPriceShop itemPrice;
 
     public static ItemShop GetRandomItemShopExcludingNoItem()
     {
         ItemShop newItemShop = new ItemShop();
-        ItemCode randomItemCode = ItemProfileSO.GetRandomItemCodeExcludingNoItem();
-        newItemShop.itemProfile = ItemProfileSO.FindByItemCode(randomItemCode);
-        newItemShop.price = newItemShop.itemProfile.priceToSale.GetRandomValue();
-        newItemShop.quantity = newItemShop.itemProfile.quantityToBy.GetRandomValue();
+
+        newItemShop.itemProfile = GetRandomItemProfileSO();
+        newItemShop.quantity = GetRandomItemQuantity(newItemShop.itemProfile);
+        newItemShop.itemPrice = GetRandomItemPrice(newItemShop.itemProfile);
+
         return newItemShop;
     }
+
+    private static ItemPriceShop GetRandomItemPrice(ItemProfileSO itemProfile)
+    {
+        System.Random random = new System.Random();
+        int randomIndex = random.Next(itemProfile.price.Count);
+        ItemPrice itemPrice = itemProfile.price[randomIndex];
+        return new ItemPriceShop(itemPrice.rangePrice.GetRandomValue(), itemPrice.currencyCode);
+    }
+
+    private static ItemProfileSO GetRandomItemProfileSO()
+    {
+        ItemCode randomItemCode = ItemProfileSO.GetRandomItemCodeExcludingNoItem();
+        return ItemProfileSO.FindByItemCode(randomItemCode);
+    }
+
+    private static int GetRandomItemQuantity(ItemProfileSO itemProfile) => itemProfile.quantityToBuy.GetRandomValue();
+
 
 }
