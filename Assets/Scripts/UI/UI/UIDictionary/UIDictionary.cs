@@ -9,6 +9,8 @@ public class UIDictionary : InitMonoBehaviour
 
     protected bool isOpen = true;
 
+    [SerializeField] private DictionaryFilter dictionaryFilter = DictionaryFilter.Enemies;
+
     protected override void Awake()
     {
         base.Awake();
@@ -19,7 +21,7 @@ public class UIDictionary : InitMonoBehaviour
     protected override void Start()
     {
         base.Start();
-        ShowItems();
+        ShowProfileSO();
         // this.Close();
     }
 
@@ -33,7 +35,7 @@ public class UIDictionary : InitMonoBehaviour
     public virtual void Open()
     {
         UIDictionaryCtrl.Instance.gameObject.SetActive(true);
-        ShowItems();
+        ShowProfileSO();
         this.isOpen = true;
     }
 
@@ -43,7 +45,13 @@ public class UIDictionary : InitMonoBehaviour
         this.isOpen = false;
     }
 
-    public virtual void ShowItems()
+    public virtual void ShowProfileSO()
+    {
+        if (dictionaryFilter == DictionaryFilter.Enemies) ShowEnemyProfileSO();
+        if (dictionaryFilter == DictionaryFilter.NPCs) ShowNPCProfileSO();
+    }
+
+    private void ShowEnemyProfileSO()
     {
         if (!this.isOpen) return;
         this.ClearItems();
@@ -55,5 +63,23 @@ public class UIDictionary : InitMonoBehaviour
         foreach (EnemyProfileSO item in objList) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
+    private void ShowNPCProfileSO()
+    {
+        if (!this.isOpen) return;
+        this.ClearItems();
+
+        NPCProfileSO[] objectsArray = Resources.LoadAll<NPCProfileSO>("NPC");
+
+        List<NPCProfileSO> objList = new List<NPCProfileSO>(objectsArray);
+
+        foreach (NPCProfileSO item in objList) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+    }
+
     protected virtual void ClearItems() => UIDictionaryItemSpawner.Instance.ClearItems();
+
+    public void SetDictionaryFilter(DictionaryFilter dictionaryFilter)
+    {
+        this.dictionaryFilter = dictionaryFilter;
+        this.ShowProfileSO();
+    }
 }

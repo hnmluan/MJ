@@ -15,6 +15,7 @@ MonoBehaviour:
   damageObjectCode: 0
   npcName: Cu Teo
   faceset: {fileID: 21300000, guid: f28936809260b844aa1022277bb9fe6f, type: 3}
+  sprite: {fileID: 21300000, guid: f28936809260b844aa1022277bb9fe6f, type: 3}
   npcDialog:
     taskDialogs:
     - taskDialogName: task_1

@@ -39,7 +39,7 @@ public class UIInventory : InitMonoBehaviour
         ShowItems();
         this.Close();
 
-        //InvokeRepeating(nameof(this.ShowItems), 1, 1);
+        //InvokeRepeating(nameof(this.ShowEnemyProfileSO), 1, 1);
     }
 
     public virtual void Toggle()

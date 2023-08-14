@@ -11,8 +11,8 @@ public class NPCCtrl : InitMonoBehaviour
     [SerializeField] protected GameObject dialogConversable;
     public GameObject DialogConversable { get => dialogConversable; }
 
-    [SerializeField] protected NPCSO npcSO;
-    public NPCSO NPCSO => npcSO;
+    [SerializeField] protected NPCProfileSO npcSO;
+    public NPCProfileSO NPCSO => npcSO;
 
     [SerializeField] protected NPCConverse npcConverse;
     public NPCConverse NPCConverse => npcConverse;
@@ -81,7 +81,7 @@ public class NPCCtrl : InitMonoBehaviour
     {
         if (this.npcSO != null) return;
         string resPath = "NPC/" + transform.name;
-        this.npcSO = Resources.Load<NPCSO>(resPath);
+        this.npcSO = Resources.Load<NPCProfileSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadNPCSO " + resPath, gameObject);
     }
 }

@@ -42,20 +42,29 @@ public class UIDictionaryIn4 : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
+    protected override void OnDisable() => this.ShowEmptyObj();
 
-
-    protected override void OnDisable() => this.SetEmptyUIInfor();
-
-
-    public virtual void ResetUIInfor(EnemyProfileSO item)
+    public void ShowDetailObj(ScriptableObject objSO)
     {
-        objImage.sprite = item.sprite;
-        objName.text = item.name;
+        if (objSO is EnemyProfileSO) ShowDetailEnemy(objSO as EnemyProfileSO);
+        if (objSO is NPCProfileSO) ShowDetailNPC(objSO as NPCProfileSO);
     }
 
-    public virtual void SetEmptyUIInfor()
+    private void ShowDetailEnemy(EnemyProfileSO enemySO)
     {
-        objImage.sprite = null;
+        objImage.sprite = enemySO.sprite;
+        objName.text = enemySO.name;
+    }
+
+    private void ShowDetailNPC(NPCProfileSO npcSO)
+    {
+        objImage.sprite = npcSO.sprite;
+        objName.text = npcSO.name;
+    }
+
+    public virtual void ShowEmptyObj()
+    {
+        //objImage.sprite = null;
         objName.text = "";
     }
 }

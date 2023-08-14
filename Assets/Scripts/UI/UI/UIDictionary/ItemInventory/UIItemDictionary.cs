@@ -34,11 +34,25 @@ public class UIItemDictionary : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
-    public virtual void ShowItem(EnemyProfileSO item)
+    public virtual void ShowItem(ScriptableObject item)
     {
-        if (item == null) return;
-        itemDictionary = item;
-        itemName.text = item.enemyName;
-        itemImage.sprite = item.sprite;
+        if (item is EnemyProfileSO) ShowEnemyProfileSO(item as EnemyProfileSO);
+        if (item is NPCProfileSO) ShowNPCProfileSO(item as NPCProfileSO);
+    }
+
+    private void ShowEnemyProfileSO(EnemyProfileSO enemyProfileSO)
+    {
+        if (enemyProfileSO == null) return;
+        itemDictionary = enemyProfileSO;
+        itemName.text = enemyProfileSO.enemyName;
+        itemImage.sprite = enemyProfileSO.sprite;
+    }
+
+    private void ShowNPCProfileSO(NPCProfileSO npcProfileSO)
+    {
+        if (npcProfileSO == null) return;
+        itemDictionary = npcProfileSO;
+        itemName.text = npcProfileSO.npcName;
+        itemImage.sprite = npcProfileSO.sprite;
     }
 }

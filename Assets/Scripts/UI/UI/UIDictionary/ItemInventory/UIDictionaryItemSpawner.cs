@@ -40,7 +40,7 @@ public class UIDictionaryItemSpawner : Spawner
         foreach (Transform item in this.holder) this.Despawn(item);
     }
 
-    public virtual void SpawnItem(EnemyProfileSO item)
+    public virtual void SpawnItem(ScriptableObject item)
     {
         Transform uiItem = this.dictionaryCtrl.UIDictionaryItemSpawner.Spawn(UIDictionaryItemSpawner.normalItem, Vector3.zero, Quaternion.identity);
         uiItem.transform.localScale = new Vector3(1, 1, 1);
