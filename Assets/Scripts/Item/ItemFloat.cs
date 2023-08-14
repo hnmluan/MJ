@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class ItemAbstract : InitMonoBehaviour
+public class ItemFloat : ObjFloat
 {
     [Header("Item Abstract")]
     [SerializeField] protected ItemCtrl itemCtrl;
@@ -8,8 +8,8 @@ public abstract class ItemAbstract : InitMonoBehaviour
 
     protected override void LoadComponents()
     {
-        base.LoadComponents();
         this.LoadItemCtrl();
+        base.LoadComponents();
     }
 
     protected virtual void LoadItemCtrl()
@@ -18,4 +18,6 @@ public abstract class ItemAbstract : InitMonoBehaviour
         this.itemCtrl = transform.parent.GetComponent<ItemCtrl>();
         Debug.Log(transform.name + ": LoadItemCtrl", gameObject);
     }
+
+    protected override void SetObj() => obj = itemCtrl.ItemSR.transform;
 }

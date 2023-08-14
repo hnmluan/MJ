@@ -14,6 +14,8 @@ public class DespawnByTime : Despawn
         timer = 0f;
     }
 
+    protected override void OnEnable() => timer = 0f;
+
     protected override bool CanDespawn() => timer >= despawnTime;
 
     public void SetTimeDespawn(float despawnTime) => this.despawnTime = despawnTime;

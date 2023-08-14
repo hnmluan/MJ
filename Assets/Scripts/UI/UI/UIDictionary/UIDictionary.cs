@@ -22,7 +22,7 @@ public class UIDictionary : InitMonoBehaviour
     {
         base.Start();
         ShowProfileSO();
-        // this.Close();
+        this.Close();
     }
 
     public virtual void Toggle()

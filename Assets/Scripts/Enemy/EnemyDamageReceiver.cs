@@ -15,6 +15,8 @@ public class EnemyDamageReceiver : DamageReceiver
 
     [SerializeField] protected float blinkInterval = 0.1f;
 
+    [SerializeField] protected float dropDistance = 2f;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -39,7 +41,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         Vector3 dropPos = transform.position;
         Quaternion dropRot = transform.rotation;
-        ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropListItem, dropPos, dropRot);
+        ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropListItem, transform.position, dropRot, dropDistance);
     }
 
     protected virtual void OnDeadFX() { }

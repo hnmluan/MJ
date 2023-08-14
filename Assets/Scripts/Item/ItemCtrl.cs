@@ -8,16 +8,22 @@ public class ItemCtrl : InitMonoBehaviour
     [SerializeField] protected ItemInventory itemInventory;
     public ItemInventory ItemInventory => itemInventory;
 
+    [SerializeField] protected SpriteRenderer itemSR;
+    public SpriteRenderer ItemSR => itemSR;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadItemDespawn();
         this.LoadItemInventory();
+        this.LoadItemSR();
     }
-    protected override void OnEnable()
+
+    protected virtual void LoadItemSR()
     {
-        base.OnEnable();
-        this.ResetItem();
+        if (this.itemSR != null) return;
+        this.itemSR = transform.Find("Model").GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadItemSR", gameObject);
     }
 
     protected virtual void LoadItemDespawn()
@@ -27,15 +33,7 @@ public class ItemCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemDespawn", gameObject);
     }
 
-    public virtual void SetItemInventory(ItemInventory itemInventory)
-    {
-        this.itemInventory = itemInventory.Clone();
-
-        //this.itemInventory = new ItemInventory();
-        //this.itemInventory.itemProfile = itemInventory.itemProfile;
-        //this.itemInventory.itemCount = itemInventory.itemCount;
-        //this.itemInventory.upgradeLevel = itemInventory.upgradeLevel;
-    }
+    public virtual void SetItemInventory(ItemInventory itemInventory) => this.itemInventory = itemInventory.Clone();
 
     protected virtual void LoadItemInventory()
     {
@@ -43,13 +41,6 @@ public class ItemCtrl : InitMonoBehaviour
         ItemCode itemCode = ItemCodeParser.FromString(transform.name);
         ItemProfileSO itemProfile = ItemProfileSO.FindByItemCode(itemCode);
         this.itemInventory.itemProfile = itemProfile;
-        this.ResetItem();
         Debug.Log(transform.name + ": LoadItemInventory", gameObject);
-    }
-
-    protected virtual void ResetItem()
-    {
-        this.itemInventory.itemCount = 1;
-        this.itemInventory.upgradeLevel = 0;
     }
 }

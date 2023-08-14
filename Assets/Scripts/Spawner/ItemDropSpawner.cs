@@ -15,7 +15,7 @@ public class ItemDropSpawner : Spawner
         ItemDropSpawner.instance = this;
     }
 
-    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList, Vector3 pos, Quaternion rot)
+    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList, Vector3 pos, Quaternion rot, float dropDistance)
     {
         List<ItemDropRate> dropItems = new List<ItemDropRate>();
 
@@ -25,12 +25,19 @@ public class ItemDropSpawner : Spawner
         foreach (ItemDropRate itemDropRate in dropItems)
         {
             ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            Transform itemDrop = this.Spawn(itemCode.ToString(), pos, rot);
+            Transform itemDrop = this.Spawn(itemCode.ToString(), GetRandomPositionDrop(pos, dropDistance), rot);
             if (itemDrop == null) continue;
             itemDrop.gameObject.SetActive(true);
         }
 
         return dropItems;
+    }
+
+    public Vector3 GetRandomPositionDrop(Vector3 pos, float dropDistance)
+    {
+        Vector2 randomCirclePoint = Random.insideUnitCircle.normalized * Random.Range(0f, dropDistance);
+        Vector3 randomPosition = pos + new Vector3(randomCirclePoint.x, randomCirclePoint.y, 0f);
+        return randomPosition;
     }
 
     protected virtual List<ItemDropRate> DropItems(List<ItemDropRate> items)
