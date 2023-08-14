@@ -9,7 +9,7 @@ public class UIDictionary : InitMonoBehaviour
 
     protected bool isOpen = true;
 
-    [SerializeField] private DictionaryFilter dictionaryFilter = DictionaryFilter.Enemies;
+    [SerializeField] private EDictionaryType dictionaryFilter = EDictionaryType.Enemies;
 
     protected override void Awake()
     {
@@ -51,9 +51,11 @@ public class UIDictionary : InitMonoBehaviour
 
         this.ClearItems();
 
-        if (dictionaryFilter == DictionaryFilter.Enemies) ShowEnemyProfileSO();
+        if (dictionaryFilter == EDictionaryType.Enemies) ShowEnemyProfileSO();
 
-        if (dictionaryFilter == DictionaryFilter.NPCs) ShowNPCProfileSO();
+        if (dictionaryFilter == EDictionaryType.NPCs) ShowNPCProfileSO();
+
+        if (dictionaryFilter == EDictionaryType.Weapons) ShowDamageObjectProfileSO();
     }
 
     private void ShowEnemyProfileSO()
@@ -66,13 +68,20 @@ public class UIDictionary : InitMonoBehaviour
         foreach (NPCProfileSO item in GetNPCProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
+    private void ShowDamageObjectProfileSO()
+    {
+        foreach (DamageObjectSO item in GetDamageObjectProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+    }
+
     protected virtual void ClearItems() => UIDictionaryItemSpawner.Instance.ClearItems();
 
-    public void SetDictionaryFilter(DictionaryFilter dictionaryFilter)
+    public void SetDictionaryFilter(EDictionaryType dictionaryFilter)
     {
         this.dictionaryFilter = dictionaryFilter;
         this.ShowProfileSO();
     }
+
+    private List<DamageObjectSO> GetDamageObjectProfileSO() => new List<DamageObjectSO>(Resources.LoadAll<DamageObjectSO>("DamageObject"));
 
     private List<NPCProfileSO> GetNPCProfileSO() => new List<NPCProfileSO>(Resources.LoadAll<NPCProfileSO>("NPC"));
 

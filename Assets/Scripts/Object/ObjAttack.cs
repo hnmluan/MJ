@@ -51,9 +51,8 @@ public abstract class ObjAttack : InitMonoBehaviour
 
     public DamageObjectSO GetDamageObjectSO()
     {
-        string resPathMelee = "DamageObject/Melee/" + this.damageObject.ToString();
-        string resPathRanged = "DamageObject/Ranged/" + this.damageObject.ToString();
-        return Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
+        string resPath = "DamageObject/" + this.damageObject.ToString();
+        return Resources.Load<DamageObjectSO>(resPath);
     }
 
     protected abstract bool IsAttacking();

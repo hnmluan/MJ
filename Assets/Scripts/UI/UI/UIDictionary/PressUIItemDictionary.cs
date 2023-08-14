@@ -6,6 +6,7 @@ public class PressUIItemDictionary : PressUI
     {
         ScriptableObject objSO = this.GetComponent<UIItemDictionary>().ItemDictionary;
         if (objSO == null) return;
-        UIDictionaryIn4.Instance.ShowDetailObj(objSO);
+        Dictionary.Instance.SeenItemDictionary(objSO);
+        UIDictionaryDetail.Instance.ShowDetailObj(objSO);
     }
 }
