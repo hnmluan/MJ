@@ -47,32 +47,23 @@ public class UIDictionary : InitMonoBehaviour
 
     public virtual void ShowProfileSO()
     {
+        if (!this.isOpen) return;
+
+        this.ClearItems();
+
         if (dictionaryFilter == DictionaryFilter.Enemies) ShowEnemyProfileSO();
+
         if (dictionaryFilter == DictionaryFilter.NPCs) ShowNPCProfileSO();
     }
 
     private void ShowEnemyProfileSO()
     {
-        if (!this.isOpen) return;
-        this.ClearItems();
-
-        EnemyProfileSO[] objectsArray = Resources.LoadAll<EnemyProfileSO>("Enemy");
-
-        List<EnemyProfileSO> objList = new List<EnemyProfileSO>(objectsArray);
-
-        foreach (EnemyProfileSO item in objList) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (EnemyProfileSO item in GetEnemyProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
     private void ShowNPCProfileSO()
     {
-        if (!this.isOpen) return;
-        this.ClearItems();
-
-        NPCProfileSO[] objectsArray = Resources.LoadAll<NPCProfileSO>("NPC");
-
-        List<NPCProfileSO> objList = new List<NPCProfileSO>(objectsArray);
-
-        foreach (NPCProfileSO item in objList) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (NPCProfileSO item in GetNPCProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIDictionaryItemSpawner.Instance.ClearItems();
@@ -82,4 +73,8 @@ public class UIDictionary : InitMonoBehaviour
         this.dictionaryFilter = dictionaryFilter;
         this.ShowProfileSO();
     }
+
+    private List<NPCProfileSO> GetNPCProfileSO() => new List<NPCProfileSO>(Resources.LoadAll<NPCProfileSO>("NPC"));
+
+    private List<EnemyProfileSO> GetEnemyProfileSO() => new List<EnemyProfileSO>(Resources.LoadAll<EnemyProfileSO>("Enemy"));
 }
