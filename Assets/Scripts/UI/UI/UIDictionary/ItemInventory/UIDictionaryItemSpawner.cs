@@ -4,9 +4,11 @@ public class UIDictionaryItemSpawner : Spawner
 {
     private static UIDictionaryItemSpawner instance;
     public static UIDictionaryItemSpawner Instance => instance;
+
     public static string normalItem = "UIDictionaryItem";
 
     [Header("Dictionary Item Spawner")]
+
     [SerializeField] protected UIDictionaryCtrl dictionaryCtrl;
     public UIDictionaryCtrl UIDictionaryCtrl => dictionaryCtrl;
 
@@ -38,7 +40,7 @@ public class UIDictionaryItemSpawner : Spawner
         foreach (Transform item in this.holder) this.Despawn(item);
     }
 
-    public virtual void SpawnItem(ItemDictionary item)
+    public virtual void SpawnItem(EnemyProfileSO item)
     {
         Transform uiItem = this.dictionaryCtrl.UIDictionaryItemSpawner.Spawn(UIDictionaryItemSpawner.normalItem, Vector3.zero, Quaternion.identity);
         uiItem.transform.localScale = new Vector3(1, 1, 1);

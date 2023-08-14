@@ -63,7 +63,7 @@ public class UIItemShop : InitMonoBehaviour
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
-        this.itemImage = transform.Find("ImageBox").Find("Image").GetComponent<Image>();
+        this.itemImage = transform.Find("ImageBox").Find("ObjImage").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadItemInvtory", gameObject);
     }
 

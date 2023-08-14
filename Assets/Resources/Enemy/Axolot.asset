@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
-  m_Name: Bamboo
+  m_Name: Axolot
   m_EditorClassIdentifier: 
   itemCode: 1
   itemType: 1
-  enemyName: Bamboo
-  sprite: {fileID: -1391039458, guid: 6b32a6d0f5cd7c7418d8a68aff589691, type: 3}
+  enemyName: Axolot
+  sprite: {fileID: 1768825141, guid: 244b02e6ec934b144a675d92abefca23, type: 3}
   hpMax: 1
   dropListItem:
   - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}

@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIDictionaryIn4 : InitMonoBehaviour
 {
@@ -8,8 +8,11 @@ public class UIDictionaryIn4 : InitMonoBehaviour
     private static UIDictionaryIn4 instance;
     public static UIDictionaryIn4 Instance => instance;
 
-    [SerializeField] protected ItemDictionary itemDictionary = null;
-    public ItemDictionary ItemDictionary => itemDictionary;
+    [SerializeField] protected Text objName;
+    public Text ObjName => objName;
+
+    [SerializeField] protected Image objImage;
+    public Image ObjImage => objImage;
 
     protected override void Awake()
     {
@@ -18,79 +21,41 @@ public class UIDictionaryIn4 : InitMonoBehaviour
         UIDictionaryIn4.instance = this;
     }
 
-    protected override void OnDisable() => this.SetEmptyUIInfor();
-
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadItemName();
+        this.LoadItemImage();
+    }
+
+    private void LoadItemImage()
+    {
+        if (this.objImage != null) return;
+        this.objImage = transform.Find("Image").Find("Image").GetComponent<Image>();
+        Debug.Log(transform.name + ": LoadItemDictionarytory", gameObject);
+    }
+
+    protected virtual void LoadItemName()
+    {
+        if (this.objName != null) return;
+        this.objName = transform.Find("Name").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
 
-    public virtual void ResetUIInfor(ItemDictionary item)
+
+    protected override void OnDisable() => this.SetEmptyUIInfor();
+
+
+    public virtual void ResetUIInfor(EnemyProfileSO item)
     {
-        this.itemDictionary = item;
+        objImage.sprite = item.sprite;
+        objName.text = item.name;
     }
 
     public virtual void SetEmptyUIInfor()
     {
-        this.itemDictionary = null;
-    }
-
-    public virtual void ClickUseItem()
-    {
-        Drop(itemDictionary.itemProfile.listItemCanGet);
-        PlayerCtrl.Instance.Inventory.DeductItem(itemDictionary.itemProfile.itemCode, 1);
-        ResetUIInfor(itemDictionary);
-        if (itemDictionary.itemCount == 0) SetEmptyUIInfor();
-        UIDictionary.Instance.ShowItems();
-    }
-
-    public virtual void ClickUseAllItem()
-    {
-        for (int i = 0; i < itemDictionary.itemCount; i++) Drop(itemDictionary.itemProfile.listItemCanGet);
-        PlayerCtrl.Instance.Inventory.DeductItem(itemDictionary.itemProfile.itemCode, itemDictionary.itemCount);
-        SetEmptyUIInfor();
-        UIDictionary.Instance.ShowItems();
-    }
-
-    private bool CanUse() => itemDictionary.itemProfile.listItemCanGet.Count != 0;
-
-    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
-    {
-        List<ItemDropRate> dropItems = new List<ItemDropRate>();
-
-        if (dropList.Count < 1) return dropItems;
-
-        dropItems = this.DropItems(dropList);
-        foreach (ItemDropRate itemDropRate in dropItems)
-        {
-            ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            PlayerCtrl.Instance.Inventory.AddItem(itemCode, 1);
-        }
-
-        return dropItems;
-    }
-
-    protected virtual List<ItemDropRate> DropItems(List<ItemDropRate> items)
-    {
-        List<ItemDropRate> droppedItems = new List<ItemDropRate>();
-
-        float rate, itemRate;
-        int itemDropMore;
-
-        foreach (ItemDropRate item in items)
-        {
-            rate = Random.Range(0, 1f);
-            itemRate = item.dropRate / 100000f;
-
-            itemDropMore = Mathf.FloorToInt(itemRate);
-            if (itemDropMore > 0)
-            {
-                itemRate -= itemDropMore;
-                for (int i = 0; i < itemDropMore; i++) droppedItems.Add(item);
-            }
-        }
-
-        return droppedItems;
+        objImage.sprite = null;
+        objName.text = "";
     }
 }

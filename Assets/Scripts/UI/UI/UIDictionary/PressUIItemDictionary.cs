@@ -3,7 +3,7 @@ public class PressUIItemDictionary : PressUI
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
-        ItemDictionary itemDictionary = this.GetComponent<UIItemDictionary>().ItemDictionary;
+        EnemyProfileSO itemDictionary = this.GetComponent<UIItemDictionary>().ItemDictionary as EnemyProfileSO;
         if (itemDictionary == null) return;
         UIDictionaryIn4.Instance.ResetUIInfor(itemDictionary);
     }

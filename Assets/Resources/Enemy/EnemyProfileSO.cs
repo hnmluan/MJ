@@ -7,6 +7,7 @@ public class EnemyProfileSO : ScriptableObject
     public EnemyCode itemCode = EnemyCode.NoEnemy;
     public EnemyType itemType = EnemyType.NoType;
     public string enemyName = "no-name";
+    public Sprite sprite;
     public int hpMax = 2;
     public List<ItemDropRate> dropListItem;
     public string discription;

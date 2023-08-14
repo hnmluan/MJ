@@ -18,9 +18,6 @@ public class PlayerCtrl : InitMonoBehaviour
     [SerializeField] protected PlayerMovement playerMovement;
     public PlayerMovement PlayerMovement { get => playerMovement; }
 
-    //[SerializeField] protected PlayerInteract playerInteract;
-    //public PlayerInteract PlayerInteract { get => playerInteract; }
-
     [SerializeField] protected Slider hpBar;
     public Slider HPBar { get => hpBar; }
 
@@ -43,10 +40,7 @@ public class PlayerCtrl : InitMonoBehaviour
         this.LoadAnimator();
         this.LoadPlayerAttack();
         this.LoadPlayerMovement();
-        //this.LoadPlayerInteract();
-        this.LoadHPBar();
         this.LoadPlayerSprite();
-        //this.LoadHealthBlink();
         this.LoadRigidbody2D();
         this.LoadInventory();
     }
@@ -85,46 +79,10 @@ public class PlayerCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadPlayerMovement", gameObject);
     }
 
-    //protected virtual void LoadPlayerInteract()
-    //{
-    //    if (this.playerInteract != null) return;
-    //    this.playerInteract = transform.GetComponentInChildren<PlayerInteract>();
-    //    Debug.Log(transform.name + ": LoadPlayerInteract", gameObject);
-    //}
-
-    protected virtual void LoadHPBar()
-    {
-        if (this.hpBar != null) return;
-        this.hpBar = transform.GetComponentInChildren<Slider>();
-        Debug.Log(transform.name + ": LoadHeathBar", gameObject);
-    }
-
     protected virtual void LoadPlayerSprite()
     {
         if (this.playerSprite != null) return;
         this.playerSprite = transform.GetComponentInChildren<SpriteRenderer>();
         Debug.Log(transform.name + ": LoadPlayerSprite", gameObject);
     }
-
-    //protected virtual void LoadHealthBlink()
-    //{
-    //    if (this.healthBlink != null) return;
-    //    this.healthBlink = transform.GetComponentInChildren<HealthBlink>();
-    //    Debug.Log(transform.name + ": LoadHealthBlink", gameObject);
-    //}
-
-    //public void DisableAllActions()
-    //{
-    //    playerMovement.gameObject.SetActive(false);
-    //    playerInteract.gameObject.SetActive(false);
-    //    playerAttack.gameObject.SetActive(false);
-    //    Debug.Log("DisableAllActions");
-    //}
-
-    //public void EnableAllActions()
-    //{
-    //    playerMovement.gameObject.SetActive(true);
-    //    playerInteract.gameObject.SetActive(true);
-    //    playerAttack.gameObject.SetActive(true);
-    //}
 }
