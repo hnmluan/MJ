@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Inventory : InitMonoBehaviour
 {
+    private static Inventory instance;
+    public static Inventory Instance { get => instance; }
+
     [SerializeField] private int maxSlot = 100;
     public int MaxSlot => maxSlot;
 
@@ -14,6 +17,12 @@ public class Inventory : InitMonoBehaviour
 
     protected override void Awake()
     {
+        base.Awake();
+        if (Inventory.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        Inventory.instance = this;
+    }
+    protected override void Start()
+    {
         this.AddItem(ItemCode.GoldOre, 3);
         this.AddItem(ItemCode.IronOre, 4);
         this.AddItem(ItemCode.GoldOre, 5);
@@ -21,15 +30,10 @@ public class Inventory : InitMonoBehaviour
         this.AddItem(ItemCode.GoldenMirror, 20);
         this.AddItem(ItemCode.CopperSword, 100);
     }
-    protected override void Start()
-    {
-        base.Start();
-    }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
-        //if (GetCurrentItemCount() + addCount > maxItemCout) return false;
-
+        if (GetCurrentItemCount() + addCount > maxItemCout) return false;
 
         ItemProfileSO itemProfile = this.GetItemProfile(itemCode);
 

@@ -4,6 +4,7 @@ public class UIInvItemSpawner : Spawner
 {
     private static UIInvItemSpawner instance;
     public static UIInvItemSpawner Instance => instance;
+
     public static string normalItem = "UIInvItem";
 
     [Header("Inv Item Spawner")]

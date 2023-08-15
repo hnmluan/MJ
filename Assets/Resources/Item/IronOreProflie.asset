@@ -15,7 +15,7 @@ MonoBehaviour:
   itemCode: 1
   itemType: 1
   itemName: Iron Ore
-  itemSprite: {fileID: 21300000, guid: b816292610f94e94a9fc70b6c01d9671, type: 3}
+  itemSprite: {fileID: 21300000, guid: c847893fd58cfc44f8140f2908b45c07, type: 3}
   discription: 
   defaultMaxStack: 10
   listItemCanGet: []

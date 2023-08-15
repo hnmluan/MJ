@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIShop : InitMonoBehaviour
+public class UIShop : BaseUI
 {
     [Header("UI Shop")]
     private static UIShop instance;
@@ -16,8 +16,6 @@ public class UIShop : InitMonoBehaviour
 
     [SerializeField] private int numberOfItems = 10;
     public int NumberOfItems => numberOfItems;
-
-    protected bool isOpen = true;
 
     protected override void Awake()
     {
@@ -33,33 +31,12 @@ public class UIShop : InitMonoBehaviour
         ItemProfileSO.FindByItemCode(ItemCode.NoItem);
 
         base.Start();
-        this.Close();
     }
 
     private void Update() => CheckTimeToResetItem();
 
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        UIShopCtrl.Instance.gameObject.SetActive(true);
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        UIShopCtrl.Instance.gameObject.SetActive(false);
-        this.isOpen = false;
-    }
-
     public virtual void ResetItems()
     {
-        if (!this.isOpen) return;
         this.ClearItems();
 
         foreach (ItemShop item in GetRandomNumberList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);

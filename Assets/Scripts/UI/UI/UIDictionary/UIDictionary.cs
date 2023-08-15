@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDictionary : InitMonoBehaviour
+public class UIDictionary : BaseUI
 {
     [Header("UI Dictionary")]
     private static UIDictionary instance;
     public static UIDictionary Instance => instance;
-
-    protected bool isOpen = true;
 
     [SerializeField] private EDictionaryType dictionaryFilter = EDictionaryType.Enemies;
 
@@ -20,35 +18,12 @@ public class UIDictionary : InitMonoBehaviour
 
     protected override void Start()
     {
+        ShowProfileSO();
         base.Start();
-        ShowProfileSO();
-        this.Close();
-    }
-
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        UIDictionaryCtrl.Instance.gameObject.SetActive(true);
-        ShowProfileSO();
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        UIDictionaryCtrl.Instance.gameObject.SetActive(false);
-        this.isOpen = false;
     }
 
     public virtual void ShowProfileSO()
     {
-        if (!this.isOpen) return;
-
         this.ClearItems();
 
         if (dictionaryFilter == EDictionaryType.Enemies) ShowEnemyProfileSO();

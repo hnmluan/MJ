@@ -2,17 +2,22 @@
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : InitMonoBehaviour
+public class UIInventory : BaseUI
 {
     [Header("UI Inventory")]
     private static UIInventory instance;
     public static UIInventory Instance => instance;
 
-    protected bool isOpen = true;
-
     [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
+        UIInventory.instance = this;
+    }
 
     public void SetInventorySort(InventorySort inventorySort)
     {
@@ -26,49 +31,17 @@ public class UIInventory : InitMonoBehaviour
         this.ShowItems();
     }
 
-    protected override void Awake()
+    public override void Open()
     {
-        base.Awake();
-        if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
-        UIInventory.instance = this;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
+        base.Open();
         ShowItems();
-        this.Close();
-
-        //InvokeRepeating(nameof(this.ShowEnemyProfileSO), 1, 1);
-    }
-
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        UIInventoryCtrl.Instance.gameObject.SetActive(true);
-        ShowItems();
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        UIInventoryCtrl.Instance.gameObject.SetActive(false);
-        this.isOpen = false;
     }
 
     public virtual void ShowItems()
     {
-        if (!this.isOpen) return;
-
         this.ClearItems();
 
-        List<ItemInventory> items = PlayerCtrl.Instance.Inventory.Items;
+        List<ItemInventory> items = Inventory.Instance.Items;
 
         items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
 

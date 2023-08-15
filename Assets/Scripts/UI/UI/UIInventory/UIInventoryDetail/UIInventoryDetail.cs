@@ -63,7 +63,7 @@ public class UIInventoryDetail : InitMonoBehaviour
     public virtual void ClickUseItem()
     {
         Drop(itemInventory.itemProfile.listItemCanGet);
-        PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
         ResetUIInfor(itemInventory);
         if (itemInventory.itemCount == 0) SetEmptyUIInfor();
         UIInventory.Instance.ShowItems();
@@ -72,7 +72,7 @@ public class UIInventoryDetail : InitMonoBehaviour
     public virtual void ClickUseAllItem()
     {
         for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
-        PlayerCtrl.Instance.Inventory.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInfor();
         UIInventory.Instance.ShowItems();
     }
@@ -101,7 +101,7 @@ public class UIInventoryDetail : InitMonoBehaviour
         foreach (ItemDropRate itemDropRate in dropItems)
         {
             ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            PlayerCtrl.Instance.Inventory.AddItem(itemCode, 1);
+            Inventory.Instance.AddItem(itemCode, 1);
         }
 
         return dropItems;

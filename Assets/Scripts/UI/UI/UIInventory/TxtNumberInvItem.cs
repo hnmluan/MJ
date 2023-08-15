@@ -4,8 +4,8 @@ public class TxtNumberInvItem : BaseText
 
     protected virtual void UpdateSlot()
     {
-        int currentItem = PlayerCtrl.Instance.Inventory.GetCurrentItemCount();
-        int maxItem = PlayerCtrl.Instance.Inventory.MaxItemCout;
+        int currentItem = Inventory.Instance.GetCurrentItemCount();
+        int maxItem = Inventory.Instance.MaxItemCout;
         this.text.text = currentItem + " / " + maxItem;
     }
 }

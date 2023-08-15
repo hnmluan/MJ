@@ -1,11 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class ItemLooter : InventoryAbstract
+public class ItemLooter : InitMonoBehaviour
 {
     [SerializeField] protected SphereCollider _collider;
+
     [SerializeField] protected Rigidbody _rigidbody;
+
+    [SerializeField] protected float lootSpeed = 5.0f;
+
+    [SerializeField] protected float lootMinDistance = 2.0f;
 
     protected override void LoadComponents()
     {
@@ -37,7 +42,20 @@ public class ItemLooter : InventoryAbstract
         ItemPickupable itemPickupable = collider.GetComponent<ItemPickupable>();
         if (itemPickupable == null) return;
 
+
+
         ItemCode itemCode = itemPickupable.GetItemCode();
-        if (this.inventory.AddItem(itemCode, 1)) itemPickupable.Picked();
+        if (Inventory.Instance.AddItem(itemCode, 1)) itemPickupable.Picked();
+    }
+
+    protected void LootItem(Transform item)
+    {
+        float distance = Vector3.Distance(transform.position, item.position);
+
+        if (distance < lootMinDistance)
+        {
+            Vector3 dirToItem = (item.position - transform.position).normalized;
+            transform.position += dirToItem * lootSpeed * Time.deltaTime;
+        }
     }
 }

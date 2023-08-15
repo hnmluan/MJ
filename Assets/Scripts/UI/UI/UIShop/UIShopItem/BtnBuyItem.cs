@@ -42,7 +42,7 @@ public class BtnBuyItem : BaseButton
 
     private void BuyItem()
     {
-        PlayerCtrl.Instance.Inventory.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.quantity);
+        Inventory.Instance.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.quantity);
         uiItemShop.SoldOut.gameObject.SetActive(true);
         this.gameObject.SetActive(false);
     }

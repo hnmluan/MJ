@@ -4,8 +4,8 @@ public class TxtInventorySlot : BaseText
 
     protected virtual void UpdateSlot()
     {
-        int currentSlotText = PlayerCtrl.Instance.Inventory.GetCurrentSlot();
-        int maxSlotText = PlayerCtrl.Instance.Inventory.MaxSlot;
+        int currentSlotText = Inventory.Instance.GetCurrentSlot();
+        int maxSlotText = Inventory.Instance.MaxSlot;
         this.text.text = currentSlotText + " / " + maxSlotText;
     }
 }

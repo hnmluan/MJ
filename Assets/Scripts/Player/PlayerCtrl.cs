@@ -24,9 +24,6 @@ public class PlayerCtrl : InitMonoBehaviour
     [SerializeField] protected SpriteRenderer playerSprite;
     public SpriteRenderer PlayerSprite { get => playerSprite; }
 
-    [SerializeField] protected Inventory inventory;
-    public Inventory Inventory { get => inventory; }
-
     protected override void Awake()
     {
         base.Awake();
@@ -42,7 +39,6 @@ public class PlayerCtrl : InitMonoBehaviour
         this.LoadPlayerMovement();
         this.LoadPlayerSprite();
         this.LoadRigidbody2D();
-        this.LoadInventory();
     }
 
     protected virtual void LoadAnimator()
@@ -50,12 +46,6 @@ public class PlayerCtrl : InitMonoBehaviour
         if (this.animator != null) return;
         this.animator = transform.GetComponentInChildren<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
-    }
-    protected virtual void LoadInventory()
-    {
-        if (this.inventory != null) return;
-        this.inventory = transform.GetComponentInChildren<Inventory>();
-        Debug.Log(transform.name + ": LoadInventory", gameObject);
     }
 
     protected virtual void LoadRigidbody2D()
