@@ -12,12 +12,12 @@ public class TxtInvQuantityDetail : BaseText
     {
         try
         {
-            if (UIInventoryDetail.Instance.ItemInventory == null)
+            if (UIInvDetail.Instance.ItemInventory == null)
             {
                 text.text = "0";
                 return;
             }
-            text.text = UIInventoryDetail.Instance.ItemInventory.itemCount.ToString();
+            text.text = UIInvDetail.Instance.ItemInventory.itemCount.ToString();
         }
         catch (System.Exception)
         {

@@ -2,7 +2,7 @@ using Assets.SimpleLocalization;
 using UnityEngine;
 
 [RequireComponent(typeof(LocalizedText))]
-public class TxtInvTypeDetail : BaseText
+public class TxtInvDescDetail : BaseText
 {
     protected virtual void FixedUpdate() => this.UpdateText();
 
@@ -10,22 +10,20 @@ public class TxtInvTypeDetail : BaseText
     {
         try
         {
-            if (UIInventoryDetail.Instance.ItemInventory == null)
+            if (UIInvDetail.Instance.ItemInventory == null)
             {
                 GetComponent<LocalizedText>().LocalizationKey = "empty";
                 GetComponent<LocalizedText>().Localize();
                 return;
             }
-
-            GetComponent<LocalizedText>().LocalizationKey = "Item.Type." + UIInventoryDetail.Instance.ItemInventory.itemProfile.itemType.ToString().Replace(" ", "");
+            GetComponent<LocalizedText>().LocalizationKey = "Item.Description";
             GetComponent<LocalizedText>().Localize();
         }
         catch (System.Exception)
         {
-            GetComponent<LocalizedText>().LocalizationKey = "empty";
-            GetComponent<LocalizedText>().Localize();
-        }
 
+            throw;
+        }
     }
 
     protected override void OnDisable()

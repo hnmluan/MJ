@@ -10,3 +10,7 @@ Inventory.Slot,Slot:,Số ô:
 Inventory.filter,Filter By,Lọc bởi:
 Wallet.SilverText,Silver,Bạc: 
 Wallet.GoldText,Gold,Vàng:
+Inventory.Use,Use,Dùng
+Inventory.UseAll,Use All,Dùng hết
+Inventory.Buy,Buy,Bán
+Inventory.BuyAll,Buy All,Bán hết

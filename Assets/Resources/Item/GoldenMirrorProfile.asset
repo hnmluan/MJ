@@ -40,6 +40,4 @@ MonoBehaviour:
   quantityToBuy:
     minValue: 4
     maxValue: 7
-  priceToSale:
-    minValue: 1
-    maxValue: 2
+  priceToSell: 0

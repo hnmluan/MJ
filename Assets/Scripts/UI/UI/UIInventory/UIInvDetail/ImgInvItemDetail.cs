@@ -6,12 +6,12 @@ public class ImgInvItemDetail : BaseImage
     {
         try
         {
-            if (UIInventoryDetail.Instance.ItemInventory == null)
+            if (UIInvDetail.Instance.ItemInventory == null)
             {
                 image.sprite = null;
                 return;
             }
-            image.sprite = UIInventoryDetail.Instance.ItemInventory.itemProfile.itemSprite;
+            image.sprite = UIInvDetail.Instance.ItemInventory.itemProfile.itemSprite;
         }
         catch (System.Exception)
         {

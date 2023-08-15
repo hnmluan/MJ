@@ -25,7 +25,7 @@ public class ItemProfileSO : ScriptableObject
 
     public IntRange quantityToBuy;
 
-    public IntRange priceToSale;
+    public int priceToSell;
 
 
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
