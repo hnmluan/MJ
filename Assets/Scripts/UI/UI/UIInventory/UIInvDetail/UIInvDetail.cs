@@ -55,7 +55,7 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemType.GetComponent<LocalizedText>().Localize();
     }
 
-    public virtual void ClickUseItem()
+    public virtual void UseItem()
     {
         Drop(itemInventory.itemProfile.listItemCanGet);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
@@ -64,9 +64,26 @@ public class UIInvDetail : UIInvDetailAbstract
         UIInventory.Instance.ShowItems();
     }
 
-    public virtual void ClickUseAllItem()
+    public virtual void UseAllItem()
     {
         for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        SetEmptyUIInvDetail();
+        UIInventory.Instance.ShowItems();
+    }
+
+    public virtual void BuyItem()
+    {
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell);
+        SetUIInvDetail(itemInventory);
+        if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
+        UIInventory.Instance.ShowItems();
+    }
+
+    public virtual void BuyAllItem()
+    {
+        Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInvDetail();
         UIInventory.Instance.ShowItems();

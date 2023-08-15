@@ -1,18 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BtnInvBuyAll : MonoBehaviour
+public class BtnInvBuyAll : BaseButton
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    protected override void OnClick() => UIInvDetail.Instance.BuyAllItem();
 }

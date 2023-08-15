@@ -17,18 +17,29 @@ public class UIItemInventory : InitMonoBehaviour
     [SerializeField] protected Image itemImage;
     public Image Image => itemImage;
 
+    [SerializeField] protected Image focus;
+    public Image Focus => focus;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadItemName();
         this.LoadItemNumer();
         this.LoadItemImage();
+        this.LoadFocus();
+    }
+
+    private void LoadFocus()
+    {
+        if (this.focus != null) return;
+        this.focus = transform.Find("Focus").GetComponent<Image>();
+        Debug.Log(transform.name + ": LoadFocus", gameObject);
     }
 
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
-        this.itemImage = transform.Find("ItemImage").GetComponent<Image>();
+        this.itemImage = transform.Find("Image").Find("Image").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadItemInvtory", gameObject);
     }
 
