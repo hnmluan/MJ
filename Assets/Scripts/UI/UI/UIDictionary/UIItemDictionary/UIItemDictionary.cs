@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,12 +57,14 @@ public class UIItemDictionary : InitMonoBehaviour
         if (item is EnemyProfileSO) ShowEnemyProfileSO(item as EnemyProfileSO);
         if (item is NPCProfileSO) ShowNPCProfileSO(item as NPCProfileSO);
         if (item is DamageObjectSO) ShowDamageObjectSO(item as DamageObjectSO);
-        if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem();
+        if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem(item);
     }
 
-    private void HideItem()
+    private void HideItem(ScriptableObject item)
     {
-        itemName.text = "???????";
+        if (item is EnemyProfileSO) itemName.text = LocalizationManager.Localize((item as EnemyProfileSO).keyName);
+        if (item is NPCProfileSO) itemName.text = LocalizationManager.Localize((item as NPCProfileSO).keyName);
+        if (item is DamageObjectSO) itemName.text = LocalizationManager.Localize((item as DamageObjectSO).keyName);
         itemImage.color = Color.black;
     }
 
@@ -69,7 +72,7 @@ public class UIItemDictionary : InitMonoBehaviour
     {
         if (damageObjectProfileSO == null) return;
         itemDictionary = damageObjectProfileSO;
-        itemName.text = damageObjectProfileSO.name;
+        itemName.text = LocalizationManager.Localize(damageObjectProfileSO.keyName);
         itemImage.sprite = damageObjectProfileSO.spriteInHand;
         itemImage.color = Color.white;
     }
@@ -78,7 +81,7 @@ public class UIItemDictionary : InitMonoBehaviour
     {
         if (enemyProfileSO == null) return;
         itemDictionary = enemyProfileSO;
-        itemName.text = enemyProfileSO.enemyName;
+        itemName.text = LocalizationManager.Localize(enemyProfileSO.keyName);
         itemImage.color = Color.white;
         itemImage.sprite = enemyProfileSO.sprite;
     }
@@ -87,7 +90,7 @@ public class UIItemDictionary : InitMonoBehaviour
     {
         if (npcProfileSO == null) return;
         itemDictionary = npcProfileSO;
-        itemName.text = npcProfileSO.npcName;
+        itemName.text = LocalizationManager.Localize(npcProfileSO.keyName);
         itemImage.color = Color.white;
         itemImage.sprite = npcProfileSO.sprite;
     }

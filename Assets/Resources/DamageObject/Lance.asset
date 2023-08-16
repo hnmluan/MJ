@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageObjectCode: 1
   damageObjectType: 1
-  damageObjectName: Lance
+  keyName: Lance
+  discription: 
   spriteInHand: {fileID: 21300000, guid: c0142e0cee11c994ea9219f14e4ab053, type: 3}
   spriteInAttack: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
   range: 2
   damage: 20
-  discription: 
   speed: 3
   attackTime: 0.5
   attackRate: 0.5

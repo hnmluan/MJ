@@ -18,7 +18,11 @@ public class UIDictionary : BaseUI
         UIDictionary.instance = this;
     }
 
-    protected override void OnEnable() => this.ShowProfileSO();
+    protected override void OnEnable()
+    {
+        dictionaryType = EDictionaryType.Enemies;
+        this.ShowProfileSO();
+    }
 
     public virtual void ShowProfileSO()
     {

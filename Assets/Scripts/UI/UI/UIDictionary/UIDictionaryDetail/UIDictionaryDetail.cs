@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,9 @@ public class UIDictionaryDetail : InitMonoBehaviour
 
     [SerializeField] protected Text objName;
     public Text ObjName => objName;
+
+    [SerializeField] protected Text objDescription;
+    public Text ObjDescription => objDescription;
 
     [SerializeField] protected Image objImage;
     public Image ObjImage => objImage;
@@ -28,6 +32,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
         base.LoadComponents();
         this.LoadItemName();
         this.LoadItemImage();
+        this.LoadItemDescription();
     }
 
     private void LoadItemImage()
@@ -44,6 +49,13 @@ public class UIDictionaryDetail : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
+    protected virtual void LoadItemDescription()
+    {
+        if (this.objDescription != null) return;
+        this.objDescription = transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Description").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadItemDescription", gameObject);
+    }
+
     protected override void OnDisable() => this.ShowEmptyObj();
 
     public void ShowDetailObj(ScriptableObject objSO)
@@ -51,20 +63,24 @@ public class UIDictionaryDetail : InitMonoBehaviour
         if (objSO is EnemyProfileSO) ShowDetailEnemy(objSO as EnemyProfileSO);
         if (objSO is NPCProfileSO) ShowDetailNPC(objSO as NPCProfileSO);
         if (objSO is DamageObjectSO) ShowDetailDamageObject(objSO as DamageObjectSO);
-        if (!Dictionary.Instance.CheckAvailableItemInDictonary(objSO)) HideDetail();
+        if (!Dictionary.Instance.CheckAvailableItemInDictonary(objSO)) HideDetail(objSO);
     }
 
-    private void HideDetail()
+    private void HideDetail(ScriptableObject objSO)
     {
         objImage.color = Color.black;
-        objName.text = "???????";
+        if (objSO is EnemyProfileSO) objName.text = LocalizationManager.Localize((objSO as EnemyProfileSO).keyName);
+        if (objSO is NPCProfileSO) objName.text = LocalizationManager.Localize((objSO as NPCProfileSO).keyName);
+        if (objSO is DamageObjectSO) objName.text = LocalizationManager.Localize((objSO as DamageObjectSO).keyName);
+        objDescription.text = "???????";
     }
 
     private void ShowDetailEnemy(EnemyProfileSO enemySO)
     {
         itemDictionary = enemySO;
         objImage.sprite = enemySO.sprite;
-        objName.text = enemySO.name;
+        objName.text = LocalizationManager.Localize(enemySO.keyName);
+        objDescription.text = LocalizationManager.Localize(enemySO.keyDescription);
         objImage.color = Color.white;
     }
 
@@ -72,7 +88,8 @@ public class UIDictionaryDetail : InitMonoBehaviour
     {
         itemDictionary = npcSO;
         objImage.sprite = npcSO.sprite;
-        objName.text = npcSO.name;
+        objName.text = LocalizationManager.Localize(npcSO.keyName);
+        objDescription.text = LocalizationManager.Localize(npcSO.keyDescription);
         objImage.color = Color.white;
     }
 
@@ -80,13 +97,16 @@ public class UIDictionaryDetail : InitMonoBehaviour
     {
         itemDictionary = damageObjectSO;
         objImage.sprite = damageObjectSO.spriteInHand;
-        objName.text = damageObjectSO.name;
+        objName.text = LocalizationManager.Localize(damageObjectSO.keyName);
+        objDescription.text = LocalizationManager.Localize(damageObjectSO.keyDescription);
         objImage.color = Color.white;
     }
 
     public virtual void ShowEmptyObj()
     {
-        //objImage.sprite = null;
+        objImage.color = Color.white;
+        objImage.sprite = null;
         objName.text = "";
+        objDescription.text = "";
     }
 }

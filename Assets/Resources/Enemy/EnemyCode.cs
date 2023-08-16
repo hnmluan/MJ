@@ -1,6 +1,7 @@
 public enum EnemyCode
 {
     NoEnemy = 0,
-    Bamboo = 1,
+    GreenBamboo = 1,
+    YellowBamboo = 2,
 }
 

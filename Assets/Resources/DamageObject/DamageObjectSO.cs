@@ -4,24 +4,14 @@ using UnityEngine;
 public class DamageObjectSO : ScriptableObject
 {
     public DamageObjectCode damageObjectCode = DamageObjectCode.NoDamageObject;
-
     public DamageObjectType damageObjectType = DamageObjectType.NoType;
-
-    public string damageObjectName;
-
+    public string keyName;
+    public string keyDescription;
     public Sprite spriteInHand;
-
     public Sprite spriteInAttack;
-
     public float range;
-
     public int damage;
-
-    public string discription;
-
     public float speed;
-
     public float attackTime;
-
     public float attackRate;
 }
