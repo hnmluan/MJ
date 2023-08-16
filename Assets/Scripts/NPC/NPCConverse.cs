@@ -13,19 +13,9 @@ public class NPCConverse : NPCAbstract, IInteractable
 
     protected override void Start()
     {
-        UIDialog.Instance.OnHideDialog += () => this.isInConversation = false;
-    }
-
-    private void Update()
-    {
-        if (isInConversation)
-        {
-            npcCtrl.ObjMoveToPlayer.enabled = true;
-            npcCtrl.ObjMoveFree.enabled = false;
-            return;
-        }
-        npcCtrl.ObjMoveToPlayer.enabled = false;
-        npcCtrl.ObjMoveFree.enabled = true;
+        UIDialog.Instance.OnHideDialog += () => MoveFree();
+        UIDialog.Instance.OnShowDialog += () => MoveToPlayer();
+        MoveFree();
     }
 
     public void Interact()
@@ -33,13 +23,23 @@ public class NPCConverse : NPCAbstract, IInteractable
         if (!IsConverable()) return;
         StartCoroutine(UIDialog.Instance.ShowDialog(dialogsToShow, npcCtrl.NPCSO.faceset));
         isInConversation = true;
+        Dictionary.Instance.AddDictionary(npcCtrl.NPCSO);
+    }
 
+    private void MoveToPlayer()
+    {
+        npcCtrl.ObjMoveToPlayer.enabled = true;
+        npcCtrl.ObjMoveFree.enabled = false;
+    }
+    private void MoveFree()
+    {
+        npcCtrl.ObjMoveToPlayer.enabled = false;
+        npcCtrl.ObjMoveFree.enabled = true;
     }
 
     private bool IsConverable()
     {
         dialogsToShow = npcCtrl.NPCSO.npcDialog.GetLocalizationKeysForTask("task_1");
-        //nếu không có lời thoại nào của npc trong nhiệm vụ đó thì không thể giao tiếp
         return dialogsToShow.Count != 0;
     }
 

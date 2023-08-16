@@ -35,6 +35,7 @@ public class EnemyDamageReceiver : DamageReceiver
         this.OnDeadFX();
         this.OnDeadDrop();
         this.enemyCtrl.EnemyDespawn.DespawnObject();
+        Dictionary.Instance.AddDictionary(enemyCtrl.EnemySO);
     }
 
     protected virtual void OnDeadDrop()

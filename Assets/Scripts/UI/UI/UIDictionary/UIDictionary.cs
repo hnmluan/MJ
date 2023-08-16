@@ -4,10 +4,12 @@ using UnityEngine;
 public class UIDictionary : BaseUI
 {
     [Header("UI Dictionary")]
+
     private static UIDictionary instance;
     public static UIDictionary Instance => instance;
 
-    [SerializeField] private EDictionaryType dictionaryFilter = EDictionaryType.Enemies;
+    [SerializeField] private EDictionaryType dictionaryType = EDictionaryType.Enemies;
+    public EDictionaryType DictionaryType => dictionaryType;
 
     protected override void Awake()
     {
@@ -16,21 +18,17 @@ public class UIDictionary : BaseUI
         UIDictionary.instance = this;
     }
 
-    protected override void Start()
-    {
-        ShowProfileSO();
-        base.Start();
-    }
+    protected override void OnEnable() => this.ShowProfileSO();
 
     public virtual void ShowProfileSO()
     {
         this.ClearItems();
 
-        if (dictionaryFilter == EDictionaryType.Enemies) ShowEnemyProfileSO();
+        if (dictionaryType == EDictionaryType.Enemies) ShowEnemyProfileSO();
 
-        if (dictionaryFilter == EDictionaryType.NPCs) ShowNPCProfileSO();
+        if (dictionaryType == EDictionaryType.NPCs) ShowNPCProfileSO();
 
-        if (dictionaryFilter == EDictionaryType.Weapons) ShowDamageObjectProfileSO();
+        if (dictionaryType == EDictionaryType.Weapons) ShowDamageObjectProfileSO();
     }
 
     private void ShowEnemyProfileSO()
@@ -52,7 +50,7 @@ public class UIDictionary : BaseUI
 
     public void SetDictionaryFilter(EDictionaryType dictionaryFilter)
     {
-        this.dictionaryFilter = dictionaryFilter;
+        this.dictionaryType = dictionaryFilter;
         this.ShowProfileSO();
     }
 
