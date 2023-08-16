@@ -37,16 +37,16 @@ public class UIInvDetail : UIInvDetailAbstract
         this.itemInventory = item;
         ShowButton();
 
-        uiInvDetailCtrl.ItemImage.sprite = this.ItemInventory.itemProfile.itemSprite;
-        uiInvDetailCtrl.ItemDescription.GetComponent<LocalizedText>().LocalizationKey = "Item.Description";
-        uiInvDetailCtrl.ItemName.GetComponent<LocalizedText>().LocalizationKey = "Item." + this.ItemInventory.itemProfile.itemName.Replace(" ", "");
-        uiInvDetailCtrl.ItemQuantity.GetComponent<LocalizedText>().LocalizationKey = this.ItemInventory.itemCount.ToString();
-        uiInvDetailCtrl.ItemType.GetComponent<LocalizedText>().LocalizationKey = "Item.Type." + this.ItemInventory.itemProfile.itemType.ToString().Replace(" ", "");
+        string itemNameKey = LocalizationKey.ItemName(item.itemProfile.itemCode);
+        string itemTypeKey = LocalizationKey.ItemType(item.itemProfile.itemType);
+        string itemDiscriptionKey = "Item.Description";
 
-        uiInvDetailCtrl.ItemDescription.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemName.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemQuantity.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemType.GetComponent<LocalizedText>().Localize();
+        uiInvDetailCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
+        uiInvDetailCtrl.ItemQuantity.text = item.itemCount.ToString();
+        uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(itemNameKey);
+        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(itemDiscriptionKey);
+        uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize(itemTypeKey);
+
     }
 
     public virtual void SetEmptyUIInvDetail()
@@ -55,15 +55,10 @@ public class UIInvDetail : UIInvDetailAbstract
         this.itemInventory = null;
 
         uiInvDetailCtrl.ItemImage.sprite = null;
-        uiInvDetailCtrl.ItemDescription.GetComponent<LocalizedText>().LocalizationKey = "empty";
-        uiInvDetailCtrl.ItemName.GetComponent<LocalizedText>().LocalizationKey = "empty";
-        uiInvDetailCtrl.ItemQuantity.GetComponent<LocalizedText>().LocalizationKey = "empty";
-        uiInvDetailCtrl.ItemType.GetComponent<LocalizedText>().LocalizationKey = "empty";
-
-        uiInvDetailCtrl.ItemDescription.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemName.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemQuantity.GetComponent<LocalizedText>().Localize();
-        uiInvDetailCtrl.ItemType.GetComponent<LocalizedText>().Localize();
+        uiInvDetailCtrl.ItemDescription.text = null;
+        uiInvDetailCtrl.ItemName.text = null;
+        uiInvDetailCtrl.ItemQuantity.text = null;
+        uiInvDetailCtrl.ItemType.text = null;
     }
 
     public virtual void UseItem()

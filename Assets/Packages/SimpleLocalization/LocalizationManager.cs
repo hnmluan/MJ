@@ -110,8 +110,8 @@ namespace Assets.SimpleLocalization
 
             if (missed)
             {
-                // Debug.LogWarning(localizationKey);
-                // Debug.LogWarning($"Translation not found: {localizationKey} ({Language}).");
+                // Debug.LogWarning(LocalizationKey);
+                // Debug.LogWarning($"Translation not found: {LocalizationKey} ({Language}).");
 
                 return Dictionary["English"].ContainsKey(localizationKey) ? Dictionary["English"][localizationKey] : localizationKey;
             }

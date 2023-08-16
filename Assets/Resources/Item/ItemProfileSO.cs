@@ -53,6 +53,8 @@ public class ItemProfileSO : ScriptableObject
 
         return randomItemCode;
     }
+
+    public static string GetLocalizationKeyOfName(ItemCode itemCode) => "Item." + itemCode.ToString().Replace(" ", "");
 }
 
 
