@@ -102,4 +102,8 @@ public class Dictionary : InitMonoBehaviour
     Dictionary.Instance.EnemiesAvailableButNotSeen.Count
     + Dictionary.Instance.NpcsAvailableButNotSeen.Count
     + Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Count;
+
+    public int GetNumberOfNpcsInNotSeen() => Dictionary.Instance.NpcsAvailableButNotSeen.Count;
+    public int GetNumberOfEnemiesInNotSeen() => Dictionary.Instance.enemySOsAvailableButNotSeen.Count;
+    public int GetNumberOfWeaponsInNotSeen() => Dictionary.Instance.damageObjectSOsAvailableButNotSeen.Count;
 }
