@@ -29,6 +29,13 @@ public class UIItemInventory : InitMonoBehaviour
         this.LoadFocus();
     }
 
+    private void Update()
+    {
+        this.focus.gameObject.SetActive(false);
+        if (UIInventory.Instance.GetIndexSlot(itemInventory) == UIInventory.Instance.CurrSlots && UIInventory.Instance.CurrSlots != -1)
+            this.focus.gameObject.SetActive(true);
+    }
+
     private void LoadFocus()
     {
         if (this.focus != null) return;

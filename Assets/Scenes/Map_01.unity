@@ -71771,6 +71771,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySort: 1
   inventoryFilter: 0
+  CurrSlots: -1
 --- !u!4 &1630028113 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8326370759844356215, guid: 1d2d8c4939d4c3649bbd4393f8e341be, type: 3}

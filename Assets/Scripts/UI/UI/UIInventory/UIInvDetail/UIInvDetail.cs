@@ -21,6 +21,17 @@ public class UIInvDetail : UIInvDetailAbstract
 
     protected override void OnDisable() => this.SetEmptyUIInvDetail();
 
+    private void Update()
+    {
+        if (UIInventory.Instance.GetItemInventoryInCurrSlots() == null)
+        {
+            SetEmptyUIInvDetail();
+            UIInventory.Instance.CurrSlots = -1;
+            return;
+        }
+        SetUIInvDetail(UIInventory.Instance.GetItemInventoryInCurrSlots());
+    }
+
     public virtual void SetUIInvDetail(ItemInventory item)
     {
         this.itemInventory = item;

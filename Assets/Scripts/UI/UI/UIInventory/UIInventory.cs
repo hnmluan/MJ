@@ -12,11 +12,54 @@ public class UIInventory : BaseUI
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
+    public int CurrSlots = -1;
+
     protected override void Awake()
     {
         base.Awake();
         if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
         UIInventory.instance = this;
+    }
+
+    protected override void OnEnable() => CurrSlots = -1;
+
+    public int GetIndexSlot(ItemInventory itemInventory)
+    {
+        int index = -1;
+
+        int itemCount = UIInventoryCtrl.Instance.Content.childCount;
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            Transform currentItem = UIInventoryCtrl.Instance.Content.GetChild(i);
+
+            if (currentItem.gameObject.activeSelf == true)
+            {
+                UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
+
+                ItemInventory currentProfile = currentUIItem.ItemInventory;
+
+                index += 1;
+
+                if (currentProfile == itemInventory)
+                {
+                    return index;
+                }
+            }
+        }
+        return -1;
+    }
+
+    public ItemInventory GetItemInventoryInCurrSlots()
+    {
+        for (int i = 0; i < Inventory.Instance.Items.Count; i++)
+        {
+            if (GetIndexSlot(Inventory.Instance.Items[i]) == CurrSlots)
+            {
+                return Inventory.Instance.Items[i];
+            }
+        }
+        return null;
     }
 
     public void SetInventorySort(InventorySort inventorySort)
