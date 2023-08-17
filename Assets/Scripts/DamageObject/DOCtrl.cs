@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected DamageObjectSO doSO;
-    public DamageObjectSO DOSO => doSO;
+    [SerializeField] protected WeaponProfileSO doSO;
+    public WeaponProfileSO DOSO => doSO;
 
     [SerializeField] protected SpriteRenderer doSR;
     public SpriteRenderer DOSR => doSR;
@@ -74,8 +74,8 @@ public class DOCtrl : InitMonoBehaviour
         string resPathMelee = "DamageObject/Melee/" + transform.name;
         string resPathRanged = "DamageObject/Ranged/" + transform.name;
 
-        this.doSO = Resources.Load<DamageObjectSO>(resPathMelee) != null ? Resources.Load<DamageObjectSO>(resPathMelee) : Resources.Load<DamageObjectSO>(resPathRanged);
-        string resPath = Resources.Load<DamageObjectSO>(resPathMelee) != null ? resPathMelee : resPathRanged;
+        this.doSO = Resources.Load<WeaponProfileSO>(resPathMelee) != null ? Resources.Load<WeaponProfileSO>(resPathMelee) : Resources.Load<WeaponProfileSO>(resPathRanged);
+        string resPath = Resources.Load<WeaponProfileSO>(resPathMelee) != null ? resPathMelee : resPathRanged;
 
         Debug.Log(transform.name + ": LoadMeleeDOSO" + resPath, gameObject);
     }

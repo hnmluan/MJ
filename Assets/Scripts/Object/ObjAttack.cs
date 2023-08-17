@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class ObjAttack : InitMonoBehaviour
 {
-    [SerializeField] protected DamageObjectCode damageObject = DamageObjectCode.NoDamageObject;
+    [SerializeField] protected WeaponCode damageObject = WeaponCode.NoWeapon;
 
     [SerializeField] protected bool isAttacking = false;
 
@@ -49,10 +49,10 @@ public abstract class ObjAttack : InitMonoBehaviour
         doCtrl.SetAttacker(transform.parent);
     }
 
-    public DamageObjectSO GetDamageObjectSO()
+    public WeaponProfileSO GetDamageObjectSO()
     {
         string resPath = "DamageObject/" + this.damageObject.ToString();
-        return Resources.Load<DamageObjectSO>(resPath);
+        return Resources.Load<WeaponProfileSO>(resPath);
     }
 
     protected abstract bool IsAttacking();

@@ -27,7 +27,6 @@ public class ItemProfileSO : ScriptableObject
 
     public int priceToSell;
 
-
     public static ItemProfileSO FindByItemCode(ItemCode itemCode)
     {
         var profiles = Resources.LoadAll("Item", typeof(ItemProfileSO));

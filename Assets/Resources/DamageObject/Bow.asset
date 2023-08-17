@@ -15,7 +15,7 @@ MonoBehaviour:
   damageObjectCode: 2
   damageObjectType: 2
   keyName: Bow
-  discription: 
+  keyDescription: 
   spriteInHand: {fileID: 21300000, guid: f74f69139326f2c48a28653f079bece2, type: 3}
   spriteInAttack: {fileID: 21300000, guid: edc704a36033feb479180a886f9ac3f9, type: 3}
   range: 8
@@ -23,3 +23,12 @@ MonoBehaviour:
   speed: 16
   attackTime: 0.5
   attackRate: 0.2
+  recipes:
+  - level: 1
+    recipeIngredients:
+    - itemProfile: {fileID: 0}
+      itemCount: 0
+    - itemProfile: {fileID: 0}
+      itemCount: 0
+    recipePrice: []
+    damage: 0

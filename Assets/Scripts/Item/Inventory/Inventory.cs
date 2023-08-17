@@ -23,6 +23,7 @@ public class Inventory : InitMonoBehaviour
         if (Inventory.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
         Inventory.instance = this;
     }
+
     protected override void Start()
     {
         this.AddItem(ItemCode.GoldOre, 3);

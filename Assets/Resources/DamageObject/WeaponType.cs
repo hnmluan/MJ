@@ -1,4 +1,4 @@
-public enum DamageObjectType
+public enum WeaponType
 {
     NoType = 0,
     Melee = 1,

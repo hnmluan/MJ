@@ -62,7 +62,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
     {
         if (objSO is EnemyProfileSO) ShowDetailEnemy(objSO as EnemyProfileSO);
         if (objSO is NPCProfileSO) ShowDetailNPC(objSO as NPCProfileSO);
-        if (objSO is DamageObjectSO) ShowDetailDamageObject(objSO as DamageObjectSO);
+        if (objSO is WeaponProfileSO) ShowDetailDamageObject(objSO as WeaponProfileSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(objSO)) HideDetail(objSO);
     }
 
@@ -71,7 +71,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
         objImage.color = Color.black;
         if (objSO is EnemyProfileSO) objName.text = LocalizationManager.Localize((objSO as EnemyProfileSO).keyName);
         if (objSO is NPCProfileSO) objName.text = LocalizationManager.Localize((objSO as NPCProfileSO).keyName);
-        if (objSO is DamageObjectSO) objName.text = LocalizationManager.Localize((objSO as DamageObjectSO).keyName);
+        if (objSO is WeaponProfileSO) objName.text = LocalizationManager.Localize((objSO as WeaponProfileSO).keyName);
         objDescription.text = "???????";
     }
 
@@ -93,7 +93,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
         objImage.color = Color.white;
     }
 
-    private void ShowDetailDamageObject(DamageObjectSO damageObjectSO)
+    private void ShowDetailDamageObject(WeaponProfileSO damageObjectSO)
     {
         itemDictionary = damageObjectSO;
         objImage.sprite = damageObjectSO.spriteInHand;

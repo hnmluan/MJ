@@ -15,11 +15,11 @@ public class Dictionary : InitMonoBehaviour
         Dictionary.instance = this;
     }
 
-    [SerializeField] List<DamageObjectSO> damageObjectSOsAvailableSeen;
-    public List<DamageObjectSO> DamageObjectSOsAvailableSeen { get => damageObjectSOsAvailableSeen; }
+    [SerializeField] List<WeaponProfileSO> damageObjectSOsAvailableSeen;
+    public List<WeaponProfileSO> DamageObjectSOsAvailableSeen { get => damageObjectSOsAvailableSeen; }
 
-    [SerializeField] List<DamageObjectSO> damageObjectSOsAvailableButNotSeen;
-    public List<DamageObjectSO> DamageObjectSOsAvailableButNotSeen { get => damageObjectSOsAvailableButNotSeen; }
+    [SerializeField] List<WeaponProfileSO> damageObjectSOsAvailableButNotSeen;
+    public List<WeaponProfileSO> DamageObjectSOsAvailableButNotSeen { get => damageObjectSOsAvailableButNotSeen; }
 
     [SerializeField] List<NPCProfileSO> npcSOsAvailableSeen;
     public List<NPCProfileSO> NpcsAvailableSeen { get => npcSOsAvailableSeen; }
@@ -33,7 +33,7 @@ public class Dictionary : InitMonoBehaviour
     [SerializeField] List<EnemyProfileSO> enemySOsAvailableButNotSeen;
     public List<EnemyProfileSO> EnemiesAvailableButNotSeen { get => enemySOsAvailableButNotSeen; }
 
-    private void AddDictionary(DamageObjectSO damageObjectSO)
+    private void AddDictionary(WeaponProfileSO damageObjectSO)
     {
         if (damageObjectSOsAvailableSeen.Contains(damageObjectSO) || damageObjectSOsAvailableButNotSeen.Contains(damageObjectSO)) return;
         damageObjectSOsAvailableButNotSeen.Add(damageObjectSO);
@@ -55,7 +55,7 @@ public class Dictionary : InitMonoBehaviour
     {
         if (profileSO is EnemyProfileSO) AddDictionary(profileSO as EnemyProfileSO);
         if (profileSO is NPCProfileSO) AddDictionary(profileSO as NPCProfileSO);
-        if (profileSO is DamageObjectSO) AddDictionary(profileSO as DamageObjectSO);
+        if (profileSO is WeaponProfileSO) AddDictionary(profileSO as WeaponProfileSO);
         OnAddItem();
     }
 
@@ -77,7 +77,7 @@ public class Dictionary : InitMonoBehaviour
         }
     }
 
-    private void SeenItemDictionary(DamageObjectSO damageObjectSO)
+    private void SeenItemDictionary(WeaponProfileSO damageObjectSO)
     {
         if (damageObjectSOsAvailableButNotSeen.Contains(damageObjectSO))
         {
@@ -90,13 +90,13 @@ public class Dictionary : InitMonoBehaviour
     {
         if (profileSO is EnemyProfileSO) SeenItemDictionary(profileSO as EnemyProfileSO);
         if (profileSO is NPCProfileSO) SeenItemDictionary(profileSO as NPCProfileSO);
-        if (profileSO is DamageObjectSO) SeenItemDictionary(profileSO as DamageObjectSO);
+        if (profileSO is WeaponProfileSO) SeenItemDictionary(profileSO as WeaponProfileSO);
         this.OnAddItem();
     }
 
     public bool CheckAvailableItemInDictonary(ScriptableObject profileSO)
-        => damageObjectSOsAvailableSeen.Contains(profileSO as DamageObjectSO)
-        || damageObjectSOsAvailableButNotSeen.Contains(profileSO as DamageObjectSO)
+        => damageObjectSOsAvailableSeen.Contains(profileSO as WeaponProfileSO)
+        || damageObjectSOsAvailableButNotSeen.Contains(profileSO as WeaponProfileSO)
         || npcSOsAvailableSeen.Contains(profileSO as NPCProfileSO)
         || npcSOsAvailableButNotSeen.Contains(profileSO as NPCProfileSO)
         || enemySOsAvailableSeen.Contains(profileSO as EnemyProfileSO)

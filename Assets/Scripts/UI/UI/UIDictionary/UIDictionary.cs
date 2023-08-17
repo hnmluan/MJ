@@ -56,7 +56,7 @@ public class UIDictionary : BaseUI, IActionDictionaryObserver
 
     private void ShowDamageObjectProfileSO()
     {
-        foreach (DamageObjectSO item in GetDamageObjectProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (WeaponProfileSO item in GetDamageObjectProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIDictionaryItemSpawner.Instance.ClearItems();
@@ -67,7 +67,7 @@ public class UIDictionary : BaseUI, IActionDictionaryObserver
         this.ShowProfileSO();
     }
 
-    private List<DamageObjectSO> GetDamageObjectProfileSO() => new List<DamageObjectSO>(Resources.LoadAll<DamageObjectSO>("DamageObject"));
+    private List<WeaponProfileSO> GetDamageObjectProfileSO() => new List<WeaponProfileSO>(Resources.LoadAll<WeaponProfileSO>("DamageObject"));
 
     private List<NPCProfileSO> GetNPCProfileSO() => new List<NPCProfileSO>(Resources.LoadAll<NPCProfileSO>("NPC"));
 
@@ -91,12 +91,12 @@ public class UIDictionary : BaseUI, IActionDictionaryObserver
 
             string currentName =
                 currentProfile is EnemyProfileSO ? LocalizationManager.Localize((currentProfile as EnemyProfileSO).keyName) :
-                currentProfile is DamageObjectSO ? LocalizationManager.Localize((currentProfile as DamageObjectSO).keyName) :
+                currentProfile is WeaponProfileSO ? LocalizationManager.Localize((currentProfile as WeaponProfileSO).keyName) :
                 LocalizationManager.Localize((currentProfile as NPCProfileSO).keyName);
 
             string nextName =
                 nextProfile is EnemyProfileSO ? LocalizationManager.Localize((nextProfile as EnemyProfileSO).keyName) :
-                nextProfile is DamageObjectSO ? LocalizationManager.Localize((nextProfile as DamageObjectSO).keyName) :
+                nextProfile is WeaponProfileSO ? LocalizationManager.Localize((nextProfile as WeaponProfileSO).keyName) :
                 LocalizationManager.Localize((nextProfile as NPCProfileSO).keyName);
 
             bool isSwap = false;

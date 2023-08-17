@@ -45,7 +45,7 @@ public class DODamageSender : DamageSender
     public override void Send(DamageReceiver damageReceiver)
     {
         base.Send(damageReceiver);
-        if (damageObjectCtrl.DOSO.damageObjectType == DamageObjectType.Melee) return;
+        if (damageObjectCtrl.DOSO.damageObjectType == WeaponType.Melee) return;
         this.DestroyDO();
     }
 
