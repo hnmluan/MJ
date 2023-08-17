@@ -2,7 +2,7 @@ using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemDictionary : InitMonoBehaviour
+public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
 {
     [Header("UI Item Dictionary")]
     [SerializeField] protected ScriptableObject itemDictionary;
@@ -16,6 +16,14 @@ public class UIItemDictionary : InitMonoBehaviour
 
     [SerializeField] protected Transform iconNewItem;
     public Transform IconNewItem => iconNewItem;
+
+    protected override void Start() => Dictionary.Instance.AddObserver(this);
+
+    protected override void OnEnable()
+    {
+        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
+        else iconNewItem.gameObject.SetActive(false);
+    }
 
     protected override void LoadComponents()
     {
@@ -44,12 +52,6 @@ public class UIItemDictionary : InitMonoBehaviour
         if (this.iconNewItem != null) return;
         this.iconNewItem = transform.Find("New");
         Debug.Log(transform.name + ": LoadIonNewItem", gameObject);
-    }
-
-    private void FixedUpdate()
-    {
-        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
-        else iconNewItem.gameObject.SetActive(false);
     }
 
     public virtual void ShowItem(ScriptableObject item)
@@ -99,4 +101,16 @@ public class UIItemDictionary : InitMonoBehaviour
         Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as NPCProfileSO)
             || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyProfileSO)
             || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as DamageObjectSO);
+
+    public void OnAddItem()
+    {
+        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
+        else iconNewItem.gameObject.SetActive(false);
+    }
+
+    public void OnSeenItem()
+    {
+        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
+        else iconNewItem.gameObject.SetActive(false);
+    }
 }

@@ -9,6 +9,6 @@ public class PressUIItemInventory : PressUI
         UIInvDetail.Instance.SetUIInvDetail(itemInventory);
         UIInventory.Instance.CurrSlots = UIInventory.Instance.GetIndexSlot(itemInventory);
         //uiItemInventory.ShowItem(itemInventory);
-        UIInventory.Instance.ShowItems();
+        //UIInventory.Instance.ShowItems();
     }
 }

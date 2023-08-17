@@ -1,11 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuantityNewItemDictionary : InitMonoBehaviour
+public class TxtNewItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
 {
     [SerializeField] protected Transform iconNew;
 
     [SerializeField] protected Text numberOfNewItem;
+
+    protected override void OnEnable()
+    {
+        if (Dictionary.Instance.GetNumberOfItemInNotSeen() == 0)
+        {
+            iconNew.gameObject.SetActive(false);
+            return;
+        }
+        iconNew.gameObject.SetActive(true);
+        numberOfNewItem.text = Dictionary.Instance.GetNumberOfItemInNotSeen().ToString();
+    }
+
+    protected override void Start() => Dictionary.Instance.AddObserver(this);
 
     protected override void LoadComponents()
     {
@@ -28,14 +41,15 @@ public class QuantityNewItemDictionary : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadIconNew", gameObject);
     }
 
-    private void FixedUpdate()
+    public void OnAddItem()
     {
-        if (Dictionary.Instance.GetNumberOfItemInNotSeen() == 0)
-        {
-            iconNew.gameObject.SetActive(false);
-            return;
-        }
         iconNew.gameObject.SetActive(true);
         numberOfNewItem.text = Dictionary.Instance.GetNumberOfItemInNotSeen().ToString();
+    }
+
+    public void OnSeenItem()
+    {
+        numberOfNewItem.text = Dictionary.Instance.GetNumberOfItemInNotSeen().ToString();
+        if (Dictionary.Instance.GetNumberOfItemInNotSeen() == 0) iconNew.gameObject.SetActive(false);
     }
 }

@@ -6,6 +6,8 @@ public class Dictionary : InitMonoBehaviour
     private static Dictionary instance;
     public static Dictionary Instance { get => instance; }
 
+    [SerializeField] protected List<IActionDictionaryObserver> observers = new List<IActionDictionaryObserver>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -54,6 +56,7 @@ public class Dictionary : InitMonoBehaviour
         if (profileSO is EnemyProfileSO) AddDictionary(profileSO as EnemyProfileSO);
         if (profileSO is NPCProfileSO) AddDictionary(profileSO as NPCProfileSO);
         if (profileSO is DamageObjectSO) AddDictionary(profileSO as DamageObjectSO);
+        OnAddItem();
     }
 
     private void SeenItemDictionary(EnemyProfileSO enemyProfileSO)
@@ -88,6 +91,7 @@ public class Dictionary : InitMonoBehaviour
         if (profileSO is EnemyProfileSO) SeenItemDictionary(profileSO as EnemyProfileSO);
         if (profileSO is NPCProfileSO) SeenItemDictionary(profileSO as NPCProfileSO);
         if (profileSO is DamageObjectSO) SeenItemDictionary(profileSO as DamageObjectSO);
+        this.OnAddItem();
     }
 
     public bool CheckAvailableItemInDictonary(ScriptableObject profileSO)
@@ -104,6 +108,20 @@ public class Dictionary : InitMonoBehaviour
     + Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Count;
 
     public int GetNumberOfNpcsInNotSeen() => Dictionary.Instance.NpcsAvailableButNotSeen.Count;
+
     public int GetNumberOfEnemiesInNotSeen() => Dictionary.Instance.enemySOsAvailableButNotSeen.Count;
+
     public int GetNumberOfWeaponsInNotSeen() => Dictionary.Instance.damageObjectSOsAvailableButNotSeen.Count;
+
+    public virtual void AddObserver(IActionDictionaryObserver observer) => this.observers.Add(observer);
+
+    protected virtual void OnAddItem()
+    {
+        foreach (IActionDictionaryObserver observer in this.observers) observer.OnAddItem();
+    }
+
+    protected virtual void OnDeductItem()
+    {
+        foreach (IActionDictionaryObserver observer in this.observers) observer.OnSeenItem();
+    }
 }

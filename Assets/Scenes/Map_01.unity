@@ -16306,10 +16306,7 @@ MonoBehaviour:
   npcSOsAvailableSeen: []
   npcSOsAvailableButNotSeen: []
   enemySOsAvailableSeen: []
-  enemySOsAvailableButNotSeen:
-  - {fileID: 11400000, guid: fd94a674abfd567409c90f3729fac24a, type: 2}
-  - {fileID: 11400000, guid: e7d50d7217c8f054b9cfebc9b4c41348, type: 2}
-  - {fileID: 11400000, guid: 12d2a289ffea2894d836ec0c1cbe0822, type: 2}
+  enemySOsAvailableButNotSeen: []
 --- !u!1001 &426508845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22410,8 +22407,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 342431502}
   m_HandleRect: {fileID: 342431501}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 1
+  m_Value: 0
+  m_Size: 0.9310345
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

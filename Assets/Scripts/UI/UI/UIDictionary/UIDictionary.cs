@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Assets.SimpleLocalization;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDictionary : BaseUI
+public class UIDictionary : BaseUI, IActionDictionaryObserver
 {
     [Header("UI Dictionary")]
 
@@ -16,6 +17,12 @@ public class UIDictionary : BaseUI
         base.Awake();
         if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
         UIDictionary.instance = this;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        Dictionary.Instance.AddObserver(this);
     }
 
     protected override void OnEnable()
@@ -33,6 +40,8 @@ public class UIDictionary : BaseUI
         if (dictionaryType == EDictionaryType.NPCs) ShowNPCProfileSO();
 
         if (dictionaryType == EDictionaryType.Weapons) ShowDamageObjectProfileSO();
+
+        SortItems();
     }
 
     private void ShowEnemyProfileSO()
@@ -63,4 +72,57 @@ public class UIDictionary : BaseUI
     private List<NPCProfileSO> GetNPCProfileSO() => new List<NPCProfileSO>(Resources.LoadAll<NPCProfileSO>("NPC"));
 
     private List<EnemyProfileSO> GetEnemyProfileSO() => new List<EnemyProfileSO>(Resources.LoadAll<EnemyProfileSO>("Enemy"));
+
+    protected virtual void SortItems()
+    {
+        int itemCount = UIDictionaryCtrl.Instance.Content.childCount;
+        bool isSorting = false;
+
+        for (int i = 0; i < itemCount - 1; i++)
+        {
+            Transform currObj = UIDictionaryCtrl.Instance.Content.GetChild(i);
+            Transform nextObj = UIDictionaryCtrl.Instance.Content.GetChild(i + 1);
+
+            UIItemDictionary currentUIObj = currObj.GetComponent<UIItemDictionary>();
+            UIItemDictionary nextUIObj = nextObj.GetComponent<UIItemDictionary>();
+
+            ScriptableObject currentProfile = currentUIObj.ItemDictionary;
+            ScriptableObject nextProfile = nextUIObj.ItemDictionary;
+
+            string currentName =
+                currentProfile is EnemyProfileSO ? LocalizationManager.Localize((currentProfile as EnemyProfileSO).keyName) :
+                currentProfile is DamageObjectSO ? LocalizationManager.Localize((currentProfile as DamageObjectSO).keyName) :
+                LocalizationManager.Localize((currentProfile as NPCProfileSO).keyName);
+
+            string nextName =
+                nextProfile is EnemyProfileSO ? LocalizationManager.Localize((nextProfile as EnemyProfileSO).keyName) :
+                nextProfile is DamageObjectSO ? LocalizationManager.Localize((nextProfile as DamageObjectSO).keyName) :
+                LocalizationManager.Localize((nextProfile as NPCProfileSO).keyName);
+
+            bool isSwap = false;
+
+            isSwap = string.Compare(currentName, nextName) == 1;
+
+            if (isSwap)
+            {
+                this.SwapItems(currObj, nextObj);
+                isSorting = true;
+            }
+        }
+
+        if (isSorting) this.SortItems();
+    }
+
+    protected virtual void SwapItems(Transform currentItem, Transform nextItem)
+    {
+        int currentIndex = currentItem.GetSiblingIndex();
+        int nextIndex = nextItem.GetSiblingIndex();
+
+        currentItem.SetSiblingIndex(nextIndex);
+        nextItem.SetSiblingIndex(currentIndex);
+    }
+
+    public void OnAddItem() => ShowProfileSO();
+
+    public void OnSeenItem() => ShowProfileSO();
 }

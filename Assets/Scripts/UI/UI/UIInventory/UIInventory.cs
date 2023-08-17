@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : BaseUI
+public class UIInventory : BaseUI, IActionInventoryObserver
 {
     [Header("UI Inventory")]
     private static UIInventory instance;
@@ -19,6 +19,12 @@ public class UIInventory : BaseUI
         base.Awake();
         if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
         UIInventory.instance = this;
+    }
+
+    protected override void Start()
+    {
+        this.Close();
+        Inventory.Instance.AddObserver(this);
     }
 
     protected override void OnEnable() => CurrSlots = -1;
@@ -80,7 +86,7 @@ public class UIInventory : BaseUI
         ShowItems();
     }
 
-    public virtual void ShowItems()
+    private void ShowItems()
     {
         this.ClearItems();
 
@@ -173,4 +179,8 @@ public class UIInventory : BaseUI
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
+
+    public void OnAddItem() => ShowItems();
+
+    public void OnDeductItem() => ShowItems();
 }

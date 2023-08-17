@@ -1,16 +1,16 @@
-public class TxtNewEnemiesDictionary : BaseText
+public class TxtNewEnemiesDictionary : BaseText, IActionDictionaryObserver
 {
-    private void Update()
-    {
-        if (Dictionary.Instance.GetNumberOfEnemiesInNotSeen() == 0)
-        {
-            text.text = "";
-            return;
-        }
+    public void OnAddItem() => text.text = GetNumberNewObjText();
 
-        text.text =
-            "(" +
-            Dictionary.Instance.GetNumberOfEnemiesInNotSeen().ToString() +
-            ")";
+    public void OnSeenItem() => text.text = GetNumberNewObjText();
+
+    protected override void OnEnable() => text.text = GetNumberNewObjText();
+
+    protected override void Start() => Dictionary.Instance.AddObserver(this);
+
+    private string GetNumberNewObjText()
+    {
+        if (Dictionary.Instance.GetNumberOfEnemiesInNotSeen() == 0) return "";
+        return "(" + Dictionary.Instance.GetNumberOfEnemiesInNotSeen().ToString() + ")";
     }
 }

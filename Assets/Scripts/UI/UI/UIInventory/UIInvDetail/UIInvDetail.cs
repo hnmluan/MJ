@@ -67,7 +67,7 @@ public class UIInvDetail : UIInvDetailAbstract
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
         SetUIInvDetail(itemInventory);
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
-        UIInventory.Instance.ShowItems();
+        //UIInventory.Instance.ShowItems();
     }
 
     public virtual void UseAllItem()
@@ -75,7 +75,7 @@ public class UIInvDetail : UIInvDetailAbstract
         for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInvDetail();
-        UIInventory.Instance.ShowItems();
+        //UIInventory.Instance.ShowItems();
     }
 
     public virtual void BuyItem()
@@ -84,7 +84,7 @@ public class UIInvDetail : UIInvDetailAbstract
         Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell);
         SetUIInvDetail(itemInventory);
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
-        UIInventory.Instance.ShowItems();
+        //UIInventory.Instance.ShowItems();
     }
 
     public virtual void BuyAllItem()
@@ -92,7 +92,7 @@ public class UIInvDetail : UIInvDetailAbstract
         Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         SetEmptyUIInvDetail();
-        UIInventory.Instance.ShowItems();
+        //UIInventory.Instance.ShowItems();
     }
 
     private void ShowButton()
