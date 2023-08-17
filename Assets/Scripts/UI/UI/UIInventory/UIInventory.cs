@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.SimpleLocalization;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -124,8 +125,8 @@ public class UIInventory : BaseUI, IActionInventoryObserver
             switch (this.inventorySort)
             {
                 case InventorySort.ByName:
-                    string currentName = currentProfile.keyName;
-                    string nextName = nextProfile.keyName;
+                    string currentName = LocalizationManager.Localize(currentProfile.keyName);
+                    string nextName = LocalizationManager.Localize(nextProfile.keyName);
                     isSwap = string.Compare(currentName, nextName) == 1; // Đổi từ -1 thành 1 để đảo ngược thứ tự
                     break;
                 case InventorySort.ByQuantity:
@@ -153,8 +154,8 @@ public class UIInventory : BaseUI, IActionInventoryObserver
                         // Sắp xếp theo tên nếu cùng số lượng
                         if (currentUIItem.ItemInventory.itemCount == nextUIItem.ItemInventory.itemCount)
                         {
-                            string currentName = currentProfile.keyName;
-                            string nextName = nextProfile.keyName;
+                            string currentName = LocalizationManager.Localize(currentProfile.keyName);
+                            string nextName = LocalizationManager.Localize(nextProfile.keyName);
                             isSwap = string.Compare(currentName, nextName) == 1;
                         }
                         break;

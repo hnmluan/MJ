@@ -10,12 +10,14 @@ public abstract class BaseUI : InitMonoBehaviour
     {
         gameObject.SetActive(true);
         UICtrl.Instance.IsOpen = true;
+        UICtrl.Instance.OpenSetting();
     }
 
     public virtual void Close()
     {
         gameObject.SetActive(false);
         UICtrl.Instance.IsOpen = false;
+        UICtrl.Instance.CloseSetting();
     }
 
     public virtual void Toggle()

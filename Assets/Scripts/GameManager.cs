@@ -34,13 +34,13 @@ public class GameManager : InitMonoBehaviour
             previousState = GameState.Dialog;
         };
 
-        UIMenuCtrl.Instance.OnShowSetting += () =>
+        UICtrl.Instance.OnShowSetting += () =>
         {
             previousState = state;
             state = GameState.Setting;
         };
 
-        UIMenuCtrl.Instance.OnHideSetting += () =>
+        UICtrl.Instance.OnHideSetting += () =>
         {
             if (state == GameState.Setting)
                 if (previousState == GameState.Dialog)
