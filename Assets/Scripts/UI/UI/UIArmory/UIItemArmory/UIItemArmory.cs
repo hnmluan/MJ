@@ -64,6 +64,5 @@ public class UIItemArmory : InitMonoBehaviour
         this.weaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
         this.weaponImage.sprite = weapon.weaponProfile.spriteInHand;
         this.weaponLevel.text = "+ " + weapon.level.ToString();
-
     }
 }

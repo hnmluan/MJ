@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageObjectCode: 1
   damageObjectType: 1
-  keyName: Lance
-  keyDescription: 
+  keyName: Weapon.Lance
+  keyDescription: Weapon.Description
   spriteInHand: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
   spriteInAttack: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
   range: 2

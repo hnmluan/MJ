@@ -1,4 +1,5 @@
 using Assets.SimpleLocalization;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class UIArmoryDetail : UIArmoryDetailAbstract
@@ -26,16 +27,27 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
         uiArmoryDetailCtrl.WeaponImage.sprite = weapon.weaponProfile.spriteInHand;
         uiArmoryDetailCtrl.WeaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
+        uiArmoryDetailCtrl.WeaponLevel.text = "+ " + weapon.level.ToString();
+        uiArmoryDetailCtrl.WeaponType.text = LocalizationManager.Localize("Weapon.Type." + weapon.weaponProfile.damageObjectType.ToString());
+
+        int numberOfUpdateRecipeIngredient = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipeIngredients.Count;
+
+        List<WeaponRecipeIngredient> recipeIngredients = weapon.weaponProfile.levels[weapon.level - 1].weaponRecipe.recipeIngredients;
+
+        for (int i = 0; i < numberOfUpdateRecipeIngredient; i++)
+        {
+            RecipeUpdateLevelUISpawner.Instance.SpawnRecipeUpdateLevelUI(recipeIngredients[i]);
+        }
     }
 
     public virtual void SetEmptyUIArmoryDetail()
     {
         this.weapon = null;
-
         uiArmoryDetailCtrl.WeaponImage.sprite = null;
-        uiArmoryDetailCtrl.WeaponDescription.text = null;
-        uiArmoryDetailCtrl.WeaponName.text = null;
-        uiArmoryDetailCtrl.WeaponQuantity.text = null;
-        uiArmoryDetailCtrl.WeaponType.text = null;
+        uiArmoryDetailCtrl.WeaponName.text = "";
+        uiArmoryDetailCtrl.WeaponLevel.text = "";
+        uiArmoryDetailCtrl.WeaponType.text = "";
+
+        RecipeUpdateLevelUISpawner.Instance.ClearRecipeUpdateLevelUI();
     }
 }

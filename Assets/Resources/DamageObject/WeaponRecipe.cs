@@ -6,11 +6,7 @@ using System.Collections.Generic;
 
 public class WeaponRecipe
 {
-    public int level;
-
     public List<WeaponRecipeIngredient> recipeIngredients;
 
     public List<WeaponRecipePrice> recipePrice;
-
-    public int damage;
 }

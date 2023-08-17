@@ -14,20 +14,16 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
     [SerializeField] protected Text weaponType;
     public Text WeaponType => weaponType;
 
-    [SerializeField] protected Text weaponDescription;
-    public Text WeaponDescription => weaponDescription;
-
-    [SerializeField] protected Text weaponQuantity;
-    public Text WeaponQuantity => weaponQuantity;
+    [SerializeField] protected Text weaponLevel;
+    public Text WeaponLevel => weaponLevel;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadWeaponType();
         this.LoadWeaponName();
-        this.LoadWeaponQuantity();
+        this.LoadWeaponLevel();
         this.LoadWeaponImage();
-        this.LoadWeaponDiscription();
     }
 
     private void LoadWeaponType()
@@ -44,23 +40,11 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 
-    private void LoadWeaponQuantity()
+    private void LoadWeaponLevel()
     {
-        if (this.weaponQuantity != null) return;
-        this.weaponQuantity = transform.Find("Information").Find("Grid").Find("WeaponQuantity").GetComponent<Text>();
+        if (this.weaponLevel != null) return;
+        this.weaponLevel = transform.Find("Information").Find("Grid").Find("WeaponName").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
-    }
-
-    private void LoadWeaponDiscription()
-    {
-        if (this.weaponDescription != null) return;
-        this.weaponDescription = transform.Find("Information").
-            Find("Scroll View").
-            Find("Viewport").
-            Find("Content").
-            Find("Description").
-            GetComponent<Text>();
-        Debug.Log(transform.name + ": LoadWeaponDiscription", gameObject);
     }
 
     private void LoadWeaponImage()

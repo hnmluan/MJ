@@ -6,9 +6,7 @@ public class PressUIItemArmory : PressUI
         UIItemArmory uiWeapon = GetComponent<UIItemArmory>();
         Weapon Weapon = uiWeapon.Weapon;
         if (Weapon == null) return;
+        UIArmoryDetail.Instance.SetEmptyUIArmoryDetail();
         UIArmoryDetail.Instance.SetUIArmoryDetail(Weapon);
-        //UIArmory.Instance.CurrSlots = UIArmory.Instance.GetIndexSlot(Weapon);
-        //uiWeapon.ShowWeapon(Weapon);
-        //UIArmory.Instance.ShowWeapons();
     }
 }

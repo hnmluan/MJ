@@ -26,5 +26,5 @@ public class WeaponProfileSO : ScriptableObject
 
     public float attackRate;
 
-    public List<WeaponRecipe> recipes;
+    public List<WeaponLevel> levels;
 }

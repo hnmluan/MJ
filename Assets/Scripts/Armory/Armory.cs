@@ -18,17 +18,20 @@ public class Armory : InitMonoBehaviour
 
     protected override void Start()
     {
-        AddItem(WeaponCode.Lance, 3);
-        AddItem(WeaponCode.Bow, 3);
+        AddItem(WeaponCode.Bow, 3, 3);
+        AddItem(WeaponCode.Lance, 3, 1);
+        AddItem(WeaponCode.Lance, 3, 2);
+        AddItem(WeaponCode.Bow, 3, 3);
+        AddItem(WeaponCode.Bow, 3, 1);
     }
 
-    public virtual void AddItem(WeaponCode weaponCode, int addCount)
+    public virtual void AddItem(WeaponCode weaponCode, int addCount, int level)
     {
         for (int i = 0; i < addCount; i++)
         {
             Weapon weapon = new Weapon();
             weapon.weaponProfile = GetWeaponProfile(weaponCode);
-            weapon.level = 1;
+            weapon.level = level;
             weapons.Add(weapon);
         }
     }

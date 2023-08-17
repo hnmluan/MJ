@@ -1,2 +1,9 @@
 Key,English,Vietnamese
 Armory.Title,Armory,Kho vũ khí
+Armory.Level,Level,Cấp độ
+Armory.Name,Name,Tên
+Armory.Type,Type,Loại
+Armory.sortName,Name,Tên
+Armory.sortLevel,Level,Cấp độ
+Armory.sort,Sort by:,Sắp xếp
+Armory.filter,Filter By,Lọc bởi:
