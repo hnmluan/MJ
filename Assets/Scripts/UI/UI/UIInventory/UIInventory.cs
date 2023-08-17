@@ -124,8 +124,8 @@ public class UIInventory : BaseUI, IActionInventoryObserver
             switch (this.inventorySort)
             {
                 case InventorySort.ByName:
-                    string currentName = currentProfile.itemName;
-                    string nextName = nextProfile.itemName;
+                    string currentName = currentProfile.keyName;
+                    string nextName = nextProfile.keyName;
                     isSwap = string.Compare(currentName, nextName) == 1; // Đổi từ -1 thành 1 để đảo ngược thứ tự
                     break;
                 case InventorySort.ByQuantity:
@@ -142,7 +142,7 @@ public class UIInventory : BaseUI, IActionInventoryObserver
                 {
                     case InventorySort.ByName:
                         // Sắp xếp theo số lượng nếu cùng tên
-                        if (currentProfile.itemName == nextProfile.itemName)
+                        if (currentProfile.keyName == nextProfile.keyName)
                         {
                             int currentCount = currentUIItem.ItemInventory.itemCount;
                             int nextCount = nextUIItem.ItemInventory.itemCount;
@@ -153,8 +153,8 @@ public class UIInventory : BaseUI, IActionInventoryObserver
                         // Sắp xếp theo tên nếu cùng số lượng
                         if (currentUIItem.ItemInventory.itemCount == nextUIItem.ItemInventory.itemCount)
                         {
-                            string currentName = currentProfile.itemName;
-                            string nextName = nextProfile.itemName;
+                            string currentName = currentProfile.keyName;
+                            string nextName = nextProfile.keyName;
                             isSwap = string.Compare(currentName, nextName) == 1;
                         }
                         break;

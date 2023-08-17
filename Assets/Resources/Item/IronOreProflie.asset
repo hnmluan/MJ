@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 1
   itemType: 1
-  itemName: Iron Ore
+  keyName: Item.IronOre
   itemSprite: {fileID: 21300000, guid: c847893fd58cfc44f8140f2908b45c07, type: 3}
-  discription: 
+  keyDiscription: Item.Description
   defaultMaxStack: 10
   listItemCanGet: []
   price:

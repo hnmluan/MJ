@@ -37,15 +37,11 @@ public class UIInvDetail : UIInvDetailAbstract
         this.itemInventory = item;
         ShowButton();
 
-        string itemNameKey = LocalizationKey.ItemName(item.itemProfile.itemCode);
-        string itemTypeKey = LocalizationKey.ItemType(item.itemProfile.itemType);
-        string itemDiscriptionKey = "Item.Description";
-
         uiInvDetailCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
         uiInvDetailCtrl.ItemQuantity.text = item.itemCount.ToString();
-        uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(itemNameKey);
-        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(itemDiscriptionKey);
-        uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize(itemTypeKey);
+        uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
+        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDiscription);
+        uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize("Item.Type." + item.itemProfile.itemType.ToString());
 
     }
 

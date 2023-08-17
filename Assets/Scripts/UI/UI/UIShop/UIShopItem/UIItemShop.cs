@@ -84,16 +84,12 @@ public class UIItemShop : InitMonoBehaviour
     public virtual void ShowItem(ItemShop item)
     {
         this.itemShop = item;
-        string name = "Item." + this.itemShop.itemProfile.itemName.Replace(" ", "");
 
-        this.itemName.GetComponent<LocalizedText>().LocalizationKey = name;
+        string name = "Item." + this.itemShop.itemProfile.keyName.Replace(" ", "");
 
-        this.itemName.GetComponent<LocalizedText>().Localize();
-
+        this.itemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
         this.itemNumber.text = this.itemShop.quantity.ToString();
-
         this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
-
         this.buyButton.gameObject.SetActive(true);
         this.soldOut.gameObject.SetActive(false);
         this.isSoldOut = false;

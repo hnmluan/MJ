@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 4
   itemType: 3
-  itemName: Golden Mirror
+  keyName: Item.GoldenMirror
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
-  discription: 
+  keyDiscription: Item.Description
   defaultMaxStack: 10
   listItemCanGet:
   - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}

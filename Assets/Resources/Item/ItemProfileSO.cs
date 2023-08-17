@@ -9,11 +9,11 @@ public class ItemProfileSO : ScriptableObject
 
     public ItemType itemType = ItemType.NoType;
 
-    public string itemName = "no-name";
+    public string keyName = "no-name";
 
     public Sprite itemSprite;
 
-    public string discription;
+    public string keyDiscription;
 
     public int defaultMaxStack = 10;
 
