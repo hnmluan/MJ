@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1009659d85167b746be70807c878b473, type: 3}
-  m_Name: CopperSwordProfile
+  m_Name: GoldOre
   m_EditorClassIdentifier: 
-  itemCode: 3
-  itemType: 2
-  keyName: Item.CopperSword
-  itemSprite: {fileID: 21300000, guid: 3eae96585f084314b960f731961cba91, type: 3}
+  itemCode: 2
+  itemType: 1
+  keyName: Item.GoldOre
+  itemSprite: {fileID: 21300000, guid: afd0b8f8d20796a46851bc7663e63a00, type: 3}
   keyDiscription: Item.Description
   defaultMaxStack: 10
   listItemCanGet: []
@@ -29,9 +29,9 @@ MonoBehaviour:
       minValue: 3
       maxValue: 10
   priceToBuy:
-    minValue: 2
-    maxValue: 4
+    minValue: 1
+    maxValue: 2
   quantityToBuy:
     minValue: 3
-    maxValue: 4
-  priceToSell: 5
+    maxValue: 8
+  priceToSell: 7

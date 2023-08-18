@@ -42,7 +42,6 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
         uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDiscription);
         uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize("Item.Type." + item.itemProfile.itemType.ToString());
-
     }
 
     public virtual void SetEmptyUIInvDetail()
@@ -74,13 +73,15 @@ public class UIInvDetail : UIInvDetailAbstract
         //UIInventory.Instance.ShowItems();
     }
 
-    public virtual void BuyItem()
+    public virtual int BuyItem()
     {
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
         Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell);
         SetUIInvDetail(itemInventory);
+        int price = itemInventory.itemProfile.priceToSell;
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
         //UIInventory.Instance.ShowItems();
+        return price;
     }
 
     public virtual void BuyAllItem()

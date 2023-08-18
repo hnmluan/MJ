@@ -51,7 +51,7 @@ public abstract class DamageReceiver : InitMonoBehaviour
     public virtual void Deduct(int deduct)
     {
         if (this.isDead) return;
-
+        UITextSpawner.Instance.SpawnUIText("-" + deduct.ToString(), transform.position);
         this.hp -= deduct;
         if (this.hp < 0) this.hp = 0;
         this.CheckIsDead();

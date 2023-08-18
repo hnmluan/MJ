@@ -1,10 +1,15 @@
 Key,English,Vietnamese
 Item.Type.Resource,Resource,Tài nguyên
 Item.Type.Equiment,Equiment,Thiết bị
-Item.Type.Mirror,Mirror,Hòm vật phẩm
+Item.Type.Treasure,Treasure,Kho báu
 Item.CopperSword,Copper Sword,Kiếm đồng
 Item.GoldOre,Gold Ore,Quặn vàng
 Item.IronOre,Iron Ore,Quặn sắt
-Item.GoldenMirror,Golden Mirror,Gương vàng
+Item.GoldenTreasure,Golden Treasure,Gương vàng
 Item.Description,It can be obtained through killing monsters. It can be obtained through killing monsters. It can be obtained through killing monsters. It can be obtained through killing monsters.,Có thể lấy được thông qua đánh giết quái
 Item.Type.NoType,All,Tất cả
+Item.GoldKey,Gold Key,Chìa khóa vàng
+Item.GoldCup,Gold Cup,Ly vàng
+Item.SilverCup,Silver Cup,Ly bạc
+Item.SilverKey,Silver Key,Chìa khóa bạc
+Item.SilverTreasure,Silver Treasure,Gương bạc

@@ -17,7 +17,7 @@ MonoBehaviour:
   keyName: Enemy.GreenBamboo
   keyDescription: Enemy.Description.GreenBamboo
   sprite: {fileID: -1391039458, guid: 6b32a6d0f5cd7c7418d8a68aff589691, type: 3}
-  hpMax: 1
+  hpMax: 100
   dropListItem:
   - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
     dropRate: 1000000

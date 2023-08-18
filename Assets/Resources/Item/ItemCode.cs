@@ -7,7 +7,12 @@ public enum ItemCode
     IronOre = 1,
     GoldOre = 2,
     CopperSword = 3,
-    GoldenMirror = 4
+    GoldenTreasure = 4,
+    GoldCup = 5,
+    SilverCup = 6,
+    SilverTreasure = 7,
+    SilverKey = 8,
+    GoldKey = 9
 }
 
 public class ItemCodeParser

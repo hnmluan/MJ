@@ -71,11 +71,9 @@ public class DOCtrl : InitMonoBehaviour
     private void LoadDamageObjectSO()
     {
         if (this.doSO != null) return;
-        string resPathMelee = "DamageObject/Melee/" + transform.name;
-        string resPathRanged = "DamageObject/Ranged/" + transform.name;
+        string resPath = "DamageObject/" + transform.name;
 
-        this.doSO = Resources.Load<WeaponProfileSO>(resPathMelee) != null ? Resources.Load<WeaponProfileSO>(resPathMelee) : Resources.Load<WeaponProfileSO>(resPathRanged);
-        string resPath = Resources.Load<WeaponProfileSO>(resPathMelee) != null ? resPathMelee : resPathRanged;
+        this.doSO = Resources.Load<WeaponProfileSO>(resPath);
 
         Debug.Log(transform.name + ": LoadMeleeDOSO" + resPath, gameObject);
     }

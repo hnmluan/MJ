@@ -4,5 +4,5 @@ public enum ItemType
 
     Resource = 1,
     Equiment = 2,
-    Mirror = 3,
+    Treasure = 3,
 }
