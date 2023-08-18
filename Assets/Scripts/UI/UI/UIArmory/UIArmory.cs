@@ -38,7 +38,7 @@ public class UIArmory : BaseUI
         ShowWeapons();
     }
 
-    private void ShowWeapons()
+    public void ShowWeapons()
     {
         this.ClearWeapons();
 

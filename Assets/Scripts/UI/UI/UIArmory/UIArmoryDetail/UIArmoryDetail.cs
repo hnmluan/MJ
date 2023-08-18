@@ -23,6 +23,8 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
     public virtual void SetUIArmoryDetail(Weapon weapon)
     {
+        SetEmptyUIArmoryDetail();
+
         this.weapon = weapon;
 
         uiArmoryDetailCtrl.WeaponImage.sprite = weapon.weaponProfile.spriteInHand;
@@ -31,9 +33,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         uiArmoryDetailCtrl.WeaponType.text = LocalizationManager.Localize("Weapon.Type." + weapon.weaponProfile.damageObjectType.ToString());
 
         this.ShowUpgradeText();
-
         this.ShowUpgradeRecipeIngredient();
-
         this.ShowUpgradeRecipePrice();
     }
 
@@ -57,7 +57,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
         if (numberOfUpdateRecipeIngredient == 0) return;
 
-        List<WeaponRecipeIngredient> recipeIngredients = weapon.weaponProfile.levels[weapon.level - 1].weaponRecipe.recipeIngredients;
+        List<WeaponRecipeIngredient> recipeIngredients = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipeIngredients;
 
         for (int i = 0; i < numberOfUpdateRecipeIngredient; i++) RecipeUpgradeLevelUISpawner.Instance.SpawnRecipeUpdateLevelUI(recipeIngredients[i]);
     }

@@ -26,10 +26,10 @@ public class Inventory : InitMonoBehaviour
 
     protected override void Start()
     {
-        this.AddItem(ItemCode.GoldOre, 3);
-        this.AddItem(ItemCode.IronOre, 4);
-        this.AddItem(ItemCode.GoldOre, 5);
-        this.AddItem(ItemCode.CopperSword, 1);
+        this.AddItem(ItemCode.GoldOre, 100);
+        this.AddItem(ItemCode.IronOre, 100);
+        this.AddItem(ItemCode.GoldOre, 100);
+        this.AddItem(ItemCode.CopperSword, 100);
         this.AddItem(ItemCode.GoldenMirror, 20);
         this.AddItem(ItemCode.CopperSword, 100);
     }

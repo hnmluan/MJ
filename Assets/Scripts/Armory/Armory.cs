@@ -9,6 +9,8 @@ public class Armory : InitMonoBehaviour
     [SerializeField] protected List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
 
+    [SerializeField] public float ratioDecompose;
+
     protected override void Awake()
     {
         base.Awake();
@@ -34,11 +36,6 @@ public class Armory : InitMonoBehaviour
             weapon.level = level;
             weapons.Add(weapon);
         }
-    }
-
-    public virtual void DecomposeWeapons(Weapon weapon)
-    {
-
     }
 
     protected virtual WeaponProfileSO GetWeaponProfile(WeaponCode weaponCode)
