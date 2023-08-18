@@ -20,6 +20,9 @@ public class UIItemArmory : InitMonoBehaviour
     [SerializeField] protected Image focus;
     public Image Focus => focus;
 
+    [SerializeField] protected Transform canUpgrade;
+    public Transform CanUpgrade => canUpgrade;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -27,6 +30,14 @@ public class UIItemArmory : InitMonoBehaviour
         this.LoadWeaponNumer();
         this.LoadWeaponImage();
         this.LoadFocus();
+        this.LoadCanUpgrade();
+    }
+
+    private void LoadCanUpgrade()
+    {
+        if (this.canUpgrade != null) return;
+        this.canUpgrade = transform.Find("CanUpgrade");
+        Debug.Log(transform.name + ": LoadCanUpgrade", gameObject);
     }
 
     private void LoadFocus()
@@ -64,5 +75,12 @@ public class UIItemArmory : InitMonoBehaviour
         this.weaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
         this.weaponImage.sprite = weapon.weaponProfile.spriteInHand;
         this.weaponLevel.text = "+ " + weapon.level.ToString();
+
+        if (weapon.CanUpgrade())
+        {
+            canUpgrade.gameObject.SetActive(true);
+            return;
+        }
+        canUpgrade.gameObject.SetActive(false);
     }
 }

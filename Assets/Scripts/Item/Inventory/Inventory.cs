@@ -194,6 +194,16 @@ public class Inventory : InitMonoBehaviour
 
     public virtual void AddObserver(IActionInventoryObserver observer) => this.observers.Add(observer);
 
+    public virtual int GetQuantity(ItemCode itemCode)
+    {
+        int quantity = 0;
+        for (int i = 0; i < this.items.Count; i++)
+        {
+            if (items[i].itemProfile.itemCode == itemCode) quantity += items[i].itemCount;
+        }
+        return quantity;
+    }
+
     protected virtual void OnAddItem()
     {
         foreach (IActionInventoryObserver observer in this.observers) observer.OnAddItem();

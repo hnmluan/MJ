@@ -17,6 +17,9 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
     [SerializeField] protected Text weaponLevel;
     public Text WeaponLevel => weaponLevel;
 
+    [SerializeField] protected Text weaponUpgrade;
+    public Text WeaponUpgrade => weaponUpgrade;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -24,6 +27,7 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
         this.LoadWeaponName();
         this.LoadWeaponLevel();
         this.LoadWeaponImage();
+        this.LoadWeaponUpgrade();
     }
 
     private void LoadWeaponType()
@@ -40,10 +44,17 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 
+    private void LoadWeaponUpgrade()
+    {
+        if (this.weaponUpgrade != null) return;
+        this.weaponUpgrade = transform.Find("Upgrade").Find("Text").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadWeaponName", gameObject);
+    }
+
     private void LoadWeaponLevel()
     {
         if (this.weaponLevel != null) return;
-        this.weaponLevel = transform.Find("Information").Find("Grid").Find("WeaponName").GetComponent<Text>();
+        this.weaponLevel = transform.Find("Information").Find("Grid").Find("WeaponLevel").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 

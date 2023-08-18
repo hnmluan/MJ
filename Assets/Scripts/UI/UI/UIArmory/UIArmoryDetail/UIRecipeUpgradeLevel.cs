@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIRecipeUpdateLevel : InitMonoBehaviour
+public class UIRecipeUpgradeLevel : InitMonoBehaviour
 {
     [SerializeField] protected Image image;
     public Image Image => image;
@@ -34,6 +34,25 @@ public class UIRecipeUpdateLevel : InitMonoBehaviour
     {
         if (weaponRecipeIngredient == null) return;
         this.image.sprite = weaponRecipeIngredient.itemProfile.itemSprite;
-        this.quantity.text = weaponRecipeIngredient.itemCount.ToString() + " / ";
+        this.quantity.text =
+            weaponRecipeIngredient.itemCount.ToString()
+            + "/"
+            + Inventory.Instance.GetQuantity(weaponRecipeIngredient.itemProfile.itemCode).ToString();
+    }
+
+    public virtual void ShowUIRecipeUpdateLevel(WeaponRecipePrice weaponRecipePrice)
+    {
+        if (weaponRecipePrice == null) return;
+        this.image.sprite = weaponRecipePrice.currencyProfile.currencySprite;
+
+        int balance =
+            weaponRecipePrice.currencyProfile.currencyCode == CurrencyCode.Silver ?
+            Wallet.Instance.SilverBalance :
+            Wallet.Instance.GoldenBalance;
+
+        this.quantity.text =
+            weaponRecipePrice.currencyCout.ToString()
+            + "/"
+            + balance.ToString();
     }
 }
