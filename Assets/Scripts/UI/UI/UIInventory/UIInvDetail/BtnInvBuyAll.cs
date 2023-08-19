@@ -1,11 +1,15 @@
-using System.Collections.Generic;
+using UnityEngine;
 
 public class BtnInvBuyAll : BaseButton
 {
     protected override void OnClick()
     {
-        List<int> listPrice = UIInvDetail.Instance.BuyAllItem();
-        List<string> stringList = listPrice.ConvertAll(item => "+ " + item.ToString() + " GOLD");
-        UITextSpawner.Instance.SpawnUITextWithMousePosition(stringList);
+        string resPath = "Currency/SilverProfile";
+
+        CurrencyProfileSO currencySO = Resources.Load<CurrencyProfileSO>(resPath);
+
+        Sprite image = currencySO.currencySprite;
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(UIInvDetail.Instance.BuyAllItem(), image);
     }
 }

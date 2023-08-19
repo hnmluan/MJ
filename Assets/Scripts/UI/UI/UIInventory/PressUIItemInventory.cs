@@ -7,8 +7,7 @@ public class PressUIItemInventory : PressUI
         ItemInventory itemInventory = uiItemInventory.ItemInventory;
         if (itemInventory == null) return;
         UIInvDetail.Instance.SetUIInvDetail(itemInventory);
-        UIInventory.Instance.CurrSlots = UIInventory.Instance.GetIndexSlot(itemInventory);
-        //uiItemInventory.ShowItem(itemInventory);
+        //uiItemInventory.ShowItem(itemInventory);  
         //UIInventory.Instance.ShowItems();
     }
 }

@@ -1,8 +1,19 @@
+using UnityEngine;
+
 public class BtnInvBuy : BaseButton
 {
     protected override void OnClick()
     {
-        UITextSpawner.Instance.SpawnUITextWithMousePosition("+ " + UIInvDetail.Instance.BuyItem().ToString() + " GOLD");
+        string price = UIInvDetail.Instance.BuyItem();
+
+        string resPath = "Currency/SilverProfile";
+
+        CurrencyProfileSO currencySO = Resources.Load<CurrencyProfileSO>(resPath);
+
+        Sprite image = currencySO.currencySprite;
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(price, image);
     }
+
 
 }

@@ -6,8 +6,6 @@ public class Inventory : InitMonoBehaviour
     private static Inventory instance;
     public static Inventory Instance { get => instance; }
 
-    [SerializeField] protected List<IActionInventoryObserver> observers = new List<IActionInventoryObserver>();
-
     [SerializeField] private int maxSlot = 100;
     public int MaxSlot => maxSlot;
 
@@ -20,7 +18,7 @@ public class Inventory : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (Inventory.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        if (Inventory.instance != null) Debug.LogError("Only 1 Inventory allow to exist");
         Inventory.instance = this;
     }
 
@@ -77,8 +75,6 @@ public class Inventory : InitMonoBehaviour
             itemExist.itemCount = newCount;
             if (addRemain < 1) break;
         }
-
-        this.OnAddItem();
 
         return true;
     }
@@ -190,12 +186,10 @@ public class Inventory : InitMonoBehaviour
             itemInventory.itemCount -= deduct;
         }
         RemoveEmptySlot();
-        OnDeductItem();
     }
 
     public virtual void RemoveEmptySlot() => items.RemoveAll(item => item.itemCount == 0);
 
-    public virtual void AddObserver(IActionInventoryObserver observer) => this.observers.Add(observer);
 
     public virtual int GetQuantity(ItemCode itemCode)
     {
@@ -205,15 +199,5 @@ public class Inventory : InitMonoBehaviour
             if (items[i].itemProfile.itemCode == itemCode) quantity += items[i].itemCount;
         }
         return quantity;
-    }
-
-    protected virtual void OnAddItem()
-    {
-        foreach (IActionInventoryObserver observer in this.observers) observer.OnAddItem();
-    }
-
-    protected virtual void OnDeductItem()
-    {
-        foreach (IActionInventoryObserver observer in this.observers) observer.OnDeductItem();
     }
 }

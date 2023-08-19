@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.SimpleLocalization;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,18 +17,7 @@ public class UITextSpawner : Spawner
         UITextSpawner.instance = this;
     }
 
-    /*    public virtual void SpawnUIText(string content)
-        {
-            Vector3 centerPosition = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
-
-            Transform text = Spawn("UIText", centerPosition, Quaternion.identity);
-
-            text.gameObject.SetActive(true);
-
-            UIText uIText = text.GetComponent<UIText>();
-
-            uIText.SetText(content);
-        }*/
+    /*-----------------UIText----------------------*/
 
     public virtual void SpawnUIText(string content, Vector3 position)
     {
@@ -65,6 +55,60 @@ public class UITextSpawner : Spawner
         foreach (string text in contents)
         {
             SpawnUIText(text, mouseWorldPosition);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    /*-----------------UIImageText----------------------*/
+
+    public virtual void SpawnUIImageText(string content, Sprite image, Vector3 position)
+    {
+        Transform text = Spawn("UIImageText", position, Quaternion.identity);
+
+        text.gameObject.SetActive(true);
+
+        UIImageText uIImageText = text.GetComponent<UIImageText>();
+
+        uIImageText.SetContent(content, image);
+    }
+
+    public virtual void SpawnUIImageTextWithMousePosition(string content, Sprite image)
+    {
+        Vector2 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, -Camera.main.transform.position.z));
+
+        SpawnUIImageText(content, image, mouseWorldPosition);
+    }
+
+    public void SpawnUIImageTextWithMousePosition(List<ItemDropRate> list)
+    {
+        Vector2 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, -Camera.main.transform.position.z));
+        Vector3 clone = new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, mouseWorldPosition.z);
+        StartCoroutine(IESpawnUIImageText(list, clone));
+    }
+
+    public void SpawnUIImageTextWithMousePosition(List<string> list, Sprite image) => StartCoroutine(IESpawnUIImageTextWithMousePosition(list, image));
+
+    private IEnumerator IESpawnUIImageTextWithMousePosition(List<string> list, Sprite image)
+    {
+        Vector2 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, -Camera.main.transform.position.z));
+
+        foreach (string item in list)
+        {
+            SpawnUIImageText(item, image, mouseWorldPosition);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    private IEnumerator IESpawnUIImageText(List<ItemDropRate> list, Vector3 position)
+    {
+        foreach (ItemDropRate item in list)
+        {
+            Sprite sprite = item.itemSO.itemSprite;
+            string content = "+ 1" + LocalizationManager.Localize(item.itemSO.keyName.ToString());
+            SpawnUIImageText(content, sprite, position);
             yield return new WaitForSeconds(interval);
         }
     }

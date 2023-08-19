@@ -21,17 +21,6 @@ public class UIInvDetail : UIInvDetailAbstract
 
     protected override void OnDisable() => this.SetEmptyUIInvDetail();
 
-    private void Update()
-    {
-        if (UIInventory.Instance.GetItemInventoryInCurrSlots() == null)
-        {
-            SetEmptyUIInvDetail();
-            UIInventory.Instance.CurrSlots = -1;
-            return;
-        }
-        SetUIInvDetail(UIInventory.Instance.GetItemInventoryInCurrSlots());
-    }
-
     public virtual void SetUIInvDetail(ItemInventory item)
     {
         this.itemInventory = item;
@@ -56,13 +45,9 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemType.text = null;
     }
 
-    public virtual List<string> UseItem()
+    public virtual List<ItemDropRate> UseItem()
     {
         List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
-
-        List<string> listItemGet
-
-            = itemDropRates.ConvertAll(item => "+ " + LocalizationManager.Localize(item.itemSO.keyName) + " GOLD");
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
 
@@ -70,46 +55,50 @@ public class UIInvDetail : UIInvDetailAbstract
 
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
 
-        return listItemGet;
+        UIInventory.Instance.ShowItems();
 
-        //UIInventory.Instance.ShowItems();
+        return itemDropRates;
     }
 
-    public virtual List<string> UseAllItem()
+    public virtual List<ItemDropRate> UseAllItem()
     {
-        List<string> listItemGet = new List<string>();
+        List<ItemDropRate> listItemGet = new List<ItemDropRate>();
 
-        for (int i = 0; i < itemInventory.itemCount; i++)
-        {
-            List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
-
-            listItemGet.AddRange(itemDropRates.ConvertAll(item => "+ " + LocalizationManager.Localize(item.itemSO.keyName) + " GOLD"));
-        }
+        for (int i = 0; i < itemInventory.itemCount; i++) listItemGet.AddRange(Drop(itemInventory.itemProfile.listItemCanGet));
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
 
         SetEmptyUIInvDetail();
 
+        UIInventory.Instance.ShowItems();
+
         return listItemGet;
-        //UIInventory.Instance.ShowItems();
     }
 
-    public virtual int BuyItem()
+    public virtual string BuyItem()
     {
+        string price = "X " + itemInventory.itemProfile.priceToSell.ToString() + " " + LocalizationManager.Localize("Currency.Silver");
+
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
+
         Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell);
+
         SetUIInvDetail(itemInventory);
-        int price = itemInventory.itemProfile.priceToSell;
+
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
-        //UIInventory.Instance.ShowItems();
+
+        UIInventory.Instance.ShowItems();
+
         return price;
     }
 
-    public virtual List<int> BuyAllItem()
+    public virtual List<string> BuyAllItem()
     {
-        List<int> listPrice = new List<int>();
+        List<string> listPrice = new List<string>();
 
-        for (int i = 0; i < itemInventory.itemCount; i++) listPrice.Add(itemInventory.itemCount);
+        for (int i = 0; i < itemInventory.itemCount; i++)
+
+            listPrice.Add("X " + itemInventory.itemProfile.priceToSell.ToString() + " " + LocalizationManager.Localize("Currency.Gold"));
 
         int price = itemInventory.itemProfile.priceToSell * itemInventory.itemCount;
 
@@ -119,7 +108,7 @@ public class UIInvDetail : UIInvDetailAbstract
 
         SetEmptyUIInvDetail();
 
-        //UIInventory.Instance.ShowItems();
+        UIInventory.Instance.ShowItems();
 
         return listPrice;
     }
@@ -127,14 +116,17 @@ public class UIInvDetail : UIInvDetailAbstract
     private void ShowButton()
     {
         HideButton();
+
         if (CanUse())
         {
             uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(true);
+
             uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(true);
         }
         if (CanBuy())
         {
             uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(true);
+
             uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(true);
         }
     }
@@ -142,8 +134,11 @@ public class UIInvDetail : UIInvDetailAbstract
     private void HideButton()
     {
         uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(false);
+
         uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(false);
+
         uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(false);
+
         uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : BaseUI, IActionInventoryObserver
+public class UIInventory : BaseUI
 {
     [Header("UI Inventory")]
     private static UIInventory instance;
@@ -13,8 +13,6 @@ public class UIInventory : BaseUI, IActionInventoryObserver
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
-    public int CurrSlots = -1;
-
     protected override void Awake()
     {
         base.Awake();
@@ -22,13 +20,7 @@ public class UIInventory : BaseUI, IActionInventoryObserver
         UIInventory.instance = this;
     }
 
-    protected override void Start()
-    {
-        this.Close();
-        Inventory.Instance.AddObserver(this);
-    }
-
-    protected override void OnEnable() => CurrSlots = -1;
+    protected override void Start() => this.Close();
 
     public int GetIndexSlot(ItemInventory itemInventory)
     {
@@ -57,18 +49,6 @@ public class UIInventory : BaseUI, IActionInventoryObserver
         return -1;
     }
 
-    public ItemInventory GetItemInventoryInCurrSlots()
-    {
-        for (int i = 0; i < Inventory.Instance.Items.Count; i++)
-        {
-            if (GetIndexSlot(Inventory.Instance.Items[i]) == CurrSlots)
-            {
-                return Inventory.Instance.Items[i];
-            }
-        }
-        return null;
-    }
-
     public void SetInventorySort(InventorySort inventorySort)
     {
         this.inventorySort = inventorySort;
@@ -87,7 +67,7 @@ public class UIInventory : BaseUI, IActionInventoryObserver
         ShowItems();
     }
 
-    private void ShowItems()
+    public virtual void ShowItems()
     {
         this.ClearItems();
 
@@ -180,8 +160,4 @@ public class UIInventory : BaseUI, IActionInventoryObserver
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
-
-    public void OnAddItem() => ShowItems();
-
-    public void OnDeductItem() => ShowItems();
 }

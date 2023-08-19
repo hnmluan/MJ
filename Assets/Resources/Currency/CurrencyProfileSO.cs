@@ -7,7 +7,7 @@ public class CurrencyProfileSO : ScriptableObject
 {
     public CurrencyCode currencyCode = CurrencyCode.NoCurrency;
 
-    public string currencyName = "no-name";
+    public string keyName = "no-name";
 
     public Sprite currencySprite;
 
