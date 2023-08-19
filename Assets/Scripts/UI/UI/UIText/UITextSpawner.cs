@@ -40,6 +40,15 @@ public class UITextSpawner : Spawner
         uIText.SetText(content);
     }
 
+    public virtual IEnumerator SpawnUIText(List<string> contents, Vector3 position)
+    {
+        foreach (string text in contents)
+        {
+            SpawnUIText(text, position);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
     public virtual void SpawnUITextWithMousePosition(string content)
     {
         Vector2 mouseScreenPosition = Input.mousePosition;
@@ -60,12 +69,4 @@ public class UITextSpawner : Spawner
         }
     }
 
-    public virtual IEnumerator SpawnUIText(List<string> contents, Vector3 position)
-    {
-        foreach (string text in contents)
-        {
-            SpawnUIText(text, position);
-            yield return new WaitForSeconds(interval);
-        }
-    }
 }

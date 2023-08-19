@@ -15,7 +15,7 @@ public class UIInvDetail : UIInvDetailAbstract
     protected override void Awake()
     {
         base.Awake();
-        if (UIInvDetail.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
+        if (UIInvDetail.instance != null) Debug.LogError("Only 1 UIInvDetail allow to exist");
         UIInvDetail.instance = this;
     }
 
@@ -56,20 +56,41 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemType.text = null;
     }
 
-    public virtual void UseItem()
+    public virtual List<string> UseItem()
     {
-        Drop(itemInventory.itemProfile.listItemCanGet);
+        List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
+
+        List<string> listItemGet
+
+            = itemDropRates.ConvertAll(item => "+ " + LocalizationManager.Localize(item.itemSO.keyName) + " GOLD");
+
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
+
         SetUIInvDetail(itemInventory);
+
         if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
+
+        return listItemGet;
+
         //UIInventory.Instance.ShowItems();
     }
 
-    public virtual void UseAllItem()
+    public virtual List<string> UseAllItem()
     {
-        for (int i = 0; i < itemInventory.itemCount; i++) Drop(itemInventory.itemProfile.listItemCanGet);
+        List<string> listItemGet = new List<string>();
+
+        for (int i = 0; i < itemInventory.itemCount; i++)
+        {
+            List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
+
+            listItemGet.AddRange(itemDropRates.ConvertAll(item => "+ " + LocalizationManager.Localize(item.itemSO.keyName) + " GOLD"));
+        }
+
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+
         SetEmptyUIInvDetail();
+
+        return listItemGet;
         //UIInventory.Instance.ShowItems();
     }
 
@@ -84,12 +105,23 @@ public class UIInvDetail : UIInvDetailAbstract
         return price;
     }
 
-    public virtual void BuyAllItem()
+    public virtual List<int> BuyAllItem()
     {
+        List<int> listPrice = new List<int>();
+
+        for (int i = 0; i < itemInventory.itemCount; i++) listPrice.Add(itemInventory.itemCount);
+
+        int price = itemInventory.itemProfile.priceToSell * itemInventory.itemCount;
+
         Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
+
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+
         SetEmptyUIInvDetail();
+
         //UIInventory.Instance.ShowItems();
+
+        return listPrice;
     }
 
     private void ShowButton()
