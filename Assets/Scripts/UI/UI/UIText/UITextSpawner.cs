@@ -90,6 +90,8 @@ public class UITextSpawner : Spawner
 
     public void SpawnUIImageTextWithMousePosition(List<string> list, Sprite image) => StartCoroutine(IESpawnUIImageTextWithMousePosition(list, image));
 
+    public void SpawnUIImageTextWithMousePosition(List<ImageText> list) => StartCoroutine(IESpawnUIImageTextWithMousePosition(list));
+
     private IEnumerator IESpawnUIImageTextWithMousePosition(List<string> list, Sprite image)
     {
         Vector2 mouseScreenPosition = Input.mousePosition;
@@ -98,6 +100,18 @@ public class UITextSpawner : Spawner
         foreach (string item in list)
         {
             SpawnUIImageText(item, image, mouseWorldPosition);
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    private IEnumerator IESpawnUIImageTextWithMousePosition(List<ImageText> list)
+    {
+        Vector2 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, -Camera.main.transform.position.z));
+
+        foreach (ImageText item in list)
+        {
+            SpawnUIImageText(item.text, item.image, mouseWorldPosition);
             yield return new WaitForSeconds(interval);
         }
     }

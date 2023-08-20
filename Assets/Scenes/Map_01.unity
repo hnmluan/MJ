@@ -24381,8 +24381,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 342431502}
   m_HandleRect: {fileID: 342431501}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.9310345
+  m_Value: 1
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -35104,15 +35104,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -1391039458, guid: 6b32a6d0f5cd7c7418d8a68aff589691, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
-  m_UseSpriteMesh: 0
+  m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &906698408
 CanvasRenderer:
@@ -40591,8 +40591,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 63.5, y: -17.5}
-  m_SizeDelta: {x: 37, y: 35}
+  m_AnchoredPosition: {x: 53.5, y: -11}
+  m_SizeDelta: {x: 37, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1044811577
 MonoBehaviour:
@@ -47357,7 +47357,6 @@ GameObject:
   - component: {fileID: 1211318203}
   - component: {fileID: 1211318202}
   - component: {fileID: 1211318201}
-  - component: {fileID: 1211318204}
   - component: {fileID: 1211318205}
   m_Layer: 5
   m_Name: BtnDecompose
@@ -47469,19 +47468,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1211318204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211318199}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0c4f60b6f9ee349add5bc83d8fe3cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 1211318203}
 --- !u!114 &1211318205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48650,7 +48636,7 @@ RectTransform:
   - {fileID: 1714553893}
   - {fileID: 1136506259}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -75747,8 +75733,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 17.5, y: -17.5}
-  m_SizeDelta: {x: 35, y: 35}
+  m_AnchoredPosition: {x: 12.5, y: -12.5}
+  m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1539580218
 MonoBehaviour:
@@ -76149,7 +76135,7 @@ RectTransform:
   - {fileID: 1603506512}
   - {fileID: 1625971677}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -78831,6 +78817,8 @@ MonoBehaviour:
   weaponType: {fileID: 734598826}
   weaponLevel: {fileID: 1684704543}
   weaponUpgrade: {fileID: 1501499887}
+  btnUpgradeWeapon: {fileID: 1619998889}
+  btnDecompose: {fileID: 1211318203}
 --- !u!114 &1598318304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79310,7 +79298,7 @@ RectTransform:
   - {fileID: 333324134}
   - {fileID: 1196400065}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -86230,7 +86218,7 @@ RectTransform:
   - {fileID: 702265958}
   - {fileID: 556818322}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -86553,7 +86541,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 82, y: 35}
+  m_SizeDelta: {x: 72, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1827363448
 MonoBehaviour:
@@ -92809,10 +92797,10 @@ RectTransform:
   - {fileID: 153411374}
   - {fileID: 1669324405}
   - {fileID: 159150173}
-  - {fileID: 1552596575}
   - {fileID: 1820396215}
   - {fileID: 1626595446}
   - {fileID: 1231536478}
+  - {fileID: 1552596575}
   m_Father: {fileID: 1786353759}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

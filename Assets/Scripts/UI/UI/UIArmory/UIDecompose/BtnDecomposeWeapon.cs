@@ -1,5 +1,5 @@
+using Assets.SimpleLocalization;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class BtnDecomposeWeapon : BaseButton
 {
@@ -7,9 +7,19 @@ public class BtnDecomposeWeapon : BaseButton
     {
         Weapon weapon = UIArmoryDetail.Instance.Weapon;
 
-        List<WeaponRecipeIngredient> list = weapon.GetRecipeDecompose();
+        List<WeaponRecipeIngredient> listRecipeIngredient = weapon.GetRecipeDecompose();
 
-        foreach (WeaponRecipeIngredient item in list) Debug.Log(item.itemProfile.itemCode.ToString() + " : " + item.itemCount);
+        List<ImageText> textList = new List<ImageText>();
+
+        foreach (WeaponRecipeIngredient item in listRecipeIngredient)
+        {
+            ImageText imageText = new ImageText();
+            imageText.text = LocalizationManager.Localize(item.itemProfile.keyName) + "+" + item.itemCount;
+            imageText.image = item.itemProfile.itemSprite;
+            textList.Add(imageText);
+        }
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(textList);
 
         UIDecompose.Instance.Close();
 

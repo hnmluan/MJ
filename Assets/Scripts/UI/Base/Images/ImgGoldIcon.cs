@@ -1,6 +1,6 @@
 public class ImgGoldIcon : BaseImage
 {
-    protected virtual void FixedUpdate() => this.UpdateImage();
+    protected override void Start() => this.UpdateImage();
 
     protected virtual void UpdateImage()
     {

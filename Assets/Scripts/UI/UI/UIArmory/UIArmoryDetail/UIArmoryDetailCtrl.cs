@@ -20,6 +20,12 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
     [SerializeField] protected Text weaponUpgrade;
     public Text WeaponUpgrade => weaponUpgrade;
 
+    [SerializeField] protected Button btnUpgradeWeapon;
+    public Button BtnUpgradeWeapon => btnUpgradeWeapon;
+
+    [SerializeField] protected Button btnDecompose;
+    public Button BtnDecompose => btnDecompose;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -28,6 +34,22 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
         this.LoadWeaponLevel();
         this.LoadWeaponImage();
         this.LoadWeaponUpgrade();
+        this.LoadBtnUpgradeWeapon();
+        this.LoadBtnDecompose();
+    }
+
+    private void LoadBtnDecompose()
+    {
+        if (this.btnDecompose != null) return;
+        this.btnDecompose = transform.Find("Buttons").Find("BtnDecompose").GetComponent<Button>();
+        Debug.Log(transform.name + ": LoadWeaponType", gameObject);
+    }
+
+    private void LoadBtnUpgradeWeapon()
+    {
+        if (this.btnUpgradeWeapon != null) return;
+        this.btnUpgradeWeapon = transform.Find("Buttons").Find("BtnUpgrade").GetComponent<Button>();
+        Debug.Log(transform.name + ": LoadWeaponType", gameObject);
     }
 
     private void LoadWeaponType()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,4 +52,11 @@ public class UIImageText : InitMonoBehaviour
         this.content.text = content;
         this.image.sprite = image;
     }
+}
+
+[Serializable]
+public class ImageText
+{
+    public string text;
+    public Sprite image;
 }

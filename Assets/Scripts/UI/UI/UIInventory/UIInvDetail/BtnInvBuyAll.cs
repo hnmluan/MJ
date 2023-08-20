@@ -4,9 +4,7 @@ public class BtnInvBuyAll : BaseButton
 {
     protected override void OnClick()
     {
-        string resPath = "Currency/SilverProfile";
-
-        CurrencyProfileSO currencySO = Resources.Load<CurrencyProfileSO>(resPath);
+        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
 
         Sprite image = currencySO.currencySprite;
 

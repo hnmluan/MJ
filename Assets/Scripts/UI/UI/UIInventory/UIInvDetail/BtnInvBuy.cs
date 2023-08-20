@@ -4,16 +4,10 @@ public class BtnInvBuy : BaseButton
 {
     protected override void OnClick()
     {
-        string price = UIInvDetail.Instance.BuyItem();
-
-        string resPath = "Currency/SilverProfile";
-
-        CurrencyProfileSO currencySO = Resources.Load<CurrencyProfileSO>(resPath);
+        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
 
         Sprite image = currencySO.currencySprite;
 
-        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(price, image);
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(UIInvDetail.Instance.BuyItem(), image);
     }
-
-
 }

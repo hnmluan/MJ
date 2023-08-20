@@ -15,7 +15,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
     protected override void Awake()
     {
         base.Awake();
-        if (UIArmoryDetail.instance != null) Debug.LogError("Only 1 UIArmory allow to exist");
+        if (UIArmoryDetail.instance != null) Debug.LogError("Only 1 UIArmoryDetail allow to exist");
         UIArmoryDetail.instance = this;
     }
 
@@ -35,6 +35,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         this.ShowUpgradeText();
         this.ShowUpgradeRecipeIngredient();
         this.ShowUpgradeRecipePrice();
+        this.ShowButtons();
     }
 
     public virtual void SetEmptyUIArmoryDetail()
@@ -47,6 +48,8 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         uiArmoryDetailCtrl.WeaponUpgrade.text = "";
 
         RecipeUpgradeLevelUISpawner.Instance.ClearRecipeUpdateLevelUI();
+
+        this.ShowButtons();
     }
 
     private void ShowUpgradeRecipeIngredient()
@@ -85,5 +88,18 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         };
 
         uiArmoryDetailCtrl.WeaponUpgrade.text = LocalizationManager.Localize("Armory.upgradeMax");
+    }
+
+    private void ShowButtons()
+    {
+        if (weapon == null)
+        {
+            uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(false);
+            uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(false);
+            return;
+        }
+        uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(true);
+        uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(false);
+        if (weapon.weaponProfile.levels.Count > weapon.level) uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(true);
     }
 }
