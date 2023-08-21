@@ -24,7 +24,7 @@ public class ItemShop
     {
         System.Random random = new System.Random();
         int randomIndex = random.Next(itemProfile.price.Count);
-        ItemPrice itemPrice = itemProfile.price[randomIndex];
+        ItemRangePrice itemPrice = itemProfile.price[randomIndex];
         return new ItemPriceShop(itemPrice.rangePrice.GetRandomValue(), itemPrice.currencyCode);
     }
 

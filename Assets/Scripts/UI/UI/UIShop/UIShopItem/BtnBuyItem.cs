@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using UnityEngine;
 
 public class BtnBuyItem : BaseButton
@@ -23,18 +24,41 @@ public class BtnBuyItem : BaseButton
         try
         {
             if (uiItemShop == null) return;
-            int price = uiItemShop.ItemShop.itemPrice.price * uiItemShop.ItemShop.quantity;
-            switch (uiItemShop.ItemShop.itemPrice.currencyCode)
+
+            ItemShop itemShop = uiItemShop.ItemShop;
+
+            int price = itemShop.price;
+
+            string nameCurrency = LocalizationManager.Localize(itemShop.itemPrice.currencyProfileSO.keyName);
+
+            string balanceNotEnough = LocalizationManager.Localize("Shop.BalanceNotEnough");
+
+            string content = nameCurrency + " -" + price;
+
+            Sprite image = itemShop.itemPrice.currencyProfileSO.currencySprite;
+
+            CurrencyCode currencyCode = uiItemShop.ItemShop.itemPrice.currencyProfileSO.currencyCode;
+
+            if (currencyCode == CurrencyCode.Gold)
             {
-                case CurrencyCode.Gold:
-                    if (Wallet.Instance.DeductGoldenBalance(price)) BuyItem();
-                    break;
-                case CurrencyCode.Silver:
-                    if (Wallet.Instance.DeductSilverBalance(price)) BuyItem();
-                    break;
-                default:
-                    break;
+                if (Wallet.Instance.DeductGoldenBalance(price))
+                {
+                    UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
+                    BuyItem();
+                    return;
+                }
             }
+
+            if (currencyCode == CurrencyCode.Silver)
+            {
+                if (Wallet.Instance.DeductSilverBalance(price))
+                {
+                    UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
+                    BuyItem();
+                    return;
+                };
+            }
+            UITextSpawner.Instance.SpawnUITextWithMousePosition(balanceNotEnough);
         }
         catch (System.Exception) { }
 

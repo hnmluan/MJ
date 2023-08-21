@@ -88,11 +88,17 @@ public class UIItemShop : InitMonoBehaviour
         string name = "Item." + this.itemShop.itemProfile.keyName.Replace(" ", "");
 
         this.itemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
+
         this.itemNumber.text = this.itemShop.quantity.ToString();
+
         this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
+
         this.buyButton.gameObject.SetActive(true);
+
         this.soldOut.gameObject.SetActive(false);
+
         this.isSoldOut = false;
-        this.currencyImage.sprite = CurrencyProfileSO.FindByItemCode(this.itemShop.itemPrice.currencyCode).currencySprite;
+
+        this.currencyImage.sprite = item.itemPrice.currencyProfileSO.currencySprite;
     }
 }

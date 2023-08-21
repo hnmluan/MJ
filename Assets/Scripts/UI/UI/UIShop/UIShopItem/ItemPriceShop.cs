@@ -2,11 +2,11 @@
 public class ItemPriceShop
 {
     public int price = 0;
-    public CurrencyCode currencyCode = CurrencyCode.NoCurrency;
+    public CurrencyProfileSO currencyProfileSO;
 
-    public ItemPriceShop(int price, CurrencyCode currencyCode)
+    public ItemPriceShop(int price, CurrencyProfileSO currencyProfileSO)
     {
         this.price = price;
-        this.currencyCode = currencyCode;
+        this.currencyProfileSO = currencyProfileSO;
     }
 }
