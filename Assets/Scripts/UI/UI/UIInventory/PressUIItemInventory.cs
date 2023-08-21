@@ -4,10 +4,7 @@ public class PressUIItemInventory : PressUI
     public override void OnPointerClick(PointerEventData eventData)
     {
         UIItemInventory uiItemInventory = GetComponent<UIItemInventory>();
-        ItemInventory itemInventory = uiItemInventory.ItemInventory;
-        if (itemInventory == null) return;
-        UIInvDetail.Instance.SetUIInvDetail(itemInventory);
-        //uiItemInventory.ShowItem(itemInventory);  
-        //UIInventory.Instance.ShowItems();
+        if (uiItemInventory == null) return;
+        uiItemInventory.PressUIItemInventory();
     }
 }

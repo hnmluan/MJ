@@ -13,6 +13,8 @@ public class UIInventory : BaseUI
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
+    [SerializeField] public int currentItemInventory = -1;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,9 +24,29 @@ public class UIInventory : BaseUI
 
     protected override void Start() => this.Close();
 
-    public int GetIndexSlot(ItemInventory itemInventory)
+    protected override void OnEnable()
     {
-        int index = -1;
+        ClearFocusItem();
+        currentItemInventory = -1;
+    }
+
+    public virtual void SetCurrentItemInventory(int currentItemInventory) => this.currentItemInventory = currentItemInventory;
+
+    public void KeepFocusInCurrentItemInventory()
+    {
+        ClearFocusItem();
+        if (currentItemInventory == -1) return;
+        GetListUIItemInventory()[currentItemInventory].Focus.gameObject.SetActive(true);
+        UIInvDetail.Instance.SetUIInvDetail(GetListUIItemInventory()[currentItemInventory].ItemInventory);
+    }
+    public void ClearFocusItem()
+    {
+        foreach (UIItemInventory item in GetListUIItemInventory()) item.Focus.gameObject.SetActive(false);
+    }
+
+    public List<UIItemInventory> GetListUIItemInventory()
+    {
+        List<UIItemInventory> list = new List<UIItemInventory>();
 
         int itemCount = UIInventoryCtrl.Instance.Content.childCount;
 
@@ -36,16 +58,18 @@ public class UIInventory : BaseUI
             {
                 UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
 
-                ItemInventory currentProfile = currentUIItem.ItemInventory;
-
-                index += 1;
-
-                if (currentProfile == itemInventory)
-                {
-                    return index;
-                }
+                list.Add(currentUIItem);
             }
         }
+        return list;
+    }
+
+    public int GetIndexItemInventory(ItemInventory itemInventory)
+    {
+        int itemCount = GetListUIItemInventory().Count;
+
+        for (int i = 0; i < itemCount; i++) if (GetListUIItemInventory()[i].ItemInventory == itemInventory) return i;
+
         return -1;
     }
 

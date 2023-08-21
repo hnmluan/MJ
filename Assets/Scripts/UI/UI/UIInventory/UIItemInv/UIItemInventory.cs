@@ -64,4 +64,12 @@ public class UIItemInventory : InitMonoBehaviour
         this.itemNumber.text = this.itemInventory.itemCount.ToString();
         this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
     }
+
+    public virtual void PressUIItemInventory()
+    {
+        if (itemInventory == null) return;
+        UIInvDetail.Instance.SetUIInvDetail(itemInventory);
+        UIInventory.Instance.SetCurrentItemInventory(UIInventory.Instance.GetIndexItemInventory(itemInventory));
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
+    }
 }

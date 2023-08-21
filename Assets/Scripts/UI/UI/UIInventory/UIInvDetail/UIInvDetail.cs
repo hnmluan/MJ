@@ -45,7 +45,7 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemType.text = null;
     }
 
-    public virtual List<ItemDropRate> UseItem()
+    public virtual void UseItem()
     {
         List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
 
@@ -57,10 +57,12 @@ public class UIInvDetail : UIInvDetailAbstract
 
         UIInventory.Instance.ShowItems();
 
-        return itemDropRates;
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(itemDropRates);
+
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
-    public virtual List<ItemDropRate> UseAllItem()
+    public virtual void UseAllItem()
     {
         List<ItemDropRate> listItemGet = new List<ItemDropRate>();
 
@@ -72,16 +74,18 @@ public class UIInvDetail : UIInvDetailAbstract
 
         UIInventory.Instance.ShowItems();
 
-        return listItemGet;
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listItemGet);
+
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
-    public virtual string BuyItem()
+    public virtual void BuyItem()
     {
         string price = "X " + itemInventory.itemProfile.priceToSell.ToString() + " " + LocalizationManager.Localize("Currency.Silver");
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
 
-        Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell);
+        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.priceToSell);
 
         SetUIInvDetail(itemInventory);
 
@@ -89,10 +93,16 @@ public class UIInvDetail : UIInvDetailAbstract
 
         UIInventory.Instance.ShowItems();
 
-        return price;
+        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
+
+        Sprite image = currencySO.currencySprite;
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(price, image);
+
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
-    public virtual List<string> BuyAllItem()
+    public virtual void BuyAllItem()
     {
         List<string> listPrice = new List<string>();
 
@@ -102,7 +112,7 @@ public class UIInvDetail : UIInvDetailAbstract
 
         int price = itemInventory.itemProfile.priceToSell * itemInventory.itemCount;
 
-        Wallet.Instance.AddGoldenBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
+        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
 
@@ -110,7 +120,13 @@ public class UIInvDetail : UIInvDetailAbstract
 
         UIInventory.Instance.ShowItems();
 
-        return listPrice;
+        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
+
+        Sprite image = currencySO.currencySprite;
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listPrice, image);
+
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
     private void ShowButton()

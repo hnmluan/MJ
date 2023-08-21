@@ -1,6 +1,6 @@
 public class BtnInvUseAll : BaseButton
 {
-    protected override void OnClick()
-        =>
-       UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(UIInvDetail.Instance.UseAllItem());
+    protected override void OnClick() => UIInvDetail.Instance.UseAllItem();
+
+
 }
