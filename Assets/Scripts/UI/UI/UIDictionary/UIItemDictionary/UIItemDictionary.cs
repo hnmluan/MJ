@@ -17,6 +17,9 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     [SerializeField] protected Transform iconNewItem;
     public Transform IconNewItem => iconNewItem;
 
+    [SerializeField] protected Transform focus;
+    public Transform Focus => focus;
+
     protected override void Start() => Dictionary.Instance.AddObserver(this);
 
     protected override void OnEnable()
@@ -31,13 +34,21 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         this.LoadItemName();
         this.LoadItemImage();
         this.LoadIonNewItem();
+        this.LoadFocus();
     }
 
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
-        this.itemImage = transform.Find("Image").GetComponent<Image>();
+        this.itemImage = transform.Find("Image").Find("Image").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadItemDictionarytory", gameObject);
+    }
+
+    private void LoadFocus()
+    {
+        if (this.focus != null) return;
+        this.focus = transform.Find("Focus");
+        Debug.Log(transform.name + ": LoadFocus", gameObject);
     }
 
     protected virtual void LoadItemName()

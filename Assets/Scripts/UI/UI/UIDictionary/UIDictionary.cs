@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDictionary : BaseUI, IActionDictionaryObserver
+public class UIDictionary : BaseUI
 {
     [Header("UI Dictionary")]
 
@@ -17,12 +17,6 @@ public class UIDictionary : BaseUI, IActionDictionaryObserver
         base.Awake();
         if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
         UIDictionary.instance = this;
-    }
-
-    protected override void Start()
-    {
-        base.Start();
-        Dictionary.Instance.AddObserver(this);
     }
 
     protected override void OnEnable()
@@ -121,8 +115,4 @@ public class UIDictionary : BaseUI, IActionDictionaryObserver
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
-
-    public void OnAddItem() => ShowProfileSO();
-
-    public void OnSeenItem() => ShowProfileSO();
 }
