@@ -35,10 +35,18 @@ public class UIInventory : BaseUI
     public void KeepFocusInCurrentItemInventory()
     {
         ClearFocusItem();
-        if (currentItemInventory == -1) return;
-        GetListUIItemInventory()[currentItemInventory].Focus.gameObject.SetActive(true);
-        UIInvDetail.Instance.SetUIInvDetail(GetListUIItemInventory()[currentItemInventory].ItemInventory);
+        try
+        {
+            if (currentItemInventory == -1) return;
+            GetListUIItemInventory()[currentItemInventory].Focus.gameObject.SetActive(true);
+            UIInvDetail.Instance.SetUIInvDetail(GetListUIItemInventory()[currentItemInventory].ItemInventory);
+        }
+        catch (System.Exception)
+        {
+            currentItemInventory = -1;
+        }
     }
+
     public void ClearFocusItem()
     {
         foreach (UIItemInventory item in GetListUIItemInventory()) item.Focus.gameObject.SetActive(false);
