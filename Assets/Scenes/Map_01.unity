@@ -44785,7 +44785,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1131480307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -48941,7 +48941,7 @@ RectTransform:
   - {fileID: 1714553893}
   - {fileID: 1136506259}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -48962,6 +48962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armorySort: 1
   armoryFilter: 0
+  currentItemArmory: -1
 --- !u!114 &1231536480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76441,7 +76442,7 @@ RectTransform:
   - {fileID: 1603506512}
   - {fileID: 1625971677}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -79604,7 +79605,7 @@ RectTransform:
   - {fileID: 333324134}
   - {fileID: 1196400065}
   m_Father: {fileID: 2000565654}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -93149,9 +93150,9 @@ RectTransform:
   - {fileID: 1669324405}
   - {fileID: 159150173}
   - {fileID: 1820396215}
+  - {fileID: 1626595446}
   - {fileID: 1231536478}
   - {fileID: 1552596575}
-  - {fileID: 1626595446}
   m_Father: {fileID: 1786353759}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

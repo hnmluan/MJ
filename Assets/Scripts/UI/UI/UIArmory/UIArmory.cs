@@ -13,11 +13,25 @@ public class UIArmory : BaseUI
 
     [SerializeField] protected WeaponType armoryFilter = WeaponType.NoType;
 
+    [SerializeField] public int currentItemArmory = -1;
+
     protected override void Awake()
     {
         base.Awake();
         if (UIArmory.instance != null) Debug.LogError("Only 1 UIArmory allow to exist");
         UIArmory.instance = this;
+    }
+
+    protected override void OnEnable()
+    {
+        ClearFocusItem();
+        currentItemArmory = -1;
+    }
+
+    public override void Open()
+    {
+        base.Open();
+        ShowWeapons();
     }
 
     public void SetArmorySort(ArmorySort armorySort)
@@ -32,10 +46,55 @@ public class UIArmory : BaseUI
         this.ShowWeapons();
     }
 
-    public override void Open()
+    public virtual void SetCurrentItemInventory(int currentItemArmory) => this.currentItemArmory = currentItemArmory;
+
+    public void ClearFocusItem()
     {
-        base.Open();
-        ShowWeapons();
+        foreach (UIItemArmory item in GetListUIItemArmory()) item.Focus.gameObject.SetActive(false);
+    }
+
+    public void KeepFocusInCurrentItemArmory()
+    {
+        ClearFocusItem();
+        try
+        {
+            if (currentItemArmory == -1) return;
+            GetListUIItemArmory()[currentItemArmory].Focus.gameObject.SetActive(true);
+            UIArmoryDetail.Instance.SetUIArmoryDetail(GetListUIItemArmory()[currentItemArmory].Weapon);
+        }
+        catch (System.Exception)
+        {
+            currentItemArmory = -1;
+        }
+    }
+
+    public List<UIItemArmory> GetListUIItemArmory()
+    {
+        List<UIItemArmory> list = new List<UIItemArmory>();
+
+        int itemCount = UIArmoryCtrl.Instance.Content.childCount;
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            Transform currentItem = UIArmoryCtrl.Instance.Content.GetChild(i);
+
+            if (currentItem.gameObject.activeSelf == true)
+            {
+                UIItemArmory currentUIItem = currentItem.GetComponent<UIItemArmory>();
+
+                list.Add(currentUIItem);
+            }
+        }
+        return list;
+    }
+
+    public int GetIndexItemInventory(Weapon weapon)
+    {
+        int itemCount = GetListUIItemArmory().Count;
+
+        for (int i = 0; i < itemCount; i++) if (GetListUIItemArmory()[i].Weapon == weapon) return i;
+
+        return -1;
     }
 
     public void ShowWeapons()
@@ -50,6 +109,8 @@ public class UIArmory : BaseUI
 
         this.SortItems();
     }
+
+    protected virtual void ClearWeapons() => UIArmoryItemSpawner.Instance.ClearWeapons();
 
     protected virtual void SortItems()
     {
@@ -132,6 +193,4 @@ public class UIArmory : BaseUI
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
-
-    protected virtual void ClearWeapons() => UIArmoryItemSpawner.Instance.ClearWeapons();
 }

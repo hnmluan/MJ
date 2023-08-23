@@ -22,15 +22,36 @@ public class UIInventory : BaseUI
         UIInventory.instance = this;
     }
 
-    protected override void Start() => this.Close();
-
     protected override void OnEnable()
     {
         ClearFocusItem();
         currentItemInventory = -1;
     }
 
+    public override void Open()
+    {
+        base.Open();
+        ShowItems();
+    }
+
+    public void SetInventorySort(InventorySort inventorySort)
+    {
+        this.inventorySort = inventorySort;
+        this.ShowItems();
+    }
+
+    public void SetInventoryFilter(ItemType inventoryFilter)
+    {
+        this.inventoryFilter = inventoryFilter;
+        this.ShowItems();
+    }
+
     public virtual void SetCurrentItemInventory(int currentItemInventory) => this.currentItemInventory = currentItemInventory;
+
+    public void ClearFocusItem()
+    {
+        foreach (UIItemInventory item in GetListUIItemInventory()) item.Focus.gameObject.SetActive(false);
+    }
 
     public void KeepFocusInCurrentItemInventory()
     {
@@ -45,11 +66,6 @@ public class UIInventory : BaseUI
         {
             currentItemInventory = -1;
         }
-    }
-
-    public void ClearFocusItem()
-    {
-        foreach (UIItemInventory item in GetListUIItemInventory()) item.Focus.gameObject.SetActive(false);
     }
 
     public List<UIItemInventory> GetListUIItemInventory()
@@ -79,24 +95,6 @@ public class UIInventory : BaseUI
         for (int i = 0; i < itemCount; i++) if (GetListUIItemInventory()[i].ItemInventory == itemInventory) return i;
 
         return -1;
-    }
-
-    public void SetInventorySort(InventorySort inventorySort)
-    {
-        this.inventorySort = inventorySort;
-        this.ShowItems();
-    }
-
-    public void SetInventoryFilter(ItemType inventoryFilter)
-    {
-        this.inventoryFilter = inventoryFilter;
-        this.ShowItems();
-    }
-
-    public override void Open()
-    {
-        base.Open();
-        ShowItems();
     }
 
     public virtual void ShowItems()
