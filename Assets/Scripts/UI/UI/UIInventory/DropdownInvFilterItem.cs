@@ -29,7 +29,7 @@ public class DropdownInvFilterItem : BaseDropdown
     {
         if (this.localizedDropdown != null) return;
         this.localizedDropdown = GetComponent<LocalizedDropdown>();
-        Debug.LogWarning(transform.name + ": LoadDropdown", gameObject);
+        Debug.LogWarning(transform.name + ": LoadToggle", gameObject);
     }
 
     protected override void OnChanged(int option)

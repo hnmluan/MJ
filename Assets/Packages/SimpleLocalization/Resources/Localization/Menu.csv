@@ -20,3 +20,9 @@ Guide.extention,------EXTENSION------,------MỞ RỘNG------
 Guide.conversation,------CONVERSATION------,------HỘI THOẠI------
 Pause.Title,Pause,Tạm Dừng
 Congratulation,Congratulation,Chức mừng
+Setting.VeryLow,Very Low,Cực thấp
+Setting.Low,Low,Thấp
+Setting.Medium,Medium,Trung bình
+Setting.High,High,Cao
+Setting.VeryHigh,Very High,Rất cao
+Setting.Ultra,Ultra,Cực kì cao
