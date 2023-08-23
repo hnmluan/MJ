@@ -23,4 +23,72 @@ MonoBehaviour:
   speed: 3
   attackTime: 0.5
   attackRate: 0.5
-  recipes: []
+  levels:
+  - level: 1
+    weaponRecipe:
+      recipeIngredients:
+      - itemProfile: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+        itemCount: 3
+      - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+        itemCount: 3
+      - itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+        itemCount: 3
+      - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+        itemCount: 3
+      recipePrice:
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        currencyCout: 3
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        currencyCout: 4
+    damage: 5
+  - level: 2
+    weaponRecipe:
+      recipeIngredients:
+      - itemProfile: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+        itemCount: 6
+      - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+        itemCount: 6
+      - itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+        itemCount: 3
+      - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+        itemCount: 3
+      recipePrice:
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        currencyCout: 6
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        currencyCout: 6
+    damage: 6
+  - level: 3
+    weaponRecipe:
+      recipeIngredients:
+      - itemProfile: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+        itemCount: 8
+      - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+        itemCount: 8
+      - itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+        itemCount: 8
+      - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+        itemCount: 8
+      recipePrice:
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        currencyCout: 8
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        currencyCout: 8
+    damage: 8
+  - level: 4
+    weaponRecipe:
+      recipeIngredients:
+      - itemProfile: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+        itemCount: 9
+      - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+        itemCount: 9
+      - itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+        itemCount: 9
+      - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+        itemCount: 9
+      recipePrice:
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        currencyCout: 9
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        currencyCout: 9
+    damage: 9
