@@ -1703,6 +1703,7 @@ public class AstarPath : VersionedMonoBehaviour
     /// <param name="graphsToScan">The graphs to scan. If this parameter is null then all graphs will be scanned</param>
     public void Scan(NavGraph[] graphsToScan = null)
     {
+        Debug.Log("scan");
         var prevProgress = new Progress();
 
         Profiler.BeginSample("Scan");
@@ -1711,6 +1712,7 @@ public class AstarPath : VersionedMonoBehaviour
         {
             if (prevProgress.description != p.description)
             {
+                Debug.Log("scan");
 #if !NETFX_CORE && UNITY_EDITOR
                 Profiler.EndSample();
                 Profiler.BeginSample(p.description);
@@ -1776,6 +1778,8 @@ public class AstarPath : VersionedMonoBehaviour
     /// <param name="graphsToScan">The graphs to scan. If this parameter is null then all graphs will be scanned</param>
     public IEnumerable<Progress> ScanAsync(NavGraph[] graphsToScan = null)
     {
+        Debug.Log("scan");
+
         if (graphsToScan == null) graphsToScan = graphs;
 
         if (graphsToScan == null)
