@@ -47,7 +47,7 @@ public class UIInvDetail : UIInvDetailAbstract
 
     public virtual void UseItem()
     {
-        List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.listItemCanGet);
+        List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.GetItemData<TreasureItemData>().listItemDrop);
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
 
@@ -66,7 +66,7 @@ public class UIInvDetail : UIInvDetailAbstract
     {
         List<ItemDropRate> listItemGet = new List<ItemDropRate>();
 
-        for (int i = 0; i < itemInventory.itemCount; i++) listItemGet.AddRange(Drop(itemInventory.itemProfile.listItemCanGet));
+        for (int i = 0; i < itemInventory.itemCount; i++) listItemGet.AddRange(Drop(itemInventory.itemProfile.GetItemData<TreasureItemData>().listItemDrop));
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
 
@@ -81,11 +81,11 @@ public class UIInvDetail : UIInvDetailAbstract
 
     public virtual void BuyItem()
     {
-        string price = "X " + itemInventory.itemProfile.priceToSell.ToString() + " " + LocalizationManager.Localize("Currency.Silver");
+        string price = "X " + itemInventory.itemProfile.GetItemData<BuyItemData>().price.ToString() + " " + LocalizationManager.Localize("Currency.Silver");
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
 
-        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.priceToSell);
+        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.GetItemData<BuyItemData>().price);
 
         SetUIInvDetail(itemInventory);
 
@@ -108,11 +108,11 @@ public class UIInvDetail : UIInvDetailAbstract
 
         for (int i = 0; i < itemInventory.itemCount; i++)
 
-            listPrice.Add("X " + itemInventory.itemProfile.priceToSell.ToString() + " " + LocalizationManager.Localize("Currency.Gold"));
+            listPrice.Add("X " + itemInventory.itemProfile.GetItemData<BuyItemData>().price.ToString() + " " + LocalizationManager.Localize("Currency.Gold"));
 
-        int price = itemInventory.itemProfile.priceToSell * itemInventory.itemCount;
+        int price = itemInventory.itemProfile.GetItemData<BuyItemData>().price * itemInventory.itemCount;
 
-        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.priceToSell * itemInventory.itemCount);
+        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.GetItemData<BuyItemData>().price * itemInventory.itemCount);
 
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
 
@@ -158,9 +158,9 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
     }
 
-    private bool CanUse() => itemInventory.itemProfile.listItemCanGet.Count != 0;
+    private bool CanUse() => itemInventory.itemProfile.IsExistItemData<TreasureItemData>();
 
-    private bool CanBuy() => itemInventory.itemProfile.priceToSell != 0;
+    private bool CanBuy() => itemInventory.itemProfile.IsExistItemData<BuyItemData>();
 
     public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
     {

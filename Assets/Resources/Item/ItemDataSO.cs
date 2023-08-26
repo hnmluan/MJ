@@ -18,15 +18,7 @@ public class ItemDataSO : ScriptableObject
 
     public int defaultMaxStack = 10;
 
-    public int priceToSell;
-
-    public List<ItemDropRate> listItemCanGet;
-
-    public List<ItemRangePrice> price;
-
-    public IntRange quantityToBuy;
-
-    [field: SerializeReference] public List<ItemData> datas = new List<ItemData>() { new DetailsItemData() };
+    [field: SerializeReference] public List<ItemData> datas;
 
     public void AddData(ItemData data)
     {
@@ -35,6 +27,10 @@ public class ItemDataSO : ScriptableObject
 
         datas.Add(data);
     }
+
+    public bool IsExistItemData<T>() where T : ItemData => GetItemData<T>() == null;
+
+    public T GetItemData<T>() where T : ItemData => datas.OfType<T>().FirstOrDefault();
 
     public static ItemDataSO FindByItemCode(ItemCode itemCode)
     {
@@ -47,22 +43,22 @@ public class ItemDataSO : ScriptableObject
         return null;
     }
 
-    public static ItemCode GetRandomItemCodeExcludingNoItem()
+    public static ItemDataSO GetRandomSellableItemSO()
     {
-        ItemCode[] itemCode = (ItemCode[])System.Enum.GetValues(typeof(ItemCode));
-        ItemCode randomItemCode;
+        if (GetSellableItemsSO().Count == 0) return null;
 
         System.Random random = new System.Random();
 
-        do
-        {
-            randomItemCode = itemCode[random.Next(itemCode.Length)];
-        } while (randomItemCode == ItemCode.NoItem);
+        int randomIndex = random.Next(0, GetSellableItemsSO().Count);
 
-        return randomItemCode;
+        return GetSellableItemsSO()[randomIndex];
     }
 
-    public static string GetLocalizationKeyOfName(ItemCode itemCode) => "Item." + itemCode.ToString().Replace(" ", "");
+    public static List<ItemDataSO> GetSellableItemsSO()
+    {
+        ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/SO");
+        return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is SellItemData)).ToList();
+    }
 }
 
 

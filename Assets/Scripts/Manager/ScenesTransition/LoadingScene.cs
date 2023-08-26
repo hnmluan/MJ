@@ -19,6 +19,8 @@ public class LoadingScene : InitMonoBehaviour
 
     [SerializeField] private Slider loadingProcess;
 
+    [SerializeField] private Text processText;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +39,7 @@ public class LoadingScene : InitMonoBehaviour
         {
             await Task.Delay(100);
             loadingProcess.value = scene.progress;
+            processText.text = scene.progress * 100 + " %";
         } while (scene.progress < 0.9f);
 
         await Task.Delay(1000);

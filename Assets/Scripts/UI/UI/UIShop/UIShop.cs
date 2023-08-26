@@ -37,6 +37,8 @@ public class UIShop : BaseUI
 
     public virtual void ResetItems()
     {
+        if (ItemDataSO.GetSellableItemsSO().Count == 0) return;
+
         this.ClearItems();
 
         foreach (ItemShop item in GetRandomNumberList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
@@ -75,7 +77,7 @@ public class UIShop : BaseUI
 
         for (int i = 0; i < quantity; i++)
         {
-            ItemShop randomItemShop = ItemShop.GetRandomItemShopExcludingNoItem();
+            ItemShop randomItemShop = ItemShop.GetRandomSellableItem();
             listItemShop.Add(randomItemShop);
         }
 
