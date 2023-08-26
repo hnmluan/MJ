@@ -25,7 +25,13 @@ public abstract class BaseButton : InitMonoBehaviour
         Debug.LogWarning(transform.name + ": LoadButton", gameObject);
     }
 
-    protected virtual void AddOnClickEvent() => this.button.onClick.AddListener(this.OnClick);
+    protected virtual void AddOnClickEvent()
+    {
+        this.button.onClick.AddListener(this.OnClick);
+        this.button.onClick.AddListener(this.SoundOnClick);
+    }
 
     protected abstract void OnClick();
+
+    protected virtual void SoundOnClick() => AudioController.Instance.PlayVFX("sfx_button_press");
 }

@@ -69,7 +69,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     {
         if (item is EnemyProfileSO) ShowEnemyProfileSO(item as EnemyProfileSO);
         if (item is NPCProfileSO) ShowNPCProfileSO(item as NPCProfileSO);
-        if (item is WeaponProfileSO) ShowDamageObjectSO(item as WeaponProfileSO);
+        if (item is WeaponDataSO) ShowDamageObjectSO(item as WeaponDataSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem(item);
     }
 
@@ -77,11 +77,11 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     {
         if (item is EnemyProfileSO) itemName.text = LocalizationManager.Localize((item as EnemyProfileSO).keyName);
         if (item is NPCProfileSO) itemName.text = LocalizationManager.Localize((item as NPCProfileSO).keyName);
-        if (item is WeaponProfileSO) itemName.text = LocalizationManager.Localize((item as WeaponProfileSO).keyName);
+        if (item is WeaponDataSO) itemName.text = LocalizationManager.Localize((item as WeaponDataSO).keyName);
         itemImage.color = Color.black;
     }
 
-    private void ShowDamageObjectSO(WeaponProfileSO damageObjectProfileSO)
+    private void ShowDamageObjectSO(WeaponDataSO damageObjectProfileSO)
     {
         if (damageObjectProfileSO == null) return;
         itemDictionary = damageObjectProfileSO;
@@ -111,7 +111,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     private bool CheckNewItem() =>
         Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as NPCProfileSO)
             || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyProfileSO)
-            || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as WeaponProfileSO);
+            || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as WeaponDataSO);
 
     public void OnAddItem()
     {

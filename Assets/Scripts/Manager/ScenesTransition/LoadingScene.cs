@@ -19,7 +19,6 @@ public class LoadingScene : InitMonoBehaviour
 
     [SerializeField] private Slider loadingProcess;
 
-    [SerializeField] private AstarPath astarPath;
     protected override void Awake()
     {
         base.Awake();
@@ -55,6 +54,7 @@ public class LoadingScene : InitMonoBehaviour
 
     private void OnSceneChanged(Scene previousScene, Scene newScene)
     {
+        AstarPath astarPath = FindObjectOfType<AstarPath>();
         if (astarPath == null) return;
         astarPath.Scan();
     }

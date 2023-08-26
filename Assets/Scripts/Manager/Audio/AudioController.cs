@@ -61,7 +61,7 @@ public class AudioController : InitMonoBehaviour
     {
         Audio s = Array.Find(musicSounds, x => x.name == name);
 
-        if (s == null) Debug.Log(transform.name + ": Music" + s.name + "not found", gameObject);
+        if (s == null) Debug.Log(transform.name + ": Music" + name + "not found", gameObject);
         else
         {
             musicSource.clip = s.audio;
@@ -73,7 +73,7 @@ public class AudioController : InitMonoBehaviour
     {
         Audio s = Array.Find(sfxSounds, x => x.name == name);
 
-        if (s == null) Debug.Log(transform.name + ": VFX" + s.name + "not found", gameObject);
+        if (s == null) Debug.Log(transform.name + " : VFX" + name + "not found", gameObject);
         else sfxSource.PlayOneShot(s.audio);
     }
 
@@ -81,7 +81,7 @@ public class AudioController : InitMonoBehaviour
     {
         Audio s = Array.Find(animalSounds, x => x.name == name);
 
-        if (s == null) Debug.Log(transform.name + ": Animal sound" + s.name + "not found", gameObject);
+        if (s == null) Debug.Log(transform.name + ": Animal sound" + name + "not found", gameObject);
         else animalSource.PlayOneShot(s.audio);
     }
 

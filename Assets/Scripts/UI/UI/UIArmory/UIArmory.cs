@@ -130,8 +130,8 @@ public class UIArmory : BaseUI
             Weapon currentWeapon = currentUIItem.Weapon;
             Weapon nextWeapon = nextUIItem.Weapon;
 
-            WeaponProfileSO currentProfile = currentWeapon.weaponProfile;
-            WeaponProfileSO nextProfile = nextWeapon.weaponProfile;
+            WeaponDataSO currentProfile = currentWeapon.weaponProfile;
+            WeaponDataSO nextProfile = nextWeapon.weaponProfile;
 
             bool isSwap = false;
 

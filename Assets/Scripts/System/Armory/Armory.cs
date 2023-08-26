@@ -38,10 +38,10 @@ public class Armory : InitMonoBehaviour
         }
     }
 
-    protected virtual WeaponProfileSO GetWeaponProfile(WeaponCode weaponCode)
+    protected virtual WeaponDataSO GetWeaponProfile(WeaponCode weaponCode)
     {
-        var profiles = Resources.LoadAll("DamageObject", typeof(WeaponProfileSO));
-        foreach (WeaponProfileSO profile in profiles)
+        var profiles = Resources.LoadAll("DamageObject/ScriptableObject/", typeof(WeaponDataSO));
+        foreach (WeaponDataSO profile in profiles)
         {
             if (profile.damageObjectCode != weaponCode) continue;
             return profile;

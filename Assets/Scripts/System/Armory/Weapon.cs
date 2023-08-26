@@ -5,7 +5,7 @@ using System.Linq;
 [Serializable]
 public class Weapon
 {
-    public WeaponProfileSO weaponProfile;
+    public WeaponDataSO weaponProfile;
 
     public int level;
 

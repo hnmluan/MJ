@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected WeaponProfileSO doSO;
-    public WeaponProfileSO DOSO => doSO;
+    [SerializeField] protected WeaponDataSO doSO;
+    public WeaponDataSO DOSO => doSO;
 
     [SerializeField] protected SpriteRenderer doSR;
     public SpriteRenderer DOSR => doSR;
@@ -71,11 +71,11 @@ public class DOCtrl : InitMonoBehaviour
     private void LoadDamageObjectSO()
     {
         if (this.doSO != null) return;
-        string resPath = "DamageObject/" + transform.name;
+        string resPath = "DamageObject/ScriptableObject/" + transform.name;
 
-        this.doSO = Resources.Load<WeaponProfileSO>(resPath);
+        this.doSO = Resources.Load<WeaponDataSO>(resPath);
 
-        Debug.Log(transform.name + ": LoadMeleeDOSO" + resPath, gameObject);
+        Debug.Log(transform.name + ": LoadDamageObjectSO" + resPath, gameObject);
     }
 
 }

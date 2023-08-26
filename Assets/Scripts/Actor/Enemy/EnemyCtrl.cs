@@ -36,7 +36,7 @@ public class EnemyCtrl : InitMonoBehaviour
     protected virtual void LoadEnemySO()
     {
         if (this.enemySO != null) return;
-        string resPath = "Enemy/" + transform.name;
+        string resPath = "Enemy/ScriptableObject/" + transform.name;
         this.enemySO = Resources.Load<EnemyProfileSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
     }

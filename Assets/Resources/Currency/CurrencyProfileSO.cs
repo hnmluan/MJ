@@ -15,7 +15,7 @@ public class CurrencyProfileSO : ScriptableObject
 
     public static CurrencyProfileSO FindByItemCode(CurrencyCode currencyCode)
     {
-        var profiles = Resources.LoadAll("Currency", typeof(CurrencyProfileSO));
+        var profiles = Resources.LoadAll("Currency/ScriptableObject", typeof(CurrencyProfileSO));
         foreach (CurrencyProfileSO profile in profiles)
         {
             if (profile.currencyCode != currencyCode) continue;

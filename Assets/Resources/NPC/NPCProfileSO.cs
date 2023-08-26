@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NPC", menuName = "SO/NPC")]
@@ -8,5 +10,14 @@ public class NPCProfileSO : ScriptableObject
     public string keyDescription;
     public Sprite faceset;
     public Sprite sprite;
-    public NPCDialog npcDialog;
+    public Dialog npcDialog;
+    [field: SerializeReference] public List<NPCComponent> components;
+
+    public void AddData(NPCComponent data)
+    {
+        if (components.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
+            return;
+
+        components.Add(data);
+    }
 }

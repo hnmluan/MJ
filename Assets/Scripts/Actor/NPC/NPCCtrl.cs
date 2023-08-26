@@ -80,7 +80,7 @@ public class NPCCtrl : InitMonoBehaviour
     protected virtual void LoadNPCSO()
     {
         if (this.npcSO != null) return;
-        string resPath = "NPC/" + transform.name;
+        string resPath = "NPC/ScriptableObject/" + transform.name;
         this.npcSO = Resources.Load<NPCProfileSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadNPCSO " + resPath, gameObject);
     }

@@ -49,10 +49,10 @@ public abstract class ObjAttack : InitMonoBehaviour
         doCtrl.SetAttacker(transform.parent);
     }
 
-    public WeaponProfileSO GetDamageObjectSO()
+    public WeaponDataSO GetDamageObjectSO()
     {
-        string resPath = "DamageObject/" + this.damageObject.ToString();
-        return Resources.Load<WeaponProfileSO>(resPath);
+        string resPath = "DamageObject/ScriptableObject/" + this.damageObject.ToString();
+        return Resources.Load<WeaponDataSO>(resPath);
     }
 
     protected abstract bool IsAttacking();

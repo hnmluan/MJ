@@ -1712,7 +1712,6 @@ public class AstarPath : VersionedMonoBehaviour
         {
             if (prevProgress.description != p.description)
             {
-                Debug.Log("scan");
 #if !NETFX_CORE && UNITY_EDITOR
                 Profiler.EndSample();
                 Profiler.BeginSample(p.description);
