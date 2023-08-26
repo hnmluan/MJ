@@ -16,22 +16,17 @@ MonoBehaviour:
   itemType: 1
   keyName: Item.SilverTreasure
   itemSprite: {fileID: 876198631, guid: 3f07b9cadb53dda4fa133ec773951ce8, type: 3}
-  keyDiscription: Item.Description
+  keyDescription: Item.Description
   defaultMaxStack: 10
-  listItemCanGet: []
-  price:
-  - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-    rangePrice:
-      minValue: 3
-      maxValue: 10
-  - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-    rangePrice:
-      minValue: 3
-      maxValue: 10
-  priceToBuy:
-    minValue: 1
-    maxValue: 2
-  quantityToBuy:
-    minValue: 2
-    maxValue: 9
-  priceToSell: 12
+  datas:
+  - rid: 576510825429467212
+  references:
+    version: 2
+    RefIds:
+    - rid: 576510825429467212
+      type: {class: TreasureItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: TreasureItemData
+        listItemDrop:
+        - itemSO: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+          dropRate: 200000

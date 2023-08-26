@@ -1776,8 +1776,6 @@ public class AstarPath : VersionedMonoBehaviour
     /// <param name="graphsToScan">The graphs to scan. If this parameter is null then all graphs will be scanned</param>
     public IEnumerable<Progress> ScanAsync(NavGraph[] graphsToScan = null)
     {
-        Debug.Log("scan");
-
         if (graphsToScan == null) graphsToScan = graphs;
 
         if (graphsToScan == null)

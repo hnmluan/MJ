@@ -16,34 +16,15 @@ MonoBehaviour:
   itemType: 2
   keyName: Item.CopperSword
   itemSprite: {fileID: 21300000, guid: f36cfb5308a825740b6ffb1e2faae926, type: 3}
-  keyDescription: 
+  keyDescription: Item.Description
   defaultMaxStack: 10
-  priceToSell: 5
-  listItemCanGet: []
-  price:
-  - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-    rangePrice:
-      minValue: 3
-      maxValue: 10
-  - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-    rangePrice:
-      minValue: 3
-      maxValue: 10
-  quantityToBuy:
-    minValue: 3
-    maxValue: 4
   datas:
-  - rid: 576510825429467193
+  - rid: 576510825429467211
   references:
     version: 2
     RefIds:
-    - rid: 576510825429467193
-      type: {class: DetailsItemData, ns: , asm: Assembly-CSharp}
+    - rid: 576510825429467211
+      type: {class: SellableItemData, ns: , asm: Assembly-CSharp}
       data:
-        name: DetailsItemData
-        itemCode: 3
-        itemType: 2
-        keyName: Item.CopperSword
-        keyDescription: Item.Description
-        itemSprite: {fileID: 21300000, guid: f36cfb5308a825740b6ffb1e2faae926, type: 3}
-        defaultMaxStack: 10
+        name: SellableItemData
+        price: 12

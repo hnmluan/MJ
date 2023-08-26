@@ -28,7 +28,7 @@ public class ItemDataSO : ScriptableObject
         datas.Add(data);
     }
 
-    public bool IsExistItemData<T>() where T : ItemData => GetItemData<T>() == null;
+    public bool IsExistItemData<T>() where T : ItemData => GetItemData<T>() != null;
 
     public T GetItemData<T>() where T : ItemData => datas.OfType<T>().FirstOrDefault();
 
@@ -57,7 +57,7 @@ public class ItemDataSO : ScriptableObject
     public static List<ItemDataSO> GetSellableItemsSO()
     {
         ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/SO");
-        return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is SellItemData)).ToList();
+        return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is BuyableItemData)).ToList();
     }
 }
 

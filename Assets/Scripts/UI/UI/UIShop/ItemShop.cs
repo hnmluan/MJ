@@ -23,12 +23,12 @@ public class ItemShop
     private static ItemPriceShop GetRandomItemPrice(ItemDataSO itemProfile)
     {
         System.Random random = new System.Random();
-        int randomIndex = random.Next(itemProfile.GetItemData<SellItemData>().price.Count);
-        ItemRangePrice itemPrice = itemProfile.GetItemData<SellItemData>().price[randomIndex];
+        int randomIndex = random.Next(itemProfile.GetItemData<BuyableItemData>().price.Count);
+        ItemRangePrice itemPrice = itemProfile.GetItemData<BuyableItemData>().price[randomIndex];
         return new ItemPriceShop(itemPrice.rangePrice.GetRandomValue(), itemPrice.currencyCode);
     }
 
     private static ItemDataSO GetSellableItemData() => ItemDataSO.GetRandomSellableItemSO();
 
-    private static int GetRandomItemQuantity(ItemDataSO itemProfile) => itemProfile.GetItemData<SellItemData>().quantityToBuy.GetRandomValue();
+    private static int GetRandomItemQuantity(ItemDataSO itemProfile) => itemProfile.GetItemData<BuyableItemData>().quantityToBuy.GetRandomValue();
 }

@@ -108,6 +108,8 @@ public class UIInventory : BaseUI
         foreach (ItemInventory item in items) UIInvItemSpawner.Instance.SpawnItem(item);
 
         this.SortItems();
+
+        KeepFocusInCurrentItemInventory();
     }
 
     protected virtual void ClearItems() => UIInvItemSpawner.Instance.ClearItems();

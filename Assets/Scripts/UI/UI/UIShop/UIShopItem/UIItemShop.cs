@@ -32,7 +32,7 @@ public class UIItemShop : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadItemName();
-        this.LoadItemNumer();
+        this.LoadItemNumber();
         this.LoadItemImage();
         this.LoadCurrencyImage();
         this.LoadItemBuy();
@@ -64,7 +64,7 @@ public class UIItemShop : InitMonoBehaviour
     {
         if (this.itemImage != null) return;
         this.itemImage = transform.Find("ImageBox").Find("ObjImage").GetComponent<Image>();
-        Debug.Log(transform.name + ": LoadItemInvtory", gameObject);
+        Debug.Log(transform.name + ": LoadItemImage", gameObject);
     }
 
     protected virtual void LoadItemName()
@@ -74,7 +74,7 @@ public class UIItemShop : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
-    protected virtual void LoadItemNumer()
+    protected virtual void LoadItemNumber()
     {
         if (this.itemNumber != null) return;
         this.itemNumber = transform.Find("QuantityBox").Find("Quantity").GetComponent<Text>();
@@ -84,8 +84,6 @@ public class UIItemShop : InitMonoBehaviour
     public virtual void ShowItem(ItemShop item)
     {
         this.itemShop = item;
-
-        string name = "Item." + this.itemShop.itemProfile.keyName.Replace(" ", "");
 
         this.itemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
 

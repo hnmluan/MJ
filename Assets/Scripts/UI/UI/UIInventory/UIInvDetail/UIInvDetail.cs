@@ -1,5 +1,4 @@
 using Assets.SimpleLocalization;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIInvDetail : UIInvDetailAbstract
@@ -24,7 +23,8 @@ public class UIInvDetail : UIInvDetailAbstract
     public virtual void SetUIInvDetail(ItemInventory item)
     {
         this.itemInventory = item;
-        ShowButton();
+
+        ShowButtons();
 
         uiInvDetailCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
         uiInvDetailCtrl.ItemQuantity.text = item.itemCount.ToString();
@@ -35,7 +35,7 @@ public class UIInvDetail : UIInvDetailAbstract
 
     public virtual void SetEmptyUIInvDetail()
     {
-        HideButton();
+        ClearButtons();
         this.itemInventory = null;
 
         uiInvDetailCtrl.ItemImage.sprite = null;
@@ -47,157 +47,56 @@ public class UIInvDetail : UIInvDetailAbstract
 
     public virtual void UseItem()
     {
-        List<ItemDropRate> itemDropRates = Drop(itemInventory.itemProfile.GetItemData<TreasureItemData>().listItemDrop);
-
+        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-
-        SetUIInvDetail(itemInventory);
-
-        if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
-
         UIInventory.Instance.ShowItems();
-
-        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(itemDropRates);
-
-        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
     public virtual void UseAllItem()
     {
-        List<ItemDropRate> listItemGet = new List<ItemDropRate>();
-
-        for (int i = 0; i < itemInventory.itemCount; i++) listItemGet.AddRange(Drop(itemInventory.itemProfile.GetItemData<TreasureItemData>().listItemDrop));
-
+        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-
-        SetEmptyUIInvDetail();
-
         UIInventory.Instance.ShowItems();
-
-        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listItemGet);
-
-        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
-    public virtual void BuyItem()
+    public virtual void SellItem()
     {
-        string price = "X " + itemInventory.itemProfile.GetItemData<BuyItemData>().price.ToString() + " " + LocalizationManager.Localize("Currency.Silver");
-
+        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-
-        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.GetItemData<BuyItemData>().price);
-
-        SetUIInvDetail(itemInventory);
-
-        if (itemInventory.itemCount == 0) SetEmptyUIInvDetail();
-
         UIInventory.Instance.ShowItems();
-
-        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
-
-        Sprite image = currencySO.currencySprite;
-
-        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(price, image);
-
-        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 
-    public virtual void BuyAllItem()
+    public virtual void SellAllItem()
     {
-        List<string> listPrice = new List<string>();
-
-        for (int i = 0; i < itemInventory.itemCount; i++)
-
-            listPrice.Add("X " + itemInventory.itemProfile.GetItemData<BuyItemData>().price.ToString() + " " + LocalizationManager.Localize("Currency.Gold"));
-
-        int price = itemInventory.itemProfile.GetItemData<BuyItemData>().price * itemInventory.itemCount;
-
-        Wallet.Instance.AddSilverBalance(itemInventory.itemProfile.GetItemData<BuyItemData>().price * itemInventory.itemCount);
-
+        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-
-        SetEmptyUIInvDetail();
-
-        UIInventory.Instance.ShowItems();
-
-        CurrencyProfileSO currencySO = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver);
-
-        Sprite image = currencySO.currencySprite;
-
-        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listPrice, image);
-
-        UIInventory.Instance.KeepFocusInCurrentItemInventory();
+        UIInventory.Instance.ShowItems();   
     }
 
-    private void ShowButton()
+    private void ShowButtons()
     {
-        HideButton();
-
-        if (CanUse())
+        ClearButtons();
+        if (IsUsable())
         {
             uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(true);
-
-            uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(true);
+            if (itemInventory.itemCount > 1) uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(true);
         }
-        if (CanBuy())
+        if (IsSellable())
         {
             uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(true);
-
-            uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(true);
+            if (itemInventory.itemCount > 1) uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(true);
         }
     }
 
-    private void HideButton()
+    private void ClearButtons()
     {
         uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(false);
-
         uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(false);
-
         uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(false);
-
         uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
     }
 
-    private bool CanUse() => itemInventory.itemProfile.IsExistItemData<TreasureItemData>();
+    private bool IsUsable() => itemInventory.itemProfile.IsExistItemData<TreasureItemData>();
 
-    private bool CanBuy() => itemInventory.itemProfile.IsExistItemData<BuyItemData>();
-
-    public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList)
-    {
-        List<ItemDropRate> dropItems = new List<ItemDropRate>();
-
-        if (dropList.Count < 1) return dropItems;
-
-        dropItems = this.DropItems(dropList);
-        foreach (ItemDropRate itemDropRate in dropItems)
-        {
-            ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            Inventory.Instance.AddItem(itemCode, 1);
-        }
-
-        return dropItems;
-    }
-
-    protected virtual List<ItemDropRate> DropItems(List<ItemDropRate> items)
-    {
-        List<ItemDropRate> droppedItems = new List<ItemDropRate>();
-
-        float rate, itemRate;
-        int itemDropMore;
-
-        foreach (ItemDropRate item in items)
-        {
-            rate = Random.Range(0, 1f);
-            itemRate = item.dropRate / 100000f;
-
-            itemDropMore = Mathf.FloorToInt(itemRate);
-            if (itemDropMore > 0)
-            {
-                itemRate -= itemDropMore;
-                for (int i = 0; i < itemDropMore; i++) droppedItems.Add(item);
-            }
-        }
-
-        return droppedItems;
-    }
+    private bool IsSellable() => itemInventory.itemProfile.IsExistItemData<SellableItemData>();
 }

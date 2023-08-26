@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 [Serializable]
 
-public class SellItemData : ItemData
+public class BuyableItemData : ItemData
 {
     public List<ItemRangePrice> price;
 

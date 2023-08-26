@@ -121,7 +121,7 @@ public class UITextSpawner : Spawner
         foreach (ItemDropRate item in list)
         {
             Sprite sprite = item.itemSO.itemSprite;
-            string content = "+ 1" + LocalizationManager.Localize(item.itemSO.keyName.ToString());
+            string content = LocalizationManager.Localize(item.itemSO.keyName.ToString()) + " +1";
             SpawnUIImageText(content, sprite, position);
             yield return new WaitForSeconds(interval);
         }
