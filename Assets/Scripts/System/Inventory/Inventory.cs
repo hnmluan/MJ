@@ -39,7 +39,7 @@ public class Inventory : InitMonoBehaviour
     {
         if (GetCurrentItemCount() + addCount > maxItemCout) return false;
 
-        ItemProfileSO itemProfile = this.GetItemProfile(itemCode);
+        ItemDataSO itemProfile = this.GetItemProfile(itemCode);
 
         int addRemain = addCount;
         int newCount;
@@ -100,10 +100,10 @@ public class Inventory : InitMonoBehaviour
         return itemInventory.maxStack;
     }
 
-    protected virtual ItemProfileSO GetItemProfile(ItemCode itemCode)
+    protected virtual ItemDataSO GetItemProfile(ItemCode itemCode)
     {
-        var profiles = Resources.LoadAll("Item/ScriptableObject/", typeof(ItemProfileSO));
-        foreach (ItemProfileSO profile in profiles)
+        var profiles = Resources.LoadAll("Item/SO/", typeof(ItemDataSO));
+        foreach (ItemDataSO profile in profiles)
         {
             if (profile.itemCode != itemCode) continue;
             return profile;
@@ -131,7 +131,7 @@ public class Inventory : InitMonoBehaviour
         return itemInventory.itemCount >= maxStack;
     }
 
-    protected virtual ItemInventory CreateEmptyItem(ItemProfileSO itemProfile)
+    protected virtual ItemInventory CreateEmptyItem(ItemDataSO itemProfile)
     {
         ItemInventory itemInventory = new ItemInventory
         {

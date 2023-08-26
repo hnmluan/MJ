@@ -3,7 +3,7 @@
 [Serializable]
 public class ItemShop
 {
-    public ItemProfileSO itemProfile;
+    public ItemDataSO itemProfile;
     public int quantity = 0;
     public int price = 0;
     public ItemPriceShop itemPrice;
@@ -20,7 +20,7 @@ public class ItemShop
         return newItemShop;
     }
 
-    private static ItemPriceShop GetRandomItemPrice(ItemProfileSO itemProfile)
+    private static ItemPriceShop GetRandomItemPrice(ItemDataSO itemProfile)
     {
         System.Random random = new System.Random();
         int randomIndex = random.Next(itemProfile.price.Count);
@@ -28,13 +28,11 @@ public class ItemShop
         return new ItemPriceShop(itemPrice.rangePrice.GetRandomValue(), itemPrice.currencyCode);
     }
 
-    private static ItemProfileSO GetRandomItemProfileSO()
+    private static ItemDataSO GetRandomItemProfileSO()
     {
-        ItemCode randomItemCode = ItemProfileSO.GetRandomItemCodeExcludingNoItem();
-        return ItemProfileSO.FindByItemCode(randomItemCode);
+        ItemCode randomItemCode = ItemDataSO.GetRandomItemCodeExcludingNoItem();
+        return ItemDataSO.FindByItemCode(randomItemCode);
     }
 
-    private static int GetRandomItemQuantity(ItemProfileSO itemProfile) => itemProfile.quantityToBuy.GetRandomValue();
-
-
+    private static int GetRandomItemQuantity(ItemDataSO itemProfile) => itemProfile.quantityToBuy.GetRandomValue();
 }

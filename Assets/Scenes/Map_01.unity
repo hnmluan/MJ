@@ -33110,7 +33110,7 @@ MonoBehaviour:
   itemDespawn: {fileID: 1356477594}
   itemInventory:
     itemId: 
-    itemProfile: {fileID: 11400000, guid: f879b08d7621fd34584c151332539314, type: 2}
+    itemProfile: {fileID: 0}
     itemCount: 0
     maxStack: 30
   itemSR: {fileID: 1510306860}
@@ -43853,7 +43853,7 @@ MonoBehaviour:
   itemDespawn: {fileID: 526018207}
   itemInventory:
     itemId: 
-    itemProfile: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+    itemProfile: {fileID: 0}
     itemCount: 0
     maxStack: 30
   itemSR: {fileID: 1397986420}
@@ -47338,7 +47338,7 @@ MonoBehaviour:
   itemDespawn: {fileID: 578950519}
   itemInventory:
     itemId: 
-    itemProfile: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+    itemProfile: {fileID: 0}
     itemCount: 0
     maxStack: 30
   itemSR: {fileID: 1866521746}
@@ -103137,7 +103137,7 @@ MonoBehaviour:
   itemDespawn: {fileID: 4543232283949944555}
   itemInventory:
     itemId: 
-    itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+    itemProfile: {fileID: 0}
     itemCount: 0
     maxStack: 30
   itemSR: {fileID: 4543232283056871855}

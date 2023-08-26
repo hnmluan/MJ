@@ -16,8 +16,9 @@ MonoBehaviour:
   itemType: 3
   keyName: Item.GoldenTreasure
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
-  keyDiscription: Item.Description
+  keyDescription: 
   defaultMaxStack: 10
+  datas: []
   listItemCanGet:
   - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
     dropRate: 100000
@@ -41,3 +42,6 @@ MonoBehaviour:
     minValue: 4
     maxValue: 7
   priceToSell: 0
+  references:
+    version: 2
+    RefIds: []

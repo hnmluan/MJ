@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public class ItemRecipeIngredient
 {
-    public ItemProfileSO itemProfile;
+    public ItemDataSO itemProfile;
     public int itemCount;
 }

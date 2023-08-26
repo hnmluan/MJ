@@ -39,7 +39,7 @@ public class ItemCtrl : InitMonoBehaviour
     {
         if (this.itemInventory.itemProfile != null) return;
         ItemCode itemCode = ItemCodeParser.FromString(transform.name);
-        ItemProfileSO itemProfile = ItemProfileSO.FindByItemCode(itemCode);
+        ItemDataSO itemProfile = ItemDataSO.FindByItemCode(itemCode);
         this.itemInventory.itemProfile = itemProfile;
         Debug.Log(transform.name + ": LoadItemInventory", gameObject);
     }

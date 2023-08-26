@@ -4,6 +4,6 @@ using System;
 
 public class WeaponRecipeIngredient
 {
-    public ItemProfileSO itemProfile;
+    public ItemDataSO itemProfile;
     public int itemCount;
 }

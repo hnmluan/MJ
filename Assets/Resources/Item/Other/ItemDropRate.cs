@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public class ItemDropRate
 {
-    public ItemProfileSO itemSO;
+    public ItemDataSO itemSO;
     public int dropRate;
 }

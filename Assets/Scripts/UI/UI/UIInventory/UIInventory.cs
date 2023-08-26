@@ -127,8 +127,8 @@ public class UIInventory : BaseUI
             UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
             UIItemInventory nextUIItem = nextItem.GetComponent<UIItemInventory>();
 
-            ItemProfileSO currentProfile = currentUIItem.ItemInventory.itemProfile;
-            ItemProfileSO nextProfile = nextUIItem.ItemInventory.itemProfile;
+            ItemDataSO currentProfile = currentUIItem.ItemInventory.itemProfile;
+            ItemDataSO nextProfile = nextUIItem.ItemInventory.itemProfile;
 
             bool isSwap = false;
 

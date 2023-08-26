@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemProfileSO", menuName = "SO/ItemProfile")]
 
-public class ItemProfileSO : ScriptableObject
+public class ItemDataSO : ScriptableObject
 {
     public ItemCode itemCode = ItemCode.NoItem;
 
@@ -14,24 +14,32 @@ public class ItemProfileSO : ScriptableObject
 
     public Sprite itemSprite;
 
-    public string keyDiscription;
+    public string keyDescription;
 
     public int defaultMaxStack = 10;
+
+    public int priceToSell;
 
     public List<ItemDropRate> listItemCanGet;
 
     public List<ItemRangePrice> price;
 
-    public IntRange priceToBuy;
-
     public IntRange quantityToBuy;
 
-    public int priceToSell;
+    [field: SerializeReference] public List<ItemData> datas = new List<ItemData>() { new DetailsItemData() };
 
-    public static ItemProfileSO FindByItemCode(ItemCode itemCode)
+    public void AddData(ItemData data)
     {
-        var profiles = Resources.LoadAll("Item/ScriptableObject", typeof(ItemProfileSO));
-        foreach (ItemProfileSO profile in profiles)
+        if (datas.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
+            return;
+
+        datas.Add(data);
+    }
+
+    public static ItemDataSO FindByItemCode(ItemCode itemCode)
+    {
+        var profiles = Resources.LoadAll("Item/SO", typeof(ItemDataSO));
+        foreach (ItemDataSO profile in profiles)
         {
             if (profile.itemCode != itemCode) continue;
             return profile;
@@ -41,7 +49,7 @@ public class ItemProfileSO : ScriptableObject
 
     public static ItemCode GetRandomItemCodeExcludingNoItem()
     {
-        ItemCode[] itemCode = (ItemCode[])Enum.GetValues(typeof(ItemCode));
+        ItemCode[] itemCode = (ItemCode[])System.Enum.GetValues(typeof(ItemCode));
         ItemCode randomItemCode;
 
         System.Random random = new System.Random();

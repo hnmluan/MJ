@@ -28,7 +28,7 @@ public class UIShop : BaseUI
     {
         this.ResetItems();
         lastTimeRestItem = DateTime.Now;
-        ItemProfileSO.FindByItemCode(ItemCode.NoItem);
+        ItemDataSO.FindByItemCode(ItemCode.NoItem);
 
         base.Start();
     }

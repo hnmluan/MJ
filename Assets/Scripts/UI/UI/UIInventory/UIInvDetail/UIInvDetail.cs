@@ -29,7 +29,7 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
         uiInvDetailCtrl.ItemQuantity.text = item.itemCount.ToString();
         uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
-        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDiscription);
+        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDescription);
         uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize("Item.Type." + item.itemProfile.itemType.ToString());
     }
 

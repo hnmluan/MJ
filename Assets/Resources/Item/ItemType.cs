@@ -1,8 +1,9 @@
 public enum ItemType
 {
     NoType = 0,
-
     Resource = 1,
-    Equiment = 2,
+    Equipment = 2,
     Treasure = 3,
+    Key = 4,
+    Special = 5,
 }

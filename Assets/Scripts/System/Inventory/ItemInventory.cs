@@ -3,7 +3,7 @@ using System;
 public class ItemInventory
 {
     public string itemId;
-    public ItemProfileSO itemProfile;
+    public ItemDataSO itemProfile;
     public int itemCount = 0;
     public int maxStack = 30;
 
