@@ -16,6 +16,7 @@ public class PlayerMovement : PlayerAbstract
     private void Update()
     {
         if (GameManager.Instance.State != GameState.FreeRoam) return;
+        if (DialogueManager.GetInstance().dialogueIsPlaying) return;
 
         GetDirection();
 
