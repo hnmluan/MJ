@@ -19,5 +19,6 @@ public class InputManager : MonoBehaviour
     public virtual bool OpenDictionary() => Input.GetKeyDown(KeyCode.L);
     public virtual bool OpenShop() => Input.GetKeyDown(KeyCode.H);
     public virtual bool StartConversation() => Input.GetKeyDown(KeyCode.Z);
+    public virtual bool CountinueConversation() => Input.GetKeyDown(KeyCode.Space);
     public virtual bool Close() => Input.GetKeyDown(KeyCode.Escape);
 }
