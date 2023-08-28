@@ -5,20 +5,41 @@ public class InputManager : MonoBehaviour
     private static InputManager instance;
     public static InputManager Instance => instance;
 
+    private bool submitPressed = true;
+
     void Awake()
     {
         if (InputManager.instance != null) Debug.LogError("Only 1 InputManager allow to exist");
         InputManager.instance = this;
     }
+    public static InputManager GetInstance() => instance;
 
-    public virtual bool OpenInventory() => Input.GetKeyDown(KeyCode.I);
-    public virtual bool OpenSetting() => Input.GetKeyDown(KeyCode.K);
-    public virtual bool OpenGuide() => Input.GetKeyDown(KeyCode.G);
-    public virtual bool OpenPause() => Input.GetKeyDown(KeyCode.P);
-    public virtual bool OpenArmory() => Input.GetKeyDown(KeyCode.M);
-    public virtual bool OpenDictionary() => Input.GetKeyDown(KeyCode.L);
-    public virtual bool OpenShop() => Input.GetKeyDown(KeyCode.H);
-    public virtual bool StartConversation() => Input.GetKeyDown(KeyCode.Z);
-    public virtual bool CountinueConversation() => Input.GetKeyDown(KeyCode.Space);
-    public virtual bool Close() => Input.GetKeyDown(KeyCode.Escape);
+    public bool StartInteract() => Input.GetKeyDown(KeyCode.I);
+
+    public void RegisterInteractPressed() => submitPressed = !submitPressed;
+
+    // public bool ContinueInteract() => Input.GetKeyDown(KeyCode.Space) && submitPressed;
+
+    public bool ContinueInteract()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && submitPressed)
+        {
+            submitPressed = false;
+            return false;
+        }
+        return Input.GetKeyDown(KeyCode.Space);
+    }
+
+    public void RegisterSubmitPressed() => submitPressed = true;
+
+    public virtual bool OpenInventory() => false;
+    public virtual bool OpenSetting() => false;
+    public virtual bool OpenGuide() => false;
+    public virtual bool OpenPause() => false;
+    public virtual bool OpenArmory() => false;
+    public virtual bool OpenDictionary() => false;
+    public virtual bool OpenShop() => false;
+    public virtual bool StartConversation() => false;
+    public virtual bool CountinueConversation() => false;
+    public virtual bool Close() => false;
 }
