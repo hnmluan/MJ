@@ -5,8 +5,6 @@ public class InputManager : MonoBehaviour
     private static InputManager instance;
     public static InputManager Instance => instance;
 
-    private bool submitPressed = true;
-
     void Awake()
     {
         if (InputManager.instance != null) Debug.LogError("Only 1 InputManager allow to exist");
@@ -16,21 +14,26 @@ public class InputManager : MonoBehaviour
 
     public bool StartInteract() => Input.GetKeyDown(KeyCode.I);
 
-    public void RegisterInteractPressed() => submitPressed = !submitPressed;
 
     // public bool ContinueInteract() => Input.GetKeyDown(KeyCode.Space) && submitPressed;
 
-    public bool ContinueInteract()
+    public bool ContinueInteract() => Input.GetKeyDown(KeyCode.Space);
+
+    private bool submitPressed = false;
+
+    public bool GetSubmitPressed()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && submitPressed)
+        if (submitPressed && Input.GetKeyDown(KeyCode.Space))
         {
             submitPressed = false;
             return false;
-        }
+        };
+
         return Input.GetKeyDown(KeyCode.Space);
     }
 
     public void RegisterSubmitPressed() => submitPressed = true;
+
 
     public virtual bool OpenInventory() => false;
     public virtual bool OpenSetting() => false;

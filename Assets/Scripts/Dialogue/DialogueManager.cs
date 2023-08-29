@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -126,7 +127,7 @@ public class DialogueManager : MonoBehaviour
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0
-            && InputManager.GetInstance().ContinueInteract())
+            && InputManager.GetInstance().GetSubmitPressed())
         {
             ContinueStory();
         }
@@ -173,7 +174,10 @@ public class DialogueManager : MonoBehaviour
             {
                 StopCoroutine(displayLineCoroutine);
             }
-            string nextLine = currentStory.Continue();
+
+            string nextLine = currentStory.Continue().Trim();
+            string dialog = LocalizationManager.Localize(nextLine);
+
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
             {
@@ -184,7 +188,7 @@ public class DialogueManager : MonoBehaviour
             {
                 // handle tags
                 HandleTags(currentStory.currentTags);
-                displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+                displayLineCoroutine = StartCoroutine(DisplayLine(dialog));
             }
         }
         else
@@ -210,11 +214,11 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (InputManager.GetInstance().ContinueInteract())
-            {
-                dialogueText.maxVisibleCharacters = line.Length;
-                break;
-            }
+            /*            if (InputManager.GetInstance().GetSubmitPressed())
+                        {
+                            dialogueText.maxVisibleCharacters = line.Length;
+                            break;
+                        }*/
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag)
