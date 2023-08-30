@@ -10,7 +10,7 @@ public class RecipeDecomposeUISpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (RecipeDecomposeUISpawner.instance != null) Debug.LogError("Only 1 RecipeDecomposeUISpawner allow to exist");
+        if (RecipeDecomposeUISpawner.instance != null) Debug.Log("Only 1 RecipeDecomposeUISpawner allow to exist");
         RecipeDecomposeUISpawner.instance = this;
     }
     protected override void LoadHolder()

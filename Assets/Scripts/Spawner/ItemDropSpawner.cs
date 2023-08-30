@@ -11,7 +11,7 @@ public class ItemDropSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (ItemDropSpawner.instance != null) Debug.LogError("Only 1 ItemDropSpawner allow to exist");
+        if (ItemDropSpawner.instance != null) Debug.Log("Only 1 ItemDropSpawner allow to exist");
         ItemDropSpawner.instance = this;
     }
 

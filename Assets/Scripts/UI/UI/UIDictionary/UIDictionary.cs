@@ -15,7 +15,7 @@ public class UIDictionary : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
+        if (UIDictionary.instance != null) Debug.Log("Only 1 UIDictionary allow to exist");
         UIDictionary.instance = this;
     }
 

@@ -23,7 +23,7 @@ public class UIArmory : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIArmory.instance != null) Debug.LogError("Only 1 UIArmory allow to exist");
+        if (UIArmory.instance != null) Debug.Log("Only 1 UIArmory allow to exist");
         UIArmory.instance = this;
     }
 

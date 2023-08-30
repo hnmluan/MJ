@@ -9,7 +9,7 @@ public class MutilLanguage : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (MutilLanguage.instance != null) Debug.LogError("Only 1 MutilLanguage allow to exist");
+        if (MutilLanguage.instance != null) Debug.Log("Only 1 MutilLanguage allow to exist");
         MutilLanguage.instance = this;
 
         LocalizationManager.Read();

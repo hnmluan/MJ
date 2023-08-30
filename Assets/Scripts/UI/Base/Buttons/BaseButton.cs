@@ -33,5 +33,5 @@ public abstract class BaseButton : InitMonoBehaviour
 
     protected abstract void OnClick();
 
-    protected virtual void SoundOnClick() => AudioController.Instance.PlayVFX("sfx_button_press");
+    protected virtual void SoundOnClick() => AudioController.Ins.PlayVFX("sfx_button_press");
 }

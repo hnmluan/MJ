@@ -15,7 +15,7 @@ public class UIDictionaryItemSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (UIDictionaryItemSpawner.instance != null) Debug.LogError("Only 1 UIDictionaryItemSpawner allow to exist");
+        if (UIDictionaryItemSpawner.instance != null) Debug.Log("Only 1 UIDictionaryItemSpawner allow to exist");
         UIDictionaryItemSpawner.instance = this;
     }
 

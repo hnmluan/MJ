@@ -23,7 +23,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIDictionaryDetail.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
+        if (UIDictionaryDetail.instance != null) Debug.Log("Only 1 UIDictionary allow to exist");
         UIDictionaryDetail.instance = this;
     }
 

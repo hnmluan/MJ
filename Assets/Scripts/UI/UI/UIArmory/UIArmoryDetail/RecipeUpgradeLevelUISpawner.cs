@@ -10,7 +10,7 @@ public class RecipeUpgradeLevelUISpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (RecipeUpgradeLevelUISpawner.instance != null) Debug.LogError("Only 1 UIArmoryItemSpawner allow to exist");
+        if (RecipeUpgradeLevelUISpawner.instance != null) Debug.Log("Only 1 UIArmoryItemSpawner allow to exist");
         RecipeUpgradeLevelUISpawner.instance = this;
     }
 

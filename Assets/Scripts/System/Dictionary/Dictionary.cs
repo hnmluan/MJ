@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dictionary : InitMonoBehaviour
+public class Dictionary : Singleton<Dictionary>
 {
     private static Dictionary instance;
     public static Dictionary Instance { get => instance; }
@@ -11,7 +11,7 @@ public class Dictionary : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (Dictionary.instance != null) Debug.LogError("Only 1 Dictionary allow to exist");
+        if (Dictionary.instance != null) Debug.Log("Only 1 Dictionary allow to exist");
         Dictionary.instance = this;
     }
 

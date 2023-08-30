@@ -45,7 +45,7 @@ public class ItemLooter : InitMonoBehaviour
 
 
         ItemCode itemCode = itemPickupable.GetItemCode();
-        if (Inventory.Instance.AddItem(itemCode, 1)) itemPickupable.Picked();
+        if (Inventory.Ins.AddItem(itemCode, 1)) itemPickupable.Picked();
     }
 
     protected void LootItem(Transform item)

@@ -15,7 +15,7 @@ public class UIShopCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIShopCtrl.instance != null) Debug.LogError("Only 1 UIShopCtrl allow to exist");
+        if (UIShopCtrl.instance != null) Debug.Log("Only 1 UIShopCtrl allow to exist");
         UIShopCtrl.instance = this;
     }
 

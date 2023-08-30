@@ -14,7 +14,7 @@ public class UIInvItemSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (UIInvItemSpawner.instance != null) Debug.LogError("Only 1 UIInvItemSpawner allow to exist");
+        if (UIInvItemSpawner.instance != null) Debug.Log("Only 1 UIInvItemSpawner allow to exist");
         UIInvItemSpawner.instance = this;
     }
 

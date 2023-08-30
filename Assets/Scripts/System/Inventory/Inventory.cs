@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : InitMonoBehaviour
+public class Inventory : Singleton<Inventory>
 {
     private static Inventory instance;
     public static Inventory Instance { get => instance; }
@@ -18,8 +18,8 @@ public class Inventory : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (Inventory.instance != null) Debug.LogError("Only 1 Inventory allow to exist");
-        Inventory.instance = this;
+        if (Inventory.Ins != null) Debug.Log("Only 1 Inventory allow to exist");
+        Inventory.Ins = this;
     }
 
     protected override void Start()

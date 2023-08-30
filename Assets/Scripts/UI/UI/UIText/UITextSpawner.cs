@@ -13,7 +13,7 @@ public class UITextSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (UITextSpawner.instance != null) Debug.LogError("Only 1 UITextSpawner allow to exist");
+        if (UITextSpawner.instance != null) Debug.Log("Only 1 UITextSpawner allow to exist");
         UITextSpawner.instance = this;
     }
 

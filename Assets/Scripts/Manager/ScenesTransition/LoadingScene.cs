@@ -11,7 +11,7 @@ public enum Scenes
     VillageElderHouse = 3
 }
 
-public class LoadingScene : InitMonoBehaviour
+public class LoadingScene : Singleton<LoadingScene>
 {
     private static LoadingScene instance;
     public static LoadingScene Instance => instance;
@@ -25,7 +25,7 @@ public class LoadingScene : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (LoadingScene.instance != null) Debug.LogError("Only 1 LoadingScene allow to exist");
+        if (LoadingScene.instance != null) Debug.Log("Only 1 LoadingScene allow to exist");
         LoadingScene.instance = this;
     }
 

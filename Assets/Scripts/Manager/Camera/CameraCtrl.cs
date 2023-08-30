@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraCtrl : InitMonoBehaviour
+public class CameraCtrl : Singleton<CameraCtrl>
 {
 
     private static CameraCtrl instance;
@@ -13,7 +13,7 @@ public class CameraCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (CameraCtrl.instance != null) Debug.LogError("Only 1 CameraCtrl allow to exist");
+        if (CameraCtrl.instance != null) Debug.Log("Only 1 CameraCtrl allow to exist");
         CameraCtrl.instance = this;
     }
 

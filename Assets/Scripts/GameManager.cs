@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 public enum GameState { FreeRoam, Dialog, Battle, Setting }
-public class GameManager : InitMonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     private static GameManager instance;
     public static GameManager Instance { get => instance; }
@@ -13,7 +13,7 @@ public class GameManager : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (GameManager.instance != null) Debug.LogError("Only 1 GameManager allow to exist");
+        if (GameManager.instance != null) Debug.Log("Only 1 GameManager allow to exist");
         GameManager.instance = this;
     }
 

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class UICtrl : InitMonoBehaviour
+public class UICtrl : Singleton<UICtrl>
 {
     private static UICtrl instance;
     public static UICtrl Instance { get => instance; }
@@ -15,7 +15,7 @@ public class UICtrl : InitMonoBehaviour
     {
         base.Awake();
 
-        if (UICtrl.instance != null) Debug.LogError("Only 1 UICtrl allow to exist");
+        if (UICtrl.instance != null) Debug.Log("Only 1 UICtrl allow to exist");
 
         UICtrl.instance = this;
     }

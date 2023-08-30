@@ -10,7 +10,7 @@ public class LocalizedDialog : LocalizedText
 
     protected void Awake()
     {
-        if (LocalizedDialog.instance != null) Debug.LogError("Only 1 LocalizedDialog allow to exist");
+        if (LocalizedDialog.instance != null) Debug.Log("Only 1 LocalizedDialog allow to exist");
 
         LocalizedDialog.instance = this;
     }

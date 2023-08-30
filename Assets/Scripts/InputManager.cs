@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : Singleton<InputManager>
 {
     private static InputManager instance;
     public static InputManager Instance => instance;
 
-    void Awake()
+    protected override void Awake()
     {
-        if (InputManager.instance != null) Debug.LogError("Only 1 InputManager allow to exist");
+        if (InputManager.instance != null) Debug.Log("Only 1 InputManager allow to exist");
         InputManager.instance = this;
     }
     public static InputManager GetInstance() => instance;

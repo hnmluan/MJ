@@ -24,7 +24,7 @@ public class PlayerMovement : PlayerAbstract
         if (direction != Vector2.zero)
         {
             Move();
-            PlayWalkSFX();
+            //PlayWalkSFX();  
         };
     }
 
@@ -43,7 +43,7 @@ public class PlayerMovement : PlayerAbstract
 
         if (sfxTimer >= sfxInterval)
         {
-            AudioController.Instance.PlayVFX("sfx_walk");
+            AudioController.Ins.PlayVFX("sfx_walk");
 
             sfxTimer = 0f;
         }

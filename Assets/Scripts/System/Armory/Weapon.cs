@@ -24,7 +24,7 @@ public class Weapon
 
         foreach (WeaponRecipeIngredient item in recipeIngredients)
         {
-            Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
+            Inventory.Ins.DeductItem(item.itemProfile.itemCode, item.itemCount);
         }
         foreach (WeaponRecipePrice item in recipePrices)
         {
@@ -39,7 +39,7 @@ public class Weapon
     {
         foreach (WeaponRecipeIngredient recipeDecompose in GetRecipeDecompose())
         {
-            Inventory.Instance.AddItem(recipeDecompose.itemProfile.itemCode, recipeDecompose.itemCount);
+            Inventory.Ins.AddItem(recipeDecompose.itemProfile.itemCode, recipeDecompose.itemCount);
         }
         Armory.Instance.Weapons.Remove(this);
     }

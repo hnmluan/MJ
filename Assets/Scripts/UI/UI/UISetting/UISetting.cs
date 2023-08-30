@@ -9,7 +9,7 @@ public class UISetting : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UISetting.instance != null) Debug.LogError("Only 1 UISetting allow to exist");
+        if (UISetting.instance != null) Debug.Log("Only 1 UISetting allow to exist");
         UISetting.instance = this;
     }
 }

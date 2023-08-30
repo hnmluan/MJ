@@ -20,7 +20,7 @@ public class UIShop : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIShop.instance != null) Debug.LogError("Only 1 UIShop allow to exist");
+        if (UIShop.instance != null) Debug.Log("Only 1 UIShop allow to exist");
         UIShop.instance = this;
     }
 

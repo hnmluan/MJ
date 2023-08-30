@@ -8,7 +8,7 @@ public class EnemySpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (EnemySpawner.instance != null) Debug.LogError("Only 1 EnemySpawner allow to exist");
+        if (EnemySpawner.instance != null) Debug.Log("Only 1 EnemySpawner allow to exist");
         EnemySpawner.instance = this;
     }
 

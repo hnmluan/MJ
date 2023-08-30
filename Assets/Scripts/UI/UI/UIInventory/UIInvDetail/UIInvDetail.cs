@@ -14,7 +14,7 @@ public class UIInvDetail : UIInvDetailAbstract
     protected override void Awake()
     {
         base.Awake();
-        if (UIInvDetail.instance != null) Debug.LogError("Only 1 UIInvDetail allow to exist");
+        if (UIInvDetail.instance != null) Debug.Log("Only 1 UIInvDetail allow to exist");
         UIInvDetail.instance = this;
     }
 
@@ -48,29 +48,29 @@ public class UIInvDetail : UIInvDetailAbstract
     public virtual void UseItem()
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Instance.ShowItems();
+        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        UIInventory.Ins.ShowItems();
     }
 
     public virtual void UseAllItem()
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Instance.ShowItems();
+        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        UIInventory.Ins.ShowItems();
     }
 
     public virtual void SellItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Instance.ShowItems();
+        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        UIInventory.Ins.ShowItems();
     }
 
     public virtual void SellAllItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Instance.ShowItems();   
+        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        UIInventory.Ins.ShowItems();   
     }
 
     private void ShowButtons()

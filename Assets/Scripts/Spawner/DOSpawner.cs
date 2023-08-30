@@ -8,7 +8,7 @@ public class DOSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (DOSpawner.instance != null) Debug.LogError("Only 1 DOSpawner allow to exist");
+        if (DOSpawner.instance != null) Debug.Log("Only 1 DOSpawner allow to exist");
         DOSpawner.instance = this;
     }
 }

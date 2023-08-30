@@ -8,7 +8,7 @@ public class FXSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (FXSpawner.instance != null) Debug.LogError("Only 1 FXSpawner allow to exist");
+        if (FXSpawner.instance != null) Debug.Log("Only 1 FXSpawner allow to exist");
         FXSpawner.instance = this;
     }
 }

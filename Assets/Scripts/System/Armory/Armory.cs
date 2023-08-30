@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armory : InitMonoBehaviour
+public class Armory : Singleton<Armory>
 {
     private static Armory instance;
     public static Armory Instance { get => instance; }
@@ -14,7 +14,7 @@ public class Armory : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (Armory.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        if (Armory.instance != null) Debug.Log("Only 1 PlayerCtrl allow to exist");
         Armory.instance = this;
     }
 

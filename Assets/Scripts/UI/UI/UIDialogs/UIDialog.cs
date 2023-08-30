@@ -21,7 +21,7 @@ public class UIDialog : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIDialog.instance != null) Debug.LogError("Only 1 UIDialog allow to exist");
+        if (UIDialog.instance != null) Debug.Log("Only 1 UIDialog allow to exist");
         UIDialog.instance = this;
     }
 

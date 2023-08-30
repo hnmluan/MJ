@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerCtrl : InitMonoBehaviour
+public class PlayerCtrl : Singleton<PlayerCtrl>
 {
     private static PlayerCtrl instance;
     public static PlayerCtrl Instance { get => instance; }
@@ -27,7 +27,7 @@ public class PlayerCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (PlayerCtrl.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        if (PlayerCtrl.instance != null) Debug.Log("Only 1 PlayerCtrl allow to exist");
         PlayerCtrl.instance = this;
     }
 

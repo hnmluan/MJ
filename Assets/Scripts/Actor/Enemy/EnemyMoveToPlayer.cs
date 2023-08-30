@@ -19,8 +19,16 @@ public class EnemyMoveToPlayer : ObjMoveToPlayer
 
     protected override void Update()
     {
-        base.Update();
-        SetAnimation((transform.position - target.position).normalized);
+        try
+        {
+            base.Update();
+            SetAnimation((transform.position - target.position).normalized);
+        }
+        catch (System.Exception)
+        {
+            LoadTarget();
+        }
+
     }
 
     private void SetAnimation(Vector3 moveDirection)

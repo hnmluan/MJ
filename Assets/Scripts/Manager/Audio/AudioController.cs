@@ -2,11 +2,8 @@ using System;
 using UnityEngine;
 
 
-public class AudioController : InitMonoBehaviour
+public class AudioController : Singleton<AudioController>
 {
-    private static AudioController instance;
-    public static AudioController Instance { get => instance; }
-
     [SerializeField] protected Audio[] musicSounds;
 
     [SerializeField] protected Audio[] sfxSounds;
@@ -46,13 +43,6 @@ public class AudioController : InitMonoBehaviour
         if (this.musicSource != null) return;
         musicSource = transform.Find("MusicSource").GetComponent<AudioSource>();
         Debug.Log(transform.name + ": LoadMusicSource", gameObject);
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (AudioController.instance != null) Debug.LogError("Only 1 AudioController allow to exist");
-        AudioController.instance = this;
     }
 
     protected override void Start() => PlayMusic("music_back_ground_free");

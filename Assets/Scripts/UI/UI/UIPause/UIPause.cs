@@ -9,7 +9,7 @@ public class UIPause : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIPause.instance != null) Debug.LogError("Only 1 UIPause allow to exist");
+        if (UIPause.instance != null) Debug.Log("Only 1 UIPause allow to exist");
         UIPause.instance = this;
     }
 }

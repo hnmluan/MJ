@@ -15,7 +15,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
     protected override void Awake()
     {
         base.Awake();
-        if (UIArmoryDetail.instance != null) Debug.LogError("Only 1 UIArmoryDetail allow to exist");
+        if (UIArmoryDetail.instance != null) Debug.Log("Only 1 UIArmoryDetail allow to exist");
         UIArmoryDetail.instance = this;
     }
 

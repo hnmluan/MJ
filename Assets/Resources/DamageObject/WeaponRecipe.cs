@@ -15,7 +15,7 @@ public class WeaponRecipe
         bool CanUpgrade = true;
         foreach (WeaponRecipeIngredient item in recipeIngredients)
         {
-            if (item.itemCount > Inventory.Instance.GetQuantity(item.itemProfile.itemCode)) CanUpgrade = false;
+            if (item.itemCount > Inventory.Ins.GetQuantity(item.itemProfile.itemCode)) CanUpgrade = false;
         }
         foreach (WeaponRecipePrice item in recipePrice)
         {

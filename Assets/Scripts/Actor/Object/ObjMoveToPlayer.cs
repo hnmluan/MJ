@@ -8,7 +8,7 @@ public class ObjMoveToPlayer : ObjMoveToTagert
         this.LoadTarget();
     }
 
-    private void LoadTarget()
+    protected void LoadTarget()
     {
         if (this.target != null) return;
         this.target = GameObject.FindGameObjectWithTag("Player").transform;

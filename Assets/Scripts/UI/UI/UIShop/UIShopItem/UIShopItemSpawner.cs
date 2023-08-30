@@ -13,7 +13,7 @@ public class UIShopItemSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (UIShopItemSpawner.instance != null) Debug.LogError("Only 1 UIShopItemSpawner allow to exist");
+        if (UIShopItemSpawner.instance != null) Debug.Log("Only 1 UIShopItemSpawner allow to exist");
         UIShopItemSpawner.instance = this;
     }
 

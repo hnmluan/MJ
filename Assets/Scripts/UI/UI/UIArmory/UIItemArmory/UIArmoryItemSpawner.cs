@@ -10,7 +10,7 @@ public class UIArmoryItemSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (UIArmoryItemSpawner.instance != null) Debug.LogError("Only 1 UIArmoryItemSpawner allow to exist");
+        if (UIArmoryItemSpawner.instance != null) Debug.Log("Only 1 UIArmoryItemSpawner allow to exist");
         UIArmoryItemSpawner.instance = this;
     }
 

@@ -9,7 +9,7 @@ public class UIGuide : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIGuide.instance != null) Debug.LogError("Only 1 UIGuide allow to exist");
+        if (UIGuide.instance != null) Debug.Log("Only 1 UIGuide allow to exist");
         UIGuide.instance = this;
     }
 }

@@ -21,7 +21,7 @@ public class Sunny : Weather
     protected override void Awake()
     {
         base.Awake();
-        if (Sunny.instance != null) Debug.LogError("Only 1 Sunny allow to exist");
+        if (Sunny.instance != null) Debug.Log("Only 1 Sunny allow to exist");
         Sunny.instance = this;
     }
 

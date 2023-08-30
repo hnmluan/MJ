@@ -8,7 +8,7 @@ public class HBBarSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (HBBarSpawner.instance != null) Debug.LogError("Only 1 HBBarSpawner allow to exist");
+        if (HBBarSpawner.instance != null) Debug.Log("Only 1 HBBarSpawner allow to exist");
         HBBarSpawner.instance = this;
     }
 }

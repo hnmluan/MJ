@@ -21,7 +21,7 @@ public class DialogCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (DialogCtrl.instance != null) Debug.LogError("Only 1 DialogCtrl allow to exist");
+        if (DialogCtrl.instance != null) Debug.Log("Only 1 DialogCtrl allow to exist");
         DialogCtrl.instance = this;
     }
 

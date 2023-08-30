@@ -22,7 +22,7 @@ public class Rain : Weather
     protected override void Awake()
     {
         base.Awake();
-        if (Rain.instance != null) Debug.LogError("Only 1 Rain allow to exist");
+        if (Rain.instance != null) Debug.Log("Only 1 Rain allow to exist");
         Rain.instance = this;
     }
 

@@ -15,7 +15,7 @@ public class UIDictionaryCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIDictionaryCtrl.instance != null) Debug.LogError("Only 1 UIDictionaryCtrl allow to exist");
+        if (UIDictionaryCtrl.instance != null) Debug.Log("Only 1 UIDictionaryCtrl allow to exist");
         UIDictionaryCtrl.instance = this;
     }
 

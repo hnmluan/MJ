@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Wallet : InitMonoBehaviour
+public class Wallet : Singleton<Wallet>
 {
     private static Wallet instance;
     public static Wallet Instance { get => instance; }
@@ -36,7 +36,7 @@ public class Wallet : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (Wallet.instance != null) Debug.LogError("Only 1 PlayerCtrl allow to exist");
+        if (Wallet.instance != null) Debug.Log("Only 1 PlayerCtrl allow to exist");
         Wallet.instance = this;
     }
 }

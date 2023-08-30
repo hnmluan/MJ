@@ -9,7 +9,7 @@ public class UIDecompose : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIDecompose.instance != null) Debug.LogError("Only 1 UIDecompose allow to exist");
+        if (UIDecompose.instance != null) Debug.Log("Only 1 UIDecompose allow to exist");
         UIDecompose.instance = this;
     }
 

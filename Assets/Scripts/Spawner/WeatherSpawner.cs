@@ -8,7 +8,7 @@ public class WeatherSpawner : Spawner
     protected override void Awake()
     {
         base.Awake();
-        if (WeatherSpawner.instance != null) Debug.LogError("Only 1 WeatherSpawner allow to exist");
+        if (WeatherSpawner.instance != null) Debug.Log("Only 1 WeatherSpawner allow to exist");
         WeatherSpawner.instance = this;
     }
 }

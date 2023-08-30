@@ -15,7 +15,7 @@ public class UIInventoryCtrl : InitMonoBehaviour
     protected override void Awake()
     {
         base.Awake();
-        if (UIInventoryCtrl.instance != null) Debug.LogError("Only 1 UIInventoryCtrl allow to exist");
+        if (UIInventoryCtrl.instance != null) Debug.Log("Only 1 UIInventoryCtrl allow to exist");
         UIInventoryCtrl.instance = this;
     }
 
