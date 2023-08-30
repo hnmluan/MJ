@@ -8,6 +8,7 @@ public enum Scenes
     NoScene = 0,
     Map_01 = 1,
     Map_02 = 2,
+    VillageElderHouse = 3
 }
 
 public class LoadingScene : InitMonoBehaviour
