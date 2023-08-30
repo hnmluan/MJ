@@ -15,6 +15,11 @@ public class UIArmory : BaseUI
 
     [SerializeField] public int currentItemArmory = -1;
 
+    [Header("Armory Weapon Spawner")]
+
+    [SerializeField] protected Transform content;
+    public Transform Content => content;
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,6 +31,19 @@ public class UIArmory : BaseUI
     {
         ClearFocusItem();
         currentItemArmory = -1;
+    }
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadContent();
+    }
+
+    protected virtual void LoadContent()
+    {
+        if (this.content != null) return;
+        this.content = transform.Find("Scroll View").Find("Viewport").Find("Content");
+        Debug.Log(transform.name + ": LoadContent", gameObject);
     }
 
     public override void Open()
@@ -72,11 +90,11 @@ public class UIArmory : BaseUI
     {
         List<UIItemArmory> list = new List<UIItemArmory>();
 
-        int itemCount = UIArmoryCtrl.Instance.Content.childCount;
+        int itemCount = content.childCount;
 
         for (int i = 0; i < itemCount; i++)
         {
-            Transform currentItem = UIArmoryCtrl.Instance.Content.GetChild(i);
+            Transform currentItem = content.GetChild(i);
 
             if (currentItem.gameObject.activeSelf == true)
             {
@@ -116,13 +134,13 @@ public class UIArmory : BaseUI
     {
         if (this.armorySort == ArmorySort.NoSort) return;
 
-        int itemCount = UIArmoryCtrl.Instance.Content.childCount;
+        int itemCount = content.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currentItem = UIArmoryCtrl.Instance.Content.GetChild(i);
-            Transform nextItem = UIArmoryCtrl.Instance.Content.GetChild(i + 1);
+            Transform currentItem = content.GetChild(i);
+            Transform nextItem = content.GetChild(i + 1);
 
             UIItemArmory currentUIItem = currentItem.GetComponent<UIItemArmory>();
             UIItemArmory nextUIItem = nextItem.GetComponent<UIItemArmory>();

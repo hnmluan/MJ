@@ -7,10 +7,6 @@ public class UIArmoryItemSpawner : Spawner
 
     public static string normalWeapon = "UIItem";
 
-    [Header("Armory Weapon Spawner")]
-    [SerializeField] protected UIArmoryCtrl armoryCtrl;
-    public UIArmoryCtrl UIArmoryCtrl => armoryCtrl;
-
     protected override void Awake()
     {
         base.Awake();
@@ -20,18 +16,9 @@ public class UIArmoryItemSpawner : Spawner
 
     protected override void LoadHolder()
     {
-        this.LoadUIArmoryCtrl();
-
         if (this.holder != null) return;
-        this.holder = this.armoryCtrl.Content;
+        this.holder = UIArmory.Instance.Content;
         Debug.LogWarning(transform.name + ": LoadHodler", gameObject);
-    }
-
-    protected virtual void LoadUIArmoryCtrl()
-    {
-        if (this.armoryCtrl != null) return;
-        this.armoryCtrl = transform.parent.GetComponent<UIArmoryCtrl>();
-        Debug.LogWarning(transform.name + ": LoadUIArmoryCtrl", gameObject);
     }
 
     public virtual void ClearWeapons()
@@ -41,7 +28,7 @@ public class UIArmoryItemSpawner : Spawner
 
     public virtual void SpawnWeapon(Weapon weapon)
     {
-        Transform uiWeapon = this.armoryCtrl.UIArmoryWeaponSpawner.Spawn(UIArmoryItemSpawner.normalWeapon, Vector3.zero, Quaternion.identity);
+        Transform uiWeapon = this.Spawn(UIArmoryItemSpawner.normalWeapon, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);
 
         UIItemArmory Weapon = uiWeapon.GetComponent<UIItemArmory>();
