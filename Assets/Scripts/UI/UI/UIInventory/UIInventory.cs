@@ -18,8 +18,8 @@ public class UIInventory : BaseUI
     protected override void Awake()
     {
         base.Awake();
-        if (UIInventory.Ins != null) Debug.Log("Only 1 UIInventory allow to exist");
-        UIInventory.Ins = this;
+        if (UIInventory.instance != null) Debug.Log("Only 1 UIInventory allow to exist");
+        UIInventory.instance = this;
     }
 
     protected override void OnEnable()
@@ -101,7 +101,7 @@ public class UIInventory : BaseUI
     {
         this.ClearItems();
 
-        List<ItemInventory> items = Inventory.Ins.Items;
+        List<ItemInventory> items = Inventory.Instance.Items;
 
         items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
 

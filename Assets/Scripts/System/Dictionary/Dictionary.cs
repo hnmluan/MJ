@@ -3,17 +3,7 @@ using UnityEngine;
 
 public class Dictionary : Singleton<Dictionary>
 {
-    private static Dictionary instance;
-    public static Dictionary Instance { get => instance; }
-
     [SerializeField] protected List<IActionDictionaryObserver> observers = new List<IActionDictionaryObserver>();
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Dictionary.instance != null) Debug.Log("Only 1 Dictionary allow to exist");
-        Dictionary.instance = this;
-    }
 
     [SerializeField] List<WeaponDataSO> damageObjectSOsAvailableSeen;
     public List<WeaponDataSO> DamageObjectSOsAvailableSeen { get => damageObjectSOsAvailableSeen; }

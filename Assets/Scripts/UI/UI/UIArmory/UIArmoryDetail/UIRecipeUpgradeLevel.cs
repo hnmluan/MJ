@@ -37,7 +37,7 @@ public class UIRecipeUpgradeLevel : InitMonoBehaviour
         this.quantity.text =
             weaponRecipeIngredient.itemCount.ToString()
             + "/"
-            + Inventory.Ins.GetQuantity(weaponRecipeIngredient.itemProfile.itemCode).ToString();
+            + Inventory.Instance.GetQuantity(weaponRecipeIngredient.itemProfile.itemCode).ToString();
     }
 
     public virtual void ShowUIRecipeUpdateLevel(WeaponRecipePrice weaponRecipePrice)

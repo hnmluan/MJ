@@ -43,7 +43,7 @@ public class PlayerMovement : PlayerAbstract
 
         if (sfxTimer >= sfxInterval)
         {
-            AudioController.Ins.PlayVFX("sfx_walk");
+            AudioController.Instance.PlayVFX("sfx_walk");
 
             sfxTimer = 0f;
         }

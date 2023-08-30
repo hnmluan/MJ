@@ -13,21 +13,11 @@ public enum Scenes
 
 public class LoadingScene : Singleton<LoadingScene>
 {
-    private static LoadingScene instance;
-    public static LoadingScene Instance => instance;
-
     [SerializeField] private GameObject loadingUI;
 
     [SerializeField] private Slider loadingProcess;
 
     [SerializeField] private Text processText;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (LoadingScene.instance != null) Debug.Log("Only 1 LoadingScene allow to exist");
-        LoadingScene.instance = this;
-    }
 
     public async void LoadScence(Scenes name, Vector3 position)
     {

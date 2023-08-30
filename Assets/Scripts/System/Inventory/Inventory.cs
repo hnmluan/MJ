@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    private static Inventory instance;
-    public static Inventory Instance { get => instance; }
-
     [SerializeField] private int maxSlot = 100;
     public int MaxSlot => maxSlot;
 
@@ -14,13 +11,6 @@ public class Inventory : Singleton<Inventory>
 
     [SerializeField] protected List<ItemInventory> items;
     public List<ItemInventory> Items => items;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Inventory.Ins != null) Debug.Log("Only 1 Inventory allow to exist");
-        Inventory.Ins = this;
-    }
 
     protected override void Start()
     {

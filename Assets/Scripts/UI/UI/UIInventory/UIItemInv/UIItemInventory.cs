@@ -69,7 +69,7 @@ public class UIItemInventory : InitMonoBehaviour
     {
         if (itemInventory == null) return;
         UIInvDetail.Instance.SetUIInvDetail(itemInventory);
-        UIInventory.Ins.SetCurrentItemInventory(UIInventory.Ins.GetIndexItemInventory(itemInventory));
-        UIInventory.Ins.KeepFocusInCurrentItemInventory();
+        UIInventory.Instance.SetCurrentItemInventory(UIInventory.Instance.GetIndexItemInventory(itemInventory));
+        UIInventory.Instance.KeepFocusInCurrentItemInventory();
     }
 }

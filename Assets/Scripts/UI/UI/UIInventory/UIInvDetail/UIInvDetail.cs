@@ -48,29 +48,29 @@ public class UIInvDetail : UIInvDetailAbstract
     public virtual void UseItem()
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
-        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Ins.ShowItems();
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        UIInventory.Instance.ShowItems();
     }
 
     public virtual void UseAllItem()
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
-        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Ins.ShowItems();
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        UIInventory.Instance.ShowItems();
     }
 
     public virtual void SellItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
-        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Ins.ShowItems();
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        UIInventory.Instance.ShowItems();
     }
 
     public virtual void SellAllItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
-        Inventory.Ins.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Ins.ShowItems();   
+        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        UIInventory.Instance.ShowItems();
     }
 
     private void ShowButtons()

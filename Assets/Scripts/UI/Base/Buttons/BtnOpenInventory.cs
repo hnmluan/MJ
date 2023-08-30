@@ -1,6 +1,6 @@
 public class BtnOpenInventory : BaseButton
 {
-    protected override void OnClick() => UIInventory.Ins.Toggle();
+    protected override void OnClick() => UIInventory.Instance.Toggle();
 
     private void Update()
     {

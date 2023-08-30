@@ -18,7 +18,7 @@ public class TreasureItemData : ItemData
         foreach (ItemDropRate itemDropRate in dropItems)
         {
             ItemCode itemCode = itemDropRate.itemSO.itemCode;
-            Inventory.Ins.AddItem(itemCode, 1);
+            Inventory.Instance.AddItem(itemCode, 1);
         }
 
         return dropItems;

@@ -5,11 +5,11 @@ public class DropdownInvSortItem : BaseDropdown
         switch (option)
         {
             case 0:
-                UIInventory.Ins.SetInventorySort(InventorySort.ByName);
+                UIInventory.Instance.SetInventorySort(InventorySort.ByName);
 
                 break;
             case 1:
-                UIInventory.Ins.SetInventorySort(InventorySort.ByQuantity);
+                UIInventory.Instance.SetInventorySort(InventorySort.ByQuantity);
                 break;
         }
 

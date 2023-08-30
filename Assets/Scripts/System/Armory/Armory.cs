@@ -3,20 +3,10 @@ using UnityEngine;
 
 public class Armory : Singleton<Armory>
 {
-    private static Armory instance;
-    public static Armory Instance { get => instance; }
-
     [SerializeField] protected List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
 
     [SerializeField] public float ratioDecompose;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (Armory.instance != null) Debug.Log("Only 1 PlayerCtrl allow to exist");
-        Armory.instance = this;
-    }
 
     protected override void Start()
     {

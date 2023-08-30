@@ -3,9 +3,6 @@ using UnityEngine.UI;
 
 public class PlayerCtrl : Singleton<PlayerCtrl>
 {
-    private static PlayerCtrl instance;
-    public static PlayerCtrl Instance { get => instance; }
-
     [SerializeField] protected Animator animator;
     public Animator Animator { get => animator; }
 
@@ -23,13 +20,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
 
     [SerializeField] protected SpriteRenderer playerSprite;
     public SpriteRenderer PlayerSprite { get => playerSprite; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (PlayerCtrl.instance != null) Debug.Log("Only 1 PlayerCtrl allow to exist");
-        PlayerCtrl.instance = this;
-    }
 
     protected override void LoadComponents()
     {

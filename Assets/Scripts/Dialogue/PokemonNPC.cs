@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Ink.Runtime;
 
 public class PokemonNPC : MonoBehaviour
 {
@@ -12,18 +9,18 @@ public class PokemonNPC : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    private void Start() 
+    private void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    private void Update() 
+    private void Update()
     {
-        string pokemonName = ((Ink.Runtime.StringValue) DialogueManager
-            .GetInstance()
+        string pokemonName = ((Ink.Runtime.StringValue)DialogueManager
+            .Instance
             .GetVariableState("pokemon_name")).value;
 
-        switch (pokemonName) 
+        switch (pokemonName)
         {
             case "":
                 spriteRenderer.color = defaultColor;

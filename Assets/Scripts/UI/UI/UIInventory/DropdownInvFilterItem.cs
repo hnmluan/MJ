@@ -35,6 +35,6 @@ public class DropdownInvFilterItem : BaseDropdown
     protected override void OnChanged(int option)
     {
         ItemType itemType = (ItemType)Enum.ToObject(typeof(ItemType), option);
-        UIInventory.Ins.SetInventoryFilter(itemType);
+        UIInventory.Instance.SetInventoryFilter(itemType);
     }
 }
