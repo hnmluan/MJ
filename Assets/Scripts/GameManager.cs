@@ -19,20 +19,6 @@ public class GameManager : InitMonoBehaviour
 
     protected override void Start()
     {
-        UIDialog.Instance.OnShowDialog += () =>
-        {
-            previousState = state;
-            state = GameState.Dialog;
-        };
-
-        UIDialog.Instance.OnHideDialog += () =>
-        {
-            if (state == GameState.Dialog)
-            {
-                state = GameState.FreeRoam;
-            }
-            previousState = GameState.Dialog;
-        };
 
         UICtrl.Instance.OnShowSetting += () =>
         {

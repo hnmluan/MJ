@@ -1,16 +1,16 @@
-Scene01.1 #speaker:Dr. Green #portrait:dr_green_neutral #layout:left #audio:animal_crossing_mid
-Scene01.2
-Scene01.3
-Scene01.4
-Scene01.5
-Scene01.6
-Scene01.7
-Scene01.8
-Scene01.9
-Scene01.10
-Scene01.11
-Scene01.12
-Scene01.13
-Scene01.14
-Scene01.15
-Scene01.16
+Scene01.1 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.2 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.3 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.4 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.5 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.6 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.7 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.8 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.9 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.10 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.11 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.12 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.13 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.14 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
+Scene01.15 #layout:right #speaker:Ms. Yellow #audio:animal_crossing_high #portrait:ms_yellow_neutral
+Scene01.16 #layout:left #speaker:Dr. Green #audio:animal_crossing_mid #portrait:dr_green_neutral
