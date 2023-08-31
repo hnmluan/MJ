@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIArmory : BaseUI
+public class UIArmory : BaseUI<UIArmory>
 {
     [Header("UI Armory")]
-    private static UIArmory instance;
-    public static UIArmory Instance => instance;
 
     [SerializeField] protected ArmorySort armorySort = ArmorySort.ByName;
 
@@ -19,13 +17,6 @@ public class UIArmory : BaseUI
 
     [SerializeField] protected Transform content;
     public Transform Content => content;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIArmory.instance != null) Debug.Log("Only 1 UIArmory allow to exist");
-        UIArmory.instance = this;
-    }
 
     protected override void OnEnable()
     {

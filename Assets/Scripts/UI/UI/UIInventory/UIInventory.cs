@@ -3,24 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : BaseUI
+public class UIInventory : BaseUI<UIInventory>
 {
-    [Header("UI Inventory")]
-    private static UIInventory instance;
-    public static UIInventory Instance => instance;
-
     [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
     [SerializeField] public int currentItemInventory = -1;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIInventory.instance != null) Debug.Log("Only 1 UIInventory allow to exist");
-        UIInventory.instance = this;
-    }
 
     protected override void OnEnable()
     {

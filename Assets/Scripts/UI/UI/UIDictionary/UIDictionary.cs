@@ -2,22 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDictionary : BaseUI
+public class UIDictionary : BaseUI<UIDictionary>
 {
     [Header("UI Dictionary")]
 
-    private static UIDictionary instance;
-    public static UIDictionary Instance => instance;
-
     [SerializeField] private EDictionaryType dictionaryType = EDictionaryType.Enemies;
     public EDictionaryType DictionaryType => dictionaryType;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIDictionary.instance != null) Debug.Log("Only 1 UIDictionary allow to exist");
-        UIDictionary.instance = this;
-    }
 
     protected override void OnEnable()
     {

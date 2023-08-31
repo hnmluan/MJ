@@ -1,15 +1,3 @@
-using UnityEngine;
-
-public class UIPause : BaseUI
+public class UIPause : BaseUI<UIPause>
 {
-    [Header("UI Pause")]
-    private static UIPause instance;
-    public static UIPause Instance => instance;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIPause.instance != null) Debug.Log("Only 1 UIPause allow to exist");
-        UIPause.instance = this;
-    }
 }

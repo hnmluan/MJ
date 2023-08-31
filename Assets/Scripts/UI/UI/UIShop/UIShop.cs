@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIShop : BaseUI
+public class UIShop : BaseUI<UIShop>
 {
-    [Header("UI Shop")]
-    private static UIShop instance;
-    public static UIShop Instance => instance;
-
     [SerializeField] private DateTime lastTimeRestItem;
     public DateTime TimelineToRestItem => lastTimeRestItem;
 
@@ -16,13 +12,6 @@ public class UIShop : BaseUI
 
     [SerializeField] private int numberOfItems = 10;
     public int NumberOfItems => numberOfItems;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIShop.instance != null) Debug.Log("Only 1 UIShop allow to exist");
-        UIShop.instance = this;
-    }
 
     protected override void Start()
     {
