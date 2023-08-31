@@ -1,17 +1,7 @@
 using UnityEngine;
 
-public class EnemySpawner : Spawner
+public class EnemySpawner : Spawner<EnemySpawner>
 {
-    private static EnemySpawner instance;
-    public static EnemySpawner Instance { get => instance; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (EnemySpawner.instance != null) Debug.Log("Only 1 EnemySpawner allow to exist");
-        EnemySpawner.instance = this;
-    }
-
     public override Transform Spawn(Transform prefab, Vector3 spawnPos, Quaternion rotation)
     {
         Transform newEnemy = base.Spawn(prefab, spawnPos, rotation);

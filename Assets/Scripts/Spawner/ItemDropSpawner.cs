@@ -1,19 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemDropSpawner : Spawner
+public class ItemDropSpawner : Spawner<ItemDropSpawner>
 {
-    private static ItemDropSpawner instance;
-    public static ItemDropSpawner Instance => instance;
-
     [SerializeField] protected float gameDropRate = 1;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (ItemDropSpawner.instance != null) Debug.Log("Only 1 ItemDropSpawner allow to exist");
-        ItemDropSpawner.instance = this;
-    }
 
     public virtual List<ItemDropRate> Drop(List<ItemDropRate> dropList, Vector3 pos, Quaternion rot, float dropDistance)
     {

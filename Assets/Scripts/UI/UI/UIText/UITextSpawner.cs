@@ -3,19 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UITextSpawner : Spawner
+public class UITextSpawner : Spawner<UITextSpawner>
 {
-    private static UITextSpawner instance;
-    public static UITextSpawner Instance { get => instance; }
-
     public float interval;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UITextSpawner.instance != null) Debug.Log("Only 1 UITextSpawner allow to exist");
-        UITextSpawner.instance = this;
-    }
 
     /*-----------------UIText----------------------*/
 
