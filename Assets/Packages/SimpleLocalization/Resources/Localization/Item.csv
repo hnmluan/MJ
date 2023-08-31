@@ -13,3 +13,5 @@ Item.GoldCup,Gold Cup,Ly vàng
 Item.SilverCup,Silver Cup,Ly bạc
 Item.SilverKey,Silver Key,Chìa khóa bạc
 Item.SilverTreasure,Silver Treasure,Gương bạc
+Item.Type.Key,Key,Chìa khóa
+Item.Type.Special,Special,Đặc biệt
