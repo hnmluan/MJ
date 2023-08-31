@@ -313,7 +313,7 @@ public class DialogueManager : Singleton<DialogueManager>
             switch (tagKey)
             {
                 case SPEAKER_TAG:
-                    displayNameText.text = tagValue;
+                    displayNameText.text = LocalizationManager.Localize(tagValue);
                     break;
                 case PORTRAIT_TAG:
                     portraitAnimator.Play(tagValue);

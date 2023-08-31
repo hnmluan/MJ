@@ -14,9 +14,6 @@ public class NPCCtrl : InitMonoBehaviour
     [SerializeField] protected NPCProfileSO npcSO;
     public NPCProfileSO NPCSO => npcSO;
 
-    [SerializeField] protected NPCConverse npcConverse;
-    public NPCConverse NPCConverse => npcConverse;
-
     [SerializeField] protected ObjMoveToPlayer objMoveToPlayer;
     public ObjMoveToPlayer ObjMoveToPlayer => objMoveToPlayer;
 
@@ -30,7 +27,6 @@ public class NPCCtrl : InitMonoBehaviour
         this.LoadNPCSprite();
         this.LoadDialogConversable();
         this.LoadNPCSO();
-        this.LoadNPCConverse();
         this.LoadObjMoveToPlayer();
         this.LoadObjMoveFree();
     }
@@ -54,13 +50,6 @@ public class NPCCtrl : InitMonoBehaviour
         if (this.dialogConversable != null) return;
         this.dialogConversable = GameObject.Find("CommunicativeSign"); ;
         Debug.Log(transform.name + ": LoadDialogConversable", gameObject);
-    }
-
-    protected virtual void LoadNPCConverse()
-    {
-        if (this.npcConverse != null) return;
-        this.npcConverse = transform.GetComponentInChildren<NPCConverse>();
-        Debug.Log(transform.name + ": LoadNPCConverse", gameObject);
     }
 
     protected virtual void LoadObjMoveToPlayer()
