@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderSFX : BaseSlider
+public class SliderDialogue : BaseSlider
 {
     [SerializeField] protected Toggle toggle;
 
@@ -22,6 +22,6 @@ public class SliderSFX : BaseSlider
     {
         if (newValue == 0) toggle.isOn = true;
         if (newValue > 0) toggle.isOn = false;
-        AudioController.Instance.SFXVolume(newValue);
+        AudioController.Instance.dialogueSource.volume = newValue;
     }
 }

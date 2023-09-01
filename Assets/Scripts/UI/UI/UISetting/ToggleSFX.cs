@@ -7,6 +7,19 @@ public class ToggleSFX : BaseToggle
 
     [SerializeField] private float oldVolumn = 1;
 
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadSlider();
+    }
+
+    protected virtual void LoadSlider()
+    {
+        if (this.m_slider != null) return;
+        this.m_slider = transform.parent.Find("Slider").GetComponent<Slider>();
+        Debug.LogWarning(transform.name + ": LoadSlider", gameObject);
+    }
+
     protected override void OnChanged(bool option)
     {
         if (option)

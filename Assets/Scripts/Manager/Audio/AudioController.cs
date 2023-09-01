@@ -16,32 +16,42 @@ public class AudioController : Singleton<AudioController>
 
     [SerializeField] protected AudioSource animalSource;
 
+    [SerializeField] public AudioSource dialogueSource;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadMusicSource();
         this.LoadSFXSource();
         this.LoadAnimalSource();
+        this.LoadDialogueSource();
     }
 
     private void LoadAnimalSource()
     {
         if (this.animalSource != null) return;
-        animalSource = transform.Find("AnimalSource").GetComponent<AudioSource>();
+        animalSource = transform.Find("Animal").GetComponent<AudioSource>();
         Debug.Log(transform.name + ": LoadAnimalSource", gameObject);
+    }
+
+    private void LoadDialogueSource()
+    {
+        if (this.dialogueSource != null) return;
+        dialogueSource = transform.Find("Dialogue").GetComponent<AudioSource>();
+        Debug.Log(transform.name + ": LoadDialogueSource", gameObject);
     }
 
     private void LoadSFXSource()
     {
         if (this.sfxSource != null) return;
-        sfxSource = transform.Find("SFXSource").GetComponent<AudioSource>();
+        sfxSource = transform.Find("SFX").GetComponent<AudioSource>();
         Debug.Log(transform.name + ": LoadSFXSource", gameObject);
     }
 
     private void LoadMusicSource()
     {
         if (this.musicSource != null) return;
-        musicSource = transform.Find("MusicSource").GetComponent<AudioSource>();
+        musicSource = transform.Find("Music").GetComponent<AudioSource>();
         Debug.Log(transform.name + ": LoadMusicSource", gameObject);
     }
 

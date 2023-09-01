@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToggleMusic : BaseToggle
+public class ToggleDialogue : BaseToggle
 {
     [SerializeField] protected Slider m_slider;
 

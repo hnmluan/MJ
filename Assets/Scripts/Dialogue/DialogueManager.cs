@@ -32,7 +32,6 @@ public class DialogueManager : Singleton<DialogueManager>
     [SerializeField] private bool makePredictable;
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
-    private AudioSource audioSource;
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -54,7 +53,6 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueVariables = new DialogueVariables(loadGlobalsJSON);
         inkExternalFunctions = new InkExternalFunctions();
 
-        audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
     }
 
@@ -246,7 +244,7 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             if (stopAudioSource)
             {
-                audioSource.Stop();
+                AudioController.Instance.dialogueSource.Stop();
             }
             AudioClip soundClip = null;
             // create predictable audio from hashing
@@ -265,11 +263,11 @@ public class DialogueManager : Singleton<DialogueManager>
                 {
                     int predictablePitchInt = (hashCode % pitchRangeInt) + minPitchInt;
                     float predictablePitch = predictablePitchInt / 100f;
-                    audioSource.pitch = predictablePitch;
+                    AudioController.Instance.dialogueSource.pitch = predictablePitch;
                 }
                 else
                 {
-                    audioSource.pitch = minPitch;
+                    AudioController.Instance.dialogueSource.pitch = minPitch;
                 }
             }
             // otherwise, randomize the audio
@@ -279,11 +277,11 @@ public class DialogueManager : Singleton<DialogueManager>
                 int randomIndex = Random.Range(0, dialogueTypingSoundClips.Length);
                 soundClip = dialogueTypingSoundClips[randomIndex];
                 // pitch
-                audioSource.pitch = Random.Range(minPitch, maxPitch);
+                AudioController.Instance.dialogueSource.pitch = Random.Range(minPitch, maxPitch);
             }
 
             // play sound
-            audioSource.PlayOneShot(soundClip);
+            AudioController.Instance.dialogueSource.PlayOneShot(soundClip);
         }
     }
 

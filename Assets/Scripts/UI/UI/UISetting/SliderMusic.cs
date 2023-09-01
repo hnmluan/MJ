@@ -3,11 +3,24 @@ using UnityEngine.UI;
 
 public class SliderMusic : BaseSlider
 {
-    [SerializeField] protected Toggle Toggle;
+    [SerializeField] protected Toggle toggle;
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        this.LoadToggle();
+    }
+
+    protected virtual void LoadToggle()
+    {
+        if (this.toggle != null) return;
+        this.toggle = transform.parent.Find("Toggle").GetComponent<Toggle>();
+        Debug.LogWarning(transform.name + ": LoadToggle", gameObject);
+    }
+
     protected override void OnChanged(float newValue)
     {
-        if (newValue == 0) Toggle.isOn = true;
-        if (newValue > 0) Toggle.isOn = false;
+        if (newValue == 0) toggle.isOn = true;
+        if (newValue > 0) toggle.isOn = false;
         AudioController.Instance.MusicVolume(newValue);
     }
 }
