@@ -1,13 +1,29 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : PlayerAbstract
 {
+    [Header("Top-Down movement")]
+
     [SerializeField] protected float speed = 8;
 
     [SerializeField] public Vector2 direction;
 
-    [Header("Movement SFX")]
-    [Space(10)]
+    [Header("Dash movement")]
+
+    public float dashBoost = 20f;
+
+    [SerializeField] protected float _dashTime;
+
+    public float dashTime = 0.2f;
+
+    [SerializeField] protected bool isDashing = false;
+
+    [SerializeField] protected float ghostDelaySeconds;
+
+    [SerializeField] protected Coroutine dashEffectCoroutine;
+
+    [Header("Sound movement")]
 
     [SerializeField] protected float sfxTimer = 0f;
 
@@ -24,8 +40,27 @@ public class PlayerMovement : PlayerAbstract
         if (direction != Vector2.zero)
         {
             Move();
-            //PlayWalkSFX();  
+            PlayWalkSFX();
         };
+
+        if (Input.GetKey(KeyCode.Space) && isDashing == false && _dashTime <= 0)
+        {
+            speed += dashBoost;
+            _dashTime = dashTime;
+            isDashing = true;
+            StartDashEffect();
+        }
+
+        if (_dashTime <= 0 && isDashing == true)
+        {
+            speed -= dashBoost;
+            isDashing = false;
+            StopDashEffect();
+        }
+        else
+        {
+            _dashTime -= Time.deltaTime;
+        }
     }
 
     private void GetDirection()
@@ -64,4 +99,27 @@ public class PlayerMovement : PlayerAbstract
     }
 
     public void MoveToPoint(Vector3 loadToPositionOnSence) => gameObject.transform.parent.position = loadToPositionOnSence;
+
+    private void StopDashEffect()
+    {
+        if (dashEffectCoroutine != null) StopCoroutine(dashEffectCoroutine);
+    }
+
+    private void StartDashEffect()
+    {
+        if (dashEffectCoroutine != null) StopCoroutine(dashEffectCoroutine);
+        dashEffectCoroutine = StartCoroutine(DashEffectCoroutine());
+    }
+
+    IEnumerator DashEffectCoroutine()
+    {
+        while (true)
+        {
+            Transform ghost = FXSpawner.Instance.Spawn("PlayerGhost", playerCtrl.PlayerSprite.transform.position, Quaternion.identity);
+            ghost.GetComponentInChildren<SpriteRenderer>().sprite = playerCtrl.PlayerSprite.sprite;
+            ghost.gameObject.SetActive(true);
+
+            yield return new WaitForSeconds(ghostDelaySeconds);
+        }
+    }
 }

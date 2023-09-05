@@ -1,4 +1,1 @@
-public class FXSpawner : Spawner<FXSpawner>
-{
-
-}
+public class FXSpawner : Spawner<FXSpawner> { }
