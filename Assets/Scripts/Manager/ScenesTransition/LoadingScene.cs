@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public enum Scenes
 {
     NoScene = 0,
-    Map_01 = 1,
-    Map_02 = 2,
-    VillageElderHouse = 3
+    A_Scence = 1,
+    A_to_B_1_Scence = 2,
+    A_to_B_2_Scence = 3,
+    A_to_B_3_Scence = 4,
+    A_to_B_4_Scence = 5,
+    VillageElderHouse = 6,
 }
 
 public class LoadingScene : Singleton<LoadingScene>
