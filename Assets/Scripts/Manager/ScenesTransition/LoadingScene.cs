@@ -12,6 +12,7 @@ public enum Scenes
     A_to_B_3_Scence = 4,
     A_to_B_4_Scence = 5,
     VillageElderHouse = 6,
+    B_Scence = 7,
 }
 
 public class LoadingScene : Singleton<LoadingScene>
