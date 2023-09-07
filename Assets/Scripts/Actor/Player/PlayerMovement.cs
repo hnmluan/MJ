@@ -31,7 +31,7 @@ public class PlayerMovement : PlayerAbstract
 
     private void Update()
     {
-        if (GameManager.Instance.State != GameState.FreeRoam) return;
+        //if (GameManager.Instance.State != GameState.FreeRoam) return;
 
         GetDirection();
 
@@ -40,7 +40,7 @@ public class PlayerMovement : PlayerAbstract
         if (direction != Vector2.zero)
         {
             Move();
-            PlayWalkSFX();
+            //PlayWalkSFX();
         };
 
         if (Input.GetKey(KeyCode.Space) && isDashing == false && _dashTime <= 0)
@@ -48,14 +48,14 @@ public class PlayerMovement : PlayerAbstract
             speed += dashBoost;
             _dashTime = dashTime;
             isDashing = true;
-            StartDashEffect();
+            //StartDashEffect();
         }
 
         if (_dashTime <= 0 && isDashing == true)
         {
             speed -= dashBoost;
             isDashing = false;
-            StopDashEffect();
+            //StopDashEffect();
         }
         else
         {
