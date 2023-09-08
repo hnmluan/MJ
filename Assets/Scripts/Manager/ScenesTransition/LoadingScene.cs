@@ -45,15 +45,4 @@ public class LoadingScene : Singleton<LoadingScene>
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null) player.transform.position = position;
     }
-
-    protected override void OnEnable() => SceneManager.activeSceneChanged += OnSceneChanged;
-
-    protected override void OnDisable() => SceneManager.activeSceneChanged -= OnSceneChanged;
-
-    private void OnSceneChanged(Scene previousScene, Scene newScene)
-    {
-        AstarPath astarPath = FindObjectOfType<AstarPath>();
-        if (astarPath == null) return;
-        astarPath.Scan();
-    }
 }
