@@ -2,8 +2,9 @@ INCLUDE globals.ink
 
 Scene01.1 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder_neutral
 ~ playEmote("exclamation")
-~ switchTask()
+~ rewardItem("IronOre",6)
 Scene01.2 #layout:right #speaker:Me #audio:animal_crossing_high #portrait:ms_yellow_neutral
+~ playEmote("exclamation")
 Scene01.3 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder_neutral
 Scene01.4 #layout:right #speaker:Me #audio:animal_crossing_high #portrait:ms_yellow_neutral
 ~ playEmote("exclamation")

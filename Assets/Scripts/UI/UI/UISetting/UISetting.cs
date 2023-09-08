@@ -1,3 +1,1 @@
-public class UISetting : BaseUI<UISetting>
-{
-}
+public class UISetting : BaseUI<UISetting> { }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.SimpleLocalization;
+using UnityEngine;
+using UnityEngine.UI;
 
 public enum TaskCode
 {
@@ -15,11 +17,36 @@ public class TaskManager : Singleton<TaskManager>
 {
     public TaskCode currentTask = TaskCode.NoTask;
 
-    public Action<TaskCode> Switch2NextTask;
+    [SerializeField] private GameObject taskPanel;
+
+    [SerializeField] private Text taskName;
+
+    [SerializeField] private Text taskDescription;
 
     public void Switch2NextTaskEnumCode()
     {
         if (currentTask == TaskCode.Ending) return;
         currentTask++;
+        OpenTaskPanel();
+        taskPanel.SetActive(true);
+        Debug.Log("Switch2NextTaskEnumCode");
+    }
+
+    public void OpenTaskPanel()
+    {
+        taskName.text = "";
+        taskDescription.text = "";
+
+        TaskDataSO taskDataSO = TaskDataSO.FindByItemCode(currentTask);
+        if (taskDataSO == null)
+        {
+            Debug.Log("Don't have any availabel Task Data SO");
+            return;
+        };
+
+        taskName.text = LocalizationManager.Localize(taskDataSO.keyName);
+        taskDescription.text = LocalizationManager.Localize(taskDataSO.keyDescription);
+
+        taskPanel.SetActive(true);
     }
 }
