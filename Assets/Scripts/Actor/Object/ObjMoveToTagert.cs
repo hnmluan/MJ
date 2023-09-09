@@ -7,23 +7,23 @@ public class ObjMoveToTagert : InitMonoBehaviour
 {
     [SerializeField] protected Transform target;
 
-    [SerializeField] protected Seeker seeker;
+    protected Seeker seeker;
 
-    [SerializeField] protected Path currentPath;
+    protected Path currentPath;
 
-    [SerializeField] protected int currentWaypointIndex;
+    protected int currentWaypointIndex;
 
-    [SerializeField] protected bool isMoving;
+    protected bool isMoving;
+
+    protected bool isTouchTagret;
 
     [SerializeField] protected float offsetTarget = 1;
 
-    [SerializeField] protected Vector3 direction;
+    protected Vector3 direction;
 
-    [SerializeField] protected Vector3 targetPosition;
+    protected Vector3 targetPosition;
 
-    [SerializeField] protected float offsetNodePath = 0.1f;
-
-    [SerializeField] protected bool isTouchTagret;
+    protected float offsetNodePath = 0.1f;
 
     protected override void LoadComponents()
     {
@@ -77,21 +77,25 @@ public class ObjMoveToTagert : InitMonoBehaviour
 
     protected virtual void Update()
     {
-        if (target == null)
-            if (isMoving && currentPath != null)
+        if (isMoving && currentPath != null)
+        {
+            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
             {
-                if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
-                {
-                    isTouchTagret = true;
-                    isMoving = false;
-                    return;
-                }
-
-                targetPosition = currentPath.vectorPath[currentWaypointIndex];
-                direction = (targetPosition - transform.parent.position).normalized;
-                transform.parent.position += direction * 5f * Time.deltaTime;
-
-                if (Vector3.Distance(transform.parent.position, targetPosition) < offsetNodePath) currentWaypointIndex++;
+                isTouchTagret = true;
+                isMoving = false;
+                return;
             }
+
+            Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
+
+            direction = (targetPosition - transform.position).normalized;
+
+            transform.parent.position += direction * 5f * Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+            {
+                currentWaypointIndex++;
+            }
+        }
     }
 }

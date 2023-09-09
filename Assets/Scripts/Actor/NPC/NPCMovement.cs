@@ -2,20 +2,7 @@
 
 public class NPCMovement : ObjMoveFree
 {
-    [SerializeField] protected NPCCtrl npcCtrl;
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        LoadNPCCtrl();
-    }
-
-    protected virtual void LoadNPCCtrl()
-    {
-        if (npcCtrl != null) return;
-        npcCtrl = transform.parent.GetComponent<NPCCtrl>();
-        Debug.Log(transform.name + ": LoadNPCCtrl", gameObject);
-    }
+    [SerializeField] private Animator animator;
 
     protected override void Update()
     {
@@ -25,8 +12,8 @@ public class NPCMovement : ObjMoveFree
 
     private void SetAnimation()
     {
-        npcCtrl.Animator.SetFloat("X", direction.x);
-        npcCtrl.Animator.SetFloat("Y", direction.y);
-        npcCtrl.Animator.SetBool("isWalking", this.isMoving);
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
+        animator.SetBool("isWalking", this.isMoving);
     }
 }

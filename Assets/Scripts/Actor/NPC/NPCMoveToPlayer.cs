@@ -2,20 +2,7 @@ using UnityEngine;
 
 public class NPCMoveToPlayer : ObjMoveToPlayer
 {
-    [SerializeField] protected NPCCtrl npcCtrl;
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        LoadNPCCtrl();
-    }
-
-    protected virtual void LoadNPCCtrl()
-    {
-        if (npcCtrl != null) return;
-        npcCtrl = transform.parent.GetComponent<NPCCtrl>();
-        Debug.Log(transform.name + ": LoadPlayerCtrl", gameObject);
-    }
+    [SerializeField] private Animator animator;
 
     protected override void Update()
     {
@@ -25,8 +12,8 @@ public class NPCMoveToPlayer : ObjMoveToPlayer
 
     private void SetAnimation()
     {
-        npcCtrl.Animator.SetFloat("X", direction.x);
-        npcCtrl.Animator.SetFloat("Y", direction.y);
-        npcCtrl.Animator.SetBool("isWalking", !this.isTouchTagret);
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
+        animator.SetBool("isWalking", !this.isTouchTagret);
     }
 }
