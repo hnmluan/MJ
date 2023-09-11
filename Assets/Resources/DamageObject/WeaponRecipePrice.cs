@@ -3,6 +3,6 @@ using System;
 [Serializable]
 public class WeaponRecipePrice
 {
-    public CurrencyProfileSO currencyProfile;
+    public CurrencyDataSO currencyProfile;
     public int currencyCout;
 }

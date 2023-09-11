@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DamageObject", menuName = "SO/DOSO")]
+[CreateAssetMenu(fileName = "DamageObject", menuName = "ScriptableObject/DOSO")]
 public class WeaponDataSO : ScriptableObject
 {
     public WeaponCode damageObjectCode = WeaponCode.NoWeapon;

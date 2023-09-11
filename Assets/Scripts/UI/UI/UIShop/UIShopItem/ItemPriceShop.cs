@@ -2,9 +2,9 @@
 public class ItemPriceShop
 {
     public int price = 0;
-    public CurrencyProfileSO currencyProfileSO;
+    public CurrencyDataSO currencyProfileSO;
 
-    public ItemPriceShop(int price, CurrencyProfileSO currencyProfileSO)
+    public ItemPriceShop(int price, CurrencyDataSO currencyProfileSO)
     {
         this.price = price;
         this.currencyProfileSO = currencyProfileSO;

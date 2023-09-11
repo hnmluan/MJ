@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemProfileSO", menuName = "SO/ItemProfile")]
+[CreateAssetMenu(fileName = "ItemProfileSO", menuName = "ScriptableObject/ItemProfile")]
 
 public class ItemDataSO : ScriptableObject
 {
@@ -34,7 +34,7 @@ public class ItemDataSO : ScriptableObject
 
     public static ItemDataSO FindByItemCode(ItemCode itemCode)
     {
-        var profiles = Resources.LoadAll("Item/SO", typeof(ItemDataSO));
+        var profiles = Resources.LoadAll("Item/ScriptableObject", typeof(ItemDataSO));
         foreach (ItemDataSO profile in profiles)
         {
             if (profile.itemCode != itemCode) continue;
@@ -56,7 +56,7 @@ public class ItemDataSO : ScriptableObject
 
     public static List<ItemDataSO> GetSellableItemsSO()
     {
-        ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/SO");
+        ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/ScriptableObject");
         return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is BuyableItemData)).ToList();
     }
 }

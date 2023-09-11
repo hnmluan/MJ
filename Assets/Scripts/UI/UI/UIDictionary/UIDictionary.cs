@@ -30,12 +30,12 @@ public class UIDictionary : BaseUI<UIDictionary>
 
     private void ShowEnemyProfileSO()
     {
-        foreach (EnemyProfileSO item in GetEnemyProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (EnemyDataSO item in GetEnemyProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
     private void ShowNPCProfileSO()
     {
-        foreach (NPCProfileSO item in GetNPCProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (ActorDataSO item in GetNPCProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
     }
 
     private void ShowDamageObjectProfileSO()
@@ -53,9 +53,9 @@ public class UIDictionary : BaseUI<UIDictionary>
 
     private List<WeaponDataSO> GetDamageObjectProfileSO() => new List<WeaponDataSO>(Resources.LoadAll<WeaponDataSO>("DamageObject/ScriptableObject"));
 
-    private List<NPCProfileSO> GetNPCProfileSO() => new List<NPCProfileSO>(Resources.LoadAll<NPCProfileSO>("NPC/ScriptableObject"));
+    private List<ActorDataSO> GetNPCProfileSO() => new List<ActorDataSO>(Resources.LoadAll<ActorDataSO>("NPC/ScriptableObject"));
 
-    private List<EnemyProfileSO> GetEnemyProfileSO() => new List<EnemyProfileSO>(Resources.LoadAll<EnemyProfileSO>("Enemy/ScriptableObject"));
+    private List<EnemyDataSO> GetEnemyProfileSO() => new List<EnemyDataSO>(Resources.LoadAll<EnemyDataSO>("Enemy/ScriptableObject"));
 
     protected virtual void SortItems()
     {
@@ -74,14 +74,14 @@ public class UIDictionary : BaseUI<UIDictionary>
             ScriptableObject nextProfile = nextUIObj.ItemDictionary;
 
             string currentName =
-                currentProfile is EnemyProfileSO ? LocalizationManager.Localize((currentProfile as EnemyProfileSO).keyName) :
+                currentProfile is EnemyDataSO ? LocalizationManager.Localize((currentProfile as EnemyDataSO).keyName) :
                 currentProfile is WeaponDataSO ? LocalizationManager.Localize((currentProfile as WeaponDataSO).keyName) :
-                LocalizationManager.Localize((currentProfile as NPCProfileSO).keyName);
+                LocalizationManager.Localize((currentProfile as ActorDataSO).keyName);
 
             string nextName =
-                nextProfile is EnemyProfileSO ? LocalizationManager.Localize((nextProfile as EnemyProfileSO).keyName) :
+                nextProfile is EnemyDataSO ? LocalizationManager.Localize((nextProfile as EnemyDataSO).keyName) :
                 nextProfile is WeaponDataSO ? LocalizationManager.Localize((nextProfile as WeaponDataSO).keyName) :
-                LocalizationManager.Localize((nextProfile as NPCProfileSO).keyName);
+                LocalizationManager.Localize((nextProfile as ActorDataSO).keyName);
 
             bool isSwap = false;
 

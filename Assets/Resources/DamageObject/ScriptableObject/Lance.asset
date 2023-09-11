@@ -19,7 +19,7 @@ MonoBehaviour:
   spriteInHand: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
   spriteInAttack: {fileID: 21300000, guid: 2fa29960853f216489b130360e822afe, type: 3}
   range: 2
-  damage: 20
+  damage: 200
   speed: 3
   attackTime: 0.5
   attackRate: 0.5
@@ -36,9 +36,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 3
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 3
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 4
     damage: 5
   - level: 2
@@ -53,9 +53,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 3
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 6
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 6
     damage: 6
   - level: 3
@@ -70,9 +70,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 8
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 8
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 8
     damage: 8
   - level: 4
@@ -87,8 +87,8 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 9
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 9
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 9
     damage: 9

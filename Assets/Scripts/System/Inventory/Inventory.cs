@@ -92,7 +92,7 @@ public class Inventory : Singleton<Inventory>
 
     protected virtual ItemDataSO GetItemProfile(ItemCode itemCode)
     {
-        var profiles = Resources.LoadAll("Item/SO/", typeof(ItemDataSO));
+        var profiles = Resources.LoadAll("Item/ScriptableObject/", typeof(ItemDataSO));
         foreach (ItemDataSO profile in profiles)
         {
             if (profile.itemCode != itemCode) continue;

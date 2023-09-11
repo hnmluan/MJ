@@ -11,17 +11,17 @@ public class Dictionary : Singleton<Dictionary>
     [SerializeField] List<WeaponDataSO> damageObjectSOsAvailableButNotSeen;
     public List<WeaponDataSO> DamageObjectSOsAvailableButNotSeen { get => damageObjectSOsAvailableButNotSeen; }
 
-    [SerializeField] List<NPCProfileSO> npcSOsAvailableSeen;
-    public List<NPCProfileSO> NpcsAvailableSeen { get => npcSOsAvailableSeen; }
+    [SerializeField] List<ActorDataSO> npcSOsAvailableSeen;
+    public List<ActorDataSO> NpcsAvailableSeen { get => npcSOsAvailableSeen; }
 
-    [SerializeField] List<NPCProfileSO> npcSOsAvailableButNotSeen;
-    public List<NPCProfileSO> NpcsAvailableButNotSeen { get => npcSOsAvailableButNotSeen; }
+    [SerializeField] List<ActorDataSO> npcSOsAvailableButNotSeen;
+    public List<ActorDataSO> NpcsAvailableButNotSeen { get => npcSOsAvailableButNotSeen; }
 
-    [SerializeField] List<EnemyProfileSO> enemySOsAvailableSeen;
-    public List<EnemyProfileSO> EnemiesSOsAvailableSeen { get => enemySOsAvailableSeen; }
+    [SerializeField] List<EnemyDataSO> enemySOsAvailableSeen;
+    public List<EnemyDataSO> EnemiesSOsAvailableSeen { get => enemySOsAvailableSeen; }
 
-    [SerializeField] List<EnemyProfileSO> enemySOsAvailableButNotSeen;
-    public List<EnemyProfileSO> EnemiesAvailableButNotSeen { get => enemySOsAvailableButNotSeen; }
+    [SerializeField] List<EnemyDataSO> enemySOsAvailableButNotSeen;
+    public List<EnemyDataSO> EnemiesAvailableButNotSeen { get => enemySOsAvailableButNotSeen; }
 
     private void AddDictionary(WeaponDataSO damageObjectSO)
     {
@@ -29,13 +29,13 @@ public class Dictionary : Singleton<Dictionary>
         damageObjectSOsAvailableButNotSeen.Add(damageObjectSO);
     }
 
-    private void AddDictionary(NPCProfileSO npcProfileSO)
+    private void AddDictionary(ActorDataSO npcProfileSO)
     {
         if (npcSOsAvailableSeen.Contains(npcProfileSO) || npcSOsAvailableButNotSeen.Contains(npcProfileSO)) return;
         npcSOsAvailableButNotSeen.Add(npcProfileSO);
     }
 
-    private void AddDictionary(EnemyProfileSO enemyProfileSO)
+    private void AddDictionary(EnemyDataSO enemyProfileSO)
     {
         if (enemySOsAvailableSeen.Contains(enemyProfileSO) || enemySOsAvailableButNotSeen.Contains(enemyProfileSO)) return;
         enemySOsAvailableButNotSeen.Add(enemyProfileSO);
@@ -43,13 +43,13 @@ public class Dictionary : Singleton<Dictionary>
 
     public void AddDictionary(ScriptableObject profileSO)
     {
-        if (profileSO is EnemyProfileSO) AddDictionary(profileSO as EnemyProfileSO);
-        if (profileSO is NPCProfileSO) AddDictionary(profileSO as NPCProfileSO);
+        if (profileSO is EnemyDataSO) AddDictionary(profileSO as EnemyDataSO);
+        if (profileSO is ActorDataSO) AddDictionary(profileSO as ActorDataSO);
         if (profileSO is WeaponDataSO) AddDictionary(profileSO as WeaponDataSO);
         OnAddItem();
     }
 
-    private void SeenItemDictionary(EnemyProfileSO enemyProfileSO)
+    private void SeenItemDictionary(EnemyDataSO enemyProfileSO)
     {
         if (enemySOsAvailableButNotSeen.Contains(enemyProfileSO))
         {
@@ -58,7 +58,7 @@ public class Dictionary : Singleton<Dictionary>
         }
     }
 
-    private void SeenItemDictionary(NPCProfileSO npcProfileSO)
+    private void SeenItemDictionary(ActorDataSO npcProfileSO)
     {
         if (npcSOsAvailableButNotSeen.Contains(npcProfileSO))
         {
@@ -78,8 +78,8 @@ public class Dictionary : Singleton<Dictionary>
 
     public void SeenItemDictionary(ScriptableObject profileSO)
     {
-        if (profileSO is EnemyProfileSO) SeenItemDictionary(profileSO as EnemyProfileSO);
-        if (profileSO is NPCProfileSO) SeenItemDictionary(profileSO as NPCProfileSO);
+        if (profileSO is EnemyDataSO) SeenItemDictionary(profileSO as EnemyDataSO);
+        if (profileSO is ActorDataSO) SeenItemDictionary(profileSO as ActorDataSO);
         if (profileSO is WeaponDataSO) SeenItemDictionary(profileSO as WeaponDataSO);
         this.OnAddItem();
     }
@@ -87,10 +87,10 @@ public class Dictionary : Singleton<Dictionary>
     public bool CheckAvailableItemInDictonary(ScriptableObject profileSO)
         => damageObjectSOsAvailableSeen.Contains(profileSO as WeaponDataSO)
         || damageObjectSOsAvailableButNotSeen.Contains(profileSO as WeaponDataSO)
-        || npcSOsAvailableSeen.Contains(profileSO as NPCProfileSO)
-        || npcSOsAvailableButNotSeen.Contains(profileSO as NPCProfileSO)
-        || enemySOsAvailableSeen.Contains(profileSO as EnemyProfileSO)
-        || enemySOsAvailableButNotSeen.Contains(profileSO as EnemyProfileSO);
+        || npcSOsAvailableSeen.Contains(profileSO as ActorDataSO)
+        || npcSOsAvailableButNotSeen.Contains(profileSO as ActorDataSO)
+        || enemySOsAvailableSeen.Contains(profileSO as EnemyDataSO)
+        || enemySOsAvailableButNotSeen.Contains(profileSO as EnemyDataSO);
 
     public int GetNumberOfItemInNotSeen() =>
     Dictionary.Instance.EnemiesAvailableButNotSeen.Count

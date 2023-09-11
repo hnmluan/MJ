@@ -20,7 +20,7 @@ public class SellableItemData : ItemData
             listPrice.Add(price);
         }
 
-        Sprite image = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
+        Sprite image = CurrencyDataSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
 
         UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listPrice, image);
     }

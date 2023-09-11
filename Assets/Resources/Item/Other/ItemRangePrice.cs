@@ -1,6 +1,6 @@
 [System.Serializable]
 public class ItemRangePrice
 {
-    public CurrencyProfileSO currencyCode;
+    public CurrencyDataSO currencyCode;
     public IntRange rangePrice;
 }

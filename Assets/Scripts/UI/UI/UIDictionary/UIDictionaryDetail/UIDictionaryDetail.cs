@@ -60,8 +60,8 @@ public class UIDictionaryDetail : InitMonoBehaviour
 
     public void ShowDetailObj(ScriptableObject objSO)
     {
-        if (objSO is EnemyProfileSO) ShowDetailEnemy(objSO as EnemyProfileSO);
-        if (objSO is NPCProfileSO) ShowDetailNPC(objSO as NPCProfileSO);
+        if (objSO is EnemyDataSO) ShowDetailEnemy(objSO as EnemyDataSO);
+        if (objSO is ActorDataSO) ShowDetailNPC(objSO as ActorDataSO);
         if (objSO is WeaponDataSO) ShowDetailDamageObject(objSO as WeaponDataSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(objSO)) HideDetail(objSO);
     }
@@ -69,13 +69,13 @@ public class UIDictionaryDetail : InitMonoBehaviour
     private void HideDetail(ScriptableObject objSO)
     {
         objImage.color = Color.black;
-        if (objSO is EnemyProfileSO) objName.text = LocalizationManager.Localize((objSO as EnemyProfileSO).keyName);
-        if (objSO is NPCProfileSO) objName.text = LocalizationManager.Localize((objSO as NPCProfileSO).keyName);
+        if (objSO is EnemyDataSO) objName.text = LocalizationManager.Localize((objSO as EnemyDataSO).keyName);
+        if (objSO is ActorDataSO) objName.text = LocalizationManager.Localize((objSO as ActorDataSO).keyName);
         if (objSO is WeaponDataSO) objName.text = LocalizationManager.Localize((objSO as WeaponDataSO).keyName);
         objDescription.text = "???????";
     }
 
-    private void ShowDetailEnemy(EnemyProfileSO enemySO)
+    private void ShowDetailEnemy(EnemyDataSO enemySO)
     {
         itemDictionary = enemySO;
         objImage.sprite = enemySO.sprite;
@@ -84,7 +84,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
         objImage.color = Color.white;
     }
 
-    private void ShowDetailNPC(NPCProfileSO npcSO)
+    private void ShowDetailNPC(ActorDataSO npcSO)
     {
         itemDictionary = npcSO;
         objImage.sprite = npcSO.sprite;

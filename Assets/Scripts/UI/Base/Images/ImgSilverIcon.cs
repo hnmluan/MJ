@@ -6,7 +6,7 @@ public class ImgSilverIcon : BaseImage
     {
         try
         {
-            image.sprite = CurrencyProfileSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
+            image.sprite = CurrencyDataSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
         }
         catch (System.Exception)
         {

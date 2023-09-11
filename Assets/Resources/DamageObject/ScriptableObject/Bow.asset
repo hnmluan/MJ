@@ -19,7 +19,7 @@ MonoBehaviour:
   spriteInHand: {fileID: 21300000, guid: f74f69139326f2c48a28653f079bece2, type: 3}
   spriteInAttack: {fileID: 21300000, guid: edc704a36033feb479180a886f9ac3f9, type: 3}
   range: 8
-  damage: 2
+  damage: 20
   speed: 16
   attackTime: 0.5
   attackRate: 0.2
@@ -32,9 +32,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 10
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 10
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 10
     damage: 4
   - level: 2
@@ -45,9 +45,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 12
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 12
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 12
     damage: 5
   - level: 3
@@ -58,9 +58,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 14
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 14
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 14
     damage: 6
   - level: 4
@@ -71,9 +71,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 16
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 16
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 16
     damage: 7
   - level: 5
@@ -84,8 +84,8 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 18
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 18
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+      - currencyProfile: {fileID: 0}
         currencyCout: 18
     damage: 8

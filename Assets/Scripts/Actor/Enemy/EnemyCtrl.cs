@@ -11,8 +11,8 @@ public class EnemyCtrl : InitMonoBehaviour
     [SerializeField] protected EnemyDespawn enemyDespawn;
     public EnemyDespawn EnemyDespawn { get => enemyDespawn; }
 
-    [SerializeField] protected EnemyProfileSO enemySO;
-    public EnemyProfileSO EnemySO => enemySO;
+    [SerializeField] protected EnemyDataSO enemySO;
+    public EnemyDataSO EnemySO => enemySO;
 
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;
@@ -37,7 +37,7 @@ public class EnemyCtrl : InitMonoBehaviour
     {
         if (this.enemySO != null) return;
         string resPath = "Enemy/ScriptableObject/" + transform.name;
-        this.enemySO = Resources.Load<EnemyProfileSO>(resPath);
+        this.enemySO = Resources.Load<EnemyDataSO>(resPath);
         Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
     }
 

@@ -67,16 +67,16 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
 
     public virtual void ShowItem(ScriptableObject item)
     {
-        if (item is EnemyProfileSO) ShowEnemyProfileSO(item as EnemyProfileSO);
-        if (item is NPCProfileSO) ShowNPCProfileSO(item as NPCProfileSO);
+        if (item is EnemyDataSO) ShowEnemyProfileSO(item as EnemyDataSO);
+        if (item is ActorDataSO) ShowNPCProfileSO(item as ActorDataSO);
         if (item is WeaponDataSO) ShowDamageObjectSO(item as WeaponDataSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem(item);
     }
 
     private void HideItem(ScriptableObject item)
     {
-        if (item is EnemyProfileSO) itemName.text = LocalizationManager.Localize((item as EnemyProfileSO).keyName);
-        if (item is NPCProfileSO) itemName.text = LocalizationManager.Localize((item as NPCProfileSO).keyName);
+        if (item is EnemyDataSO) itemName.text = LocalizationManager.Localize((item as EnemyDataSO).keyName);
+        if (item is ActorDataSO) itemName.text = LocalizationManager.Localize((item as ActorDataSO).keyName);
         if (item is WeaponDataSO) itemName.text = LocalizationManager.Localize((item as WeaponDataSO).keyName);
         itemImage.color = Color.black;
     }
@@ -90,7 +90,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.color = Color.white;
     }
 
-    private void ShowEnemyProfileSO(EnemyProfileSO enemyProfileSO)
+    private void ShowEnemyProfileSO(EnemyDataSO enemyProfileSO)
     {
         if (enemyProfileSO == null) return;
         itemDictionary = enemyProfileSO;
@@ -99,7 +99,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.sprite = enemyProfileSO.sprite;
     }
 
-    private void ShowNPCProfileSO(NPCProfileSO npcProfileSO)
+    private void ShowNPCProfileSO(ActorDataSO npcProfileSO)
     {
         if (npcProfileSO == null) return;
         itemDictionary = npcProfileSO;
@@ -109,8 +109,8 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     }
 
     private bool CheckNewItem() =>
-        Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as NPCProfileSO)
-            || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyProfileSO)
+        Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as ActorDataSO)
+            || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyDataSO)
             || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as WeaponDataSO);
 
     public void OnAddItem()

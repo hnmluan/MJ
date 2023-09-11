@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6f6afdfb525abc4493cfd736b2af940, type: 3}
+  m_Script: {fileID: 11500000, guid: 289c6ee8831d87644845b68708718bcc, type: 3}
   m_Name: GoldProfile
   m_EditorClassIdentifier: 
   currencyCode: 1
-  keyName: Currency.Gold
-  currencySprite: {fileID: 21300000, guid: 6f4f6a5df1988f74c9f07015eb2c8ac2, type: 3}
+  keyName: Gold
+  currencySprite: {fileID: 21300000, guid: 59a331cbdee20354e986729373f7c12e, type: 3}
   discription: 

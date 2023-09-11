@@ -4,8 +4,6 @@ public class DamageSender : InitMonoBehaviour
 {
     [SerializeField] public int damage = 1;
 
-    [SerializeField] public string tagParent;
-
     public void SetDamage(int damage) => this.damage = damage;
 
     public virtual void Send(Transform obj)

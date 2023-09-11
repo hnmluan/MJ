@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CurrencyProfileSO", menuName = "SO/CurrencyProfile")]
+[CreateAssetMenu(fileName = "Currency", menuName = "ScriptableObject/Currency")]
 
-public class CurrencyProfileSO : ScriptableObject
+public class CurrencyDataSO : ScriptableObject
 {
     public CurrencyCode currencyCode = CurrencyCode.NoCurrency;
 
@@ -13,10 +13,10 @@ public class CurrencyProfileSO : ScriptableObject
 
     public string discription;
 
-    public static CurrencyProfileSO FindByItemCode(CurrencyCode currencyCode)
+    public static CurrencyDataSO FindByItemCode(CurrencyCode currencyCode)
     {
-        var profiles = Resources.LoadAll("Currency/ScriptableObject", typeof(CurrencyProfileSO));
-        foreach (CurrencyProfileSO profile in profiles)
+        var profiles = Resources.LoadAll("Currency/ScriptableObject", typeof(CurrencyDataSO));
+        foreach (CurrencyDataSO profile in profiles)
         {
             if (profile.currencyCode != currencyCode) continue;
             return profile;
