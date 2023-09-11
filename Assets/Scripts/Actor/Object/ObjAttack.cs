@@ -46,7 +46,7 @@ public abstract class ObjAttack : InitMonoBehaviour
 
         damageObject.gameObject.SetActive(true);
         DOCtrl doCtrl = damageObject.GetComponent<DOCtrl>();
-        doCtrl.SetAttacker(transform.parent);
+        doCtrl.SetAttacker(transform.parent.tag);
     }
 
     public WeaponDataSO GetDamageObjectSO()

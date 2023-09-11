@@ -21,11 +21,4 @@ public class PlayerDamageReceiver : DamageReceiver
     {
         Debug.Log("Player Die");
     }
-
-    public override void Deduct(int deduct)
-    {
-        base.Deduct(deduct);
-    }
-
-
 }

@@ -53,7 +53,7 @@ public class DODamageSender : DamageSender
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent == this.damageObjectCtrl.Attacker) return;
+        if (other.transform.parent.tag == this.damageObjectCtrl.Attacker) return;
         this.damageObjectCtrl.DODamageSender.Send(other.transform);
     }
 }

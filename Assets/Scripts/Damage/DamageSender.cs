@@ -4,7 +4,7 @@ public class DamageSender : InitMonoBehaviour
 {
     [SerializeField] public int damage = 1;
 
-    [SerializeField] public bool isDameFromPlayer;
+    [SerializeField] public string tagParent;
 
     public void SetDamage(int damage) => this.damage = damage;
 
@@ -16,6 +16,4 @@ public class DamageSender : InitMonoBehaviour
     }
 
     public virtual void Send(DamageReceiver damageReceiver) => damageReceiver.Deduct(this.damage);
-
-    protected override void OnEnable() => isDameFromPlayer = false;
 }

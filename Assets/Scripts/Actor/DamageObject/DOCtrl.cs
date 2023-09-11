@@ -17,8 +17,8 @@ public class DOCtrl : InitMonoBehaviour
     [SerializeField] protected DOMovement damageObjectMovement;
     public DOMovement DamageObjectMovement { get => damageObjectMovement; }
 
-    [SerializeField] protected Transform attacker;
-    public Transform Attacker => attacker;
+    [SerializeField] protected string attacker;
+    public string Attacker => attacker;
 
     protected override void LoadComponents()
     {
@@ -39,7 +39,7 @@ public class DOCtrl : InitMonoBehaviour
         damageObjectMovement.ResetMotionParameters();
     }
 
-    public virtual void SetAttacker(Transform attacker) => this.attacker = attacker;
+    public virtual void SetAttacker(string attacker) => this.attacker = attacker;
 
     private void LoadDamageObjectMovement()
     {

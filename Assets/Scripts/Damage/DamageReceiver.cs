@@ -15,8 +15,6 @@ public abstract class DamageReceiver : InitMonoBehaviour
 
     [SerializeField] protected bool isDead = false;
 
-
-
     protected override void OnEnable() => this.Reborn();
 
     protected override void LoadComponents()

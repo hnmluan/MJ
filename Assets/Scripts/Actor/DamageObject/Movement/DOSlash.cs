@@ -16,7 +16,7 @@ public class DOSlash : DOMovement
     protected override void Update()
     {
         base.Update();
-        transform.parent.position = damageObjectCtrl.Attacker.transform.position;
+        //transform.parent.position = damageObjectCtrl.Attacker.transform.position;
     }
 
     protected override void Move()
