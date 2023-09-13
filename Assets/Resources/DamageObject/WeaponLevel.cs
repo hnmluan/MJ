@@ -9,5 +9,5 @@ public class WeaponLevel
 
     public WeaponRecipe weaponRecipe;
 
-    public int damage;
+    public IntRange damage;
 }

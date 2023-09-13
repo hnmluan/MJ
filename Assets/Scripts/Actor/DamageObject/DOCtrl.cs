@@ -30,11 +30,16 @@ public class DOCtrl : InitMonoBehaviour
         this.LoadDamageObjectMovement();
     }
 
+    protected override void OnEnable()
+    {
+        doDamageSender.SetDamage(doSO.levels[0].damage);
+    }
+
     protected override void ResetValue()
     {
         if (this.doSO == null) return;
         doSR.sprite = doSO.spriteInAttack;
-        doDamageSender.SetDamage(doSO.damage);
+        doDamageSender.SetDamage(doSO.levels[0].damage);
         damageObjectDespawn.SetTimeDespawn(doSO.attackTime);
         damageObjectMovement.ResetMotionParameters();
     }

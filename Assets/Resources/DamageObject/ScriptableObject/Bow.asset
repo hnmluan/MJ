@@ -19,7 +19,6 @@ MonoBehaviour:
   spriteInHand: {fileID: 21300000, guid: f74f69139326f2c48a28653f079bece2, type: 3}
   spriteInAttack: {fileID: 21300000, guid: edc704a36033feb479180a886f9ac3f9, type: 3}
   range: 8
-  damage: 20
   speed: 16
   attackTime: 0.5
   attackRate: 0.2
@@ -36,7 +35,9 @@ MonoBehaviour:
         currencyCout: 10
       - currencyProfile: {fileID: 0}
         currencyCout: 10
-    damage: 4
+    damage:
+      minValue: 7
+      maxValue: 20
   - level: 2
     weaponRecipe:
       recipeIngredients:
@@ -49,7 +50,9 @@ MonoBehaviour:
         currencyCout: 12
       - currencyProfile: {fileID: 0}
         currencyCout: 12
-    damage: 5
+    damage:
+      minValue: 0
+      maxValue: 0
   - level: 3
     weaponRecipe:
       recipeIngredients:
@@ -62,7 +65,9 @@ MonoBehaviour:
         currencyCout: 14
       - currencyProfile: {fileID: 0}
         currencyCout: 14
-    damage: 6
+    damage:
+      minValue: 0
+      maxValue: 0
   - level: 4
     weaponRecipe:
       recipeIngredients:
@@ -75,7 +80,9 @@ MonoBehaviour:
         currencyCout: 16
       - currencyProfile: {fileID: 0}
         currencyCout: 16
-    damage: 7
+    damage:
+      minValue: 0
+      maxValue: 0
   - level: 5
     weaponRecipe:
       recipeIngredients:
@@ -88,4 +95,6 @@ MonoBehaviour:
         currencyCout: 18
       - currencyProfile: {fileID: 0}
         currencyCout: 18
-    damage: 8
+    damage:
+      minValue: 0
+      maxValue: 0

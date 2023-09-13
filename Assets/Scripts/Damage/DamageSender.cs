@@ -4,7 +4,7 @@ public class DamageSender : InitMonoBehaviour
 {
     [SerializeField] public int damage = 1;
 
-    public void SetDamage(int damage) => this.damage = damage;
+    public void SetDamage(IntRange damage) => this.damage = damage.GetRandomValue();
 
     public virtual void Send(Transform obj)
     {

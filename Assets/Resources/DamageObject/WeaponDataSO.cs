@@ -18,8 +18,6 @@ public class WeaponDataSO : ScriptableObject
 
     public float range;
 
-    public int damage;
-
     public float speed;
 
     public float attackTime;
