@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
+  m_Name: VillageElder
+  m_EditorClassIdentifier: 
+  characterCode: 2
+  keyName: VillageElder
+  keyDescription: VillageElder.Description
+  portrait: {fileID: 21300000, guid: 269a8dc4875e6a4488a63d1d1701ca7f, type: 3}
+  visual: {fileID: -1210676885, guid: 66b0c4748e4dcfd4ea5f2b021b9662f9, type: 3}
+  animator: {fileID: 9100000, guid: f449ae016481361438728af79f5190eb, type: 2}

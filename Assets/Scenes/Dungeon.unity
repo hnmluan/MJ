@@ -33656,6 +33656,7 @@ GameObject:
   - component: {fileID: 1112101873}
   - component: {fileID: 1112101875}
   - component: {fileID: 1112101876}
+  - component: {fileID: 1112101877}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -33754,6 +33755,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0.5}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!114 &1112101877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112101871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb5b8486b92c34c4cb1bb2e78b1b4511, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LocalizationKey: 
 --- !u!1 &1116884144
 GameObject:
   m_ObjectHideFlags: 0
@@ -34600,6 +34614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1133960695}
+  - component: {fileID: 1133960696}
   m_Layer: 0
   m_Name: VillageElder
   m_TagString: Untagged
@@ -34629,6 +34644,18 @@ Transform:
   m_Father: {fileID: 1047055379}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1133960696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133960694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9506babe80dba408d28ce777dfacde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1134171792
 GameObject:
   m_ObjectHideFlags: 0
