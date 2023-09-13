@@ -25,10 +25,20 @@ public class ObjMoveToTagert : InitMonoBehaviour
 
     protected float offsetNodePath = 0.1f;
 
+    [SerializeField] private Animator animator;
+
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadSeeker();
+        this.LoadAnimator();
+    }
+    protected virtual void LoadAnimator()
+    {
+        if (this.animator != null) return;
+        this.animator = transform.parent.Find("Visual").GetComponent<Animator>();
+        Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
 
     protected virtual void LoadSeeker()
@@ -75,8 +85,17 @@ public class ObjMoveToTagert : InitMonoBehaviour
         }
     }
 
+    private void SetAnimation()
+    {
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
+        animator.SetBool("isWalking", this.isMoving);
+    }
+
     protected virtual void Update()
     {
+        SetAnimation();
+
         if (isMoving && currentPath != null)
         {
             if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
@@ -85,6 +104,7 @@ public class ObjMoveToTagert : InitMonoBehaviour
                 isMoving = false;
                 return;
             }
+
 
             Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
 

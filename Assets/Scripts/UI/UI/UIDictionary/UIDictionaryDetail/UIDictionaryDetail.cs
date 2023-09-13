@@ -61,7 +61,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
     public void ShowDetailObj(ScriptableObject objSO)
     {
         if (objSO is EnemyDataSO) ShowDetailEnemy(objSO as EnemyDataSO);
-        if (objSO is ActorDataSO) ShowDetailNPC(objSO as ActorDataSO);
+        if (objSO is CharacterDataSO) ShowDetailNPC(objSO as CharacterDataSO);
         if (objSO is WeaponDataSO) ShowDetailDamageObject(objSO as WeaponDataSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(objSO)) HideDetail(objSO);
     }
@@ -70,7 +70,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
     {
         objImage.color = Color.black;
         if (objSO is EnemyDataSO) objName.text = LocalizationManager.Localize((objSO as EnemyDataSO).keyName);
-        if (objSO is ActorDataSO) objName.text = LocalizationManager.Localize((objSO as ActorDataSO).keyName);
+        if (objSO is CharacterDataSO) objName.text = LocalizationManager.Localize((objSO as CharacterDataSO).keyName);
         if (objSO is WeaponDataSO) objName.text = LocalizationManager.Localize((objSO as WeaponDataSO).keyName);
         objDescription.text = "???????";
     }
@@ -84,10 +84,10 @@ public class UIDictionaryDetail : InitMonoBehaviour
         objImage.color = Color.white;
     }
 
-    private void ShowDetailNPC(ActorDataSO npcSO)
+    private void ShowDetailNPC(CharacterDataSO npcSO)
     {
         itemDictionary = npcSO;
-        objImage.sprite = npcSO.sprite;
+        objImage.sprite = npcSO.portrait;
         objName.text = LocalizationManager.Localize(npcSO.keyName);
         objDescription.text = LocalizationManager.Localize(npcSO.keyDescription);
         objImage.color = Color.white;

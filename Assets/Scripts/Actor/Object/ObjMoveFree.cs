@@ -4,20 +4,29 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public abstract class ObjMoveFree : InitMonoBehaviour
+public class ObjMoveFree : InitMonoBehaviour
 {
     [SerializeField] protected Collider2D movementArea;
+
     [SerializeField] protected Seeker seeker;
+
     [SerializeField] protected Path currentPath;
+
     [SerializeField] protected int currentWaypointIndex;
+
     [SerializeField] protected bool isMoving;
+
     [SerializeField] protected Vector3 direction;
+
+    [SerializeField] private Animator animator;
+
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadSeeker();
         this.LoadMovementArea();
+        this.LoadAnimator();
     }
 
     private void LoadMovementArea()
@@ -25,7 +34,7 @@ public abstract class ObjMoveFree : InitMonoBehaviour
         if (this.movementArea != null) return;
         this.movementArea = transform.GetComponentInChildren<Collider2D>();
         if (this.movementArea == null) return;
-        movementArea.AddComponent<FixedPosition>();
+        if (transform.GetComponentInChildren<FixedPosition>() == null) movementArea.AddComponent<FixedPosition>();
         movementArea.isTrigger = true;
         Debug.Log(transform.name + ": LoadMovementArea", gameObject);
     }
@@ -37,16 +46,24 @@ public abstract class ObjMoveFree : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadSeeker", gameObject);
     }
 
-    //protected override void Start()
-    //{
-    //    isMoving = false;
-    //    StartCoroutine(MoveToRandomPointRoutine());
-    //}
+    protected virtual void LoadAnimator()
+    {
+        if (this.animator != null) return;
+        this.animator = transform.parent.Find("Visual").GetComponent<Animator>();
+        Debug.Log(transform.name + ": LoadAnimator", gameObject);
+    }
 
     protected override void OnEnable()
     {
         isMoving = false;
         StartCoroutine(MoveToRandomPointRoutine());
+    }
+
+    private void SetAnimation()
+    {
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
+        animator.SetBool("isWalking", this.isMoving);
     }
 
     private IEnumerator MoveToRandomPointRoutine()
@@ -98,6 +115,8 @@ public abstract class ObjMoveFree : InitMonoBehaviour
 
     protected virtual void Update()
     {
+        SetAnimation();
+
         if (isMoving && currentPath != null)
         {
             if (currentWaypointIndex >= currentPath.vectorPath.Count)

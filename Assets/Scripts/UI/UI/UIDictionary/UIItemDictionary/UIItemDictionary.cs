@@ -68,7 +68,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     public virtual void ShowItem(ScriptableObject item)
     {
         if (item is EnemyDataSO) ShowEnemyProfileSO(item as EnemyDataSO);
-        if (item is ActorDataSO) ShowNPCProfileSO(item as ActorDataSO);
+        if (item is CharacterDataSO) ShowNPCProfileSO(item as CharacterDataSO);
         if (item is WeaponDataSO) ShowDamageObjectSO(item as WeaponDataSO);
         if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem(item);
     }
@@ -76,7 +76,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     private void HideItem(ScriptableObject item)
     {
         if (item is EnemyDataSO) itemName.text = LocalizationManager.Localize((item as EnemyDataSO).keyName);
-        if (item is ActorDataSO) itemName.text = LocalizationManager.Localize((item as ActorDataSO).keyName);
+        if (item is CharacterDataSO) itemName.text = LocalizationManager.Localize((item as CharacterDataSO).keyName);
         if (item is WeaponDataSO) itemName.text = LocalizationManager.Localize((item as WeaponDataSO).keyName);
         itemImage.color = Color.black;
     }
@@ -99,17 +99,17 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.sprite = enemyProfileSO.sprite;
     }
 
-    private void ShowNPCProfileSO(ActorDataSO npcProfileSO)
+    private void ShowNPCProfileSO(CharacterDataSO npcProfileSO)
     {
         if (npcProfileSO == null) return;
         itemDictionary = npcProfileSO;
         itemName.text = LocalizationManager.Localize(npcProfileSO.keyName);
         itemImage.color = Color.white;
-        itemImage.sprite = npcProfileSO.sprite;
+        itemImage.sprite = npcProfileSO.portrait;
     }
 
     private bool CheckNewItem() =>
-        Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as ActorDataSO)
+        Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as CharacterDataSO)
             || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyDataSO)
             || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as WeaponDataSO);
 
