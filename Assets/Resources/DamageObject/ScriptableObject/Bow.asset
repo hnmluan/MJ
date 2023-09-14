@@ -31,9 +31,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 10
       recipePrice:
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
         currencyCout: 10
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
         currencyCout: 10
     damage:
       minValue: 7
@@ -46,9 +46,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 12
       recipePrice:
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
         currencyCout: 12
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
         currencyCout: 12
     damage:
       minValue: 0
@@ -61,9 +61,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 14
       recipePrice:
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
         currencyCout: 14
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
         currencyCout: 14
     damage:
       minValue: 0
@@ -76,9 +76,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 16
       recipePrice:
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
         currencyCout: 16
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
         currencyCout: 16
     damage:
       minValue: 0
@@ -91,9 +91,9 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
         itemCount: 18
       recipePrice:
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
         currencyCout: 18
-      - currencyProfile: {fileID: 0}
+      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
         currencyCout: 18
     damage:
       minValue: 0

@@ -6,6 +6,10 @@ public class Armory : Singleton<Armory>
     [SerializeField] protected List<Weapon> weapons;
     public List<Weapon> Weapons => weapons;
 
+    public Weapon firstWeapon;
+
+    public Weapon secondWeapon;
+
     [SerializeField] public float ratioDecompose;
 
     protected override void Start()

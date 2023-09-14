@@ -5,10 +5,15 @@ using UnityEngine;
 public class CharacterDataSO : ScriptableObject
 {
     public CharacterCode characterCode = CharacterCode.NoActor;
+
     public string keyName;
+
     public string keyDescription;
+
     public Sprite portrait;
+
     public Sprite visual;
+
     public RuntimeAnimatorController animator;
 
     public static CharacterDataSO FindByItemCode(CharacterCode characterCode)

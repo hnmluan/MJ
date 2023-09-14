@@ -96,7 +96,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemDictionary = enemyProfileSO;
         itemName.text = LocalizationManager.Localize(enemyProfileSO.keyName);
         itemImage.color = Color.white;
-        itemImage.sprite = enemyProfileSO.sprite;
+        itemImage.sprite = enemyProfileSO.portrait;
     }
 
     private void ShowNPCProfileSO(CharacterDataSO npcProfileSO)

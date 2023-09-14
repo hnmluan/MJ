@@ -78,7 +78,7 @@ public class UIDictionaryDetail : InitMonoBehaviour
     private void ShowDetailEnemy(EnemyDataSO enemySO)
     {
         itemDictionary = enemySO;
-        objImage.sprite = enemySO.sprite;
+        objImage.sprite = enemySO.portrait;
         objName.text = LocalizationManager.Localize(enemySO.keyName);
         objDescription.text = LocalizationManager.Localize(enemySO.keyDescription);
         objImage.color = Color.white;

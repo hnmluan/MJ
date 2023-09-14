@@ -22,7 +22,6 @@ public class CharacterGenerator : InitMonoBehaviour
 
     private void LoadCharacterData()
     {
-        if (this.characterData != null) return;
         characterData = CharacterDataSO.FindByName(name);
         if (characterData == null)
         {
@@ -34,22 +33,22 @@ public class CharacterGenerator : InitMonoBehaviour
 
     private void LoadVisual()
     {
-        if (this.visual != null) return;
-        visual = GameObject.Find("Visual").GetComponent<SpriteRenderer>();
+        visual = transform.Find("Visual").GetComponent<SpriteRenderer>();
+        visual.sprite = characterData.visual;
         Debug.Log(transform.name + ": LoadVisual", gameObject);
     }
 
     private void LoadAnimator()
     {
-        if (this.animator != null) return;
-        animator = GameObject.Find("Visual").GetComponent<Animator>();
+        animator = transform.Find("Visual").GetComponent<Animator>();
+        animator.runtimeAnimatorController = characterData.animator;
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
 
     private void LoadKeyName()
     {
-        if (this.keyName != null) return;
         keyName = GetComponentInChildren<LocalizedText>();
+        keyName.LocalizationKey = characterData.keyName;
         Debug.Log(transform.name + ": LoadKeyName", gameObject);
     }
 
