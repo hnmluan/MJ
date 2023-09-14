@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjMoveToPlayer : ObjMoveToTagert
+public class ObjMoveToPlayer : EnemyAI
 {
     protected override void LoadComponents()
     {

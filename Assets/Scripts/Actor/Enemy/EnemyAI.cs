@@ -2,27 +2,52 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour
+[RequireComponent(typeof(Seeker))]
+public class EnemyAI : InitMonoBehaviour
 {
     public Transform target;
 
     public float moveSpeed = 2f;
-    public float nextWayPointDistance = 2f;
-    public float repeatTimeUpdatePath = 0.5f;
-    public Animator animator;
-    public bool allowMoving;
-    public float range;
 
-    Path path;
+    public float repeatTimeUpdatePath = 0.5f;
+
+    public Animator animator;
+
+    public float rangeToFollow = Mathf.Infinity;
+
+    public float offsetTagert;
+
     public Seeker seeker;
 
-    Coroutine moveCoroutine;
+    private Path path;
 
-    private void Start()
+    private bool allowMoving;
+
+    private float nextWayPointDistance = 0.2f;
+
+    private Coroutine moveCoroutine;
+
+    protected override void Start() => InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
+
+    protected override void LoadComponents()
     {
-        seeker = GetComponent<Seeker>();
+        base.LoadComponents();
+        this.LoadAnimator();
+        this.LoadSeeker();
+    }
 
-        InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
+    private void LoadSeeker()
+    {
+        if (seeker != null) return;
+        seeker = GetComponent<Seeker>();
+        Debug.Log(transform.name + ": LoadSeeker", gameObject);
+    }
+
+    private void LoadAnimator()
+    {
+        if (animator != null) return;
+        animator = transform.parent.Find("Visual").GetComponent<Animator>();
+        Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
 
     void CalculatePath()
@@ -36,7 +61,7 @@ public class EnemyAI : MonoBehaviour
         if (!p.error)
         {
             path = p;
-            if (allowMoving) MoveToTarget();
+            MoveToTarget();
         }
     }
 
@@ -48,8 +73,8 @@ public class EnemyAI : MonoBehaviour
 
     private void SetAnimation()
     {
-        animator.SetFloat("X", (transform.position - target.position).x);
-        animator.SetFloat("Y", (transform.position - target.position).y);
+        animator.SetFloat("X", (transform.position - target.position).normalized.x);
+        animator.SetFloat("Y", (transform.position - target.position).normalized.y);
         animator.SetBool("isWalking", this.allowMoving);
     }
 
@@ -73,14 +98,15 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        SetAnimation();
         float distance = Vector3.Distance(transform.position, target.position);
-        allowMoving = distance < range;
-        if (allowMoving) SetAnimation();
+        allowMoving = distance < rangeToFollow && distance > offsetTagert;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.DrawWireSphere(transform.position, rangeToFollow);
+        Gizmos.DrawWireSphere(transform.position, offsetTagert);
     }
 }
