@@ -56572,7 +56572,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1712105834
 Transform:
   m_ObjectHideFlags: 0
@@ -57176,7 +57176,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1730519319
 Transform:
   m_ObjectHideFlags: 0
@@ -65546,6 +65546,7 @@ GameObject:
   - component: {fileID: 1976040958}
   - component: {fileID: 1976040960}
   - component: {fileID: 1976040959}
+  - component: {fileID: 1976040961}
   m_Layer: 0
   m_Name: MoveToPlayer
   m_TagString: Untagged
@@ -65575,7 +65576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976040957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30c71ce4453302c4c809644130788726, type: 3}
   m_Name: 
@@ -65613,6 +65614,26 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!114 &1976040961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976040957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8db62f73b3b985418dd4c8ddc102b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1066306981}
+  moveSpeed: 2
+  nextWayPointDistance: 0.3
+  repeatTimeUpdatePath: 0.5
+  animator: {fileID: 1548345921}
+  allowMoving: 0
+  range: 3
+  seeker: {fileID: 1976040960}
 --- !u!1 &1980134460
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,8 +89,8 @@ public class ObjMoveToTagert : InitMonoBehaviour
 
     private void SetAnimation()
     {
-        animator.SetFloat("X", direction.x);
-        animator.SetFloat("Y", direction.y);
+        animator.SetFloat("X", -direction.x);
+        animator.SetFloat("Y", -direction.y);
         animator.SetBool("isWalking", this.isMoving);
     }
 
