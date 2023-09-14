@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
+  m_Name: BrownMouse
+  m_EditorClassIdentifier: 
+  itemCode: 5
+  itemType: 1
+  keyName: Enemy.BrownMouse
+  keyDescription: Enemy.Description.BrownMouse
+  portrait: {fileID: 21300000, guid: 151c986931779e2438014a0a7de5f562, type: 3}
+  visual: {fileID: -1602931666, guid: e5b5f5b4ff7931c4aaba83b02a6ba41f, type: 3}
+  animator: {fileID: 9100000, guid: 69d3ae3960f163a48b24c6a7ece0950d, type: 2}
+  hpMax: 100
+  dropListItem: []

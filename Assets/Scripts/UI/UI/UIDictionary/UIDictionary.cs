@@ -53,7 +53,7 @@ public class UIDictionary : BaseUI<UIDictionary>
 
     private List<WeaponDataSO> GetDamageObjectProfileSO() => new List<WeaponDataSO>(Resources.LoadAll<WeaponDataSO>("DamageObject/ScriptableObject"));
 
-    private List<CharacterDataSO> GetNPCProfileSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("NPC/ScriptableObject"));
+    private List<CharacterDataSO> GetNPCProfileSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("Character/ScriptableObject"));
 
     private List<EnemyDataSO> GetEnemyProfileSO() => new List<EnemyDataSO>(Resources.LoadAll<EnemyDataSO>("Enemy/ScriptableObject"));
 

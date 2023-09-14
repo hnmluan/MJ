@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
+  m_Name: BlueFlam
+  m_EditorClassIdentifier: 
+  itemCode: 3
+  itemType: 1
+  keyName: Enemy.BlueFlam
+  keyDescription: Enemy.Description.BlueFlam
+  portrait: {fileID: 21300000, guid: f39035b7ba863c843ba2183a27cefad9, type: 3}
+  visual: {fileID: -962149790, guid: 7d0a4f5e6bf691a46908b132b4d77c5e, type: 3}
+  animator: {fileID: 9100000, guid: 922d1ceb480dc284b8271c9f9eb7ec90, type: 2}
+  hpMax: 100
+  dropListItem: []

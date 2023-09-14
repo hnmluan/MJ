@@ -14,6 +14,10 @@ public class EnemyDataSO : ScriptableObject
 
     public Sprite portrait;
 
+    public Sprite visual;
+
+    public RuntimeAnimatorController animator;
+
     public int hpMax;
 
     public List<ItemDropRate> dropListItem;

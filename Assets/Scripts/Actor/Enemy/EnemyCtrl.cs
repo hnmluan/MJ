@@ -20,10 +20,10 @@ public class EnemyCtrl : InitMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
+        this.LoadEnemySO();
         this.LoadAnimator();
         this.LoadEnemyDespawn();
         this.LoadModel();
-        this.LoadEnemySO();
         this.LoadDamageReceiver();
     }
 
@@ -45,6 +45,7 @@ public class EnemyCtrl : InitMonoBehaviour
     {
         if (this.model != null) return;
         this.model = transform.GetComponentInChildren<SpriteRenderer>();
+        model.sprite = enemySO.visual;
         Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 
@@ -59,6 +60,7 @@ public class EnemyCtrl : InitMonoBehaviour
     {
         if (this.animator != null) return;
         this.animator = transform.GetComponentInChildren<Animator>();
+        animator.runtimeAnimatorController = enemySO.animator;
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
 

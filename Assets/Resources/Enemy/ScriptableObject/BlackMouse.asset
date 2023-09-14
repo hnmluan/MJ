@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
+  m_Name: BlackMouse
+  m_EditorClassIdentifier: 
+  itemCode: 6
+  itemType: 1
+  keyName: Enemy.BlackMouse
+  keyDescription: Enemy.Description.BlackMouse
+  portrait: {fileID: 21300000, guid: d1ca78ac2edf501419e0e79c00cab023, type: 3}
+  visual: {fileID: 1896736179, guid: 21656b17c5aa1274d97660c7368d6859, type: 3}
+  animator: {fileID: 9100000, guid: 866511b60b9c8534a9eb129f90589c58, type: 2}
+  hpMax: 100
+  dropListItem: []

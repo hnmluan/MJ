@@ -27,6 +27,8 @@ public class ObjMoveToTagert : InitMonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    [SerializeField] protected float speed = 1;
+
 
     protected override void LoadComponents()
     {
@@ -110,7 +112,7 @@ public class ObjMoveToTagert : InitMonoBehaviour
 
             direction = (targetPosition - transform.position).normalized;
 
-            transform.parent.position += direction * 5f * Time.deltaTime;
+            transform.parent.position += direction * speed * Time.deltaTime;
 
             if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
             {

@@ -17,5 +17,13 @@ MonoBehaviour:
   keyName: Enemy.YellowBamboo
   keyDescription: Enemy.Description.YellowBamboo
   portrait: {fileID: 21300000, guid: 91725ccba39fff948ace53f68f38e6b9, type: 3}
-  hpMax: 2
-  dropListItem: []
+  visual: {fileID: 435224598, guid: 8fbc7d680577d8144a7c04f263d0cd93, type: 3}
+  animator: {fileID: 9100000, guid: 3e573df7708c71447b66fd9606b61b19, type: 2}
+  hpMax: 100
+  dropListItem:
+  - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+    dropRate: 100000
+  - itemSO: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+    dropRate: 100000
