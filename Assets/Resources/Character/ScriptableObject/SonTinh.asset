@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
+  m_Name: SonTinh
+  m_EditorClassIdentifier: 
+  characterCode: 13
+  keyName: SonTinh
+  keyDescription: SonTinh.Description
+  portrait: {fileID: 21300000, guid: 468449a73ba758c48a33b812e455eb7c, type: 3}
+  visual: {fileID: -1131230007, guid: 29931d85b29bb284989f4e83e67ec8a0, type: 3}
+  animator: {fileID: 9100000, guid: 1f52f724f656fa942a96d96838bff769, type: 2}

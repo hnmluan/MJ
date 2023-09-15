@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
+  m_Name: MrsKim
+  m_EditorClassIdentifier: 
+  characterCode: 9
+  keyName: MrsKim
+  keyDescription: MrsKim.Description
+  portrait: {fileID: 21300000, guid: bb645c88ac3bcf343807e574a99abd3b, type: 3}
+  visual: {fileID: -857598559, guid: 02e7a027cea2ecf45bf6e8ae0bf24e4c, type: 3}
+  animator: {fileID: 9100000, guid: 17960767e7bdc5045b14c0a47fd869b1, type: 2}

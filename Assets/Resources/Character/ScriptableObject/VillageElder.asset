@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
   m_Name: VillageElder
   m_EditorClassIdentifier: 
-  characterCode: 2
+  characterCode: 17
   keyName: VillageElder
   keyDescription: VillageElder.Description
   portrait: {fileID: 21300000, guid: 269a8dc4875e6a4488a63d1d1701ca7f, type: 3}

@@ -13818,6 +13818,23 @@ MonoBehaviour:
   npcSOsAvailableSeen: []
   npcSOsAvailableButNotSeen:
   - {fileID: 11400000, guid: 64230900ffe27564ba64a37c75317f22, type: 2}
+  - {fileID: 11400000, guid: 2e3a1ea2f8983fd4a8d67ad6a0270062, type: 2}
+  - {fileID: 11400000, guid: 54a28df39a0eb1d459185f9d2cd4e239, type: 2}
+  - {fileID: 11400000, guid: 7f12b33d3b66d4d46baa74e80148e2d5, type: 2}
+  - {fileID: 11400000, guid: b4be849c2d6ef054f8d7e1c6ec5f2af6, type: 2}
+  - {fileID: 11400000, guid: 3ff4257ce7315c4489f907f9f242ee44, type: 2}
+  - {fileID: 11400000, guid: 8c1d461cad98e8b479864112d1ad467b, type: 2}
+  - {fileID: 11400000, guid: a4789bf7e8262d94a9a7f5fd387b906f, type: 2}
+  - {fileID: 11400000, guid: da1dc442607e3b54b9f854f82b982478, type: 2}
+  - {fileID: 11400000, guid: a5baa8c42aa8bf14a873bb4fd2e94d47, type: 2}
+  - {fileID: 11400000, guid: 38275db659ae3e14da1f659f96658b1f, type: 2}
+  - {fileID: 11400000, guid: 0e7ce3dcc65b50848ab82b4cff28fe7b, type: 2}
+  - {fileID: 11400000, guid: 4d6eb22735142e8469342cb54536aa98, type: 2}
+  - {fileID: 11400000, guid: b257ec104b7761c4b912e26c21a95e3f, type: 2}
+  - {fileID: 11400000, guid: 28f3d287992c3754e85fd6ac068a5a93, type: 2}
+  - {fileID: 11400000, guid: d521f89577912664b819b226efbf2e6f, type: 2}
+  - {fileID: 11400000, guid: c6ce3ca6d95d09742ac92f397b4d38a8, type: 2}
+  - {fileID: 11400000, guid: 756ead2b1fad5384ca4679009525b6a3, type: 2}
   enemySOsAvailableSeen: []
   enemySOsAvailableButNotSeen:
   - {fileID: 11400000, guid: d4efc6fa6a994dd4aad0bcb9b9d596dc, type: 2}
@@ -40753,7 +40770,7 @@ MonoBehaviour:
     Id: 1351697873
   - Name: Dictionary
     Id: 113301983
-  - Name: NPC
+  - Name: Character
     Id: 1344716637
   - Name: Enemy
     Id: 2013536786
@@ -67071,6 +67088,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 5357263223403624923}
+    - target: {fileID: 5069629700109827555, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -994161341, guid: f330f2798150e3f48a39f6c90baac938, type: 3}
+    - target: {fileID: 5069629700109827564, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 468be817ddf340e45bab0236673d9f82, type: 2}
     - target: {fileID: 5069629700259919996, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -67117,7 +67142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069629700259919997, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_Name
-      value: VillageElder
+      value: AuCo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069629700265784954, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5069629700265784955, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_SizeDelta.x

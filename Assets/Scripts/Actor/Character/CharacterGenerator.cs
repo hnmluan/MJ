@@ -1,5 +1,6 @@
 using Assets.SimpleLocalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterGenerator : InitMonoBehaviour
 {
@@ -49,6 +50,7 @@ public class CharacterGenerator : InitMonoBehaviour
     {
         keyName = GetComponentInChildren<LocalizedText>();
         keyName.LocalizationKey = characterData.keyName;
+        GetComponentInChildren<Text>().text = LocalizationManager.Localize(characterData.keyName);
         Debug.Log(transform.name + ": LoadKeyName", gameObject);
     }
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
+  m_Name: Lua
+  m_EditorClassIdentifier: 
+  characterCode: 6
+  keyName: Lua
+  keyDescription: Lua.Description
+  portrait: {fileID: 21300000, guid: 673fd1605b35d19429d244de6ffaf969, type: 3}
+  visual: {fileID: 1136524739, guid: f0c5ab68afcd0e8469d5961721e15ddc, type: 3}
+  animator: {fileID: 9100000, guid: b287f4991b024154992fab1824c87669, type: 2}

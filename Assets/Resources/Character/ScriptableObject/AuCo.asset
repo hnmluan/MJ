@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe88dcde20efb34f938cc734d7b97ca, type: 3}
+  m_Name: AuCo
+  m_EditorClassIdentifier: 
+  characterCode: 1
+  keyName: AuCo
+  keyDescription: AuCo.Description
+  portrait: {fileID: 21300000, guid: 10fdb5925154c054cbcc309821ddc5e1, type: 3}
+  visual: {fileID: -994161341, guid: f330f2798150e3f48a39f6c90baac938, type: 3}
+  animator: {fileID: 9100000, guid: 468be817ddf340e45bab0236673d9f82, type: 2}
