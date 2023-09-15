@@ -15,6 +15,6 @@ MonoBehaviour:
   characterCode: 2
   keyName: Doi
   keyDescription: Doi.Description
-  portrait: {fileID: -1106662735, guid: b1024aa741dc11c478566d96c366dae0, type: 3}
-  visual: {fileID: 21300000, guid: 8d1affe055d8d3e4f98e610c92c20100, type: 3}
+  portrait: {fileID: 21300000, guid: 76819d9e0a2de0a48b57d5f2b74d66ab, type: 3}
+  visual: {fileID: -1471455554, guid: 52a4bff64888ccc4a8cb9f3e9d7b6d20, type: 3}
   animator: {fileID: 9100000, guid: 20f4ba893f49b7048a692c52f7fc6656, type: 2}

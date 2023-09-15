@@ -19,4 +19,5 @@ public enum CharacterCode
     ThuyTinh = 16,
     VillageElder = 17,
     MorthersTam = 18,
+    Ty = 19,
 }

@@ -16,5 +16,5 @@ MonoBehaviour:
   keyName: MissTam
   keyDescription: MissTam.Description
   portrait: {fileID: 21300000, guid: 167486c8ecbb903419c3a05223f9a3bd, type: 3}
-  visual: {fileID: 21300000, guid: 929f9f6335a9880479b61e5bfe8f6039, type: 3}
+  visual: {fileID: -51529863, guid: c026e1ac5b92b8344832909269b40ae6, type: 3}
   animator: {fileID: 9100000, guid: 174631b5db25a5e4f855c7e9179833f8, type: 2}

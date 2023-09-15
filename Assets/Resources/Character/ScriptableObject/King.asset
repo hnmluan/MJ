@@ -15,6 +15,6 @@ MonoBehaviour:
   characterCode: 4
   keyName: King
   keyDescription: King.Description
-  portrait: {fileID: 21300000, guid: a261f88b92f729b468d69346452ffc27, type: 3}
-  visual: {fileID: 613772840, guid: ba25b19011ee21746820939a1fa8b443, type: 3}
+  portrait: {fileID: 21300000, guid: bf553b8c3b7518b41b27aee0e307d2ef, type: 3}
+  visual: {fileID: 798691020, guid: 8607e4769f872fb4db9d95b329e5db84, type: 3}
   animator: {fileID: 9100000, guid: d07d2f4c73ece1c4794ea932e17fb1fd, type: 2}

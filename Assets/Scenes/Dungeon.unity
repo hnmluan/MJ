@@ -16339,6 +16339,7 @@ GameObject:
   - component: {fileID: 451790834}
   - component: {fileID: 451790833}
   - component: {fileID: 451790837}
+  - component: {fileID: 451790838}
   m_Layer: 0
   m_Name: HPBar
   m_TagString: Untagged
@@ -16455,6 +16456,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPBar: {fileID: 1398007645}
   damageReceiver: {fileID: 0}
+--- !u!95 &451790838
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451790831}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41dd03694dd79534b92634a3f4d267a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &455390592
 GameObject:
   m_ObjectHideFlags: 0
@@ -67088,14 +67110,22 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 5357263223403624923}
+    - target: {fileID: 5069629700109827554, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5069629700109827555, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -994161341, guid: f330f2798150e3f48a39f6c90baac938, type: 3}
+      objectReference: {fileID: 286685675, guid: 47ab27cf78f284343bd1de67a1aa138a, type: 3}
+    - target: {fileID: 5069629700109827555, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5069629700109827564, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 468be817ddf340e45bab0236673d9f82, type: 2}
+      objectReference: {fileID: 9100000, guid: 1d78146f759dae348adb9a15db545d39, type: 2}
     - target: {fileID: 5069629700259919996, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -67142,7 +67172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069629700259919997, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_Name
-      value: AuCo
+      value: Ty
       objectReference: {fileID: 0}
     - target: {fileID: 5069629700265784954, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_Text
@@ -67155,6 +67185,10 @@ PrefabInstance:
     - target: {fileID: 5069629700265784955, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5069629700265784955, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 104.5
       objectReference: {fileID: 0}
     - target: {fileID: 5069629701310874579, guid: f319616b30d996941b3e715c83d8e7a1, type: 3}
       propertyPath: target
