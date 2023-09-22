@@ -21,6 +21,6 @@ public class SliderMusic : BaseSlider
     {
         if (newValue == 0) toggle.isOn = true;
         if (newValue > 0) toggle.isOn = false;
-        AudioController.Instance.MusicVolume(newValue);
+        AudioManager.Instance.MusicVolume = newValue;
     }
 }

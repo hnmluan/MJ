@@ -58,7 +58,7 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         base.Deduct(deduct);
         PlayBloodLossEffect();
-        AudioController.Instance.PlayVFX("sfx_loss_hp");
+        AudioManager.Instance.Play("sfx_loss_hp");
     }
 
     private void PlayBloodLossEffect() { if (HP != 0 && enemyCtrl.Model != null) StartCoroutine(BloodLossEffect()); }

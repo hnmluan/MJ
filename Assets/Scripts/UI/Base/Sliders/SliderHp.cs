@@ -8,7 +8,7 @@ public class SliderHp : BaseSlider
 
     [SerializeField] protected float currentHP = 70;
 
-    protected override void FixedUpdate() => this.HPShowing();
+    protected void FixedUpdate() => this.HPShowing();
 
     protected virtual void HPShowing()
     {

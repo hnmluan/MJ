@@ -12,11 +12,6 @@ public abstract class BaseSlider : InitMonoBehaviour
         this.AddOnClickEvent();
     }
 
-    protected virtual void FixedUpdate()
-    {
-        //For override
-    }
-
     protected override void LoadComponents()
     {
         base.LoadComponents();

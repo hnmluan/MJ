@@ -244,7 +244,7 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             if (stopAudioSource)
             {
-                AudioController.Instance.dialogueSource.Stop();
+                AudioManager.Instance.dialogueSource.Stop();
             }
             AudioClip soundClip = null;
             // create predictable audio from hashing
@@ -263,11 +263,11 @@ public class DialogueManager : Singleton<DialogueManager>
                 {
                     int predictablePitchInt = (hashCode % pitchRangeInt) + minPitchInt;
                     float predictablePitch = predictablePitchInt / 100f;
-                    AudioController.Instance.dialogueSource.pitch = predictablePitch;
+                    AudioManager.Instance.dialogueSource.pitch = predictablePitch;
                 }
                 else
                 {
-                    AudioController.Instance.dialogueSource.pitch = minPitch;
+                    AudioManager.Instance.dialogueSource.pitch = minPitch;
                 }
             }
             // otherwise, randomize the audio
@@ -277,11 +277,11 @@ public class DialogueManager : Singleton<DialogueManager>
                 int randomIndex = Random.Range(0, dialogueTypingSoundClips.Length);
                 soundClip = dialogueTypingSoundClips[randomIndex];
                 // pitch
-                AudioController.Instance.dialogueSource.pitch = Random.Range(minPitch, maxPitch);
+                AudioManager.Instance.dialogueSource.pitch = Random.Range(minPitch, maxPitch);
             }
 
             // play sound
-            AudioController.Instance.dialogueSource.PlayOneShot(soundClip);
+            AudioManager.Instance.dialogueSource.PlayOneShot(soundClip);
         }
     }
 

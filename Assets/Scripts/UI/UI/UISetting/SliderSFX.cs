@@ -22,6 +22,6 @@ public class SliderSFX : BaseSlider
     {
         if (newValue == 0) toggle.isOn = true;
         if (newValue > 0) toggle.isOn = false;
-        AudioController.Instance.SFXVolume(newValue);
+        AudioManager.Instance.SFXVolume = newValue;
     }
 }

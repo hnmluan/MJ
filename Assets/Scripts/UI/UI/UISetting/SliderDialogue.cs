@@ -5,6 +5,7 @@ public class SliderDialogue : BaseSlider
 {
     [SerializeField] protected Toggle toggle;
 
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -22,6 +23,6 @@ public class SliderDialogue : BaseSlider
     {
         if (newValue == 0) toggle.isOn = true;
         if (newValue > 0) toggle.isOn = false;
-        AudioController.Instance.dialogueSource.volume = newValue;
+        AudioManager.Instance.dialogueSource.volume = newValue;
     }
 }
