@@ -29,6 +29,7 @@ public class ConfirmPanel : MonoBehaviour
     private void AskForConfirmInternal(string message, Action yesAction, Action noAction)
     {
         gameObject.SetActive(true);
+        Debug.Log(message);
         messageText.text = message;
         this._yesAction = yesAction;
         this._noAction = noAction;

@@ -28,13 +28,12 @@ public class SelectorController : MonoBehaviour
 
     public void DeleteCurrentUser()
     {
-        if (string.IsNullOrEmpty(currentUserText.text))
-            return;
+        if (string.IsNullOrEmpty(currentUserText.text)) return;
 
-        ConfirmPanel.Ask("Are you sure to delete this user?", DeleteCurrenUserExcute);
+        ConfirmPanel.Ask("Are you sure to delete this user?", DeleteCurrenUserExcute, null);
     }
 
-    public void DeleteCurrenUserExcute()
+    private void DeleteCurrenUserExcute()
     {
         FileNameData.DeleteUser(currentUserText.text);
         currentUserText.text = "";
@@ -47,7 +46,7 @@ public class SelectorController : MonoBehaviour
             return;
 
         FileNameData.SetUser(currentUserText.text);
-        SceneManager.LoadSceneAsync("Game");
+        SceneManager.LoadSceneAsync("VillageElderHouse");
     }
 
     private void OnEnable()
@@ -57,15 +56,9 @@ public class SelectorController : MonoBehaviour
         RefreshUserToggle();
     }
 
-    private void OnDisable()
-    {
-        EventManager<string>.RemoveListener("OnUserSelected", ChangeCurrentUser);
-    }
+    private void OnDisable() => EventManager<string>.RemoveListener("OnUserSelected", ChangeCurrentUser);
 
-    private void ChangeCurrentUser(string username)
-    {
-        currentUserText.text = username;
-    }
+    private void ChangeCurrentUser(string username) => currentUserText.text = username;
 
     private void SetNewSize(int newSize)
     {
