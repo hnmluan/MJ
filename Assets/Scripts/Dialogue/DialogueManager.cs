@@ -118,7 +118,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON, Animator emoteAnimator)
+    public void EnterDialogueMode(TextAsset inkJSON, Animator emoteAnimator = null)
     {
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
