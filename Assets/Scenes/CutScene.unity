@@ -192,7 +192,7 @@ Transform:
   m_Children:
   - {fileID: 1616515840}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440419258
 GameObject:
@@ -289,7 +289,7 @@ RectTransform:
   - {fileID: 1081733555}
   - {fileID: 1543073294}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -325,7 +325,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &809709542
 GameObject:
@@ -357,7 +357,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &809709545
 MonoBehaviour:
@@ -427,8 +427,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 809709545}
         m_TargetAssemblyTypeName: CutSceneController, Assembly-CSharp
         m_MethodName: DelayActionEnd
@@ -441,6 +439,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 809709545}
         m_TargetAssemblyTypeName: CutSceneController, Assembly-CSharp
         m_MethodName: SetAnimatorDialog
@@ -548,7 +548,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1056548429
 MonoBehaviour:
@@ -6557,7 +6557,7 @@ Transform:
   - {fileID: 3694436004215721718}
   - {fileID: 2138349605743617324}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6822262219997347872
 GameObject:
@@ -6860,7 +6860,7 @@ PrefabInstance:
       objectReference: {fileID: 4090829556967655816}
     - target: {fileID: 7818594883073786773, guid: 5deed91fa0c23aa4cad7cd7f1b3ef883, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7818594883073786773, guid: 5deed91fa0c23aa4cad7cd7f1b3ef883, type: 3}
       propertyPath: m_LocalPosition.x
