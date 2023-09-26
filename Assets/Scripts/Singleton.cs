@@ -22,7 +22,7 @@ public class Singleton<T> : InitMonoBehaviour where T : MonoBehaviour
         }
     }
 
-    protected override void Awake() => MakeSingleton(true);
+    protected override void Awake() => MakeSingleton(false);
 
     public void MakeSingleton(bool destroyOnload)
     {
