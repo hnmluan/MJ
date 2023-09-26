@@ -1,6 +1,6 @@
+using Ink.Runtime;
 using System.Collections.Generic;
 using UnityEngine;
-using Ink.Runtime;
 
 public class DialogueVariables
 {
@@ -9,7 +9,7 @@ public class DialogueVariables
     private Story globalVariablesStory;
     private const string saveVariablesKey = "INK_VARIABLES";
 
-    public DialogueVariables(TextAsset loadGlobalsJSON) 
+    public DialogueVariables(TextAsset loadGlobalsJSON)
     {
         // create the story
         globalVariablesStory = new Story(loadGlobalsJSON.text);
@@ -30,9 +30,9 @@ public class DialogueVariables
         }
     }
 
-    public void SaveVariables() 
+    public void SaveVariables()
     {
-        if (globalVariablesStory != null) 
+        if (globalVariablesStory != null)
         {
             // Load the current state of all of our variables to the globals story
             VariablesToStory(globalVariablesStory);
@@ -42,31 +42,31 @@ public class DialogueVariables
         }
     }
 
-    public void StartListening(Story story) 
+    public void StartListening(Story story)
     {
         // it's important that VariablesToStory is before assigning the listener!
         VariablesToStory(story);
         story.variablesState.variableChangedEvent += VariableChanged;
     }
 
-    public void StopListening(Story story) 
+    public void StopListening(Story story)
     {
         story.variablesState.variableChangedEvent -= VariableChanged;
     }
 
-    private void VariableChanged(string name, Ink.Runtime.Object value) 
+    private void VariableChanged(string name, Ink.Runtime.Object value)
     {
         // only maintain variables that were initialized from the globals ink file
-        if (variables.ContainsKey(name)) 
+        if (variables.ContainsKey(name))
         {
             variables.Remove(name);
             variables.Add(name, value);
         }
     }
 
-    private void VariablesToStory(Story story) 
+    private void VariablesToStory(Story story)
     {
-        foreach(KeyValuePair<string, Ink.Runtime.Object> variable in variables) 
+        foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
         {
             story.variablesState.SetGlobal(variable.Key, variable.Value);
         }

@@ -3,7 +3,6 @@ using UnityEngine;
 public class InputManager : Singleton<InputManager>
 {
     public bool StartInteract() => Input.GetKeyDown(KeyCode.I);
-
     public bool ContinueInteract() => Input.GetKeyDown(KeyCode.Space);
 
     private bool submitPressed = false;
@@ -28,7 +27,5 @@ public class InputManager : Singleton<InputManager>
     public virtual bool OpenArmory() => false;
     public virtual bool OpenDictionary() => false;
     public virtual bool OpenShop() => false;
-    public virtual bool StartConversation() => false;
-    public virtual bool CountinueConversation() => false;
     public virtual bool Close() => false;
 }

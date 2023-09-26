@@ -25,6 +25,7 @@ public class CutSceneController : MonoBehaviour
     private Coroutine _camareSizeCoroutine;
     private Coroutine _delayActionCoroutine;
     private float _cameraChangeSizeSpeed = 10f;
+    private Animator animatorEmote;
 
     private Vector3 Position => movingObject.position;
 
@@ -122,6 +123,11 @@ public class CutSceneController : MonoBehaviour
         _camareSizeCoroutine = StartCoroutine(ChangeCameraSizeCoroutine(size));
     }
 
+    public void SetAnimatorDialog(Animator animator)
+    {
+        animatorEmote = animator;
+    }
+
     private IEnumerator ChangeCameraSizeCoroutine(float size)
     {
         while (Mathf.Abs(virtualCamera.m_Lens.OrthographicSize - size) > Mathf.Epsilon)
@@ -148,7 +154,7 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator PlayDialogueCoroutine(int index)
     {
-        DialogueManager.Instance.EnterDialogueMode(dialoguesStorage[index]);
+        DialogueManager.Instance.EnterDialogueMode(dialoguesStorage[index], animatorEmote);
         yield return new WaitWhile(() => DialogueManager.Instance.dialogueIsPlaying);
         _runningAction--;
     }
@@ -162,7 +168,7 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator SkipCutSceneCoroutine()
     {
-        SetFade(true);
+        SetFade(true);  
         yield return 2f.Wait();
         DOTween.KillAll();
         SceneManager.LoadSceneAsync("Game");
