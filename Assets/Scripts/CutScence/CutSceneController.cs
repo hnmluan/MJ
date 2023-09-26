@@ -36,7 +36,7 @@ public class CutSceneController : MonoBehaviour
             actionQueue[_currentAction++].Invoke();
             yield return new WaitWhile(() => _runningAction > 0);
         }
-        SkipCutScene();
+        //SkipCutScene();
     }
 
     public void SkipCutScene()
