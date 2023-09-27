@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIArmory : BaseUI<UIArmory>
+public class UIArmory : Singleton<UIArmory>
 {
     [Header("UI Armory")]
 
@@ -20,6 +20,7 @@ public class UIArmory : BaseUI<UIArmory>
 
     protected override void OnEnable()
     {
+        ShowWeapons();
         ClearFocusItem();
         currentItemArmory = -1;
     }
@@ -35,12 +36,6 @@ public class UIArmory : BaseUI<UIArmory>
         if (this.content != null) return;
         this.content = transform.Find("Scroll View").Find("Viewport").Find("Content");
         Debug.Log(transform.name + ": LoadContent", gameObject);
-    }
-
-    public override void Open()
-    {
-        base.Open();
-        ShowWeapons();
     }
 
     public void SetArmorySort(ArmorySort armorySort)

@@ -1,3 +1,3 @@
-public class UIPause : BaseUI<UIPause>
+public class UIPause : InitMonoBehaviour
 {
 }

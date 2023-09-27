@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class UIInventory : BaseUI<UIInventory>
+public class UIInventory : Singleton<UIInventory>
 {
     [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
 
@@ -15,11 +15,6 @@ public class UIInventory : BaseUI<UIInventory>
     {
         ClearFocusItem();
         currentItemInventory = -1;
-    }
-
-    public override void Open()
-    {
-        base.Open();
         ShowItems();
     }
 

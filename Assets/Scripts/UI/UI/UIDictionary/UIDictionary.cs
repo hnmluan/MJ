@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIDictionary : BaseUI<UIDictionary>
+public class UIDictionary : Singleton<UIDictionary>
 {
     [Header("UI Dictionary")]
 

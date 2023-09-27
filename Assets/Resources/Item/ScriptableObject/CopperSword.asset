@@ -27,4 +27,5 @@ MonoBehaviour:
       type: {class: SellableItemData, ns: , asm: Assembly-CSharp}
       data:
         name: SellableItemData
+        KeyActionLocalization: 
         price: 12

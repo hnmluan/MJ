@@ -10,6 +10,8 @@ public class ItemDataSO : ScriptableObject
 
     public ItemType itemType = ItemType.NoType;
 
+    public ItemRarity itemRarity = ItemRarity.NoRarity;
+
     public string keyName = "no-name";
 
     public Sprite itemSprite;
@@ -18,19 +20,19 @@ public class ItemDataSO : ScriptableObject
 
     public int defaultMaxStack = 10;
 
-    [field: SerializeReference] public List<ItemData> datas;
+    [field: SerializeReference] public List<ActionItemData> actionItemDatas;
 
-    public void AddData(ItemData data)
+    public void AddData(ActionItemData data)
     {
-        if (datas.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
+        if (actionItemDatas.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
             return;
 
-        datas.Add(data);
+        actionItemDatas.Add(data);
     }
 
-    public bool IsExistItemData<T>() where T : ItemData => GetItemData<T>() != null;
+    public bool IsExistItemData<T>() where T : ActionItemData => GetItemData<T>() != null;
 
-    public T GetItemData<T>() where T : ItemData => datas.OfType<T>().FirstOrDefault();
+    public T GetItemData<T>() where T : ActionItemData => actionItemDatas.OfType<T>().FirstOrDefault();
 
     public static ItemDataSO FindByItemCode(ItemCode itemCode)
     {
@@ -57,7 +59,7 @@ public class ItemDataSO : ScriptableObject
     public static List<ItemDataSO> GetSellableItemsSO()
     {
         ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/ScriptableObject");
-        return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is BuyableItemData)).ToList();
+        return allItemDataSO.Where(itemDataSO => itemDataSO.actionItemDatas.Any(data => data is BuyItemDataAction)).ToList();
     }
 }
 

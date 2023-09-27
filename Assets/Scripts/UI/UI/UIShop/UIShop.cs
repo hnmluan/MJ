@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIShop : BaseUI<UIShop>
+public class UIShop : Singleton<UIShop>
 {
     [SerializeField] private DateTime lastTimeRestItem;
     public DateTime TimelineToRestItem => lastTimeRestItem;

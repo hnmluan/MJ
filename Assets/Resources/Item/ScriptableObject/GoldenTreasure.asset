@@ -14,11 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 4
   itemType: 3
+  itemRarity: 5
   keyName: Item.GoldenTreasure
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
   keyDescription: Item.Description
   defaultMaxStack: 10
-  datas: []
+  actionItemDatas:
+  - rid: 4878268729143590913
+  - rid: 4878268729143590914
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4878268729143590913
+      type: {class: SellableItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: SellableItemData
+        KeyActionLocalization: 
+        price: 0
+    - rid: 4878268729143590914
+      type: {class: KeyItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: KeyItemData
+        KeyActionLocalization: 
