@@ -4,6 +4,10 @@ using UnityEngine;
 
 public static class FileNameData
 {
+    public const string Equipments = "Equipment";
+    public const string Abilities = "Ability";
+    public const string Inventory = "Inventory";
+
     public readonly static string SavePath = Application.persistentDataPath;
 
     private static string _currentUser = "Test";
@@ -20,10 +24,7 @@ public static class FileNameData
         }
     }
 
-    public static void SetUser(string username)
-    {
-        CurrentUser = username;
-    }
+    public static void SetUser(string username) => CurrentUser = username;
 
     public static string[] GetAllUser()
     {
@@ -76,33 +77,14 @@ public static class FileNameData
     }
 
 
-    public const string Equiments = "Equipment";
-    public const string Abilities = "Ability";
-    public const string Inventory = "Inventory";
+    public static string GetFullPath(string filename) => Path.Combine(SavePath, CurrentUser, filename);
 
-    public static string GetFullPath(string filename)
-    {
-        return Path.Combine(SavePath, CurrentUser, filename);
-    }
+    public static string GetEffectResourcePath(string effectName) => $"Effects/{effectName}";
 
-    public static string GetEffectResourcePath(string effectName)
-    {
-        return $"Effects/{effectName}";
-    }
+    public static string GetRuneResourcePath(string runeName) => $"Runes/{runeName}";
 
-    public static string GetRuneResourcePath(string runeName)
-    {
-        return $"Runes/{runeName}";
-    }
+    public static string GetEquimentResourcePath(string equipmentName) => $"Equipments/{equipmentName}";
 
-    public static string GetEquimentResourcePath(string equipmentName)
-    {
-        return $"Equipments/{equipmentName}";
-    }
-
-    public static string GetConsumableResourcePath(string consumableName)
-    {
-        return $"ConsumableItems/{consumableName}";
-    }
+    public static string GetConsumableResourcePath(string consumableName) => $"ConsumableItems/{consumableName}";
 }
 
