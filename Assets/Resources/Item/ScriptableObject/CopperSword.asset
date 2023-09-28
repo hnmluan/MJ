@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 3
   itemType: 2
+  itemRarity: 0
   keyName: Item.CopperSword
   itemSprite: {fileID: 21300000, guid: f36cfb5308a825740b6ffb1e2faae926, type: 3}
   keyDescription: Item.Description
   defaultMaxStack: 10
-  datas:
-  - rid: 576510825429467211
+  actionItemDatas:
+  - rid: 4878268754556616708
   references:
     version: 2
     RefIds:
-    - rid: 576510825429467211
-      type: {class: SellableItemData, ns: , asm: Assembly-CSharp}
+    - rid: 4878268754556616708
+      type: {class: DropItemActionData, ns: , asm: Assembly-CSharp}
       data:
-        name: SellableItemData
-        KeyActionLocalization: 
-        price: 12
+        name: DropItemActionData
+        keyActionLocalization: Drop
+        price: 100

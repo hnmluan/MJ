@@ -20,13 +20,13 @@ MonoBehaviour:
   keyDescription: Item.Description
   defaultMaxStack: 10
   actionItemDatas:
-  - rid: 4878268731767390208
+  - rid: 4878268754556616706
   references:
     version: 2
     RefIds:
-    - rid: 4878268731767390208
+    - rid: 4878268754556616706
       type: {class: KeyItemActionData, ns: , asm: Assembly-CSharp}
       data:
         name: KeyItemActionData
-        KeyActionLocalization: 
+        keyActionLocalization: Use
         treasure: 7

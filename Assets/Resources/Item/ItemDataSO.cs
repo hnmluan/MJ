@@ -44,23 +44,6 @@ public class ItemDataSO : ScriptableObject
         }
         return null;
     }
-
-    public static ItemDataSO GetRandomSellableItemSO()
-    {
-        if (GetSellableItemsSO().Count == 0) return null;
-
-        System.Random random = new System.Random();
-
-        int randomIndex = random.Next(0, GetSellableItemsSO().Count);
-
-        return GetSellableItemsSO()[randomIndex];
-    }
-
-    public static List<ItemDataSO> GetSellableItemsSO()
-    {
-        ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/ScriptableObject");
-        return allItemDataSO.Where(itemDataSO => itemDataSO.actionItemDatas.Any(data => data is NoDefineItemActionData)).ToList();
-    }
 }
 
 

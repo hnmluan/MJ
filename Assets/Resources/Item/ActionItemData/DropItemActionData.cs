@@ -12,5 +12,5 @@ public class DropItemActionData : ItemActionData
         UITextSpawner.Instance.SpawnUITextWithMousePosition("X " + price.ToString());
     }
 
-    protected override void SetKeyActionLocalization() => this.KeyActionLocalization = "Drop";
+    protected override void SetKeyActionLocalization() => this.keyActionLocalization = "Drop";
 }

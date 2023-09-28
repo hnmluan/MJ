@@ -1,7 +1,12 @@
 ﻿using Assets.SimpleLocalization;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+public enum InventorySort
+{
+    NoSort = 0,
+    ByName = 1,
+    ByQuantity = 2,
+}
 
 public class UIInventory : Singleton<UIInventory>
 {
@@ -9,15 +14,13 @@ public class UIInventory : Singleton<UIInventory>
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
-    [SerializeField] public int currentItemInventory = -1;
+    [SerializeField] protected Transform slots;
 
+    [SerializeField] protected ItemSlotInventory itemSlotPrefab;
 
-    protected override void OnEnable()
-    {
-        ClearFocusItem();
-        currentItemInventory = -1;
-        ShowItems();
-    }
+    [SerializeField] protected DetailInventory detailBoxInventory;
+
+    protected override void OnEnable() => ShowItems();
 
     public void SetInventorySort(InventorySort inventorySort)
     {
@@ -31,41 +34,19 @@ public class UIInventory : Singleton<UIInventory>
         this.ShowItems();
     }
 
-    public virtual void SetCurrentItemInventory(int currentItemInventory) => this.currentItemInventory = currentItemInventory;
-
-    public void ClearFocusItem()
+    public List<ItemSlotInventory> GetListUIItemInventory()
     {
-        foreach (UIItemInventory item in GetListUIItemInventory()) item.Focus.gameObject.SetActive(false);
-    }
+        List<ItemSlotInventory> list = new List<ItemSlotInventory>();
 
-    public void KeepFocusInCurrentItemInventory()
-    {
-        ClearFocusItem();
-        try
-        {
-            if (currentItemInventory == -1) return;
-            GetListUIItemInventory()[currentItemInventory].Focus.gameObject.SetActive(true);
-            UIInvDetail.Instance.SetUIInvDetail(GetListUIItemInventory()[currentItemInventory].ItemInventory);
-        }
-        catch (System.Exception)
-        {
-            currentItemInventory = -1;
-        }
-    }
-
-    public List<UIItemInventory> GetListUIItemInventory()
-    {
-        List<UIItemInventory> list = new List<UIItemInventory>();
-
-        int itemCount = UIInventoryCtrl.Instance.Content.childCount;
+        int itemCount = slots.childCount;
 
         for (int i = 0; i < itemCount; i++)
         {
-            Transform currentItem = UIInventoryCtrl.Instance.Content.GetChild(i);
+            Transform currentItem = slots.GetChild(i);
 
             if (currentItem.gameObject.activeSelf == true)
             {
-                UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
+                ItemSlotInventory currentUIItem = currentItem.GetComponent<ItemSlotInventory>();
 
                 list.Add(currentUIItem);
             }
@@ -84,35 +65,32 @@ public class UIInventory : Singleton<UIInventory>
 
     public virtual void ShowItems()
     {
-        this.ClearItems();
+        ClearItemSlots();
 
         List<ItemInventory> items = Inventory.Instance.Items;
 
-        items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
-
-        foreach (ItemInventory item in items) UIInvItemSpawner.Instance.SpawnItem(item);
+        foreach (ItemInventory item in items)
+        {
+            GetItemSlotInactive().ShowItem(item);
+        }
 
         this.SortItems();
-
-        KeepFocusInCurrentItemInventory();
     }
-
-    protected virtual void ClearItems() => UIInvItemSpawner.Instance.ClearItems();
 
     protected virtual void SortItems()
     {
         if (this.inventorySort == InventorySort.NoSort) return;
 
-        int itemCount = UIInventoryCtrl.Instance.Content.childCount;
+        int itemCount = slots.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currentItem = UIInventoryCtrl.Instance.Content.GetChild(i);
-            Transform nextItem = UIInventoryCtrl.Instance.Content.GetChild(i + 1);
+            Transform currentItem = slots.GetChild(i);
+            Transform nextItem = slots.GetChild(i + 1);
 
-            UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
-            UIItemInventory nextUIItem = nextItem.GetComponent<UIItemInventory>();
+            ItemSlotInventory currentUIItem = currentItem.GetComponent<ItemSlotInventory>();
+            ItemSlotInventory nextUIItem = nextItem.GetComponent<ItemSlotInventory>();
 
             ItemDataSO currentProfile = currentUIItem.ItemInventory.itemProfile;
             ItemDataSO nextProfile = nextUIItem.ItemInventory.itemProfile;
@@ -177,4 +155,32 @@ public class UIInventory : Singleton<UIInventory>
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
     }
+
+    protected void ClearItemSlots()
+    {
+        foreach (Transform child in slots)
+        {
+            child.gameObject.SetActive(false);
+        }
+    }
+
+    protected ItemSlotInventory GetItemSlotInactive()
+    {
+        foreach (Transform child in slots)
+        {
+            if (child.gameObject.activeSelf == false)
+            {
+                child.gameObject.SetActive(true);
+                return child.GetComponent<ItemSlotInventory>();
+            }
+        }
+
+        ItemSlotInventory newItemSlotInventory = Instantiate(itemSlotPrefab, slots);
+        newItemSlotInventory.gameObject.SetActive(true);
+        newItemSlotInventory.transform.localScale = Vector3.one;
+
+        return newItemSlotInventory;
+    }
+
+    public void ShowInforItem(ItemInventory itemInventory) => detailBoxInventory.SetBox(itemInventory);
 }

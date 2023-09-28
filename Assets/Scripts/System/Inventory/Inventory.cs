@@ -69,11 +69,11 @@ public class Inventory : Singleton<Inventory>
         return true;
     }
 
-    protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCoutFull();
+    protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCountFull();
 
     public virtual bool IsInventorySlotFull() => GetCurrentSlot() >= this.maxSlot;
 
-    public virtual bool IsInventoryCoutFull() => GetCurrentItemCount() >= this.maxItemCout;
+    public virtual bool IsInventoryCountFull() => GetCurrentItemCount() >= this.maxItemCout;
 
     public virtual int GetCurrentSlot() => this.items.Count;
 

@@ -26,11 +26,7 @@ public class UIShop : Singleton<UIShop>
 
     public virtual void ResetItems()
     {
-        if (ItemDataSO.GetSellableItemsSO().Count == 0) return;
-
-        this.ClearItems();
-
-        foreach (ItemShop item in GetRandomNumberList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
+        //UPDATE LOGIC
     }
 
     protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
@@ -62,12 +58,13 @@ public class UIShop : Singleton<UIShop>
 
     public static List<ItemShop> GetRandomNumberList(int quantity)
     {
+        //UPDATE LOGIC
         List<ItemShop> listItemShop = new List<ItemShop>();
 
         for (int i = 0; i < quantity; i++)
         {
-            ItemShop randomItemShop = ItemShop.GetRandomSellableItem();
-            listItemShop.Add(randomItemShop);
+            //ItemShop randomItemShop = ItemShop.GetRandomSellableItem();
+            //listItemShop.Add(randomItemShop);
         }
 
         return listItemShop;

@@ -35,5 +35,5 @@ public class KeyItemActionData : ItemActionData
 
     private bool IsHaveTreasureItemActionData() => ItemDataSO.FindByItemCode(treasure).actionItemDatas.OfType<TreasureItemActionData>().FirstOrDefault() != null;
 
-    protected override void SetKeyActionLocalization() => this.KeyActionLocalization = "Use";
+    protected override void SetKeyActionLocalization() => this.keyActionLocalization = "Use";
 }

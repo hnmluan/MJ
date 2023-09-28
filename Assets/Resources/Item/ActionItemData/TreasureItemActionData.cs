@@ -70,8 +70,7 @@ public class TreasureItemActionData : ItemActionData
         UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(itemDropRates);
     }
 
-
-    protected override void SetKeyActionLocalization() => this.KeyActionLocalization = "Use";
+    protected override void SetKeyActionLocalization() => this.keyActionLocalization = "Use";
 
     public override void Action() => this.OpenTreasure();
 }

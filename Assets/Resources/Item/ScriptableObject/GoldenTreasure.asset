@@ -20,19 +20,13 @@ MonoBehaviour:
   keyDescription: Item.Description
   defaultMaxStack: 10
   actionItemDatas:
-  - rid: 4878268729143590913
-  - rid: 4878268729143590914
+  - rid: 4878268754556616707
   references:
     version: 2
     RefIds:
-    - rid: 4878268729143590913
-      type: {class: SellableItemData, ns: , asm: Assembly-CSharp}
+    - rid: 4878268754556616707
+      type: {class: DropItemActionData, ns: , asm: Assembly-CSharp}
       data:
-        name: SellableItemData
-        KeyActionLocalization: 
-        price: 0
-    - rid: 4878268729143590914
-      type: {class: KeyItemData, ns: , asm: Assembly-CSharp}
-      data:
-        name: KeyItemData
-        KeyActionLocalization: 
+        name: DropItemActionData
+        keyActionLocalization: Drop
+        price: 10
