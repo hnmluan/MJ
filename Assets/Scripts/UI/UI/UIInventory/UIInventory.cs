@@ -11,6 +11,7 @@ public class UIInventory : Singleton<UIInventory>
 
     [SerializeField] public int currentItemInventory = -1;
 
+
     protected override void OnEnable()
     {
         ClearFocusItem();

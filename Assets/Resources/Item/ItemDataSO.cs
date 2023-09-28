@@ -20,9 +20,9 @@ public class ItemDataSO : ScriptableObject
 
     public int defaultMaxStack = 10;
 
-    [field: SerializeReference] public List<ActionItemData> actionItemDatas;
+    [field: SerializeReference] public List<ItemActionData> actionItemDatas;
 
-    public void AddData(ActionItemData data)
+    public void AddData(ItemActionData data)
     {
         if (actionItemDatas.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
             return;
@@ -30,9 +30,9 @@ public class ItemDataSO : ScriptableObject
         actionItemDatas.Add(data);
     }
 
-    public bool IsExistItemData<T>() where T : ActionItemData => GetItemData<T>() != null;
+    public bool IsExistItemData<T>() where T : ItemActionData => GetItemData<T>() != null;
 
-    public T GetItemData<T>() where T : ActionItemData => actionItemDatas.OfType<T>().FirstOrDefault();
+    public T GetItemData<T>() where T : ItemActionData => actionItemDatas.OfType<T>().FirstOrDefault();
 
     public static ItemDataSO FindByItemCode(ItemCode itemCode)
     {
@@ -59,7 +59,7 @@ public class ItemDataSO : ScriptableObject
     public static List<ItemDataSO> GetSellableItemsSO()
     {
         ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/ScriptableObject");
-        return allItemDataSO.Where(itemDataSO => itemDataSO.actionItemDatas.Any(data => data is BuyItemDataAction)).ToList();
+        return allItemDataSO.Where(itemDataSO => itemDataSO.actionItemDatas.Any(data => data is NoDefineItemActionData)).ToList();
     }
 }
 

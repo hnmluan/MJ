@@ -47,28 +47,28 @@ public class UIInvDetail : UIInvDetailAbstract
 
     public virtual void UseItem()
     {
-        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
+        itemInventory.itemProfile.GetItemData<TreasureItemActionData>().OpenTreasure(1);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
         UIInventory.Instance.ShowItems();
     }
 
     public virtual void UseAllItem()
     {
-        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
+        itemInventory.itemProfile.GetItemData<TreasureItemActionData>().OpenTreasure(itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         UIInventory.Instance.ShowItems();
     }
 
     public virtual void SellItem()
     {
-        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
+        /* itemInventory.itemProfile.GetItemData<DropItemActionData>().SellItem(1);*/
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
         UIInventory.Instance.ShowItems();
     }
 
     public virtual void SellAllItem()
     {
-        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
+        /* itemInventory.itemProfile.GetItemData<DropItemActionData>().SellItem(itemInventory.itemCount);*/
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
         UIInventory.Instance.ShowItems();
     }
@@ -96,7 +96,7 @@ public class UIInvDetail : UIInvDetailAbstract
         uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
     }
 
-    private bool IsUsable() => itemInventory.itemProfile.IsExistItemData<TreasureItemData>();
+    private bool IsUsable() => itemInventory.itemProfile.IsExistItemData<TreasureItemActionData>();
 
-    private bool IsSellable() => itemInventory.itemProfile.IsExistItemData<SellableItemData>();
+    private bool IsSellable() => itemInventory.itemProfile.IsExistItemData<DropItemActionData>();
 }

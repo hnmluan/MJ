@@ -14,11 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 8
   itemType: 1
+  itemRarity: 0
   keyName: Item.SilverKey
   itemSprite: {fileID: 21300000, guid: 49b1074ef401a3f478b3f297bd7dc536, type: 3}
   keyDescription: Item.Description
   defaultMaxStack: 10
-  datas: []
+  actionItemDatas:
+  - rid: 4878268731767390208
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4878268731767390208
+      type: {class: KeyItemActionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: KeyItemActionData
+        KeyActionLocalization: 
+        treasure: 7

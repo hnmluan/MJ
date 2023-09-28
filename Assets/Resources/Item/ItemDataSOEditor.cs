@@ -28,7 +28,7 @@ public class ItemDataSOEditor : Editor
             {
                 if (GUILayout.Button(dataCompType.Name))
                 {
-                    var comp = Activator.CreateInstance(dataCompType) as ActionItemData;
+                    var comp = Activator.CreateInstance(dataCompType) as ItemActionData;
 
                     if (comp == null)
                         return;
@@ -47,7 +47,7 @@ public class ItemDataSOEditor : Editor
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
         var types = assemblies.SelectMany(assembly => assembly.GetTypes());
         var filteredTypes = types.Where(
-            type => type.IsSubclassOf(typeof(ActionItemData)) && !type.ContainsGenericParameters && type.IsClass
+            type => type.IsSubclassOf(typeof(ItemActionData)) && !type.ContainsGenericParameters && type.IsClass
         );
         dataCompTypes = filteredTypes.ToList();
     }
