@@ -18,7 +18,15 @@ MonoBehaviour:
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
   keyDescription: Item.Description
   defaultMaxStack: 10
-  datas: []
+  datas:
+  - rid: 7794920710231293952
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7794920710231293952
+      type: {class: TreasureItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: TreasureItemData
+        listItemDrop:
+        - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+          dropRate: 100000

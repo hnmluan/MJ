@@ -14,15 +14,15 @@ public class Inventory : Singleton<Inventory>
 
     protected override void Start()
     {
-        /*        this.AddItem(ItemCode.IronOre, 100);
-                this.AddItem(ItemCode.GoldOre, 100);
-                this.AddItem(ItemCode.CopperSword, 100);
-                this.AddItem(ItemCode.GoldenTreasure, 100);
-                this.AddItem(ItemCode.GoldCup, 100);
-                this.AddItem(ItemCode.SilverCup, 100);
-                this.AddItem(ItemCode.SilverTreasure, 100);
-                this.AddItem(ItemCode.SilverKey, 100);
-                this.AddItem(ItemCode.GoldKey, 100);*/
+        this.AddItem(ItemCode.IronOre, 100);
+        this.AddItem(ItemCode.GoldOre, 100);
+        this.AddItem(ItemCode.CopperSword, 100);
+        this.AddItem(ItemCode.GoldenTreasure, 100);
+        this.AddItem(ItemCode.GoldCup, 100);
+        this.AddItem(ItemCode.SilverCup, 100);
+        this.AddItem(ItemCode.SilverTreasure, 100);
+        this.AddItem(ItemCode.SilverKey, 100);
+        this.AddItem(ItemCode.GoldKey, 100);
     }
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
