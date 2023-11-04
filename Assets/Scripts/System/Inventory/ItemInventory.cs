@@ -1,11 +1,15 @@
 using System;
+
+
 [Serializable]
 public class ItemInventory
 {
     public string itemId;
-    public ItemDataSO itemProfile;
+    public ItemCode itemCode;
     public int itemCount = 0;
     public int maxStack = 30;
+
+    public ItemDataSO itemProfile() => ItemDataSO.FindByItemCode(this.itemCode);
 
     public static string RandomId() => RandomStringGenerator.Generate(27);
 
@@ -14,7 +18,7 @@ public class ItemInventory
         ItemInventory item = new ItemInventory
         {
             itemId = ItemInventory.RandomId(),
-            itemProfile = this.itemProfile,
+            itemCode = this.itemCode,
             itemCount = this.itemCount,
         };
         return item;

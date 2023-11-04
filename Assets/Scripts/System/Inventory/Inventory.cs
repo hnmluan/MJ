@@ -1,33 +1,47 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[Serializable]
 public class Inventory : Singleton<Inventory>
 {
-    [SerializeField] private int maxSlot = 100;
-    public int MaxSlot => maxSlot;
+    [SerializeField] private int maxSlot;
+    public int MaxSlot { get => maxSlot; set => maxSlot = value; }
 
-    [SerializeField] private int maxItemCout = 100;
-    public int MaxItemCout => maxItemCout;
+    [SerializeField] private int maxItemCount;
+    public int MaxItemCount { get => maxItemCount; set => maxItemCount = value; }
 
-    [SerializeField] protected List<ItemInventory> items;
-    public List<ItemInventory> Items => items;
+    [SerializeField] private List<ItemInventory> items;
+    public List<ItemInventory> Items { get => items; set => items = value; }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        this.AddItem(ItemCode.IronOre, 100);
-        this.AddItem(ItemCode.GoldOre, 100);
-        this.AddItem(ItemCode.CopperSword, 100);
-        this.AddItem(ItemCode.GoldenTreasure, 100);
-        this.AddItem(ItemCode.GoldCup, 100);
-        this.AddItem(ItemCode.SilverCup, 100);
-        this.AddItem(ItemCode.SilverTreasure, 100);
-        this.AddItem(ItemCode.SilverKey, 100);
-        this.AddItem(ItemCode.GoldKey, 100);
+        base.Awake();
+        this.LoadData();
     }
+
+    public void LoadData()
+    {
+        Inventory inventoryData = SaveLoadHandler.LoadFromFile<Inventory>(FileNameData.Inventory);
+
+        if (inventoryData == null)
+        {
+            maxSlot = 9999;
+            maxItemCount = 9999;
+            return;
+        };
+
+        this.MaxSlot = inventoryData.MaxSlot;
+        this.MaxItemCount = inventoryData.MaxItemCount;
+        this.Items = inventoryData.Items;
+    }
+
+    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Inventory, this);
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
-        if (GetCurrentItemCount() + addCount > maxItemCout) return false;
+        if (GetCurrentItemCount() + addCount > MaxItemCount) return false;
 
         ItemDataSO itemProfile = this.GetItemProfile(itemCode);
 
@@ -37,7 +51,7 @@ public class Inventory : Singleton<Inventory>
         int addMore;
         ItemInventory itemExist;
 
-        for (int i = 0; i < this.maxSlot; i++)
+        for (int i = 0; i < this.MaxSlot; i++)
         {
             itemExist = this.GetItemNotFullStack(itemCode);
             if (itemExist == null)
@@ -45,7 +59,7 @@ public class Inventory : Singleton<Inventory>
                 if (this.IsInventoryFull()) return false;
 
                 itemExist = this.CreateEmptyItem(itemProfile);
-                this.items.Add(itemExist);
+                this.Items.Add(itemExist);
             }
 
             newCount = itemExist.itemCount + addRemain;
@@ -65,22 +79,22 @@ public class Inventory : Singleton<Inventory>
             itemExist.itemCount = newCount;
             if (addRemain < 1) break;
         }
-
+        SaveData();
         return true;
     }
 
-    protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCoutFull();
+    protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCountFull();
 
-    public virtual bool IsInventorySlotFull() => GetCurrentSlot() >= this.maxSlot;
+    public virtual bool IsInventorySlotFull() => GetCurrentSlot() >= this.MaxSlot;
 
-    public virtual bool IsInventoryCoutFull() => GetCurrentItemCount() >= this.maxItemCout;
+    public virtual bool IsInventoryCountFull() => GetCurrentItemCount() >= this.MaxItemCount;
 
-    public virtual int GetCurrentSlot() => this.items.Count;
+    public virtual int GetCurrentSlot() => this.Items.Count;
 
     public virtual int GetCurrentItemCount()
     {
         int itemCout = 0;
-        foreach (ItemInventory item in items) itemCout += item.itemCount;
+        foreach (ItemInventory item in Items) itemCout += item.itemCount;
         return itemCout;
     }
 
@@ -103,7 +117,7 @@ public class Inventory : Singleton<Inventory>
 
     protected virtual ItemInventory GetItemNotFullStack(ItemCode itemCode)
     {
-        foreach (ItemInventory itemInventory in this.items)
+        foreach (ItemInventory itemInventory in this.Items)
         {
             if (itemCode != itemInventory.itemProfile.itemCode) continue;
             if (this.IsFullStack(itemInventory)) continue;
@@ -142,7 +156,7 @@ public class Inventory : Singleton<Inventory>
     public virtual int ItemTotalCount(ItemCode itemCode)
     {
         int totalCount = 0;
-        foreach (ItemInventory itemInventory in this.items)
+        foreach (ItemInventory itemInventory in this.Items)
         {
             if (itemInventory.itemProfile.itemCode != itemCode) continue;
             totalCount += itemInventory.itemCount;
@@ -155,11 +169,11 @@ public class Inventory : Singleton<Inventory>
     {
         ItemInventory itemInventory;
         int deduct;
-        for (int i = this.items.Count - 1; i >= 0; i--)
+        for (int i = this.Items.Count - 1; i >= 0; i--)
         {
             if (deductCount <= 0) break;
 
-            itemInventory = this.items[i];
+            itemInventory = this.Items[i];
             if (itemInventory.itemProfile.itemCode != itemCode) continue;
 
             if (deductCount > itemInventory.itemCount)
@@ -176,17 +190,17 @@ public class Inventory : Singleton<Inventory>
             itemInventory.itemCount -= deduct;
         }
         RemoveEmptySlot();
+        SaveData();
     }
 
-    public virtual void RemoveEmptySlot() => items.RemoveAll(item => item.itemCount == 0);
-
+    public virtual void RemoveEmptySlot() => Items.RemoveAll(item => item.itemCount == 0);
 
     public virtual int GetQuantity(ItemCode itemCode)
     {
         int quantity = 0;
-        for (int i = 0; i < this.items.Count; i++)
+        for (int i = 0; i < this.Items.Count; i++)
         {
-            if (items[i].itemProfile.itemCode == itemCode) quantity += items[i].itemCount;
+            if (Items[i].itemProfile.itemCode == itemCode) quantity += Items[i].itemCount;
         }
         return quantity;
     }
