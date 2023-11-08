@@ -23,21 +23,23 @@ public class Inventory : Singleton<Inventory>
 
     public void LoadData()
     {
-        Inventory inventoryData = SaveLoadHandler.LoadFromFile<Inventory>(FileNameData.Inventory);
+        InventoryData inventoryData = SaveLoadHandler.LoadFromFile<InventoryData>(FileNameData.Inventory);
 
         if (inventoryData == null)
         {
-            maxSlot = 9999;
-            maxItemCount = 9999;
+            this.maxSlot = 10000;
+            this.maxItemCount = 10000;
+            AddItem(ItemCode.CopperSword, 100);
             return;
         };
 
-        this.MaxSlot = inventoryData.MaxSlot;
-        this.MaxItemCount = inventoryData.MaxItemCount;
-        this.Items = inventoryData.Items;
+        this.MaxSlot = inventoryData.maxSlot;
+        this.MaxItemCount = inventoryData.maxItemCount;
+
+        foreach (ItemInventoryData item in inventoryData.items) this.items.Add(item.ToItemInventory());
     }
 
-    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Inventory, this);
+    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Inventory, new InventoryData());
 
     public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
@@ -139,7 +141,6 @@ public class Inventory : Singleton<Inventory>
     {
         ItemInventory itemInventory = new ItemInventory
         {
-            itemId = ItemInventory.RandomId(),
             itemProfile = itemProfile,
             maxStack = itemProfile.defaultMaxStack
         };
