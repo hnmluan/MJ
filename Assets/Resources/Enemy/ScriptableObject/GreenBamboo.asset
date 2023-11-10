@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac586ab2df022664da372860209e9332, type: 3}
   m_Name: GreenBamboo
   m_EditorClassIdentifier: 
-  itemCode: 1
-  itemType: 1
+  enemyCode: 1
+  enemyType: 1
   keyName: Enemy.GreenBamboo
   keyDescription: Enemy.Description.GreenBamboo
   portrait: {fileID: 21300000, guid: 11cbaeffab8299c448b48955cc7d85b1, type: 3}

@@ -9,6 +9,12 @@ public class Weapon
 
     public int level;
 
+    public Weapon(WeaponDataSO weaponProfile, int level)
+    {
+        this.weaponProfile = weaponProfile;
+        this.level = level;
+    }
+
     public bool CanUpgrade()
     {
         if (level >= weaponProfile.levels.Count) return false;
@@ -41,7 +47,7 @@ public class Weapon
         {
             Inventory.Instance.AddItem(recipeDecompose.itemProfile.itemCode, recipeDecompose.itemCount);
         }
-        Armory.Instance.Weapons.Remove(this);
+        Armory.Instance.DeductItem(this);
     }
 
     public List<WeaponRecipeIngredient> GetRecipeDecompose()

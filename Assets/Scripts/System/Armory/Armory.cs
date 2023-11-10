@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[Serializable]
 public class Armory : Singleton<Armory>
 {
     [SerializeField] protected List<Weapon> weapons;
@@ -12,34 +15,45 @@ public class Armory : Singleton<Armory>
 
     [SerializeField] public float ratioDecompose;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        AddItem(WeaponCode.Bow, 3, 3);
-        AddItem(WeaponCode.Lance, 3, 1);
-        AddItem(WeaponCode.Lance, 3, 2);
-        AddItem(WeaponCode.Bow, 3, 3);
-        AddItem(WeaponCode.Bow, 3, 1);
+        base.Awake();
+        LoadData();
     }
+
+    public void LoadData()
+    {
+        ArmoryData armoryData = SaveLoadHandler.LoadFromFile<ArmoryData>(FileNameData.Armory);
+
+        if (armoryData == null)
+        {
+            AddItem(WeaponCode.Bow, 3, 3);
+            AddItem(WeaponCode.Lance, 3, 1);
+            AddItem(WeaponCode.Lance, 3, 2);
+            AddItem(WeaponCode.Bow, 3, 3);
+            AddItem(WeaponCode.Bow, 3, 1);
+            SaveData();
+            return;
+        }
+
+        weapons = armoryData.weapons.Select(item => new Weapon(WeaponDataSO.FindByName(item.name), item.level)).ToList();
+    }
+
+    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Armory, new ArmoryData(this));
 
     public virtual void AddItem(WeaponCode weaponCode, int addCount, int level)
     {
         for (int i = 0; i < addCount; i++)
         {
-            Weapon weapon = new Weapon();
-            weapon.weaponProfile = GetWeaponProfile(weaponCode);
-            weapon.level = level;
+            Weapon weapon = new Weapon(WeaponDataSO.FindByItemCode(weaponCode), level);
             weapons.Add(weapon);
         }
+        SaveData();
     }
 
-    protected virtual WeaponDataSO GetWeaponProfile(WeaponCode weaponCode)
+    public virtual void DeductItem(Weapon weapon)
     {
-        var profiles = Resources.LoadAll("DamageObject/ScriptableObject/", typeof(WeaponDataSO));
-        foreach (WeaponDataSO profile in profiles)
-        {
-            if (profile.damageObjectCode != weaponCode) continue;
-            return profile;
-        }
-        return null;
+        this.weapons.Remove(weapon);
+        SaveData();
     }
 }
