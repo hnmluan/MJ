@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,4 +26,22 @@ public class WeaponDataSO : ScriptableObject
     public float attackRate;
 
     public List<WeaponLevel> levels;
+
+    public static WeaponDataSO FindByItemCode(WeaponCode weaponCode)
+    {
+        var profiles = Resources.LoadAll("DamageObject/ScriptableObject", typeof(WeaponDataSO));
+        foreach (WeaponDataSO profile in profiles)
+        {
+            if (profile.damageObjectCode != weaponCode) continue;
+            return profile;
+        }
+        return null;
+    }
+
+    public static WeaponDataSO FindByName(string name)
+    {
+        WeaponCode weaponCode;
+        Enum.TryParse(name, out weaponCode);
+        return FindByItemCode(weaponCode);
+    }
 }

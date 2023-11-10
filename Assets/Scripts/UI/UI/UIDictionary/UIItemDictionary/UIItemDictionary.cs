@@ -109,9 +109,9 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     }
 
     private bool CheckNewItem() =>
-        Dictionary.Instance.NpcsAvailableButNotSeen.Contains(itemDictionary as CharacterDataSO)
-            || Dictionary.Instance.EnemiesAvailableButNotSeen.Contains(itemDictionary as EnemyDataSO)
-            || Dictionary.Instance.DamageObjectSOsAvailableButNotSeen.Contains(itemDictionary as WeaponDataSO);
+        Dictionary.Instance.NpcSOsAvailNotSeen.Contains(itemDictionary as CharacterDataSO)
+            || Dictionary.Instance.EnemySOsAvailNotSeen.Contains(itemDictionary as EnemyDataSO)
+            || Dictionary.Instance.WeaponSOsAvailNotSeen.Contains(itemDictionary as WeaponDataSO);
 
     public void OnAddItem()
     {

@@ -1,23 +1,43 @@
+using System;
+using UnityEngine;
+
 public enum CharacterCode
 {
-    NoActor = 0,
-    AuCo = 1,
-    Doi = 2,
-    Gam = 3,
-    King = 4,
-    LacLongQuan = 5,
-    Lua = 6,
-    MissCam = 7,
-    MissTam = 8,
-    MrsKim = 9,
-    MrTinh = 10,
-    MrVe = 11,
-    RichMan = 12,
-    SonTinh = 13,
-    Tam = 14,
-    Teo = 15,
-    ThuyTinh = 16,
-    VillageElder = 17,
-    MorthersTam = 18,
-    Ty = 19,
+    NoActor,
+    AuCo,
+    Doi,
+    Gam,
+    King,
+    LacLongQuan,
+    Lua,
+    MissCam,
+    MissTam,
+    MrsKim,
+    MrTinh,
+    MrVe,
+    RichMan,
+    SonTinh,
+    Tam,
+    Teo,
+    ThuyTinh,
+    VillageElder,
+    MorthersTam,
+    Ty,
 }
+
+public class CharacterCodeParser
+{
+    public static CharacterCode FromString(string npcCode)
+    {
+        try
+        {
+            return (CharacterCode)System.Enum.Parse(typeof(CharacterCode), npcCode);
+        }
+        catch (ArgumentException e)
+        {
+            Debug.LogError(e.ToString());
+            return CharacterCode.NoActor;
+        }
+    }
+}
+

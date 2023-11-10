@@ -8,6 +8,10 @@ public static class FileNameData
 
     public const string Inventory = "Inventory";
     public const string Wallet = "Wallet";
+    public const string Dictionary = "Dictionary";
+    public const string Setting = "Setting";
+    public const string Armory = "Armory";
+    public const string Shop = "Shop";
 
     private static string _currentUser = "Luan";
 

@@ -1,21 +1,40 @@
+using System;
+using UnityEngine;
+
 public enum EnemyCode
 {
-    NoEnemy = 0,
-    GreenBamboo = 1,
-    YellowBamboo = 2,
-    BlueFlam = 3,
-    RedFlam = 4,
-    BrownMouse = 5,
-    BlackMouse = 6,
-    GreenCyclope = 7,
-    RedCyclope = 8,
-    GreenDragonKid = 9,
-    YellowDragonKid = 10,
-    GreenFish = 11,
-    RedFish = 12,
-    RedSkull = 13,
-    BlueSkull = 14,
-    RedSpirit = 15,
-    BlueSpirit = 16,
+    NoEnemy,
+    GreenBamboo,
+    YellowBamboo,
+    BlueFlam,
+    RedFlam,
+    BrownMouse,
+    BlackMouse,
+    GreenCyclope,
+    RedCyclope,
+    GreenDragonKid,
+    YellowDragonKid,
+    GreenFish,
+    RedFish,
+    RedSkull,
+    BlueSkull,
+    RedSpirit,
+    BlueSpirit,
+}
+
+public class EnemyCodeParser
+{
+    public static EnemyCode FromString(string enemyCode)
+    {
+        try
+        {
+            return (EnemyCode)System.Enum.Parse(typeof(EnemyCode), enemyCode);
+        }
+        catch (ArgumentException e)
+        {
+            Debug.LogError(e.ToString());
+            return EnemyCode.NoEnemy;
+        }
+    }
 }
 

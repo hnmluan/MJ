@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObject/Enemy")]
 public class EnemyDataSO : ScriptableObject
 {
-    public EnemyCode itemCode = EnemyCode.NoEnemy;
+    public EnemyCode enemyCode = EnemyCode.NoEnemy;
 
-    public EnemyType itemType = EnemyType.NoType;
+    public EnemyType enemyType = EnemyType.NoType;
 
     public string keyName = "no-name";
 
@@ -21,4 +22,22 @@ public class EnemyDataSO : ScriptableObject
     public int hpMax;
 
     public List<ItemDropRate> dropListItem;
+
+    public static EnemyDataSO FindByItemCode(EnemyCode enemyCode)
+    {
+        var profiles = Resources.LoadAll("Enemy/ScriptableObject", typeof(EnemyDataSO));
+        foreach (EnemyDataSO profile in profiles)
+        {
+            if (profile.enemyCode != enemyCode) continue;
+            return profile;
+        }
+        return null;
+    }
+
+    public static EnemyDataSO FindByName(string name)
+    {
+        EnemyCode enemyCode;
+        Enum.TryParse(name, out enemyCode);
+        return FindByItemCode(enemyCode);
+    }
 }
