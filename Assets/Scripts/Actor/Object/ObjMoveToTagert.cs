@@ -3,121 +3,67 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public class ObjMoveToTagert : InitMonoBehaviour
+public class ObjMoveToTagert : MonoBehaviour
 {
-    [SerializeField] protected Transform target;
+    public Transform target;
 
-    protected Seeker seeker;
+    public float moveSpeed = 2f;
+    public float nextWayPointDistance = 2f;
+    public float repeatTimeUpdatePath = 0.1f;
+    public SpriteRenderer characterSR;
+    public Animator animator;
 
-    protected Path currentPath;
+    Path path;
+    public Seeker seeker;
+    public Rigidbody2D rb;
 
-    protected int currentWaypointIndex;
+    Coroutine moveCoroutine;
 
-    protected bool isMoving;
+    private void Start() => InvokeRepeating("CalculatePath", 0f, repeatTimeUpdatePath);
 
-    protected bool isTouchTagret;
-
-    [SerializeField] protected float offsetTarget = 1;
-
-    protected Vector3 direction;
-
-    protected Vector3 targetPosition;
-
-    protected float offsetNodePath = 0.1f;
-
-    [SerializeField] private Animator animator;
-
-    [SerializeField] protected float speed = 1;
-
-
-    protected override void LoadComponents()
+    void CalculatePath()
     {
-        base.LoadComponents();
-        this.LoadSeeker();
-        this.LoadAnimator();
-    }
-    protected virtual void LoadAnimator()
-    {
-        if (this.animator != null) return;
-        this.animator = transform.parent.Find("Visual").GetComponent<Animator>();
-        Debug.Log(transform.name + ": LoadAnimator", gameObject);
+        if (seeker.IsDone())
+            seeker.StartPath(rb.position, target.position, OnPathCompleted);
     }
 
-    protected virtual void LoadSeeker()
+    void OnPathCompleted(Path p)
     {
-        if (this.seeker != null) return;
-        this.seeker = transform.GetComponent<Seeker>();
-        Debug.Log(transform.name + ": LoadSeeker", gameObject);
-    }
-
-    protected override void OnEnable()
-    {
-        isMoving = false;
-        StartCoroutine(MoveToTagretRoutine());
-    }
-
-    private IEnumerator MoveToTagretRoutine()
-    {
-        while (true)
+        if (!p.error)
         {
-            if (target != null) MoveTo(target.position);
-
-            yield return new WaitUntil(() => !isMoving);
+            path = p;
+            MoveToTarget();
         }
     }
 
-    private void MoveTo(Vector3 destination)
+    void MoveToTarget()
     {
-        seeker.StartPath(transform.position, destination, OnPathComplete);
-        isMoving = true;
+        if (Vector3.Distance(transform.position, target.position) <= 4) return;
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+        moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
     }
 
-    private void OnPathComplete(Path path)
+    IEnumerator MoveToTargetCoroutine()
     {
-        if (!path.error)
+        int currentWP = 0;
+
+        while (currentWP < path.vectorPath.Count)
         {
-            currentPath = path;
-            currentWaypointIndex = 0;
-            isMoving = true;
-        }
-        else
-        {
-            Debug.LogError("Pathfinding error: " + path.errorLog);
-            isMoving = false;
-        }
-    }
+            Vector2 direction = ((Vector2)path.vectorPath[currentWP] - rb.position).normalized;
+            Vector2 force = direction * moveSpeed * Time.deltaTime;
+            transform.parent.position += (Vector3)force;
 
-    private void SetAnimation()
-    {
-        animator.SetFloat("X", -direction.x);
-        animator.SetFloat("Y", -direction.y);
-        animator.SetBool("isWalking", this.isMoving);
-    }
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWP]);
+            if (distance < nextWayPointDistance)
+                currentWP++;
 
-    protected virtual void Update()
-    {
-        SetAnimation();
+            if (force.x != 0)
+                if (force.x < 0)
+                    characterSR.transform.localScale = new Vector3(-1, 1, 0);
+                else
+                    characterSR.transform.localScale = new Vector3(1, 1, 0);
 
-        if (isMoving && currentPath != null)
-        {
-            if (currentWaypointIndex >= currentPath.vectorPath.Count || Vector3.Distance(transform.position, target.transform.position) <= offsetTarget)
-            {
-                isTouchTagret = true;
-                isMoving = false;
-                return;
-            }
-
-
-            Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
-
-            direction = (targetPosition - transform.position).normalized;
-
-            transform.parent.position += direction * speed * Time.deltaTime;
-
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                currentWaypointIndex++;
-            }
+            yield return null;
         }
     }
 }

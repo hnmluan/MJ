@@ -53,5 +53,4 @@ public class CharacterGenerator : InitMonoBehaviour
         GetComponentInChildren<Text>().text = LocalizationManager.Localize(characterData.keyName);
         Debug.Log(transform.name + ": LoadKeyName", gameObject);
     }
-
 }
