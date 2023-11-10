@@ -7,6 +7,7 @@ public static class FileNameData
     public readonly static string SavePath = Application.persistentDataPath;
 
     public const string Inventory = "Inventory";
+    public const string Wallet = "Wallet";
 
     private static string _currentUser = "Luan";
 
