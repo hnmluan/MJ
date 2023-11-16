@@ -33,7 +33,6 @@ public class ObjMoveFree : InitMonoBehaviour
     {
         if (this.movementArea != null) return;
         this.movementArea = transform.GetComponentInChildren<Collider2D>();
-        if (this.movementArea == null) return;
         if (transform.GetComponentInChildren<FixedPosition>() == null) movementArea.AddComponent<FixedPosition>();
         movementArea.isTrigger = true;
         Debug.Log(transform.name + ": LoadMovementArea", gameObject);

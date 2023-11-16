@@ -23,7 +23,7 @@ public class EnemyCtrl : InitMonoBehaviour
         this.LoadEnemySO();
         this.LoadAnimator();
         this.LoadEnemyDespawn();
-        this.LoadModel();
+        this.LoadVisual();
         this.LoadDamageReceiver();
     }
 
@@ -41,7 +41,7 @@ public class EnemyCtrl : InitMonoBehaviour
         Debug.LogWarning(transform.name + ": LoadEnemySO " + resPath, gameObject);
     }
 
-    protected virtual void LoadModel()
+    protected virtual void LoadVisual()
     {
         if (this.model != null) return;
         this.model = transform.GetComponentInChildren<SpriteRenderer>();
