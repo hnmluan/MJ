@@ -38,7 +38,7 @@ public class ObjMoveToTagert : MonoBehaviour
 
     void MoveToTarget()
     {
-        if (Vector3.Distance(transform.position, target.position) <= 4) return;
+        //if (Vector3.Distance(transform.position, target.position) <= 4) return;
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
         moveCoroutine = StartCoroutine(MoveToTargetCoroutine());
     }
@@ -65,11 +65,11 @@ public class ObjMoveToTagert : MonoBehaviour
 
     private void SetAnimator(Vector2 direction)
     {
-        if (Vector3.Distance(transform.position, target.position) <= 4)
-        {
-            animator.SetBool("isWalking", false);
-            return;
-        }
+        /*        if (Vector3.Distance(transform.position, target.position) <= 4)
+                {
+                    animator.SetBool("isWalking", false);
+                    return;
+                }*/
 
         if (direction.x != 0 || direction.y != 0)
         {
