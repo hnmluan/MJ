@@ -53,17 +53,33 @@ public class ObjMoveToTagert : MonoBehaviour
             Vector2 force = direction * moveSpeed * Time.deltaTime;
             transform.parent.position += (Vector3)force;
 
+            SetAnimator(direction);
+
             float distance = Vector2.Distance(rb.position, path.vectorPath[currentWP]);
             if (distance < nextWayPointDistance)
                 currentWP++;
 
-            if (force.x != 0)
-                if (force.x < 0)
-                    characterSR.transform.localScale = new Vector3(-1, 1, 0);
-                else
-                    characterSR.transform.localScale = new Vector3(1, 1, 0);
-
             yield return null;
         }
+    }
+
+    private void SetAnimator(Vector2 direction)
+    {
+        if (Vector3.Distance(transform.position, target.position) <= 4)
+        {
+            animator.SetBool("isWalking", false);
+            return;
+        }
+
+        if (direction.x != 0 || direction.y != 0)
+        {
+            animator.SetFloat("X", -direction.x);
+
+            animator.SetFloat("Y", -direction.y);
+
+            animator.SetBool("isWalking", true);
+        }
+        else
+            animator.SetBool("isWalking", false);
     }
 }
