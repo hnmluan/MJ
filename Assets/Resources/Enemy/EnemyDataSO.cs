@@ -23,6 +23,14 @@ public class EnemyDataSO : ScriptableObject
 
     public List<ItemDropRate> dropListItem;
 
+    public float trackRange = 5.0f;
+
+    public float acttackRange = 2.0f;
+
+    public float nonMoveableRange = 1.0f;
+
+    public float speed = 1.0f;
+
     public static EnemyDataSO FindByItemCode(EnemyCode enemyCode)
     {
         var profiles = Resources.LoadAll("Enemy/ScriptableObject", typeof(EnemyDataSO));

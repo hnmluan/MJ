@@ -29,3 +29,7 @@ MonoBehaviour:
     dropRate: 100000
   - itemSO: {fileID: 11400000, guid: f879b08d7621fd34584c151332539314, type: 2}
     dropRate: 100000
+  trackRange: 5
+  acttackRange: 3
+  nonMoveableRange: 3
+  speed: 4

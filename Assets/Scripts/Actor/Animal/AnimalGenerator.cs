@@ -6,7 +6,7 @@ public class AnimalGenerator : InitMonoBehaviour
 
     [SerializeField] protected Animator animator;
 
-    protected AnimalDataSO characterData;
+    [SerializeField] protected AnimalDataSO characterData;
 
     protected override void LoadComponents()
     {

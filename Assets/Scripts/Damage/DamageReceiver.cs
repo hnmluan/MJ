@@ -8,10 +8,10 @@ public abstract class DamageReceiver : InitMonoBehaviour
     [SerializeField] protected SphereCollider sphereCollider;
 
     [SerializeField] protected float hp = 20;
-    public float HP => hp;
+    public float HP { get => hp; }
 
-    [SerializeField] private float hpMax = 20;
-    public float HPMax { get => hpMax; set => hpMax = value; }
+    [SerializeField] protected float hpMax = 20;
+    public float HPMax { get => hpMax; }
 
     [SerializeField] protected bool isDead = false;
 
@@ -65,4 +65,6 @@ public abstract class DamageReceiver : InitMonoBehaviour
     }
 
     protected abstract void OnDead();
+
+    public void SetHPMax(float hpMax) => this.hpMax = hpMax;
 }

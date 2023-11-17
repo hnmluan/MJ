@@ -6,20 +6,21 @@ using UnityEngine;
 [RequireComponent(typeof(Seeker))]
 public class ObjMoveFree : InitMonoBehaviour
 {
-    [SerializeField] protected Collider2D movementArea;
-
     [SerializeField] protected Seeker seeker;
 
-    [SerializeField] protected Path currentPath;
+    [SerializeField] protected Collider2D motionArea;
 
-    [SerializeField] protected int currentWaypointIndex;
+    [SerializeField] protected Animator animator;
 
-    [SerializeField] protected bool isMoving;
+    [SerializeField] protected float speed;
 
-    [SerializeField] protected Vector3 direction;
+    protected bool isMoving;
 
-    [SerializeField] private Animator animator;
+    protected Path currentPath;
 
+    protected int currentWaypointIndex;
+
+    protected Vector3 target;
 
     protected override void LoadComponents()
     {
@@ -29,12 +30,12 @@ public class ObjMoveFree : InitMonoBehaviour
         this.LoadAnimator();
     }
 
-    private void LoadMovementArea()
+    protected virtual void LoadMovementArea()
     {
-        if (this.movementArea != null) return;
-        this.movementArea = transform.GetComponentInChildren<Collider2D>();
-        if (transform.GetComponentInChildren<FixedPosition>() == null) movementArea.AddComponent<FixedPosition>();
-        movementArea.isTrigger = true;
+        if (this.motionArea != null) return;
+        this.motionArea = transform.GetComponentInChildren<Collider2D>();
+        if (transform.GetComponentInChildren<FixedPosition>() == null) motionArea.AddComponent<FixedPosition>();
+        motionArea.isTrigger = true;
         Debug.Log(transform.name + ": LoadMovementArea", gameObject);
     }
 
@@ -55,49 +56,48 @@ public class ObjMoveFree : InitMonoBehaviour
     protected override void OnEnable()
     {
         isMoving = false;
-        StartCoroutine(MoveToRandomPointRoutine());
+        StartCoroutine(MoveTo());
     }
 
-    private void SetAnimation()
+    protected virtual void SetAnimation(Vector3 direction)
     {
-        animator.SetFloat("X", direction.x);
-        animator.SetFloat("Y", direction.y);
+        animator.SetFloat("X", -direction.x);
+        animator.SetFloat("Y", -direction.y);
         animator.SetBool("isWalking", this.isMoving);
     }
 
-    private IEnumerator MoveToRandomPointRoutine()
+    protected virtual IEnumerator MoveTo()
     {
         while (true)
         {
-            Vector3 randomPoint = GetRandomPointInCollider(movementArea);
-            MoveTo(randomPoint);
+            GetTarget();
+            MoveTo(target);
 
             yield return new WaitUntil(() => !isMoving);
             yield return new WaitForSeconds(2f);
         }
     }
 
-    private Vector3 GetRandomPointInCollider(Collider2D collider)
+    protected virtual void GetTarget()
     {
-        Vector3 center = collider.bounds.center;
-        Vector3 size = collider.bounds.size;
+        Vector3 center = motionArea.bounds.center;
+        Vector3 size = motionArea.bounds.size;
 
-        Vector3 randomPoint = center + new Vector3(
-            (Random.value - 0.55f) * size.x,
-            (Random.value - 0.55f) * size.y,
-            (Random.value - 0.55f) * size.z
-        );
+        target = center + new Vector3(
+           (Random.value - 0.55f) * size.x,
+           (Random.value - 0.55f) * size.y,
+           (Random.value - 0.55f) * size.z
+       );
 
-        return randomPoint;
     }
 
-    private void MoveTo(Vector3 destination)
+    protected virtual void MoveTo(Vector3 target)
     {
-        seeker.StartPath(transform.position, destination, OnPathComplete);
+        seeker.StartPath(transform.position, target, OnPathComplete);
         isMoving = true;
     }
 
-    private void OnPathComplete(Path path)
+    protected virtual void OnPathComplete(Path path)
     {
         if (!path.error)
         {
@@ -112,28 +112,29 @@ public class ObjMoveFree : InitMonoBehaviour
         }
     }
 
+    public void SetSpeed(float speed) => this.speed = speed;
+
     protected virtual void Update()
     {
-        SetAnimation();
 
         if (isMoving && currentPath != null)
         {
             if (currentWaypointIndex >= currentPath.vectorPath.Count)
             {
                 isMoving = false;
+                animator.SetBool("isWalking", this.isMoving);
                 return;
             }
 
             Vector3 targetPosition = currentPath.vectorPath[currentWaypointIndex];
 
-            direction = (targetPosition - transform.position).normalized;
+            Vector3 direction = (targetPosition - transform.position).normalized;
 
-            transform.parent.position += direction * 5f * Time.deltaTime;
+            SetAnimation(direction);
 
-            if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-            {
-                currentWaypointIndex++;
-            }
+            transform.parent.position += direction * speed * Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, targetPosition) < 0.1f) currentWaypointIndex++;
         }
     }
 }

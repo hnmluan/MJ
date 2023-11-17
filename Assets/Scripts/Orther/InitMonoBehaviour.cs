@@ -5,11 +5,11 @@ public class InitMonoBehaviour : MonoBehaviour
     protected virtual void Awake()
     {
         this.LoadComponents();
+        this.ResetValue();
     }
 
     protected virtual void Start()
     {
-        //For override
     }
 
     protected virtual void Reset()
@@ -18,23 +18,11 @@ public class InitMonoBehaviour : MonoBehaviour
         this.ResetValue();
     }
 
-    protected virtual void LoadComponents()
-    {
-        //For override
-    }
+    protected virtual void LoadComponents() { }
 
-    protected virtual void ResetValue()
-    {
-        //For override
-    }
+    protected virtual void ResetValue() { }
 
-    protected virtual void OnEnable()
-    {
-        //For override
-    }
+    protected virtual void OnEnable() { }
 
-    protected virtual void OnDisable()
-    {
-        //For override
-    }
+    protected virtual void OnDisable() { }
 }

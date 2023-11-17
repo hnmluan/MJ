@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class EnemySpawnByTime : MonoBehaviour
 {
-    public EnemyCode enemyCode = EnemyCode.NoEnemy;
+    [SerializeField] protected EnemyCode enemyCode = EnemyCode.NoEnemy;
 
-    public Transform enemy;
+    [SerializeField] protected float spawnDelay = 5f;
 
-    public float spawnDelay = 5f;
+    protected Transform enemy;
 
-    private void Start() => StartCoroutine(SpawnEnemy());
+    protected void Start() => StartCoroutine(SpawnEnemy());
 
-    IEnumerator SpawnEnemy()
+    protected IEnumerator SpawnEnemy()
     {
         while (true)
         {
@@ -21,7 +21,7 @@ public class EnemySpawnByTime : MonoBehaviour
         }
     }
 
-    public void Spawn()
+    protected void Spawn()
     {
         enemy = EnemySpawner.Instance.Spawn(enemyCode.ToString(), transform.position, Quaternion.identity);
         if (enemy == null) return;
