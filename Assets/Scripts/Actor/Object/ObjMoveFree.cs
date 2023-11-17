@@ -12,7 +12,7 @@ public class ObjMoveFree : InitMonoBehaviour
 
     [SerializeField] protected Animator animator;
 
-    [SerializeField] protected float speed;
+    protected float speed = 2;
 
     protected bool isMoving;
 
@@ -61,8 +61,8 @@ public class ObjMoveFree : InitMonoBehaviour
 
     protected virtual void SetAnimation(Vector3 direction)
     {
-        animator.SetFloat("X", -direction.x);
-        animator.SetFloat("Y", -direction.y);
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
         animator.SetBool("isWalking", this.isMoving);
     }
 

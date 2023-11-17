@@ -10,7 +10,7 @@ public class ObjMoveToTarget : InitMonoBehaviour
 
     [SerializeField] protected float speed = 2f;
 
-    [SerializeField] protected float outline = 0.1f;
+    [SerializeField] protected float outline = 1f;
 
     [SerializeField] protected Animator animator;
 
@@ -116,8 +116,8 @@ public class ObjMoveToTarget : InitMonoBehaviour
 
     protected virtual void SetAnimator(Vector2 direction)
     {
-        animator.SetFloat("X", -direction.x);
-        animator.SetFloat("Y", -direction.y);
+        animator.SetFloat("X", direction.x);
+        animator.SetFloat("Y", direction.y);
         animator.SetBool("isWalking", true);
     }
 

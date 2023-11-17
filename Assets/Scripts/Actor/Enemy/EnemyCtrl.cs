@@ -124,4 +124,3 @@ public class EnemyCtrl : InitMonoBehaviour
         Gizmos.DrawWireSphere(transform.position, enemySO.trackRange);
     }
 }
-    
