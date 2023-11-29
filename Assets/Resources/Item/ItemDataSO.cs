@@ -45,6 +45,13 @@ public class ItemDataSO : ScriptableObject
         return null;
     }
 
+    public static ItemDataSO FindByName(string name)
+    {
+        ItemCode itemCode;
+        Enum.TryParse(name, out itemCode);
+        return FindByItemCode(itemCode);
+    }
+
     public static ItemDataSO GetRandomSellableItemSO()
     {
         if (GetSellableItemsSO().Count == 0) return null;

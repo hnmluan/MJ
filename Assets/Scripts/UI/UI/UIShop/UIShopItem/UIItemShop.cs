@@ -4,9 +4,6 @@ using UnityEngine.UI;
 
 public class UIItemShop : InitMonoBehaviour
 {
-    [SerializeField] protected bool isSoldOut;
-    public bool IsSoldOut => isSoldOut;
-
     [SerializeField] protected ItemShop itemShop;
     public ItemShop ItemShop => itemShop;
 
@@ -85,18 +82,25 @@ public class UIItemShop : InitMonoBehaviour
     {
         this.itemShop = item;
 
-        this.itemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
+        ItemDataSO itemData = ItemDataSO.FindByName(item.itemCode);
+
+        this.itemName.text = LocalizationManager.Localize(itemData.keyName);
 
         this.itemNumber.text = this.itemShop.quantity.ToString();
 
-        this.itemImage.sprite = this.itemShop.itemProfile.itemSprite;
+        this.itemImage.sprite = itemData.itemSprite;
 
-        this.buyButton.gameObject.SetActive(true);
+        this.currencyImage.sprite = CurrencyDataSO.FindByName(item.currencyCode).currencySprite;
 
-        this.soldOut.gameObject.SetActive(false);
-
-        this.isSoldOut = false;
-
-        this.currencyImage.sprite = item.itemPrice.currencyProfileSO.currencySprite;
+        if (item.isBuy)
+        {
+            this.soldOut.gameObject.SetActive(true);
+            this.buyButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.soldOut.gameObject.SetActive(false);
+            this.buyButton.gameObject.SetActive(true);
+        }
     }
 }

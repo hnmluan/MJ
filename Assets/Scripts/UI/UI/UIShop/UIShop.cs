@@ -1,80 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class UIShop : BaseUI<UIShop>
+﻿public class UIShop : BaseUI<UIShop>
 {
-    [SerializeField] private DateTime lastTimeRestItem;
-    public DateTime TimelineToRestItem => lastTimeRestItem;
+    protected override void OnEnable() => RefreshUI();
 
-    [SerializeField] private int intervalRestItem = 100;
-    public int IntervalRestItem => intervalRestItem;
-
-    [SerializeField] private int numberOfItems = 10;
-    public int NumberOfItems => numberOfItems;
-
-    protected override void Start()
+    public void RefreshUI()
     {
-        this.ResetItems();
-
-        base.Start();
-    }
-
-    /*    protected override void OnEnable()
-        {
-            this.ResetItems();
-        }*/
-
-    private void Update() => CheckTimeToResetItem();
-
-    public virtual void ResetItems()
-    {
-        Debug.Log(ItemDataSO.GetSellableItemsSO().Count);
-        if (ItemDataSO.GetSellableItemsSO().Count == 0) return;
-
-        this.ClearItems();
-
-        foreach (ItemShop item in GetRandomItemList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
-    }
-
-    protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
-
-    private void CheckTimeToResetItem()
-    {
-        if (GetDeltaTimeReset() > intervalRestItem)
-        {
-            ResetItems();
-            UpdateTimelineToRestItem();
-        }
-    }
-
-    private void UpdateTimelineToRestItem()
-    {
-        int times = GetDeltaTimeReset() / intervalRestItem;
-
-        UpdateLastTimeRestItem(lastTimeRestItem.AddSeconds(times * intervalRestItem));
-    }
-
-    public void UpdateLastTimeRestItem(DateTime time) => this.lastTimeRestItem = time;
-
-    public int GetDeltaTimeReset()
-    {
-        TimeSpan timeDifference = DateTime.Now - lastTimeRestItem;
-        int timeDifferenceInSeconds = (int)timeDifference.TotalSeconds;
-        return timeDifferenceInSeconds;
-    }
-
-    public static List<ItemShop> GetRandomItemList(int quantity)
-    {
-        List<ItemShop> listItemShop = new List<ItemShop>();
-
-        for (int i = 0; i < quantity; i++)
-        {
-            ItemShop randomItemShop = ItemShop.GetRandomSellableItem();
-            listItemShop.Add(randomItemShop);
-        }
-
-        Debug.Log(listItemShop.Count);
-        return listItemShop;
+        UIShopItemSpawner.Instance.ClearItems();
+        foreach (ItemShop item in Shop.Instance.listItem) UIShopItemSpawner.Instance.SpawnItem(item);
     }
 }

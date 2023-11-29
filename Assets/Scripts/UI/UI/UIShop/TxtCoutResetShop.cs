@@ -2,14 +2,14 @@
 
 public class TxtCoutResetShop : BaseText
 {
-    protected virtual void FixedUpdate() => this.UpdateText();
+    //protected virtual void FixedUpdate() => this.UpdateText();
 
-    protected virtual void UpdateText()
-    {
-        int coutDown = UIShop.Instance.IntervalRestItem - UIShop.Instance.GetDeltaTimeReset();
+    /*    protected virtual void UpdateText()
+        {
+            int coutDown = UIShop.Instance.IntervalRestItem - UIShop.Instance.GetDeltaTimeReset();
 
-        text.text = SecondToTime(coutDown);
-    }
+            text.text = SecondToTime(coutDown);
+        }*/
 
     private string SecondToTime(int seconds)
     {

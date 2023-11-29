@@ -19,55 +19,44 @@ public class BtnBuyItem : BaseButton
 
     protected override void OnEnable() => LoadUIItemShop();
 
-    protected override void OnClick()
-    {
-        try
-        {
-            if (uiItemShop == null) return;
-
-            ItemShop itemShop = uiItemShop.ItemShop;
-
-            int price = itemShop.price;
-
-            string nameCurrency = LocalizationManager.Localize(itemShop.itemPrice.currencyProfileSO.keyName);
-
-            string balanceNotEnough = LocalizationManager.Localize("Shop.BalanceNotEnough");
-
-            string content = nameCurrency + " -" + price;
-
-            Sprite image = itemShop.itemPrice.currencyProfileSO.currencySprite;
-
-            CurrencyCode currencyCode = uiItemShop.ItemShop.itemPrice.currencyProfileSO.currencyCode;
-
-            if (currencyCode == CurrencyCode.Gold)
-            {
-                if (Wallet.Instance.DeductGoldenBalance(price))
-                {
-                    UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
-                    BuyItem();
-                    return;
-                }
-            }
-
-            if (currencyCode == CurrencyCode.Silver)
-            {
-                if (Wallet.Instance.DeductSilverBalance(price))
-                {
-                    UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
-                    BuyItem();
-                    return;
-                };
-            }
-            UITextSpawner.Instance.SpawnUITextWithMousePosition(balanceNotEnough);
-        }
-        catch (System.Exception) { }
-
-    }
-
     private void BuyItem()
     {
-        Inventory.Instance.AddItem(uiItemShop.ItemShop.itemProfile.itemCode, uiItemShop.ItemShop.quantity);
-        uiItemShop.SoldOut.gameObject.SetActive(true);
-        this.gameObject.SetActive(false);
+        ItemShop item = uiItemShop.ItemShop;
+        Shop.Instance.BuyItem(item);
+        UIShop.Instance.RefreshUI();
+    }
+
+    protected override void OnClick()
+    {
+        if (uiItemShop == null) return;
+        ItemShop itemShop = uiItemShop.ItemShop;
+        int price = itemShop.price;
+        string nameCurrency = LocalizationManager.Localize(CurrencyDataSO.FindByName(itemShop.currencyCode).keyName);
+        string balanceNotEnough = LocalizationManager.Localize("Shop.ResetButton");
+        Debug.Log(balanceNotEnough);
+        string content = nameCurrency + " - " + price;
+        Sprite image = CurrencyDataSO.FindByName(itemShop.currencyCode).currencySprite;
+        CurrencyCode currencyCode = CurrencyDataSO.FindByName(itemShop.currencyCode).currencyCode;
+
+        if (currencyCode == CurrencyCode.Gold)
+        {
+            if (Wallet.Instance.DeductGoldenBalance(price))
+            {
+                UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
+                BuyItem();
+                return;
+            }
+        }
+
+        if (currencyCode == CurrencyCode.Silver)
+        {
+            if (Wallet.Instance.DeductSilverBalance(price))
+            {
+                UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
+                BuyItem();
+                return;
+            };
+        }
+        UITextSpawner.Instance.SpawnUITextWithMousePosition(balanceNotEnough);
     }
 }

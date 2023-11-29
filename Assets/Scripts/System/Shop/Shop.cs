@@ -8,7 +8,7 @@ public class Shop : Singleton<Shop>
 
     public int resetInterval;
 
-    public List<ShopItem> listItem;
+    public List<ItemShop> listItem;
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Shop, new ShopData(this));
 
@@ -33,16 +33,17 @@ public class Shop : Singleton<Shop>
 
     public void ResetItem()
     {
+        this.listItem.Clear();
         for (int i = 0; i < 10; i++)
         {
             ItemDataSO item = ItemDataSO.GetRandomSellableItemSO();
-            ShopItem itemShop = new(item);
+            ItemShop itemShop = new(item);
             this.listItem.Add(itemShop);
         }
         SaveData();
     }
 
-    public void BuyItem(ShopItem item)
+    public void BuyItem(ItemShop item)
     {
         item.isBuy = true;
         this.SaveData();
@@ -50,7 +51,7 @@ public class Shop : Singleton<Shop>
 }
 
 [Serializable]
-public class ShopItem
+public class ItemShop
 {
     public string itemCode;
     public int quantity;
@@ -58,7 +59,7 @@ public class ShopItem
     public string currencyCode;
     public bool isBuy;
 
-    public ShopItem(ItemDataSO itemDataSO)
+    public ItemShop(ItemDataSO itemDataSO)
     {
         this.itemCode = itemDataSO.itemCode.ToString();
         BuyableItemData buyableItemData = itemDataSO.datas.OfType<BuyableItemData>().FirstOrDefault();
@@ -77,7 +78,7 @@ public class ShopData
 {
     public string latestItemResetTimestamp;
     public int resetInterval = 100;
-    public List<ShopItem> listItem;
+    public List<ItemShop> listItem;
 
     public ShopData(Shop shop)
     {

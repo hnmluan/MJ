@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class BaseUI : InitMonoBehaviour
 {
-    protected override void Start()
-    {
-        base.Start();
-        this.Close();
-    }
+    /*    protected override void Start()
+        {
+            base.Start();
+            this.Close();
+        }*/
 
     public virtual void Open()
     {

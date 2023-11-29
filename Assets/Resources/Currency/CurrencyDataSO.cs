@@ -24,18 +24,10 @@ public class CurrencyDataSO : ScriptableObject
         return null;
     }
 
-    public static CurrencyCode GetRandomItemCodeExcludingNoItem()
+    public static CurrencyDataSO FindByName(string name)
     {
-        CurrencyCode[] currencyCode = (CurrencyCode[])Enum.GetValues(typeof(CurrencyCode));
-        CurrencyCode randomCurrencyCode;
-
-        System.Random random = new System.Random();
-
-        do
-        {
-            randomCurrencyCode = currencyCode[random.Next(currencyCode.Length)];
-        } while (randomCurrencyCode == CurrencyCode.NoCurrency);
-
-        return randomCurrencyCode;
+        CurrencyCode currencyCode;
+        Enum.TryParse(name, out currencyCode);
+        return FindByItemCode(currencyCode);
     }
 }
