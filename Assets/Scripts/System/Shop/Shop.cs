@@ -6,7 +6,7 @@ public class Shop : Singleton<Shop>
 {
     public string latestResetTimestamp;
 
-    public int resetInterval = 100;
+    public int resetInterval;
 
     public List<ShopItem> listItem;
 
@@ -42,7 +42,11 @@ public class Shop : Singleton<Shop>
         SaveData();
     }
 
-    public static void BuyItem(ShopItem item) => item.isBuy = true;
+    public void BuyItem(ShopItem item)
+    {
+        item.isBuy = true;
+        this.SaveData();
+    }
 }
 
 [Serializable]
