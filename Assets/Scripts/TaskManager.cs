@@ -27,6 +27,7 @@ public class TaskManager : Singleton<TaskManager>
     {
         if (currentTask == TaskCode.Ending) return;
         currentTask++;
+        Debug.Log(currentTask.ToString());
         OpenTaskPanel();
         taskPanel.SetActive(true);
         Debug.Log("Switch2NextTaskEnumCode");

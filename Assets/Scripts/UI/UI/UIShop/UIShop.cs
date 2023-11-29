@@ -16,21 +16,25 @@ public class UIShop : BaseUI<UIShop>
     protected override void Start()
     {
         this.ResetItems();
-        lastTimeRestItem = DateTime.Now;
-        ItemDataSO.FindByItemCode(ItemCode.NoItem);
 
         base.Start();
     }
+
+    /*    protected override void OnEnable()
+        {
+            this.ResetItems();
+        }*/
 
     private void Update() => CheckTimeToResetItem();
 
     public virtual void ResetItems()
     {
+        Debug.Log(ItemDataSO.GetSellableItemsSO().Count);
         if (ItemDataSO.GetSellableItemsSO().Count == 0) return;
 
         this.ClearItems();
 
-        foreach (ItemShop item in GetRandomNumberList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
+        foreach (ItemShop item in GetRandomItemList(numberOfItems)) UIShopItemSpawner.Instance.SpawnItem(item);
     }
 
     protected virtual void ClearItems() => UIShopItemSpawner.Instance.ClearItems();
@@ -60,7 +64,7 @@ public class UIShop : BaseUI<UIShop>
         return timeDifferenceInSeconds;
     }
 
-    public static List<ItemShop> GetRandomNumberList(int quantity)
+    public static List<ItemShop> GetRandomItemList(int quantity)
     {
         List<ItemShop> listItemShop = new List<ItemShop>();
 
@@ -70,6 +74,7 @@ public class UIShop : BaseUI<UIShop>
             listItemShop.Add(randomItemShop);
         }
 
+        Debug.Log(listItemShop.Count);
         return listItemShop;
     }
 }

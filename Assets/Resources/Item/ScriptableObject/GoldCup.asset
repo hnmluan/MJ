@@ -18,7 +18,24 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 3fb84e94dbe01e7449b025554ce29068, type: 3}
   keyDescription: Item.Description
   defaultMaxStack: 10
-  datas: []
+  datas:
+  - rid: 4828532231772045315
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 4828532231772045315
+      type: {class: BuyableItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: BuyableItemData
+        price:
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 3
+            maxValue: 4
+        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+          rangePrice:
+            minValue: 6
+            maxValue: 9
+        quantityToBuy:
+          minValue: 4
+          maxValue: 7

@@ -12,7 +12,7 @@ public class TaskDataSO : ScriptableObject
 
     public static TaskDataSO FindByItemCode(TaskCode taskCode)
     {
-        var profiles = Resources.LoadAll("Task/SO", typeof(TaskDataSO));
+        var profiles = Resources.LoadAll("Task/ScriptableObject", typeof(TaskDataSO));
         foreach (TaskDataSO profile in profiles)
         {
             if (profile.taskCode != taskCode) continue;

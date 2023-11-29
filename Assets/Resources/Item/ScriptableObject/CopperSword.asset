@@ -20,6 +20,7 @@ MonoBehaviour:
   defaultMaxStack: 10
   datas:
   - rid: 576510825429467211
+  - rid: 4828532231772045314
   references:
     version: 2
     RefIds:
@@ -28,3 +29,15 @@ MonoBehaviour:
       data:
         name: SellableItemData
         price: 12
+    - rid: 4828532231772045314
+      type: {class: BuyableItemData, ns: , asm: Assembly-CSharp}
+      data:
+        name: BuyableItemData
+        price:
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 10
+            maxValue: 14
+        quantityToBuy:
+          minValue: 1
+          maxValue: 9

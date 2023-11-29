@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[Serializable]
 public class Inventory : Singleton<Inventory>
 {
     [SerializeField] private int maxSlot;
