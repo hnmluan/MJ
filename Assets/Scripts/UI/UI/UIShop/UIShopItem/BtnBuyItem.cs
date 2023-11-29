@@ -32,8 +32,6 @@ public class BtnBuyItem : BaseButton
         ItemShop itemShop = uiItemShop.ItemShop;
         int price = itemShop.price;
         string nameCurrency = LocalizationManager.Localize(CurrencyDataSO.FindByName(itemShop.currencyCode).keyName);
-        string balanceNotEnough = LocalizationManager.Localize("Shop.ResetButton");
-        Debug.Log(balanceNotEnough);
         string content = nameCurrency + " - " + price;
         Sprite image = CurrencyDataSO.FindByName(itemShop.currencyCode).currencySprite;
         CurrencyCode currencyCode = CurrencyDataSO.FindByName(itemShop.currencyCode).currencyCode;
@@ -57,6 +55,8 @@ public class BtnBuyItem : BaseButton
                 return;
             };
         }
+
+        string balanceNotEnough = LocalizationManager.Localize("Shop.BalanceNotEnough");
         UITextSpawner.Instance.SpawnUITextWithMousePosition(balanceNotEnough);
     }
 }

@@ -24,7 +24,6 @@ public class Wallet : Singleton<Wallet>
         {
             this.goldenBalance = 100;
             this.silverBalance = 100;
-            Debug.Log("NULLLLLLLLLLLLLLLLLLL");
             return;
         };
 
