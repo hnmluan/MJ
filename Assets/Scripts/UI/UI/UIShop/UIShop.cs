@@ -1,10 +1,14 @@
-﻿public class UIShop : BaseUI<UIShop>
+﻿using UnityEngine;
+
+public class UIShop : BaseUI<UIShop>
 {
+    [SerializeField] protected UIShopItemSpawner shopItemSpawner;
+
     protected override void OnEnable() => RefreshUI();
 
     public void RefreshUI()
     {
-        UIShopItemSpawner.Instance.ClearItems();
-        foreach (ItemShop item in Shop.Instance.listItem) UIShopItemSpawner.Instance.SpawnItem(item);
+        shopItemSpawner.ClearItems();
+        foreach (ItemShop item in Shop.Instance.listItem) shopItemSpawner.SpawnItem(item);
     }
 }

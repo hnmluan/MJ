@@ -13,6 +13,9 @@ public class UIItemShop : InitMonoBehaviour
     [SerializeField] protected Text itemNumber;
     public Text ItemNumer => itemNumber;
 
+    [SerializeField] protected Text itemPrice;
+    public Text ItemPrice => itemPrice;
+
     [SerializeField] protected Text soldOut;
     public Text SoldOut => soldOut;
 
@@ -29,6 +32,7 @@ public class UIItemShop : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadItemName();
+        this.LoadItemPrice();
         this.LoadItemNumber();
         this.LoadItemImage();
         this.LoadCurrencyImage();
@@ -60,8 +64,15 @@ public class UIItemShop : InitMonoBehaviour
     private void LoadItemImage()
     {
         if (this.itemImage != null) return;
-        this.itemImage = transform.Find("ImageBox").Find("ObjImage").GetComponent<Image>();
+        this.itemImage = transform.Find("ImageBox").Find("Image").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadItemImage", gameObject);
+    }
+
+    protected virtual void LoadItemPrice()
+    {
+        if (this.itemPrice != null) return;
+        this.itemPrice = transform.Find("Buy").Find("Price").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
     protected virtual void LoadItemName()
@@ -87,6 +98,8 @@ public class UIItemShop : InitMonoBehaviour
         this.itemName.text = LocalizationManager.Localize(itemData.keyName);
 
         this.itemNumber.text = this.itemShop.quantity.ToString();
+
+        this.itemPrice.text = this.itemShop.price.ToString();
 
         this.itemImage.sprite = itemData.itemSprite;
 

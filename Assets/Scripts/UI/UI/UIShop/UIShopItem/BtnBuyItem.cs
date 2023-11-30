@@ -5,11 +5,7 @@ public class BtnBuyItem : BaseButton
 {
     [SerializeField] protected UIItemShop uiItemShop;
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadUIItemShop();
-    }
+    protected override void LoadComponents() => this.LoadUIItemShop();
 
     private void LoadUIItemShop()
     {
