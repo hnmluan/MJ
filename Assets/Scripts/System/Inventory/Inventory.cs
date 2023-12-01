@@ -1,23 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Inventory : Singleton<Inventory>
 {
+    private List<IObservationInventory> observations = new List<IObservationInventory>();
+
     [SerializeField] private int maxSlot;
-    public int MaxSlot { get => maxSlot; set => maxSlot = value; }
+    public int MaxSlot => maxSlot;
 
     [SerializeField] private int maxItemCount;
-    public int MaxItemCount { get => maxItemCount; set => maxItemCount = value; }
+    public int MaxItemCount => maxItemCount;
 
     [SerializeField] private List<ItemInventory> items;
     public List<ItemInventory> Items { get => items; set => items = value; }
 
-    protected override void Awake()
-    {
-        base.Awake();
-        this.LoadData();
-    }
+    protected override void Awake() => this.LoadData();
 
     public void LoadData()
     {
@@ -31,8 +28,8 @@ public class Inventory : Singleton<Inventory>
             return;
         };
 
-        this.MaxSlot = inventoryData.maxSlot;
-        this.MaxItemCount = inventoryData.maxItemCount;
+        this.maxSlot = inventoryData.maxSlot;
+        this.maxItemCount = inventoryData.maxItemCount;
 
         foreach (ItemInventoryData item in inventoryData.items) this.items.Add(item.ToItemInventory());
     }
@@ -79,7 +76,8 @@ public class Inventory : Singleton<Inventory>
             itemExist.itemCount = newCount;
             if (addRemain < 1) break;
         }
-        SaveData();
+        this.SaveData();
+        this.ExcuteAddItemsObservation();
         return true;
     }
 
@@ -188,8 +186,9 @@ public class Inventory : Singleton<Inventory>
 
             itemInventory.itemCount -= deduct;
         }
-        RemoveEmptySlot();
-        SaveData();
+        this.RemoveEmptySlot();
+        this.ExcuteDeductItemObservation();
+        this.SaveData();
     }
 
     public virtual void RemoveEmptySlot() => Items.RemoveAll(item => item.itemCount == 0);
@@ -202,5 +201,21 @@ public class Inventory : Singleton<Inventory>
             if (Items[i].itemProfile.itemCode == itemCode) quantity += Items[i].itemCount;
         }
         return quantity;
+    }
+
+    public void AddObservation(IObservationInventory observation) => observations.Add(observation);
+
+    public void RemoveObservation(IObservationInventory observation) => observations.Remove(observation);
+
+    public void ExcuteDeductItemObservation()
+    {
+        foreach (IObservationInventory observation in observations)
+            observation.DeductItem();
+    }
+
+    public void ExcuteAddItemsObservation()
+    {
+        foreach (IObservationInventory observation in observations)
+            observation.AddItem();
     }
 }

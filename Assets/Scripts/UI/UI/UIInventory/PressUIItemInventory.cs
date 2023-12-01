@@ -5,6 +5,6 @@ public class PressUIItemInventory : PressUI
     {
         UIItemInventory uiItemInventory = GetComponent<UIItemInventory>();
         if (uiItemInventory == null) return;
-        uiItemInventory.PressUIItemInventory();
+        uiItemInventory.Press();
     }
 }

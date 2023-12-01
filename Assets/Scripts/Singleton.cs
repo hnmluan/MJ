@@ -21,31 +21,4 @@ public class Singleton<T> : InitMonoBehaviour where T : MonoBehaviour
             return m_ins;
         }
     }
-
-    protected override void Awake() => MakeSingleton(false);
-
-    public void MakeSingleton(bool destroyOnload)
-    {
-        if (m_ins == null)
-        {
-            m_ins = this as T;
-            if (destroyOnload)
-            {
-                var root = transform.root;
-
-                if (root != transform)
-                {
-                    DontDestroyOnLoad(root);
-                }
-                else
-                {
-                    DontDestroyOnLoad(this.gameObject);
-                }
-            }
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 }

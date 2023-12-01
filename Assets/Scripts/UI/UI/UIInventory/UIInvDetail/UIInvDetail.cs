@@ -3,20 +3,8 @@ using UnityEngine;
 
 public class UIInvDetail : UIInvDetailAbstract
 {
-    [Header("UI Inventory Detail")]
-
-    private static UIInvDetail instance;
-    public static UIInvDetail Instance => instance;
-
     [SerializeField] protected ItemInventory itemInventory = null;
     public ItemInventory ItemInventory => itemInventory;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIInvDetail.instance != null) Debug.Log("Only 1 UIInvDetail allow to exist");
-        UIInvDetail.instance = this;
-    }
 
     protected override void OnDisable() => this.SetEmptyUIInvDetail();
 
@@ -49,28 +37,26 @@ public class UIInvDetail : UIInvDetailAbstract
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Instance.ShowItems();
     }
 
     public virtual void UseAllItem()
     {
         itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Instance.ShowItems();
+        this.SetEmptyUIInvDetail();
     }
 
     public virtual void SellItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-        UIInventory.Instance.ShowItems();
     }
 
     public virtual void SellAllItem()
     {
         itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
         Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        UIInventory.Instance.ShowItems();
+        this.SetEmptyUIInvDetail();
     }
 
     private void ShowButtons()

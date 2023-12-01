@@ -20,13 +20,13 @@ public class UIShop : BaseUI<UIShop>, IObservationShop
     protected override void OnEnable()
     {
         Shop.Instance.AddObservation(this);
-        ResetUIItems();
+        ShowItems();
         UpdateGreetingText();
     }
 
     protected override void OnDisable() => Shop.Instance.RemoveObservation(this);
 
-    private void ResetUIItems()
+    private void ShowItems()
     {
         shopItemSpawner.ClearItems();
         foreach (ItemShop item in Shop.Instance.listItem) shopItemSpawner.SpawnItem(item);
@@ -68,7 +68,7 @@ public class UIShop : BaseUI<UIShop>, IObservationShop
         return keysGreetingText[random.Next(keysGreetingText.Count)];
     }
 
-    public void BuyItem() => ResetUIItems();
+    public void BuyItem() => ShowItems();
 
-    public void ResetItems() => ResetUIItems();
+    public void ResetItems() => ShowItems();
 }

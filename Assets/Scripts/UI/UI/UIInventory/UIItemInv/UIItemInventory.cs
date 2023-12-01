@@ -20,6 +20,8 @@ public class UIItemInventory : InitMonoBehaviour
     [SerializeField] protected Image focus;
     public Image Focus => focus;
 
+    protected override void OnDisable() => focus.gameObject.SetActive(false);
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
@@ -65,11 +67,13 @@ public class UIItemInventory : InitMonoBehaviour
         this.itemImage.sprite = this.itemInventory.itemProfile.itemSprite;
     }
 
-    public virtual void PressUIItemInventory()
+    public virtual void Press()
     {
         if (itemInventory == null) return;
-        UIInvDetail.Instance.SetUIInvDetail(itemInventory);
-        UIInventory.Instance.SetCurrentItemInventory(UIInventory.Instance.GetIndexItemInventory(itemInventory));
-        UIInventory.Instance.KeepFocusInCurrentItemInventory();
+        UIInventory.Instance.UIInvDetail.SetUIInvDetail(itemInventory);
+        UIInventory.Instance.ClearAllFocus();
+        focus.gameObject.SetActive(true);
     }
+
+    public void ClearFocus() => focus.gameObject.SetActive(false);
 }

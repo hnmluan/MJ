@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Shop : Singleton<Shop>
 {
-    private List<IObservationShop> observationShops = new List<IObservationShop>();
+    private List<IObservationShop> observations = new List<IObservationShop>();
 
     public string latestResetTimestamp;
 
@@ -79,19 +79,19 @@ public class Shop : Singleton<Shop>
         return timeDifferenceInSeconds;
     }
 
-    public void AddObservation(IObservationShop observation) => observationShops.Add(observation);
+    public void AddObservation(IObservationShop observation) => observations.Add(observation);
 
-    public void RemoveObservation(IObservationShop observation) => observationShops.Remove(observation);
+    public void RemoveObservation(IObservationShop observation) => observations.Remove(observation);
 
     public void ExcuteBuyItemObservation()
     {
-        foreach (IObservationShop observation in observationShops)
+        foreach (IObservationShop observation in observations)
             observation.BuyItem();
     }
 
     public void ExcuteResetItemsObservation()
     {
-        foreach (IObservationShop observation in observationShops)
+        foreach (IObservationShop observation in observations)
             observation.ResetItems();
     }
 }

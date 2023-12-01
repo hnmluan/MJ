@@ -1,4 +1,4 @@
 public class BtnInvBuyAll : BaseButton
 {
-    protected override void OnClick() => UIInvDetail.Instance.SellAllItem();
+    protected override void OnClick() => UIInventory.Instance.UIInvDetail.SellAllItem();
 }
