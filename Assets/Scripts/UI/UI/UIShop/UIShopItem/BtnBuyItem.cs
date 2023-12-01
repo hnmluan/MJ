@@ -19,7 +19,6 @@ public class BtnBuyItem : BaseButton
     {
         ItemShop item = uiItemShop.ItemShop;
         Shop.Instance.BuyItem(item);
-        UIShop.Instance.RefreshUI();
     }
 
     protected override void OnClick()

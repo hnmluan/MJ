@@ -4,49 +4,95 @@ using System.Linq;
 
 public class Shop : Singleton<Shop>
 {
+    private List<IObservationShop> observationShops = new List<IObservationShop>();
+
     public string latestResetTimestamp;
 
-    public int resetInterval;
+    public static int resetIntervalInSeconds = 10;
 
     public List<ItemShop> listItem;
 
-    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Shop, new ShopData(this));
+    protected void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Shop, new ShopData(this));
 
-    public void LoadData()
+    protected void LoadData()
     {
         ShopData shopData = SaveLoadHandler.LoadFromFile<ShopData>(FileNameData.Shop);
 
         if (shopData == null)
         {
             this.latestResetTimestamp = DateTime.Now.ToString();
-            this.resetInterval = 0;
             ResetItem();
             return;
         }
 
-        this.resetInterval = shopData.resetInterval;
         this.latestResetTimestamp = shopData.latestItemResetTimestamp;
         this.listItem = shopData.listItem;
     }
+
+    protected override void Start() => InvokeRepeating(nameof(CheckResetTime), 0f, 1f);
+
+    protected void CheckResetTime()
+    {
+        if (!isResetTimeReached()) return;
+        this.UpdateLatestResetTimestamp();
+        this.ResetItem();
+    }
+
+    protected void UpdateLatestResetTimestamp() => latestResetTimestamp = DateTime.Now.ToString();
 
     protected override void Awake() => LoadData();
 
     public void ResetItem()
     {
         this.listItem.Clear();
+        listItem = getRandomItems();
+        this.UpdateLatestResetTimestamp();
+        this.ExcuteResetItemsObservation();
+        this.SaveData();
+    }
+
+    protected List<ItemShop> getRandomItems()
+    {
+        List<ItemShop> randomItems = new List<ItemShop>();
         for (int i = 0; i < 10; i++)
         {
             ItemDataSO item = ItemDataSO.GetRandomSellableItemSO();
             ItemShop itemShop = new(item);
-            this.listItem.Add(itemShop);
+            randomItems.Add(itemShop);
         }
-        SaveData();
+        return randomItems;
     }
 
     public void BuyItem(ItemShop item)
     {
         item.isBuy = true;
         this.SaveData();
+        this.ExcuteBuyItemObservation();
+    }
+
+    public bool isResetTimeReached() => GetSecondsBetweenTimestamps(DateTime.Parse(latestResetTimestamp), DateTime.Now) >= resetIntervalInSeconds;
+
+    protected int GetSecondsBetweenTimestamps(DateTime startTime, DateTime endTime)
+    {
+        TimeSpan duration = endTime - startTime;
+        int timeDifferenceInSeconds = (int)duration.TotalSeconds;
+        return timeDifferenceInSeconds;
+    }
+
+    public void AddObservation(IObservationShop observation) => observationShops.Add(observation);
+
+    public void RemoveObservation(IObservationShop observation) => observationShops.Remove(observation);
+
+    public void ExcuteBuyItemObservation()
+    {
+        foreach (IObservationShop observation in observationShops)
+            observation.BuyItem();
+    }
+
+    public void ExcuteResetItemsObservation()
+    {
+        foreach (IObservationShop observation in observationShops)
+            observation.ResetItems();
     }
 }
 
@@ -83,7 +129,6 @@ public class ShopData
     public ShopData(Shop shop)
     {
         this.latestItemResetTimestamp = shop.latestResetTimestamp;
-        this.resetInterval = shop.resetInterval;
         this.listItem = shop.listItem;
     }
 }

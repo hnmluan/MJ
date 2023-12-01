@@ -9,7 +9,7 @@ public class SetUpIntance : MonoBehaviour
     {
         foreach (GameObject intance in intances)
         {
-            if(!intance.activeSelf)
+            if (!intance.activeSelf)
             {
                 intance.SetActive(true);
                 intance.SetActive(false);
