@@ -5,30 +5,30 @@ using System.Linq;
 [Serializable]
 public class DictionaryData
 {
-    public List<String> weaponSOsAvailSeen;
-    public List<String> weaponSOsAvailNotSeen;
+    public List<String> seenWeapons;
+    public List<String> unseenWeapons;
 
-    public List<String> npcSOsAvailSeen;
-    public List<String> npcSOsAvailNotSeen;
+    public List<String> seenNPCs;
+    public List<String> unseenNPCs;
 
-    public List<String> enemySOsAvailSeen;
-    public List<String> enemySOsAvailNotSeen;
+    public List<String> seenEnemies;
+    public List<String> unseenEnemies;
 
     public DictionaryData(Dictionary dictionary)
     {
-        this.enemySOsAvailSeen = dictionary.EnemySOsAvailSeen
+        this.seenEnemies = dictionary.SeenEnemies
             .Select(item => item.enemyCode.ToString()).ToList();
-        this.enemySOsAvailNotSeen = dictionary.EnemySOsAvailNotSeen
+        this.unseenEnemies = dictionary.UnseenEnemies
             .Select(item => item.enemyCode.ToString()).ToList();
 
-        this.weaponSOsAvailSeen = dictionary.WeaponSOsAvailSeen
+        this.seenWeapons = dictionary.SeenWeapons
             .Select(item => item.damageObjectCode.ToString()).ToList();
-        this.weaponSOsAvailNotSeen = dictionary.WeaponSOsAvailNotSeen
+        this.unseenWeapons = dictionary.UnseenWeapons
             .Select(item => item.damageObjectCode.ToString()).ToList();
 
-        this.npcSOsAvailSeen = dictionary.NpcSOsAvailSeen
+        this.seenNPCs = dictionary.SeenNPCs
             .Select(item => item.characterCode.ToString()).ToList();
-        this.npcSOsAvailNotSeen = dictionary.NpcSOsAvailNotSeen
+        this.unseenNPCs = dictionary.UnseenNPCs
             .Select(item => item.characterCode.ToString()).ToList();
     }
 }

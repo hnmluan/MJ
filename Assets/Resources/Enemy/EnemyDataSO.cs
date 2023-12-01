@@ -48,4 +48,6 @@ public class EnemyDataSO : ScriptableObject
         Enum.TryParse(name, out enemyCode);
         return FindByItemCode(enemyCode);
     }
+
+    public static List<EnemyDataSO> GetAllSO() => new List<EnemyDataSO>(Resources.LoadAll<EnemyDataSO>("Enemy/ScriptableObject"));
 }

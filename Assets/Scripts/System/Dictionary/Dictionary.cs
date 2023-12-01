@@ -7,25 +7,18 @@ using ListWeapon = System.Collections.Generic.List<WeaponDataSO>;
 
 public class Dictionary : Singleton<Dictionary>
 {
-    [SerializeField] protected List<IActionDictionaryObserver> observers = new List<IActionDictionaryObserver>();
+    private List<IObservationDictionary> observations = new List<IObservationDictionary>();
 
-    [SerializeField] ListWeapon weaponSOsAvailSeen;
-    public ListWeapon WeaponSOsAvailSeen { get => weaponSOsAvailSeen; }
+    [SerializeField] ListWeapon seenWeapons, unseenWeapons;
+    [SerializeField] ListEnemy seenEnemies, unseenEnemies;
+    [SerializeField] ListNPC seenNPCs, unseenNPCs;
 
-    [SerializeField] ListWeapon weaponSOsAvailNotSeen;
-    public ListWeapon WeaponSOsAvailNotSeen { get => weaponSOsAvailNotSeen; }
-
-    [SerializeField] ListNPC npcSOsAvailSeen;
-    public ListNPC NpcSOsAvailSeen { get => npcSOsAvailSeen; }
-
-    [SerializeField] ListNPC npcSOsAvailNotSeen;
-    public ListNPC NpcSOsAvailNotSeen { get => npcSOsAvailNotSeen; }
-
-    [SerializeField] ListEnemy enemySOsAvailSeen;
-    public ListEnemy EnemySOsAvailSeen { get => enemySOsAvailSeen; }
-
-    [SerializeField] ListEnemy enemySOsAvailNotSeen;
-    public ListEnemy EnemySOsAvailNotSeen { get => enemySOsAvailNotSeen; }
+    public ListWeapon SeenWeapons { get => seenWeapons; }
+    public ListWeapon UnseenWeapons { get => unseenWeapons; }
+    public ListNPC SeenNPCs { get => seenNPCs; }
+    public ListNPC UnseenNPCs { get => unseenNPCs; }
+    public ListEnemy SeenEnemies { get => seenEnemies; }
+    public ListEnemy UnseenEnemies { get => unseenEnemies; }
 
     protected override void Awake()
     {
@@ -39,128 +32,97 @@ public class Dictionary : Singleton<Dictionary>
 
         if (dictionaryData == null) return;
 
-        this.enemySOsAvailSeen = dictionaryData.enemySOsAvailSeen
+        this.seenEnemies = dictionaryData.seenEnemies
             .Where(item => EnemyCodeParser.FromString(item) != EnemyCode.NoEnemy)
             .Select(item => EnemyDataSO.FindByName(item)).ToList();
 
-        this.enemySOsAvailNotSeen = dictionaryData.enemySOsAvailNotSeen
+        this.unseenEnemies = dictionaryData.unseenEnemies
             .Where(item => EnemyCodeParser.FromString(item) != EnemyCode.NoEnemy)
             .Select(item => EnemyDataSO.FindByName(item)).ToList();
 
-        this.weaponSOsAvailSeen = dictionaryData.weaponSOsAvailSeen
+        this.seenWeapons = dictionaryData.seenWeapons
             .Where(item => WeaponCodeParser.FromString(item) != WeaponCode.NoWeapon)
             .Select(item => WeaponDataSO.FindByName(item)).ToList();
-        this.weaponSOsAvailNotSeen = dictionaryData.weaponSOsAvailNotSeen
+        this.unseenWeapons = dictionaryData.unseenWeapons
             .Where(item => WeaponCodeParser.FromString(item) != WeaponCode.NoWeapon)
             .Select(item => WeaponDataSO.FindByName(item)).ToList();
 
-        this.npcSOsAvailSeen = dictionaryData.npcSOsAvailSeen
+        this.seenNPCs = dictionaryData.seenNPCs
             .Where(item => CharacterCodeParser.FromString(item) != CharacterCode.NoActor)
             .Select(item => CharacterDataSO.FindByName(item)).ToList();
-        this.npcSOsAvailNotSeen = dictionaryData.npcSOsAvailNotSeen
+        this.unseenNPCs = dictionaryData.unseenNPCs
             .Where(item => CharacterCodeParser.FromString(item) != CharacterCode.NoActor)
             .Select(item => CharacterDataSO.FindByName(item)).ToList();
     }
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Dictionary, new DictionaryData(this));
 
-    private void AddDictionary(WeaponDataSO damageObjectSO)
+    private void AddItem<T>(T SO, List<T> seenItems, List<T> unseenItems)
+        where T : ScriptableObject
     {
-        if (weaponSOsAvailSeen.Contains(damageObjectSO) || weaponSOsAvailNotSeen.Contains(damageObjectSO)) return;
-        weaponSOsAvailNotSeen.Add(damageObjectSO);
+        if (seenItems.Contains(SO) || unseenItems.Contains(SO)) return;
+        unseenItems.Add(SO);
         SaveData();
     }
 
-    private void AddDictionary(CharacterDataSO npcProfileSO)
+    public void AddItem(ScriptableObject profileSO)
     {
-        if (npcSOsAvailSeen.Contains(npcProfileSO) || npcSOsAvailNotSeen.Contains(npcProfileSO)) return;
-        npcSOsAvailNotSeen.Add(npcProfileSO);
+        if (profileSO is EnemyDataSO enemyProfileSO) AddItem(enemyProfileSO, seenEnemies, unseenEnemies);
+        else if (profileSO is CharacterDataSO npcProfileSO) AddItem(npcProfileSO, seenNPCs, unseenNPCs);
+        else if (profileSO is WeaponDataSO damageObjectSO) AddItem(damageObjectSO, SeenWeapons, unseenWeapons);
+        ExcuteAddItemObservation();
         SaveData();
     }
 
-    private void AddDictionary(EnemyDataSO enemyProfileSO)
+    private void SeenItem<T>(T SO, List<T> seenItems, List<T> unseenItems) where T : ScriptableObject
     {
-        if (enemySOsAvailSeen.Contains(enemyProfileSO) || enemySOsAvailNotSeen.Contains(enemyProfileSO)) return;
-        enemySOsAvailNotSeen.Add(enemyProfileSO);
+        if (!unseenItems.Contains(SO)) return;
+
+        seenItems.Add(SO);
+        unseenItems.Remove(SO);
         SaveData();
     }
 
-    public void AddDictionary(ScriptableObject profileSO)
+    public void SeenItem(ScriptableObject profileSO)
     {
-        if (profileSO is EnemyDataSO) AddDictionary(profileSO as EnemyDataSO);
-        if (profileSO is CharacterDataSO) AddDictionary(profileSO as CharacterDataSO);
-        if (profileSO is WeaponDataSO) AddDictionary(profileSO as WeaponDataSO);
-        OnAddItem();
+        if (profileSO is EnemyDataSO enemyProfileSO) SeenItem(enemyProfileSO, seenEnemies, unseenEnemies);
+        else if (profileSO is CharacterDataSO npcProfileSO) SeenItem(npcProfileSO, seenNPCs, unseenNPCs);
+        else if (profileSO is WeaponDataSO damageObjectSO) SeenItem(damageObjectSO, SeenWeapons, unseenWeapons);
+        ExcuteSeenItemObservation();
         SaveData();
     }
 
-    private void SeenItemDictionary(EnemyDataSO enemyProfileSO)
+    public bool isAvailableItem(ScriptableObject SO) => isSeenItem(SO) || isUnseenItem(SO);
+
+    public bool isSeenItem(ScriptableObject SO)
+    => seenWeapons.Contains(SO as WeaponDataSO)
+    || seenNPCs.Contains(SO as CharacterDataSO)
+    || seenEnemies.Contains(SO as EnemyDataSO);
+
+    public bool isUnseenItem(ScriptableObject SO)
+    => unseenWeapons.Contains(SO as WeaponDataSO)
+    || unseenNPCs.Contains(SO as CharacterDataSO)
+    || unseenEnemies.Contains(SO as EnemyDataSO);
+
+    public int GetNumUnseenItems() => unseenEnemies.Count + unseenNPCs.Count + unseenWeapons.Count;
+
+    public int GetNumUnseenNpcs() => unseenNPCs.Count;
+
+    public int GetNumUnseenEnemies() => unseenEnemies.Count;
+
+    public int GetNumUnseenWeapons() => unseenWeapons.Count;
+
+    public void AddObservation(IObservationDictionary observation) => observations.Add(observation);
+
+    public void RemoveObservation(IObservationDictionary observation) => observations.Remove(observation);
+
+    public void ExcuteSeenItemObservation()
     {
-        if (enemySOsAvailNotSeen.Contains(enemyProfileSO))
-        {
-            enemySOsAvailSeen.Add(enemyProfileSO);
-            enemySOsAvailNotSeen.Remove(enemyProfileSO);
-        }
-        SaveData();
+        foreach (IObservationDictionary observation in observations) observation.SeenItem();
     }
 
-    private void SeenItemDictionary(CharacterDataSO npcProfileSO)
+    public void ExcuteAddItemObservation()
     {
-        if (npcSOsAvailNotSeen.Contains(npcProfileSO))
-        {
-            npcSOsAvailSeen.Add(npcProfileSO);
-            npcSOsAvailNotSeen.Remove(npcProfileSO);
-        }
-        SaveData();
-    }
-
-    private void SeenItemDictionary(WeaponDataSO damageObjectSO)
-    {
-        if (weaponSOsAvailNotSeen.Contains(damageObjectSO))
-        {
-            WeaponSOsAvailSeen.Add(damageObjectSO);
-            weaponSOsAvailNotSeen.Remove(damageObjectSO);
-        }
-        SaveData();
-    }
-
-    public void SeenItemDictionary(ScriptableObject profileSO)
-    {
-        if (profileSO is EnemyDataSO) SeenItemDictionary(profileSO as EnemyDataSO);
-        if (profileSO is CharacterDataSO) SeenItemDictionary(profileSO as CharacterDataSO);
-        if (profileSO is WeaponDataSO) SeenItemDictionary(profileSO as WeaponDataSO);
-        this.OnAddItem();
-        SaveData();
-    }
-
-    public bool CheckAvailableItemInDictonary(ScriptableObject profileSO)
-        => weaponSOsAvailSeen.Contains(profileSO as WeaponDataSO)
-        || weaponSOsAvailNotSeen.Contains(profileSO as WeaponDataSO)
-        || npcSOsAvailSeen.Contains(profileSO as CharacterDataSO)
-        || npcSOsAvailNotSeen.Contains(profileSO as CharacterDataSO)
-        || enemySOsAvailSeen.Contains(profileSO as EnemyDataSO)
-        || enemySOsAvailNotSeen.Contains(profileSO as EnemyDataSO);
-
-    public int GetNumberOfItemInNotSeen() =>
-    Dictionary.Instance.EnemySOsAvailNotSeen.Count
-    + Dictionary.Instance.NpcSOsAvailNotSeen.Count
-    + Dictionary.Instance.WeaponSOsAvailNotSeen.Count;
-
-    public int GetNumberOfNpcsInNotSeen() => Dictionary.Instance.NpcSOsAvailNotSeen.Count;
-
-    public int GetNumberOfEnemiesInNotSeen() => Dictionary.Instance.enemySOsAvailNotSeen.Count;
-
-    public int GetNumberOfWeaponsInNotSeen() => Dictionary.Instance.weaponSOsAvailNotSeen.Count;
-
-    public virtual void AddObserver(IActionDictionaryObserver observer) => this.observers.Add(observer);
-
-    protected virtual void OnAddItem()
-    {
-        foreach (IActionDictionaryObserver observer in this.observers) observer.OnAddItem();
-    }
-
-    protected virtual void OnDeductItem()
-    {
-        foreach (IActionDictionaryObserver observer in this.observers) observer.OnSeenItem();
+        foreach (IObservationDictionary observation in observations) observation.AddItem();
     }
 }

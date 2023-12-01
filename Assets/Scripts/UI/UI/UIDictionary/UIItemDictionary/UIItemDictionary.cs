@@ -2,10 +2,9 @@ using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
+public class UIItemDictionary : InitMonoBehaviour, IObservationDictionary
 {
-    [Header("UI Item Dictionary")]
-    [SerializeField] protected ScriptableObject itemDictionary;
+    protected ScriptableObject itemDictionary;
     public ScriptableObject ItemDictionary => itemDictionary;
 
     [SerializeField] protected Text itemName;
@@ -14,26 +13,27 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
     [SerializeField] protected Image itemImage;
     public Image Image => itemImage;
 
-    [SerializeField] protected Transform iconNewItem;
-    public Transform IconNewItem => iconNewItem;
+    [SerializeField] protected Transform unseenIcon;
+    public Transform NewIcon => unseenIcon;
 
     [SerializeField] protected Transform focus;
     public Transform Focus => focus;
 
-    protected override void Start() => Dictionary.Instance.AddObserver(this);
-
     protected override void OnEnable()
     {
-        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
-        else iconNewItem.gameObject.SetActive(false);
+        Dictionary.Instance.AddObservation(this);
+        unseenIcon.gameObject.SetActive(false);
+        if (Dictionary.Instance.isUnseenItem(itemDictionary)) unseenIcon.gameObject.SetActive(true);
     }
+
+    protected override void OnDisable() => Dictionary.Instance.RemoveObservation(this);
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadItemName();
         this.LoadItemImage();
-        this.LoadIonNewItem();
+        this.LoadIconNewItem();
         this.LoadFocus();
     }
 
@@ -58,19 +58,19 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
-    protected virtual void LoadIonNewItem()
+    protected virtual void LoadIconNewItem()
     {
-        if (this.iconNewItem != null) return;
-        this.iconNewItem = transform.Find("New");
+        if (this.unseenIcon != null) return;
+        this.unseenIcon = transform.Find("New");
         Debug.Log(transform.name + ": LoadIonNewItem", gameObject);
     }
 
     public virtual void ShowItem(ScriptableObject item)
     {
-        if (item is EnemyDataSO) ShowEnemyProfileSO(item as EnemyDataSO);
-        if (item is CharacterDataSO) ShowNPCProfileSO(item as CharacterDataSO);
-        if (item is WeaponDataSO) ShowDamageObjectSO(item as WeaponDataSO);
-        if (!Dictionary.Instance.CheckAvailableItemInDictonary(item)) HideItem(item);
+        if (item is EnemyDataSO) ShowEnemy(item as EnemyDataSO);
+        if (item is CharacterDataSO) ShowNPC(item as CharacterDataSO);
+        if (item is WeaponDataSO) ShowWeapon(item as WeaponDataSO);
+        if (!Dictionary.Instance.isAvailableItem(item)) HideItem(item);
     }
 
     private void HideItem(ScriptableObject item)
@@ -81,7 +81,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.color = Color.black;
     }
 
-    private void ShowDamageObjectSO(WeaponDataSO damageObjectProfileSO)
+    private void ShowWeapon(WeaponDataSO damageObjectProfileSO)
     {
         if (damageObjectProfileSO == null) return;
         itemDictionary = damageObjectProfileSO;
@@ -90,7 +90,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.color = Color.white;
     }
 
-    private void ShowEnemyProfileSO(EnemyDataSO enemyProfileSO)
+    private void ShowEnemy(EnemyDataSO enemyProfileSO)
     {
         if (enemyProfileSO == null) return;
         itemDictionary = enemyProfileSO;
@@ -99,7 +99,7 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.sprite = enemyProfileSO.portrait;
     }
 
-    private void ShowNPCProfileSO(CharacterDataSO npcProfileSO)
+    private void ShowNPC(CharacterDataSO npcProfileSO)
     {
         if (npcProfileSO == null) return;
         itemDictionary = npcProfileSO;
@@ -108,20 +108,13 @@ public class UIItemDictionary : InitMonoBehaviour, IActionDictionaryObserver
         itemImage.sprite = npcProfileSO.portrait;
     }
 
-    private bool CheckNewItem() =>
-        Dictionary.Instance.NpcSOsAvailNotSeen.Contains(itemDictionary as CharacterDataSO)
-            || Dictionary.Instance.EnemySOsAvailNotSeen.Contains(itemDictionary as EnemyDataSO)
-            || Dictionary.Instance.WeaponSOsAvailNotSeen.Contains(itemDictionary as WeaponDataSO);
-
-    public void OnAddItem()
+    public void AddItem()
     {
-        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
-        else iconNewItem.gameObject.SetActive(false);
+        if (Dictionary.Instance.isAvailableItem(itemDictionary)) ShowItem(itemDictionary);
     }
 
-    public void OnSeenItem()
+    public void SeenItem()
     {
-        if (CheckNewItem()) iconNewItem.gameObject.SetActive(true);
-        else iconNewItem.gameObject.SetActive(false);
+        if (Dictionary.Instance.isSeenItem(itemDictionary)) unseenIcon.gameObject.SetActive(false);
     }
 }

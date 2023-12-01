@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Character", menuName = "ScriptableObject/Character")]
@@ -33,4 +34,6 @@ public class CharacterDataSO : ScriptableObject
         Enum.TryParse(name, out characterCode);
         return FindByItemCode(characterCode);
     }
+
+    public static List<CharacterDataSO> GetAllSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("Character/ScriptableObject"));
 }

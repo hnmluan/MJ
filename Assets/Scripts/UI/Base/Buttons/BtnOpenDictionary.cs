@@ -1,6 +1,6 @@
 public class BtnOpenDictionary : BaseButton
 {
-    protected override void OnClick() => UIDictionary.Instance.Toggle();
+    protected override void OnClick() => UIDictionary.Instance.Open();
 
     private void Update()
     {

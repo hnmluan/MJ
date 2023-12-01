@@ -1,71 +1,87 @@
 ﻿using Assets.SimpleLocalization;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIDictionary : BaseUI<UIDictionary>
+public enum EDictionaryType
 {
-    [Header("UI Dictionary")]
+    Enemies,
+    NPCs,
+    Weapons
+}
 
-    [SerializeField] private EDictionaryType dictionaryType = EDictionaryType.Enemies;
+public class UIDictionary : BaseUI<UIDictionary>, IObservationDictionary
+{
+    [SerializeField] protected EDictionaryType dictionaryType = EDictionaryType.Enemies;
     public EDictionaryType DictionaryType => dictionaryType;
+
+    [SerializeField] protected UIDictionaryItemSpawner dictionaryItemSpawner;
+
+    [SerializeField] protected UIDictionaryDetail dictionaryDetail;
+    public UIDictionaryDetail DictionaryDetail => dictionaryDetail;
+
+    [SerializeField] protected List<Transform> tabs;
+
+    [SerializeField] protected Transform tabEnemy;
+
+    [SerializeField] protected Transform tabNPC;
+
+    [SerializeField] protected Transform tabWeapon;
+
+    [SerializeField] protected Text unseenEnemiesCount;
+
+    [SerializeField] protected Text unseenNPCsCount;
+
+    [SerializeField] protected Text unseenWeaponsCount;
+
+    [SerializeField] protected LocalizedText note;
 
     protected override void OnEnable()
     {
-        dictionaryType = EDictionaryType.Enemies;
-        this.ShowProfileSO();
+        /*        
+                dictionaryType = EDictionaryType.Enemies;
+                this.ClearItems();
+                note.LocalizationKey = "Dictionary.NoteEnemies";
+                note.Localize();
+                ShowEnemies();
+                SortItems();
+        */
+
+        Dictionary.Instance.AddObservation(this);
+        SwitchTab(EDictionaryType.Enemies);
+        unseenEnemiesCount.text = "(" + Dictionary.Instance.GetNumUnseenEnemies() + ")";
+        unseenNPCsCount.text = "(" + Dictionary.Instance.GetNumUnseenNpcs() + ")";
+        unseenWeaponsCount.text = "(" + Dictionary.Instance.GetNumUnseenWeapons() + ")";
     }
 
-    public virtual void ShowProfileSO()
+    protected override void OnDisable() => Dictionary.Instance.RemoveObservation(this);
+
+    private void ShowEnemies()
     {
-        this.ClearItems();
-
-        if (dictionaryType == EDictionaryType.Enemies) ShowEnemyProfileSO();
-
-        if (dictionaryType == EDictionaryType.NPCs) ShowNPCProfileSO();
-
-        if (dictionaryType == EDictionaryType.Weapons) ShowDamageObjectProfileSO();
-
-        SortItems();
+        foreach (EnemyDataSO item in EnemyDataSO.GetAllSO()) dictionaryItemSpawner.SpawnItem(item);
     }
 
-    private void ShowEnemyProfileSO()
+    private void ShowNPCs()
     {
-        foreach (EnemyDataSO item in GetEnemyProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (CharacterDataSO item in CharacterDataSO.GetAllSO()) dictionaryItemSpawner.SpawnItem(item);
     }
 
-    private void ShowNPCProfileSO()
+    private void ShowWeapons()
     {
-        foreach (CharacterDataSO item in GetNPCProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
+        foreach (WeaponDataSO item in WeaponDataSO.GetAllSO()) dictionaryItemSpawner.SpawnItem(item);
     }
 
-    private void ShowDamageObjectProfileSO()
-    {
-        foreach (WeaponDataSO item in GetDamageObjectProfileSO()) UIDictionaryItemSpawner.Instance.SpawnItem(item);
-    }
-
-    protected virtual void ClearItems() => UIDictionaryItemSpawner.Instance.ClearItems();
-
-    public void SetDictionaryFilter(EDictionaryType dictionaryFilter)
-    {
-        this.dictionaryType = dictionaryFilter;
-        this.ShowProfileSO();
-    }
-
-    private List<WeaponDataSO> GetDamageObjectProfileSO() => new List<WeaponDataSO>(Resources.LoadAll<WeaponDataSO>("DamageObject/ScriptableObject"));
-
-    private List<CharacterDataSO> GetNPCProfileSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("Character/ScriptableObject"));
-
-    private List<EnemyDataSO> GetEnemyProfileSO() => new List<EnemyDataSO>(Resources.LoadAll<EnemyDataSO>("Enemy/ScriptableObject"));
+    protected virtual void ClearItems() => dictionaryItemSpawner.ClearItems();
 
     protected virtual void SortItems()
     {
-        int itemCount = UIDictionaryCtrl.Instance.Content.childCount;
+        int itemCount = dictionaryItemSpawner.Content.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currObj = UIDictionaryCtrl.Instance.Content.GetChild(i);
-            Transform nextObj = UIDictionaryCtrl.Instance.Content.GetChild(i + 1);
+            Transform currObj = dictionaryItemSpawner.Content.GetChild(i);
+            Transform nextObj = dictionaryItemSpawner.Content.GetChild(i + 1);
 
             UIItemDictionary currentUIObj = currObj.GetComponent<UIItemDictionary>();
             UIItemDictionary nextUIObj = nextObj.GetComponent<UIItemDictionary>();
@@ -104,5 +120,53 @@ public class UIDictionary : BaseUI<UIDictionary>
 
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
+    }
+
+    public void UnFocusAllTab()
+    {
+        foreach (Transform item in tabs)
+        {
+            Color targetColor = ColorUtility.TryParseHtmlString("#A9A9A9", out Color parsedColor) ? parsedColor : Color.white;
+            item.GetComponent<Image>().color = targetColor;
+        }
+    }
+
+    public void SwitchTab(EDictionaryType dictionaryType)
+    {
+        //if (this.dictionaryType == dictionaryType && dictionaryItemSpawner.Content.childCount == 0) return;
+
+        this.dictionaryType = dictionaryType;
+
+        this.ClearItems();
+
+        switch (dictionaryType)
+        {
+            case EDictionaryType.Enemies:
+                note.LocalizationKey = "Dictionary.NoteEnemies";
+                ShowEnemies();
+                break;
+            case EDictionaryType.NPCs:
+                note.LocalizationKey = "Dictionary.NoteNpcs";
+                ShowNPCs();
+                break;
+            case EDictionaryType.Weapons:
+                note.LocalizationKey = "Dictionary.NoteWeapons";
+                ShowWeapons();
+                break;
+        }
+
+        SortItems();
+        UIDictionary.Instance.DictionaryDetail.Clear();
+        UnFocusAllTab();
+        note.Localize();
+    }
+
+    public void AddItem() { }
+
+    public void SeenItem()
+    {
+        unseenEnemiesCount.text = "(" + Dictionary.Instance.GetNumUnseenEnemies() + ")";
+        unseenNPCsCount.text = "(" + Dictionary.Instance.GetNumUnseenNpcs() + ")";
+        unseenWeaponsCount.text = "(" + Dictionary.Instance.GetNumUnseenWeapons() + ")";
     }
 }

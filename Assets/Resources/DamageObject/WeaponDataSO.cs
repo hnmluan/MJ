@@ -44,4 +44,6 @@ public class WeaponDataSO : ScriptableObject
         Enum.TryParse(name, out weaponCode);
         return FindByItemCode(weaponCode);
     }
+
+    public static List<WeaponDataSO> GetAllSO() => new List<WeaponDataSO>(Resources.LoadAll<WeaponDataSO>("DamageObject/ScriptableObject"));
 }
