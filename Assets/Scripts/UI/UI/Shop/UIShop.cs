@@ -5,40 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
-public class UIShop : InitMonoBehaviour, IObservationShop
+public class UIShop : UIBase, IObservationShop
 {
     private static UIShop instance;
     public static UIShop Instance => instance;
-
-    protected bool isOpen = true;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIShop.instance != null) Debug.LogError("Only 1 UIShop allow to exist");
-        UIShop.instance = this;
-    }
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        this.gameObject.SetActive(true);
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        this.gameObject.SetActive(false);
-        this.isOpen = false;
-    }
-
-    protected override void Start() => this.Close();
-
 
     [SerializeField] protected UIShopItemSpawner itemSpawner;
 
@@ -47,6 +17,13 @@ public class UIShop : InitMonoBehaviour, IObservationShop
     [SerializeField] protected LocalizedText greetingText;
 
     [SerializeField] protected List<string> keysGreetingText;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIShop.instance != null) Debug.LogError("Only 1 UIShop allow to exist");
+        UIShop.instance = this;
+    }
 
     protected override void OnEnable()
     {
@@ -103,7 +80,6 @@ public class UIShop : InitMonoBehaviour, IObservationShop
         Random random = new Random();
         return keysGreetingText[random.Next(keysGreetingText.Count)];
     }
-
     public void BuyItem() => ShowItems();
 
     public void ResetItems() => ShowItems();

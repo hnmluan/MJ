@@ -9,12 +9,16 @@ public enum ArmorySort
     ByLevel = 2,
 }
 
-public class UIArmory : InitMonoBehaviour
+public class UIArmory : UIBase
 {
     private static UIArmory instance;
     public static UIArmory Instance => instance;
 
-    protected bool isOpen = true;
+    [SerializeField] protected ArmorySort armorySort = ArmorySort.ByName;
+
+    [SerializeField] protected WeaponType armoryFilter = WeaponType.NoType;
+
+    [SerializeField] UIArmoryItemSpawner itemSpawner;
 
     protected override void Awake()
     {
@@ -23,50 +27,23 @@ public class UIArmory : InitMonoBehaviour
         UIArmory.instance = this;
     }
 
-    protected override void Start() => this.Close();
+    protected override void OnEnable() => ShowItems();
 
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        this.gameObject.SetActive(true);
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        this.gameObject.SetActive(false);
-        this.isOpen = false;
-    }
-
-    [SerializeField] protected ArmorySort armorySort = ArmorySort.ByName;
-
-    [SerializeField] protected WeaponType armoryFilter = WeaponType.NoType;
-
-    [SerializeField] UIArmoryItemSpawner itemSpawner;
-
-    protected override void OnEnable() => ShowWeapons();
-
-    public void SetArmorySort(ArmorySort armorySort)
+    public void SetSort(ArmorySort armorySort)
     {
         this.armorySort = armorySort;
-        this.ShowWeapons();
+        this.ShowItems();
     }
 
-    public void SetArmoryFilter(WeaponType armoryFilter)
+    public void SetFilter(WeaponType armoryFilter)
     {
         this.armoryFilter = armoryFilter;
-        this.ShowWeapons();
+        this.ShowItems();
     }
 
-    public void ShowWeapons()
+    public void ShowItems()
     {
-        this.ClearAllWeapons();
+        this.ClearAllItems();
 
         List<ItemArmory> weapons = Armory.Instance.Weapons;
 
@@ -77,7 +54,7 @@ public class UIArmory : InitMonoBehaviour
         this.SortItems();
     }
 
-    protected virtual void ClearAllWeapons() => itemSpawner.ClearWeapons();
+    protected virtual void ClearAllItems() => itemSpawner.ClearWeapons();
 
     protected virtual void SortItems()
     {

@@ -10,40 +10,10 @@ public enum EDictionaryType
     Weapons
 }
 
-public class UIDictionary : InitMonoBehaviour, IObservationDictionary
+public class UIDictionary : UIBase, IObservationDictionary
 {
     private static UIDictionary instance;
     public static UIDictionary Instance => instance;
-
-    protected bool isOpen = true;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
-        UIDictionary.instance = this;
-    }
-
-    protected override void Start() => this.Close();
-
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        this.gameObject.SetActive(true);
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        this.gameObject.SetActive(false);
-        this.isOpen = false;
-    }
 
     [SerializeField] protected EDictionaryType dictionaryType = EDictionaryType.Enemies;
     public EDictionaryType DictionaryType => dictionaryType;
@@ -67,7 +37,14 @@ public class UIDictionary : InitMonoBehaviour, IObservationDictionary
 
     [SerializeField] protected Text unseenWeaponsCount;
 
-    [SerializeField] protected LocalizedText note;
+    [SerializeField] protected LocalizedText noteText;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
+        UIDictionary.instance = this;
+    }
 
     protected override void OnEnable()
     {
@@ -166,15 +143,15 @@ public class UIDictionary : InitMonoBehaviour, IObservationDictionary
         switch (dictionaryType)
         {
             case EDictionaryType.Enemies:
-                note.LocalizationKey = "Dictionary.NoteEnemies";
+                noteText.LocalizationKey = "Dictionary.NoteEnemies";
                 ShowEnemies();
                 break;
             case EDictionaryType.NPCs:
-                note.LocalizationKey = "Dictionary.NoteNpcs";
+                noteText.LocalizationKey = "Dictionary.NoteNpcs";
                 ShowNPCs();
                 break;
             case EDictionaryType.Weapons:
-                note.LocalizationKey = "Dictionary.NoteWeapons";
+                noteText.LocalizationKey = "Dictionary.NoteWeapons";
                 ShowWeapons();
                 break;
         }
@@ -182,7 +159,7 @@ public class UIDictionary : InitMonoBehaviour, IObservationDictionary
         SortItems();
         UIDictionary.Instance.DictionaryDetail.Clear();
         UnFocusAllTab();
-        note.Localize();
+        noteText.Localize();
     }
 
     public void AddItem() { }

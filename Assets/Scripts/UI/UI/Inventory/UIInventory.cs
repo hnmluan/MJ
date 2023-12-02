@@ -11,40 +11,10 @@ public enum InventorySort
     Quantity = 2,
 }
 
-public class UIInventory : InitMonoBehaviour, IObservationInventory
+public class UIInventory : UIBase, IObservationInventory
 {
     private static UIInventory instance;
     public static UIInventory Instance => instance;
-
-    protected bool isOpen = true;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
-        UIInventory.instance = this;
-    }
-
-    protected override void Start() => this.Close();
-
-    public virtual void Toggle()
-    {
-        this.isOpen = !this.isOpen;
-        if (this.isOpen) this.Open();
-        else this.Close();
-    }
-
-    public virtual void Open()
-    {
-        this.gameObject.SetActive(true);
-        this.isOpen = true;
-    }
-
-    public virtual void Close()
-    {
-        this.gameObject.SetActive(false);
-        this.isOpen = false;
-    }
 
     [SerializeField] protected InventorySort inventorySort = InventorySort.Name;
 
@@ -58,9 +28,12 @@ public class UIInventory : InitMonoBehaviour, IObservationInventory
 
     [SerializeField] protected Text quanityItemText;
     [SerializeField] public UIInvDetail UIInvDetail => uiInvDetail;
-
-
-
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
+        UIInventory.instance = this;
+    }
 
     protected override void OnEnable()
     {

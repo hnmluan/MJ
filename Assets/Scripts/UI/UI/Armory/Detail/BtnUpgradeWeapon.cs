@@ -7,7 +7,7 @@ public class BtnUpgradeWeapon : BaseButton
         ItemArmory weapon = UIArmoryDetail.Instance.Weapon;
         bool isSuccess = weapon.Upgrade();
         UIArmoryDetail.Instance.SetUIArmoryDetail(weapon);
-        UIArmory.Instance.ShowWeapons();
+        UIArmory.Instance.ShowItems();
         if (isSuccess)
         {
             UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Armory.Upgrade.Success"));

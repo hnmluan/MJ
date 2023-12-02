@@ -35,6 +35,6 @@ public class DropdownArmoryFilter : BaseDropdown
     protected override void OnChanged(int option)
     {
         WeaponType weaponType = (WeaponType)Enum.ToObject(typeof(WeaponType), option);
-        UIArmory.Instance.SetArmoryFilter(weaponType);
+        UIArmory.Instance.SetFilter(weaponType);
     }
 }

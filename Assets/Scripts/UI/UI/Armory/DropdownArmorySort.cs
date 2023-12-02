@@ -5,11 +5,11 @@ public class DropdownArmorySort : BaseDropdown
         switch (option)
         {
             case 0:
-                UIArmory.Instance.SetArmorySort(ArmorySort.ByName);
+                UIArmory.Instance.SetSort(ArmorySort.ByName);
 
                 break;
             case 1:
-                UIArmory.Instance.SetArmorySort(ArmorySort.ByLevel);
+                UIArmory.Instance.SetSort(ArmorySort.ByLevel);
                 break;
         }
 
