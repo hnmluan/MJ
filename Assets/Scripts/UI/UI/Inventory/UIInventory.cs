@@ -7,13 +7,46 @@ using UnityEngine.UI;
 public enum InventorySort
 {
     NoSort = 0,
-    ByName = 1,
-    ByQuantity = 2,
+    Name = 1,
+    Quantity = 2,
 }
 
-public class UIInventory : BaseUI<UIInventory>, IObservationInventory
+public class UIInventory : InitMonoBehaviour, IObservationInventory
 {
-    [SerializeField] protected InventorySort inventorySort = InventorySort.ByName;
+    private static UIInventory instance;
+    public static UIInventory Instance => instance;
+
+    protected bool isOpen = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIInventory.instance != null) Debug.LogError("Only 1 UIInventory allow to exist");
+        UIInventory.instance = this;
+    }
+
+    protected override void Start() => this.Close();
+
+    public virtual void Toggle()
+    {
+        this.isOpen = !this.isOpen;
+        if (this.isOpen) this.Open();
+        else this.Close();
+    }
+
+    public virtual void Open()
+    {
+        this.gameObject.SetActive(true);
+        this.isOpen = true;
+    }
+
+    public virtual void Close()
+    {
+        this.gameObject.SetActive(false);
+        this.isOpen = false;
+    }
+
+    [SerializeField] protected InventorySort inventorySort = InventorySort.Name;
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
@@ -25,6 +58,9 @@ public class UIInventory : BaseUI<UIInventory>, IObservationInventory
 
     [SerializeField] protected Text quanityItemText;
     [SerializeField] public UIInvDetail UIInvDetail => uiInvDetail;
+
+
+
 
     protected override void OnEnable()
     {
@@ -88,12 +124,12 @@ public class UIInventory : BaseUI<UIInventory>, IObservationInventory
 
             switch (this.inventorySort)
             {
-                case InventorySort.ByName:
+                case InventorySort.Name:
                     string currentName = LocalizationManager.Localize(currentProfile.keyName);
                     string nextName = LocalizationManager.Localize(nextProfile.keyName);
                     isSwap = string.Compare(currentName, nextName) == 1; // Đổi từ -1 thành 1 để đảo ngược thứ tự
                     break;
-                case InventorySort.ByQuantity:
+                case InventorySort.Quantity:
                     int currentCount = currentUIItem.ItemInventory.itemCount;
                     int nextCount = nextUIItem.ItemInventory.itemCount;
                     isSwap = currentCount < nextCount; // Đổi dấu > thành <
@@ -105,7 +141,7 @@ public class UIInventory : BaseUI<UIInventory>, IObservationInventory
             {
                 switch (this.inventorySort)
                 {
-                    case InventorySort.ByName:
+                    case InventorySort.Name:
                         // Sắp xếp theo số lượng nếu cùng tên
                         if (currentProfile.keyName == nextProfile.keyName)
                         {
@@ -114,7 +150,7 @@ public class UIInventory : BaseUI<UIInventory>, IObservationInventory
                             isSwap = currentCount < nextCount;
                         }
                         break;
-                    case InventorySort.ByQuantity:
+                    case InventorySort.Quantity:
                         // Sắp xếp theo tên nếu cùng số lượng
                         if (currentUIItem.ItemInventory.itemCount == nextUIItem.ItemInventory.itemCount)
                         {

@@ -1,6 +1,6 @@
 public class BtnOpenGuide : BaseButton
 {
-    protected override void OnClick() => UIGuide.Instance.Toggle();
+    protected override void OnClick() => UIGuide.Instance.Open();
 
     private void Update()
     {

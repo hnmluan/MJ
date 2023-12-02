@@ -2,24 +2,12 @@ using UnityEngine;
 
 public class UIArmoryItemSpawner : Spawner
 {
-    private static UIArmoryItemSpawner instance;
-    public static UIArmoryItemSpawner Instance => instance;
-
     public static string normalWeapon = "UIItem";
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIArmoryItemSpawner.instance != null) Debug.Log("Only 1 UIArmoryItemSpawner allow to exist");
-        UIArmoryItemSpawner.instance = this;
-    }
+    [SerializeField] private Transform content;
+    public Transform Content => content;
 
-    protected override void LoadHolder()
-    {
-        if (this.holder != null) return;
-        this.holder = UIArmory.Instance.Content;
-        Debug.LogWarning(transform.name + ": LoadHodler", gameObject);
-    }
+    protected override void LoadHolder() => this.holder = this.content;
 
     public virtual void ClearWeapons()
     {

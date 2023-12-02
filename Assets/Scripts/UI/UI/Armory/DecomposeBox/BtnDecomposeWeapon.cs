@@ -28,7 +28,5 @@ public class BtnDecomposeWeapon : BaseButton
         UIArmoryDetail.Instance.SetEmptyUIArmoryDetail();
 
         UIArmory.Instance.ShowWeapons();
-
-        UIArmory.Instance.KeepFocusInCurrentItemArmory();
     }
 }

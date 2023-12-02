@@ -10,8 +10,41 @@ public enum EDictionaryType
     Weapons
 }
 
-public class UIDictionary : BaseUI<UIDictionary>, IObservationDictionary
+public class UIDictionary : InitMonoBehaviour, IObservationDictionary
 {
+    private static UIDictionary instance;
+    public static UIDictionary Instance => instance;
+
+    protected bool isOpen = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIDictionary.instance != null) Debug.LogError("Only 1 UIDictionary allow to exist");
+        UIDictionary.instance = this;
+    }
+
+    protected override void Start() => this.Close();
+
+    public virtual void Toggle()
+    {
+        this.isOpen = !this.isOpen;
+        if (this.isOpen) this.Open();
+        else this.Close();
+    }
+
+    public virtual void Open()
+    {
+        this.gameObject.SetActive(true);
+        this.isOpen = true;
+    }
+
+    public virtual void Close()
+    {
+        this.gameObject.SetActive(false);
+        this.isOpen = false;
+    }
+
     [SerializeField] protected EDictionaryType dictionaryType = EDictionaryType.Enemies;
     public EDictionaryType DictionaryType => dictionaryType;
 

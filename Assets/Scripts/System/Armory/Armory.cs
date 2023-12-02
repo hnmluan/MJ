@@ -9,11 +9,7 @@ public class Armory : Singleton<Armory>
     [SerializeField] protected List<ItemArmory> weapons;
     public List<ItemArmory> Weapons => weapons;
 
-    public ItemArmory firstWeapon;
-
-    public ItemArmory secondWeapon;
-
-    [SerializeField] public float ratioDecompose;
+    public static float ratioDecompose = 0.5f;
 
     protected override void Awake()
     {

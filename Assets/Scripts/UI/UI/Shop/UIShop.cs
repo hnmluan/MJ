@@ -5,9 +5,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 
-public class UIShop : BaseUI<UIShop>, IObservationShop
+public class UIShop : InitMonoBehaviour, IObservationShop
 {
-    [SerializeField] protected UIShopItemSpawner shopItemSpawner;
+    private static UIShop instance;
+    public static UIShop Instance => instance;
+
+    protected bool isOpen = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIShop.instance != null) Debug.LogError("Only 1 UIShop allow to exist");
+        UIShop.instance = this;
+    }
+    public virtual void Toggle()
+    {
+        this.isOpen = !this.isOpen;
+        if (this.isOpen) this.Open();
+        else this.Close();
+    }
+
+    public virtual void Open()
+    {
+        this.gameObject.SetActive(true);
+        this.isOpen = true;
+    }
+
+    public virtual void Close()
+    {
+        this.gameObject.SetActive(false);
+        this.isOpen = false;
+    }
+
+    protected override void Start() => this.Close();
+
+
+    [SerializeField] protected UIShopItemSpawner itemSpawner;
 
     [SerializeField] protected Text countdownToReset;
 
@@ -15,21 +48,24 @@ public class UIShop : BaseUI<UIShop>, IObservationShop
 
     [SerializeField] protected List<string> keysGreetingText;
 
-    private void Update() => InvokeRepeating(nameof(UpdateCountdownToReset), 0f, 1f);
-
     protected override void OnEnable()
     {
         Shop.Instance.AddObservation(this);
         ShowItems();
         UpdateGreetingText();
+        InvokeRepeating(nameof(UpdateCountdownToReset), 0f, 1f);
     }
 
-    protected override void OnDisable() => Shop.Instance.RemoveObservation(this);
+    protected override void OnDisable()
+    {
+        Shop.Instance.RemoveObservation(this);
+        CancelInvoke(nameof(UpdateCountdownToReset));
+    }
 
     private void ShowItems()
     {
-        shopItemSpawner.ClearItems();
-        foreach (ItemShop item in Shop.Instance.listItem) shopItemSpawner.SpawnItem(item);
+        itemSpawner.ClearItems();
+        foreach (ItemShop item in Shop.Instance.listItem) itemSpawner.SpawnItem(item);
     }
 
     protected void UpdateGreetingText()

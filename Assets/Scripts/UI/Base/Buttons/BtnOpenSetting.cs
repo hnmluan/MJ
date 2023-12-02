@@ -1,6 +1,6 @@
 public class BtnOpenSetting : BaseButton
 {
-    protected override void OnClick() => UISetting.Instance.Toggle();
+    protected override void OnClick() => UISetting.Instance.Open();
 
     private void Update()
     {

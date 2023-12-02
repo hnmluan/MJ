@@ -2,46 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-public class UIArmory : BaseUI<UIArmory>
+public enum ArmorySort
 {
-    [Header("UI Armory")]
+    NoSort = 0,
+    ByName = 1,
+    ByLevel = 2,
+}
+
+public class UIArmory : InitMonoBehaviour
+{
+    private static UIArmory instance;
+    public static UIArmory Instance => instance;
+
+    protected bool isOpen = true;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if (UIArmory.instance != null) Debug.LogError("Only 1 UIArmory allow to exist");
+        UIArmory.instance = this;
+    }
+
+    protected override void Start() => this.Close();
+
+    public virtual void Toggle()
+    {
+        this.isOpen = !this.isOpen;
+        if (this.isOpen) this.Open();
+        else this.Close();
+    }
+
+    public virtual void Open()
+    {
+        this.gameObject.SetActive(true);
+        this.isOpen = true;
+    }
+
+    public virtual void Close()
+    {
+        this.gameObject.SetActive(false);
+        this.isOpen = false;
+    }
 
     [SerializeField] protected ArmorySort armorySort = ArmorySort.ByName;
 
     [SerializeField] protected WeaponType armoryFilter = WeaponType.NoType;
 
-    [SerializeField] public int currentItemArmory = -1;
+    [SerializeField] UIArmoryItemSpawner itemSpawner;
 
-    [Header("Armory Weapon Spawner")]
-
-    [SerializeField] protected Transform content;
-    public Transform Content => content;
-
-    protected override void OnEnable()
-    {
-        ClearFocusItem();
-        currentItemArmory = -1;
-    }
-
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        this.LoadContent();
-    }
-
-    protected virtual void LoadContent()
-    {
-        if (this.content != null) return;
-        this.content = transform.Find("Scroll View").Find("Viewport").Find("Content");
-        Debug.Log(transform.name + ": LoadContent", gameObject);
-    }
-
-    public override void Open()
-    {
-        base.Open();
-        ShowWeapons();
-    }
+    protected override void OnEnable() => ShowWeapons();
 
     public void SetArmorySort(ArmorySort armorySort)
     {
@@ -55,83 +64,32 @@ public class UIArmory : BaseUI<UIArmory>
         this.ShowWeapons();
     }
 
-    public virtual void SetCurrentItemInventory(int currentItemArmory) => this.currentItemArmory = currentItemArmory;
-
-    public void ClearFocusItem()
-    {
-        foreach (UIItemArmory item in GetListUIItemArmory()) item.Focus.gameObject.SetActive(false);
-    }
-
-    public void KeepFocusInCurrentItemArmory()
-    {
-        ClearFocusItem();
-        try
-        {
-            if (currentItemArmory == -1) return;
-            GetListUIItemArmory()[currentItemArmory].Focus.gameObject.SetActive(true);
-            UIArmoryDetail.Instance.SetUIArmoryDetail(GetListUIItemArmory()[currentItemArmory].Weapon);
-        }
-        catch (System.Exception)
-        {
-            currentItemArmory = -1;
-        }
-    }
-
-    public List<UIItemArmory> GetListUIItemArmory()
-    {
-        List<UIItemArmory> list = new List<UIItemArmory>();
-
-        int itemCount = content.childCount;
-
-        for (int i = 0; i < itemCount; i++)
-        {
-            Transform currentItem = content.GetChild(i);
-
-            if (currentItem.gameObject.activeSelf == true)
-            {
-                UIItemArmory currentUIItem = currentItem.GetComponent<UIItemArmory>();
-
-                list.Add(currentUIItem);
-            }
-        }
-        return list;
-    }
-
-    public int GetIndexItemInventory(ItemArmory weapon)
-    {
-        int itemCount = GetListUIItemArmory().Count;
-
-        for (int i = 0; i < itemCount; i++) if (GetListUIItemArmory()[i].Weapon == weapon) return i;
-
-        return -1;
-    }
-
     public void ShowWeapons()
     {
-        this.ClearWeapons();
+        this.ClearAllWeapons();
 
         List<ItemArmory> weapons = Armory.Instance.Weapons;
 
         weapons = armoryFilter == WeaponType.NoType ? weapons : weapons.Where(item => item.weaponProfile.damageObjectType == armoryFilter).ToList();
 
-        foreach (ItemArmory weapon in weapons) UIArmoryItemSpawner.Instance.SpawnWeapon(weapon);
+        foreach (ItemArmory weapon in weapons) itemSpawner.SpawnWeapon(weapon);
 
         this.SortItems();
     }
 
-    protected virtual void ClearWeapons() => UIArmoryItemSpawner.Instance.ClearWeapons();
+    protected virtual void ClearAllWeapons() => itemSpawner.ClearWeapons();
 
     protected virtual void SortItems()
     {
         if (this.armorySort == ArmorySort.NoSort) return;
 
-        int itemCount = content.childCount;
+        int itemCount = itemSpawner.Content.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currentItem = content.GetChild(i);
-            Transform nextItem = content.GetChild(i + 1);
+            Transform currentItem = itemSpawner.Content.GetChild(i);
+            Transform nextItem = itemSpawner.Content.GetChild(i + 1);
 
             UIItemArmory currentUIItem = currentItem.GetComponent<UIItemArmory>();
             UIItemArmory nextUIItem = nextItem.GetComponent<UIItemArmory>();
@@ -190,7 +148,6 @@ public class UIArmory : BaseUI<UIArmory>
                 isSorting = true;
             }
         }
-
         if (isSorting) this.SortItems(); // Gọi đệ quy chỉ khi có sự thay đổi
     }
 

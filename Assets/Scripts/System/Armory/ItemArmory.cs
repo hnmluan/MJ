@@ -60,7 +60,7 @@ public class ItemArmory
 
             recipeDecomposes = SimplifyRecipe(recipeDecomposes);
 
-            recipeDecomposes = MultiplyItemCount(recipeDecomposes, Armory.Instance.ratioDecompose);
+            recipeDecomposes = MultiplyItemCount(recipeDecomposes, Armory.ratioDecompose);
 
             return recipeDecomposes;
         }
