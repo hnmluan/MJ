@@ -4,7 +4,7 @@ public class PressUIItemArmory : PressUI
     public override void OnPointerClick(PointerEventData eventData)
     {
         UIItemArmory uiWeapon = GetComponent<UIItemArmory>();
-        Weapon weapon = uiWeapon.Weapon;
+        ItemArmory weapon = uiWeapon.Weapon;
         if (weapon == null) return;
         UIArmoryDetail.Instance.SetEmptyUIArmoryDetail();
         UIArmoryDetail.Instance.SetUIArmoryDetail(weapon);

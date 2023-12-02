@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SecondWeaponUI : Singleton<SecondWeaponUI>
+public class FirstWeaponUI : Singleton<FirstWeaponUI>
 {
-    [SerializeField] public Weapon weapon;
+    [SerializeField] public ItemArmory weapon;
 
     [SerializeField] private Image image;
 
@@ -29,17 +29,10 @@ public class SecondWeaponUI : Singleton<SecondWeaponUI>
         Debug.Log(transform.name + ": LoadLevel", gameObject);
     }
 
-    public void SetSecondWeaponUI(Weapon weapon)
+    public void SetFirstWeaponUI(ItemArmory weapon)
     {
-        try
-        {
-            if (weapon == null) return;
-            this.weapon = weapon;
-            image.sprite = weapon.weaponProfile.spriteInHand;
-            level.text = "+" + weapon.level;
-        }
-        catch (System.Exception)
-        {
-        }
+        this.weapon = weapon;
+        image.sprite = weapon.weaponProfile.spriteInHand;
+        level.text = "+" + weapon.level;
     }
 }

@@ -5,7 +5,7 @@ public class BtnDecomposeWeapon : BaseButton
 {
     protected override void OnClick()
     {
-        Weapon weapon = UIArmoryDetail.Instance.Weapon;
+        ItemArmory weapon = UIArmoryDetail.Instance.Weapon;
 
         List<WeaponRecipeIngredient> listRecipeIngredient = weapon.GetRecipeDecompose();
 

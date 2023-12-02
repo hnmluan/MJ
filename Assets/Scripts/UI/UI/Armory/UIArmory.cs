@@ -97,7 +97,7 @@ public class UIArmory : BaseUI<UIArmory>
         return list;
     }
 
-    public int GetIndexItemInventory(Weapon weapon)
+    public int GetIndexItemInventory(ItemArmory weapon)
     {
         int itemCount = GetListUIItemArmory().Count;
 
@@ -110,11 +110,11 @@ public class UIArmory : BaseUI<UIArmory>
     {
         this.ClearWeapons();
 
-        List<Weapon> weapons = Armory.Instance.Weapons;
+        List<ItemArmory> weapons = Armory.Instance.Weapons;
 
         weapons = armoryFilter == WeaponType.NoType ? weapons : weapons.Where(item => item.weaponProfile.damageObjectType == armoryFilter).ToList();
 
-        foreach (Weapon weapon in weapons) UIArmoryItemSpawner.Instance.SpawnWeapon(weapon);
+        foreach (ItemArmory weapon in weapons) UIArmoryItemSpawner.Instance.SpawnWeapon(weapon);
 
         this.SortItems();
     }
@@ -136,8 +136,8 @@ public class UIArmory : BaseUI<UIArmory>
             UIItemArmory currentUIItem = currentItem.GetComponent<UIItemArmory>();
             UIItemArmory nextUIItem = nextItem.GetComponent<UIItemArmory>();
 
-            Weapon currentWeapon = currentUIItem.Weapon;
-            Weapon nextWeapon = nextUIItem.Weapon;
+            ItemArmory currentWeapon = currentUIItem.Weapon;
+            ItemArmory nextWeapon = nextUIItem.Weapon;
 
             WeaponDataSO currentProfile = currentWeapon.weaponProfile;
             WeaponDataSO nextProfile = nextWeapon.weaponProfile;

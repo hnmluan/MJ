@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class UIItemArmory : InitMonoBehaviour
 {
     [Header("UI Weapon Armory")]
-    [SerializeField] protected Weapon weapon;
-    public Weapon Weapon => weapon;
+    [SerializeField] protected ItemArmory weapon;
+    public ItemArmory Weapon => weapon;
 
     [SerializeField] protected Text weaponName;
     public Text WeaponName => weaponName;
@@ -68,7 +68,7 @@ public class UIItemArmory : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadWeaponNumer", gameObject);
     }
 
-    public virtual void ShowWeapon(Weapon weapon)
+    public virtual void ShowWeapon(ItemArmory weapon)
     {
         if (weapon == null) return;
         this.weapon = weapon;

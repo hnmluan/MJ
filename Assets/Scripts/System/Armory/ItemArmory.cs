@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 [Serializable]
-public class Weapon
+public class ItemArmory
 {
     public WeaponDataSO weaponProfile;
 
     public int level;
 
-    public Weapon(WeaponDataSO weaponProfile, int level)
+    public ItemArmory(WeaponDataSO weaponProfile, int level)
     {
         this.weaponProfile = weaponProfile;
         this.level = level;

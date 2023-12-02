@@ -26,7 +26,7 @@ public class UIArmoryItemSpawner : Spawner
         foreach (Transform weapon in this.holder) this.Despawn(weapon);
     }
 
-    public virtual void SpawnWeapon(Weapon weapon)
+    public virtual void SpawnWeapon(ItemArmory weapon)
     {
         Transform uiWeapon = this.Spawn(UIArmoryItemSpawner.normalWeapon, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);

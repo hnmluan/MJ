@@ -4,7 +4,7 @@ public class BtnUpgradeWeapon : BaseButton
 {
     protected override void OnClick()
     {
-        Weapon weapon = UIArmoryDetail.Instance.Weapon;
+        ItemArmory weapon = UIArmoryDetail.Instance.Weapon;
         bool isSuccess = weapon.Upgrade();
         UIArmoryDetail.Instance.SetUIArmoryDetail(weapon);
         UIArmory.Instance.ShowWeapons();

@@ -9,8 +9,8 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
     private static UIArmoryDetail instance;
     public static UIArmoryDetail Instance => instance;
 
-    [SerializeField] protected Weapon weapon = null;
-    public Weapon Weapon => weapon;
+    [SerializeField] protected ItemArmory weapon = null;
+    public ItemArmory Weapon => weapon;
 
     protected override void Awake()
     {
@@ -21,7 +21,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
     protected override void OnDisable() => this.SetEmptyUIArmoryDetail();
 
-    public virtual void SetUIArmoryDetail(Weapon weapon)
+    public virtual void SetUIArmoryDetail(ItemArmory weapon)
     {
         SetEmptyUIArmoryDetail();
 

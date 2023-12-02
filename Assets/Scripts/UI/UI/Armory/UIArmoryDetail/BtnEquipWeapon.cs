@@ -2,7 +2,7 @@ public class BtnEquipWeapon : BaseButton
 {
     protected override void OnClick()
     {
-        Weapon weapon = UIArmoryDetail.Instance.Weapon;
+        ItemArmory weapon = UIArmoryDetail.Instance.Weapon;
         Armory.Instance.firstWeapon = weapon;
         if (FirstWeaponUI.Instance.weapon == null)
         {

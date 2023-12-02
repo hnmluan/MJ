@@ -6,12 +6,12 @@ using UnityEngine;
 [Serializable]
 public class Armory : Singleton<Armory>
 {
-    [SerializeField] protected List<Weapon> weapons;
-    public List<Weapon> Weapons => weapons;
+    [SerializeField] protected List<ItemArmory> weapons;
+    public List<ItemArmory> Weapons => weapons;
 
-    public Weapon firstWeapon;
+    public ItemArmory firstWeapon;
 
-    public Weapon secondWeapon;
+    public ItemArmory secondWeapon;
 
     [SerializeField] public float ratioDecompose;
 
@@ -36,7 +36,7 @@ public class Armory : Singleton<Armory>
             return;
         }
 
-        weapons = armoryData.weapons.Select(item => new Weapon(WeaponDataSO.FindByName(item.name), item.level)).ToList();
+        weapons = armoryData.weapons.Select(item => new ItemArmory(WeaponDataSO.FindByName(item.name), item.level)).ToList();
     }
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Armory, new ArmoryData(this));
@@ -45,13 +45,13 @@ public class Armory : Singleton<Armory>
     {
         for (int i = 0; i < addCount; i++)
         {
-            Weapon weapon = new Weapon(WeaponDataSO.FindByItemCode(weaponCode), level);
+            ItemArmory weapon = new ItemArmory(WeaponDataSO.FindByItemCode(weaponCode), level);
             weapons.Add(weapon);
         }
         SaveData();
     }
 
-    public virtual void DeductItem(Weapon weapon)
+    public virtual void DeductItem(ItemArmory weapon)
     {
         this.weapons.Remove(weapon);
         SaveData();
