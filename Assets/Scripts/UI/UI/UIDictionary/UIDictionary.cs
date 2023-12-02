@@ -38,15 +38,6 @@ public class UIDictionary : BaseUI<UIDictionary>, IObservationDictionary
 
     protected override void OnEnable()
     {
-        /*        
-                dictionaryType = EDictionaryType.Enemies;
-                this.ClearItems();
-                note.LocalizationKey = "Dictionary.NoteEnemies";
-                note.Localize();
-                ShowEnemies();
-                SortItems();
-        */
-
         Dictionary.Instance.AddObservation(this);
         SwitchTab(EDictionaryType.Enemies);
         unseenEnemiesCount.text = "(" + Dictionary.Instance.GetNumUnseenEnemies() + ")";

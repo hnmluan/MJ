@@ -1,14 +1,17 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class Wallet : Singleton<Wallet>
 {
+    private List<IObservationWallet> observations = new List<IObservationWallet>();
+
     [SerializeField] private int goldenBalance;
-    public int GoldenBalance { get => goldenBalance; }
+    public int GoldenBalance => goldenBalance;
 
     [SerializeField] private int silverBalance;
-    public int SilverBalance { get => silverBalance; }
+    public int SilverBalance => silverBalance;
 
     protected override void Awake()
     {
@@ -33,43 +36,63 @@ public class Wallet : Singleton<Wallet>
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Wallet, this);
 
-    public void SetGoldenBalance(int golden)
-    {
-        this.goldenBalance = golden;
-        SaveData();
-    }
-
-    public void AddGoldenBalance(int golden)
+    public void AddGold(int golden)
     {
         this.goldenBalance += golden;
-        SaveData();
+        this.SaveData();
+        this.ExcuteAddGoldObservation();
     }
 
-    public bool DeductGoldenBalance(int golden)
+    public void AddSilver(int silver)
+    {
+        this.silverBalance += silver;
+        this.SaveData();
+        this.ExcuteAddSilverObservation();
+    }
+
+    public bool DeductGold(int golden)
     {
         if (golden - this.goldenBalance > 0) return false;
         this.goldenBalance -= golden;
-        SaveData();
+        this.SaveData();
+        this.ExcuteDeductGoldObservation();
         return true;
     }
 
-    public void SetSilverBalance(int silver)
-    {
-        this.silverBalance = silver;
-        SaveData();
-    }
-
-    public void AddSilverBalance(int silver)
-    {
-        this.silverBalance += silver;
-        SaveData();
-    }
-
-    public bool DeductSilverBalance(int silver)
+    public bool DeductSilver(int silver)
     {
         if (silver - this.silverBalance > 0) return false;
         this.silverBalance -= silver;
-        SaveData();
+        this.SaveData();
+        this.ExcuteDeductSilverObservation();
         return true;
+    }
+
+    public void AddObservation(IObservationWallet observation) => observations.Add(observation);
+
+    public void RemoveObservation(IObservationWallet observation) => observations.Remove(observation);
+
+    public void ExcuteAddGoldObservation()
+    {
+        foreach (IObservationWallet observation in observations)
+            observation.AddGold();
+    }
+
+    public void ExcuteDeductGoldObservation()
+    {
+        foreach (IObservationWallet observation in observations)
+            observation.DeductGold();
+    }
+
+    public void ExcuteAddSilverObservation()
+    {
+        foreach (IObservationWallet observation in observations)
+            observation.AddSilver();
+    }
+
+    public void ExcuteDeductSilverObservation()
+    {
+        foreach (IObservationWallet observation in observations)
+            observation.DeductSilver();
     }
 }

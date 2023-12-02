@@ -34,8 +34,8 @@ public class Weapon
         }
         foreach (WeaponRecipePrice item in recipePrices)
         {
-            if (item.currencyProfile.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGoldenBalance(item.currencyCout);
-            if (item.currencyProfile.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilverBalance(item.currencyCout);
+            if (item.currencyProfile.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.currencyCout);
+            if (item.currencyProfile.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.currencyCout);
         }
         level++;
         return true;

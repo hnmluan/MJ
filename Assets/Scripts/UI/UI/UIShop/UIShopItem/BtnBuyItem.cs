@@ -33,7 +33,7 @@ public class BtnBuyItem : BaseButton
 
         if (currencyCode == CurrencyCode.Gold)
         {
-            if (Wallet.Instance.DeductGoldenBalance(price))
+            if (Wallet.Instance.DeductGold(price))
             {
                 UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
                 BuyItem();
@@ -43,7 +43,7 @@ public class BtnBuyItem : BaseButton
 
         if (currencyCode == CurrencyCode.Silver)
         {
-            if (Wallet.Instance.DeductSilverBalance(price))
+            if (Wallet.Instance.DeductSilver(price))
             {
                 UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
                 BuyItem();

@@ -15,12 +15,12 @@ public class SellableItemData : ItemData
 
         for (int i = 0; i < quantity; i++)
         {
-            Wallet.Instance.AddSilverBalance(this.price);
+            Wallet.Instance.AddSilver(this.price);
             string price = LocalizationManager.Localize("Currency.Silver") + " +" + this.price;
             listPrice.Add(price);
         }
 
-        Sprite image = CurrencyDataSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
+        Sprite image = CurrencyDataSO.FindByCode(CurrencyCode.Silver).currencySprite;
 
         UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(listPrice, image);
     }

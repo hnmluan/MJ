@@ -13,7 +13,7 @@ public class CurrencyDataSO : ScriptableObject
 
     public string discription;
 
-    public static CurrencyDataSO FindByItemCode(CurrencyCode currencyCode)
+    public static CurrencyDataSO FindByCode(CurrencyCode currencyCode)
     {
         var profiles = Resources.LoadAll("Currency/ScriptableObject", typeof(CurrencyDataSO));
         foreach (CurrencyDataSO profile in profiles)
@@ -28,6 +28,6 @@ public class CurrencyDataSO : ScriptableObject
     {
         CurrencyCode currencyCode;
         Enum.TryParse(name, out currencyCode);
-        return FindByItemCode(currencyCode);
+        return FindByCode(currencyCode);
     }
 }

@@ -7,9 +7,9 @@ public class BtnShopReset : BaseButton
     {
         //if (Wallet.Instance.DeductSilverBalance(10))
         {
-            string nameCurrency = LocalizationManager.Localize(CurrencyDataSO.FindByItemCode(CurrencyCode.Silver).keyName);
+            string nameCurrency = LocalizationManager.Localize(CurrencyDataSO.FindByCode(CurrencyCode.Silver).keyName);
             string content = nameCurrency + " - 10";
-            Sprite image = CurrencyDataSO.FindByItemCode(CurrencyCode.Silver).currencySprite;
+            Sprite image = CurrencyDataSO.FindByCode(CurrencyCode.Silver).currencySprite;
             UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
             Shop.Instance.ResetItem();
             return;
