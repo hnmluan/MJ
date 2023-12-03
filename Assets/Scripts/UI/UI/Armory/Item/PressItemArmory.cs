@@ -1,5 +1,5 @@
 using UnityEngine.EventSystems;
-public class PressUIItemArmory : PressUI
+public class PressItemArmory : PressUI
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
@@ -8,6 +8,6 @@ public class PressUIItemArmory : PressUI
         uiWeapon.FocusItem();
         ItemArmory weapon = uiWeapon.Weapon;
         if (weapon == null) return;
-        UIArmoryDetail.Instance.SetDetail(weapon);
+        UIArmory.Instance.UIArmoryDetail.Show(weapon);
     }
 }

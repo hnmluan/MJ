@@ -9,12 +9,9 @@ public class UIArmoryItemSpawner : Spawner
 
     protected override void LoadHolder() => this.holder = this.content;
 
-    public virtual void ClearWeapons()
-    {
-        foreach (Transform weapon in this.holder) this.Despawn(weapon);
-    }
+    public virtual void Clear() { foreach (Transform weapon in this.holder) this.Despawn(weapon); }
 
-    public virtual void SpawnWeapon(ItemArmory weapon)
+    public virtual void Spawn(ItemArmory weapon)
     {
         Transform uiWeapon = this.Spawn(UIArmoryItemSpawner.normalWeapon, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);

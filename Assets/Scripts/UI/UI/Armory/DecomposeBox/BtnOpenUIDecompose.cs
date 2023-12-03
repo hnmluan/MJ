@@ -1,7 +1,4 @@
 public class BtnOpenUIDecompose : BaseButton
 {
-    protected override void OnClick()
-    {
-        UIDecompose.Instance.Open();
-    }
+    protected override void OnClick() => UIArmory.Instance.UIDecompose.Open();
 }

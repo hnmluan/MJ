@@ -5,7 +5,7 @@ public class BtnDecomposeWeapon : BaseButton
 {
     protected override void OnClick()
     {
-        ItemArmory weapon = UIArmoryDetail.Instance.Weapon;
+        ItemArmory weapon = UIArmory.Instance.UIArmoryDetail.Weapon;
 
         List<WeaponRecipeIngredient> listRecipeIngredient = weapon.GetRecipeDecompose();
 
@@ -21,11 +21,11 @@ public class BtnDecomposeWeapon : BaseButton
 
         UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(textList);
 
-        UIDecompose.Instance.Close();
+        UIArmory.Instance.UIDecompose.Close();
 
         weapon.Decompose();
 
-        UIArmoryDetail.Instance.ClearDetail();
+        UIArmory.Instance.UIArmoryDetail.Clear();
 
         UIArmory.Instance.ShowItems();
     }

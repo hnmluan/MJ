@@ -1,5 +1,5 @@
 using UnityEngine.EventSystems;
-public class PressUIItemInventory : PressUI
+public class PressItemInv : PressUI
 {
     public override void OnPointerClick(PointerEventData eventData)
     {

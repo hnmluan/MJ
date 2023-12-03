@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class PressUIItemDictionary : PressUI
+public class PressItemDict : PressUI
 {
     public override void OnPointerClick(PointerEventData eventData)
     {

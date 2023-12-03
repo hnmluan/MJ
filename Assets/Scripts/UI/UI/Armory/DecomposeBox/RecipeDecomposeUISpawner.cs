@@ -2,28 +2,14 @@ using UnityEngine;
 
 public class RecipeDecomposeUISpawner : Spawner
 {
-    private static RecipeDecomposeUISpawner instance;
-    public static RecipeDecomposeUISpawner Instance => instance;
+    public static string recipeUpdateLevelUI = "Item";
 
-    public static string recipeUpdateLevelUI = "UIItemRecipeDecompose";
+    [SerializeField] protected Transform content;
+    public Transform Content => content;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (RecipeDecomposeUISpawner.instance != null) Debug.Log("Only 1 RecipeDecomposeUISpawner allow to exist");
-        RecipeDecomposeUISpawner.instance = this;
-    }
-    protected override void LoadHolder()
-    {
-        if (this.holder != null) return;
-        this.holder = this.transform.parent;
-        Debug.LogWarning(transform.name + ": LoadHodler", gameObject);
-    }
+    protected override void LoadHolder() => this.holder = this.content;
 
-    public virtual void ClearRecipeDecomposeLevelUI()
-    {
-        foreach (Transform weapon in this.holder) this.Despawn(weapon);
-    }
+    public virtual void ClearRecipeDecomposeLevelUI() { foreach (Transform weapon in this.holder) this.Despawn(weapon); }
 
     public virtual void SpawnRecipeDecomposeItemUI(WeaponRecipeIngredient weaponRecipeIngredient)
     {

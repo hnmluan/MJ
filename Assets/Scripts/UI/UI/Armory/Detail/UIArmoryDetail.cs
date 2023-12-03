@@ -1,29 +1,16 @@
 using Assets.SimpleLocalization;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class UIArmoryDetail : UIArmoryDetailAbstract
 {
-    [Header("UI Armory Detail")]
-
-    private static UIArmoryDetail instance;
-    public static UIArmoryDetail Instance => instance;
-
-    [SerializeField] protected ItemArmory weapon = null;
+    protected ItemArmory weapon;
     public ItemArmory Weapon => weapon;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        if (UIArmoryDetail.instance != null) Debug.Log("Only 1 UIArmoryDetail allow to exist");
-        UIArmoryDetail.instance = this;
-    }
+    protected override void OnDisable() => this.Clear();
 
-    protected override void OnDisable() => this.ClearDetail();
-
-    public virtual void SetDetail(ItemArmory weapon)
+    public virtual void Show(ItemArmory weapon)
     {
-        ClearDetail();
+        Clear();
 
         this.weapon = weapon;
 
@@ -38,7 +25,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         this.ShowButtons();
     }
 
-    public virtual void ClearDetail()
+    public virtual void Clear()
     {
         this.weapon = null;
         uiArmoryDetailCtrl.WeaponImage.sprite = null;

@@ -77,7 +77,7 @@ public class UIItemArmory : InitMonoBehaviour
         this.weaponLevel.text = "+ " + weapon.level.ToString();
 
         this.focus.gameObject.SetActive(false);
-        if (weapon == UIArmoryDetail.Instance.Weapon) this.FocusItem();
+        if (weapon == UIArmory.Instance.UIArmoryDetail.Weapon) this.FocusItem();
 
         if (weapon.CanUpgrade()) canUpgrade.gameObject.SetActive(true);
         else canUpgrade.gameObject.SetActive(false);

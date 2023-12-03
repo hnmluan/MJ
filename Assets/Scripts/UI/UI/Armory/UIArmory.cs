@@ -14,11 +14,18 @@ public class UIArmory : UIBase, IObservationArmory
     private static UIArmory instance;
     public static UIArmory Instance => instance;
 
+    [SerializeField] protected UIArmoryItemSpawner itemSpawner;
+    public UIArmoryItemSpawner ItemSpawner => itemSpawner;
+
+    [SerializeField] protected UIArmoryDetail uiArmoryDetail;
+    public UIArmoryDetail UIArmoryDetail => uiArmoryDetail;
+
+    [SerializeField] protected UIDecompose uiDecompose;
+    public UIDecompose UIDecompose => uiDecompose;
+
     [SerializeField] protected ArmorySort armorySort = ArmorySort.ByName;
 
     [SerializeField] protected WeaponType armoryFilter = WeaponType.NoType;
-
-    [SerializeField] UIArmoryItemSpawner itemSpawner;
 
     protected override void Awake()
     {
@@ -55,12 +62,12 @@ public class UIArmory : UIBase, IObservationArmory
 
         weapons = armoryFilter == WeaponType.NoType ? weapons : weapons.Where(item => item.weaponProfile.damageObjectType == armoryFilter).ToList();
 
-        foreach (ItemArmory weapon in weapons) itemSpawner.SpawnWeapon(weapon);
+        foreach (ItemArmory weapon in weapons) itemSpawner.Spawn(weapon);
 
         this.SortItems();
     }
 
-    protected virtual void ClearAllItems() => itemSpawner.ClearWeapons();
+    protected virtual void ClearAllItems() => itemSpawner.Clear();
 
     protected virtual void SortItems()
     {
@@ -150,13 +157,13 @@ public class UIArmory : UIBase, IObservationArmory
     public void UpgradeItem()
     {
         this.ShowItems();
-        UIArmoryDetail.Instance.SetDetail(UIArmoryDetail.Instance.Weapon);
+        this.uiArmoryDetail.Show(this.uiArmoryDetail.Weapon);
     }
 
     public void DecomposeItem()
     {
         this.ShowItems();
-        UIArmoryDetail.Instance.ClearDetail();
+        this.uiArmoryDetail.Clear();
     }
 
     public void UnfocusAll()
