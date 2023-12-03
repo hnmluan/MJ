@@ -83,7 +83,6 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         if (weapon.weaponProfile.levels.Count > weapon.level)
         {
             uiArmoryDetailCtrl.WeaponUpgrade.text = LocalizationManager.Localize("Armory.upgrade");
-
             return;
         };
 

@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +24,27 @@ public class ItemArmory
 
     public bool Upgrade()
     {
-        if (!CanUpgrade()) return false;
+        if (!CanUpgrade())
+        {
+            UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Armory.Upgrade.Check"));
+            return false;
+        }
 
         List<WeaponRecipeIngredient> recipeIngredients = weaponProfile.levels[level].weaponRecipe.recipeIngredients;
         List<WeaponRecipePrice> recipePrices = weaponProfile.levels[level].weaponRecipe.recipePrice;
 
-        foreach (WeaponRecipeIngredient item in recipeIngredients)
-        {
-            Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
-        }
+        foreach (WeaponRecipeIngredient item in recipeIngredients) Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
+
         foreach (WeaponRecipePrice item in recipePrices)
         {
             if (item.currencyProfile.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.currencyCout);
             if (item.currencyProfile.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.currencyCout);
         }
+
         level++;
+
+        UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Armory.Upgrade.Success"));
+
         return true;
     }
 

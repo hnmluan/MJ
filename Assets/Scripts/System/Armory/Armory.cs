@@ -6,6 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Armory : Singleton<Armory>
 {
+    List<IObservationArmory> observations = new List<IObservationArmory>();
+
     [SerializeField] protected List<ItemArmory> weapons;
     public List<ItemArmory> Weapons => weapons;
 
@@ -51,5 +53,15 @@ public class Armory : Singleton<Armory>
     {
         this.weapons.Remove(weapon);
         SaveData();
+    }
+
+    public virtual void UpgradeItem(ItemArmory item)
+    {
+        item.Upgrade();
+    }
+
+    public virtual void DecomposeItem(ItemArmory item)
+    {
+        item.Decompose();
     }
 }

@@ -2,7 +2,7 @@ using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemArmory : InitMonoBehaviour
+public class UIItemArmory : InitMonoBehaviour, IObservationArmory
 {
     [Header("UI Weapon Armory")]
     [SerializeField] protected ItemArmory weapon;
@@ -82,5 +82,25 @@ public class UIItemArmory : InitMonoBehaviour
             return;
         }
         canUpgrade.gameObject.SetActive(false);
+    }
+
+    public void AddItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DeductItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void UpgradeItem()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DecomposeItem()
+    {
+        throw new System.NotImplementedException();
     }
 }
