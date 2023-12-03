@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
 
 public class UIShop : UIBase, IObservationShop
 {
@@ -41,8 +40,8 @@ public class UIShop : UIBase, IObservationShop
 
     private void ShowItems()
     {
-        itemSpawner.ClearItems();
-        foreach (ItemShop item in Shop.Instance.listItem) itemSpawner.SpawnItem(item);
+        itemSpawner.Clear();
+        foreach (ItemShop item in Shop.Instance.listItem) itemSpawner.Spawn(item);
     }
 
     protected void UpdateGreetingText()
@@ -61,12 +60,7 @@ public class UIShop : UIBase, IObservationShop
             );
     }
 
-    protected int GetSecondsBetweenTimestamps(DateTime startTime, DateTime endTime)
-    {
-        TimeSpan duration = endTime - startTime;
-        int timeDifferenceInSeconds = (int)duration.TotalSeconds;
-        return timeDifferenceInSeconds;
-    }
+    protected int GetSecondsBetweenTimestamps(DateTime startTime, DateTime endTime) => (int)(endTime - startTime).TotalSeconds;
 
     protected string ConvertSecondsToHMS(int seconds)
     {
@@ -75,12 +69,24 @@ public class UIShop : UIBase, IObservationShop
         return t;
     }
 
-    protected string GetRamdomGreeting()
+    protected string GetRamdomGreeting() => keysGreetingText[(new System.Random()).Next(keysGreetingText.Count)];
+
+    public void BuyItem(ItemShop item, bool isTransactionSuccessful)
     {
-        Random random = new Random();
-        return keysGreetingText[random.Next(keysGreetingText.Count)];
+        if (isTransactionSuccessful)
+        {
+            ShowItems();
+
+            string nameCurrency = LocalizationManager.Localize(CurrencyDataSO.FindByName(item.currencyCode).keyName);
+            string content = nameCurrency + " - " + item.price;
+            Sprite image = CurrencyDataSO.FindByName(item.currencyCode).currencySprite;
+
+            UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(content, image);
+            return;
+        }
+
+        UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Shop.BalanceNotEnough"));
     }
-    public void BuyItem() => ShowItems();
 
     public void ResetItems() => ShowItems();
 }

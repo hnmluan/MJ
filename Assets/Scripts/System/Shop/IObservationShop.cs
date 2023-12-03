@@ -1,6 +1,6 @@
 public interface IObservationShop
 {
-    void BuyItem();
+    void BuyItem(ItemShop item, bool isTransactionSuccessful);
 
     void ResetItems();
 }

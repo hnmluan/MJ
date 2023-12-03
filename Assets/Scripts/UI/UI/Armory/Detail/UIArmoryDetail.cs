@@ -3,16 +3,11 @@ using System.Collections.Generic;
 
 public class UIArmoryDetail : UIArmoryDetailAbstract
 {
-    protected ItemArmory weapon;
-    public ItemArmory Weapon => weapon;
-
-    protected override void OnDisable() => this.Clear();
+    protected ItemArmory weapon => UIArmory.Instance.CurrentItem;
 
     public virtual void Show(ItemArmory weapon)
     {
-        Clear();
-
-        this.weapon = weapon;
+        Clear(); if (weapon == null) return;
 
         uiArmoryDetailCtrl.WeaponImage.sprite = weapon.weaponProfile.spriteInHand;
         uiArmoryDetailCtrl.WeaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
@@ -27,16 +22,14 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
     public virtual void Clear()
     {
-        this.weapon = null;
         uiArmoryDetailCtrl.WeaponImage.sprite = null;
         uiArmoryDetailCtrl.WeaponName.text = "";
         uiArmoryDetailCtrl.WeaponLevel.text = "";
         uiArmoryDetailCtrl.WeaponType.text = "";
         uiArmoryDetailCtrl.WeaponUpgrade.text = "";
-
+        uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(false);
+        uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(false);
         RecipeUpgradeSpawner.Instance.Clear();
-
-        this.ShowButtons();
     }
 
     private void ShowUpgradeRecipeIngredient()
@@ -65,27 +58,13 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         for (int i = 0; i < numberOfUpdateRecipePrice; i++) RecipeUpgradeSpawner.Instance.Spawn(recipePrices[i]);
     }
 
-    private void ShowUpgradeText()
-    {
-        if (weapon.weaponProfile.levels.Count > weapon.level)
-        {
-            uiArmoryDetailCtrl.WeaponUpgrade.text = LocalizationManager.Localize("Armory.upgrade");
-            return;
-        };
-
-        uiArmoryDetailCtrl.WeaponUpgrade.text = LocalizationManager.Localize("Armory.upgradeMax");
-    }
+    private void ShowUpgradeText() =>
+        uiArmoryDetailCtrl.WeaponUpgrade.text = weapon.weaponProfile.levels.Count > weapon.level
+        ? LocalizationManager.Localize("Armory.upgrade") : LocalizationManager.Localize("Armory.upgradeMax");
 
     private void ShowButtons()
     {
-        if (weapon == null)
-        {
-            uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(false);
-            uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(false);
-            return;
-        }
         uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(true);
-        uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(false);
-        if (weapon.weaponProfile.levels.Count > weapon.level) uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(true);
+        uiArmoryDetailCtrl.BtnUpgradeWeapon.gameObject.SetActive(weapon.weaponProfile.levels.Count > weapon.level);
     }
 }

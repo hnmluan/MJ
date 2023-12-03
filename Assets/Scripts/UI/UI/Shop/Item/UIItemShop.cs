@@ -105,15 +105,9 @@ public class UIItemShop : InitMonoBehaviour
 
         this.currencyImage.sprite = CurrencyDataSO.FindByName(item.currencyCode).currencySprite;
 
-        if (item.isBuy)
-        {
-            this.soldOut.gameObject.SetActive(true);
-            this.buyButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            this.soldOut.gameObject.SetActive(false);
-            this.buyButton.gameObject.SetActive(true);
-        }
+        this.soldOut.gameObject.SetActive(item.isBuy);
+
+        this.buyButton.gameObject.SetActive(!item.isBuy);
+
     }
 }

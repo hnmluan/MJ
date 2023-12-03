@@ -14,6 +14,9 @@ public class UIArmory : UIBase, IObservationArmory
     private static UIArmory instance;
     public static UIArmory Instance => instance;
 
+    [SerializeField] protected ItemArmory currentItem;
+    public ItemArmory CurrentItem => currentItem;
+
     [SerializeField] protected UIArmoryItemSpawner itemSpawner;
     public UIArmoryItemSpawner ItemSpawner => itemSpawner;
 
@@ -36,8 +39,11 @@ public class UIArmory : UIBase, IObservationArmory
 
     protected override void OnEnable()
     {
+        this.armorySort = ArmorySort.ByName;
+        this.armoryFilter = WeaponType.NoType;
         Armory.Instance.AddObservation(this);
-        ShowItems();
+        this.ShowItems();
+        this.SetCurrentItem(null);
     }
 
     protected override void OnDisable() => Armory.Instance.RemoveObservation(this);
@@ -56,7 +62,7 @@ public class UIArmory : UIBase, IObservationArmory
 
     public void ShowItems()
     {
-        this.ClearAllItems();
+        this.ClearItems();
 
         List<ItemArmory> weapons = Armory.Instance.Weapons;
 
@@ -67,7 +73,7 @@ public class UIArmory : UIBase, IObservationArmory
         this.SortItems();
     }
 
-    protected virtual void ClearAllItems() => itemSpawner.Clear();
+    protected virtual void ClearItems() => itemSpawner.Clear();
 
     protected virtual void SortItems()
     {
@@ -150,29 +156,54 @@ public class UIArmory : UIBase, IObservationArmory
         nextItem.SetSiblingIndex(currentIndex);
     }
 
-    public void AddItem() => this.ShowItems();
-
-    public void DeductItem() => this.ShowItems();
-
-    public void UpgradeItem()
+    public virtual void SetCurrentItem(ItemArmory item)
     {
+        this.currentItem = item;
+        uiArmoryDetail.Show(item);
         this.ShowItems();
-        this.uiArmoryDetail.Show(this.uiArmoryDetail.Weapon);
+    }
+
+    public void AddItem()
+    {
+        this.SetCurrentItem(null);
+        this.ShowItems();
+    }
+
+    public void DeductItem()
+    {
+        this.SetCurrentItem(null);
+        this.ShowItems();
+
+    }
+
+    public void UpgradeItem(bool canUpgrade)
+    {
+        UITextSpawner.Instance.SpawnUITextWithMousePosition(canUpgrade
+            ? LocalizationManager.Localize("Armory.Upgrade.Check")
+            : LocalizationManager.Localize("Armory.Upgrade.Success"));
+        if (!canUpgrade) return;
+        this.SetCurrentItem(this.currentItem);
+        this.ShowItems();
     }
 
     public void DecomposeItem()
     {
-        this.ShowItems();
-        this.uiArmoryDetail.Clear();
-    }
+        List<WeaponRecipeIngredient> listRecipeIngredient = currentItem.GetRecipeDecompose();
 
-    public void UnfocusAll()
-    {
-        foreach (Transform item in itemSpawner.Content)
+        List<ImageText> textList = listRecipeIngredient.Select(item => new ImageText
         {
-            UIItemArmory uiItem = item.GetComponent<UIItemArmory>();
-            if (uiItem == null) return;
-            uiItem.UnfocusItem();
-        }
+            text = LocalizationManager.Localize(item.itemProfile.keyName) + "+" + item.itemCount,
+            image = item.itemProfile.itemSprite
+        }).ToList();
+
+        UITextSpawner.Instance.SpawnUIImageTextWithMousePosition(textList);
+
+        this.UIDecompose.Close();
+
+        this.ShowItems();
+
+        this.UIDecompose.gameObject.SetActive(false);
+
+        this.uiArmoryDetail.Show(null);
     }
 }

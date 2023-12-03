@@ -10,7 +10,7 @@ public class WeaponRecipe
 
     public List<WeaponRecipePrice> recipePrice;
 
-    public bool CanUpgrade()
+    public bool isAvailable()
     {
         foreach (WeaponRecipeIngredient item in recipeIngredients) if (!item.isAvailable()) return false;
 

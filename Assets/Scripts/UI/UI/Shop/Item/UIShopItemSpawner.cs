@@ -8,12 +8,9 @@ public class UIShopItemSpawner : Spawner
 
     protected override void LoadHolder() => this.holder = this.content;
 
-    public virtual void ClearItems()
-    {
-        foreach (Transform item in this.holder) this.Despawn(item);
-    }
+    public virtual void Clear() { foreach (Transform item in this.holder) this.Despawn(item); }
 
-    public virtual void SpawnItem(ItemShop item)
+    public virtual void Spawn(ItemShop item)
     {
         Transform uiItem = this.Spawn(UIShopItemSpawner.normalItem, Vector3.zero, Quaternion.identity);
         uiItem.transform.localScale = new Vector3(1, 1, 1);

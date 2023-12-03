@@ -20,8 +20,8 @@ public class UIItemArmory : InitMonoBehaviour
     [SerializeField] protected Image focus;
     public Image Focus => focus;
 
-    [SerializeField] protected Transform canUpgrade;
-    public Transform CanUpgrade => canUpgrade;
+    [SerializeField] protected Transform upgradeIndicator;
+    public Transform UpgradeIndicator => upgradeIndicator;
 
     protected override void LoadComponents()
     {
@@ -30,14 +30,14 @@ public class UIItemArmory : InitMonoBehaviour
         this.LoadWeaponNumer();
         this.LoadWeaponImage();
         this.LoadFocus();
-        this.LoadCanUpgrade();
+        this.LoadUpgradeIndicator();
     }
 
-    protected virtual void LoadCanUpgrade()
+    protected virtual void LoadUpgradeIndicator()
     {
-        if (this.canUpgrade != null) return;
-        this.canUpgrade = transform.Find("CanUpgrade");
-        Debug.Log(transform.name + ": LoadCanUpgrade", gameObject);
+        if (this.upgradeIndicator != null) return;
+        this.upgradeIndicator = transform.Find("UpgradeIndicator");
+        Debug.Log(transform.name + ": LoadUpgradeIndicator", gameObject);
     }
 
     protected virtual void LoadFocus()
@@ -75,14 +75,7 @@ public class UIItemArmory : InitMonoBehaviour
         this.weaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
         this.weaponImage.sprite = weapon.weaponProfile.spriteInHand;
         this.weaponLevel.text = "+ " + weapon.level.ToString();
-
-        this.focus.gameObject.SetActive(false);
-        if (weapon == UIArmory.Instance.UIArmoryDetail.Weapon) this.FocusItem();
-
-        if (weapon.CanUpgrade()) canUpgrade.gameObject.SetActive(true);
-        else canUpgrade.gameObject.SetActive(false);
+        this.upgradeIndicator.gameObject.SetActive(weapon.CanUpgrade());
+        this.focus.gameObject.SetActive(weapon == UIArmory.Instance.CurrentItem);
     }
-
-    public virtual void FocusItem() => this.focus.gameObject.SetActive(true);
-    public virtual void UnfocusItem() => this.focus.gameObject.SetActive(false);
 }

@@ -4,7 +4,7 @@ public interface IObservationArmory
 
     void DeductItem();
 
-    void UpgradeItem();
+    void UpgradeItem(bool canUpgrade);
 
     void DecomposeItem();
 }

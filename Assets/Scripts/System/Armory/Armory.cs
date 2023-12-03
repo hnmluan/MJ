@@ -11,7 +11,7 @@ public class Armory : Singleton<Armory>
     [SerializeField] protected List<ItemArmory> weapons;
     public List<ItemArmory> Weapons => weapons;
 
-    public static float ratioDecompose = 0.5f;
+    public static float ratioDecompose = 1f;
 
     protected override void Awake()
     {
@@ -28,6 +28,31 @@ public class Armory : Singleton<Armory>
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
             SaveData();
@@ -59,43 +84,28 @@ public class Armory : Singleton<Armory>
 
     public virtual void UpgradeItem(ItemArmory item)
     {
+        if (!item.CanUpgrade()) return;
         item.Upgrade();
+        this.ExcuteUpgradeItemObservation(item.CanUpgrade());
         this.SaveData();
-        this.ExcuteUpgradeItemObservation();
     }
 
     public virtual void DecomposeItem(ItemArmory item)
     {
+        this.ExcuteDecomposeItemObservation();
         item.Decompose();
         this.SaveData();
-        this.ExcuteDecomposeItemObservation();
     }
 
     public void AddObservation(IObservationArmory observation) => observations.Add(observation);
 
     public void RemoveObservation(IObservationArmory observation) => observations.Remove(observation);
 
-    public void ExcuteDeductItemObservation()
-    {
-        foreach (IObservationArmory observation in observations)
-            observation.DeductItem();
-    }
+    public void ExcuteDeductItemObservation() { foreach (IObservationArmory observation in observations) observation.DeductItem(); }
 
-    public void ExcuteAddItemsObservation()
-    {
-        foreach (IObservationArmory observation in observations)
-            observation.AddItem();
-    }
+    public void ExcuteAddItemsObservation() { foreach (IObservationArmory observation in observations) observation.AddItem(); }
 
-    public void ExcuteUpgradeItemObservation()
-    {
-        foreach (IObservationArmory observation in observations)
-            observation.UpgradeItem();
-    }
+    public void ExcuteUpgradeItemObservation(bool canUpgrade) { foreach (IObservationArmory observation in observations) observation.UpgradeItem(canUpgrade); }
 
-    public void ExcuteDecomposeItemObservation()
-    {
-        foreach (IObservationArmory observation in observations)
-            observation.DecomposeItem();
-    }
+    public void ExcuteDecomposeItemObservation() { foreach (IObservationArmory observation in observations) observation.DecomposeItem(); }
 }

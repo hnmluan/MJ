@@ -1,13 +1,5 @@
 using UnityEngine.EventSystems;
 public class PressItemArmory : PressUI
 {
-    public override void OnPointerClick(PointerEventData eventData)
-    {
-        UIItemArmory uiWeapon = GetComponent<UIItemArmory>();
-        UIArmory.Instance.UnfocusAll();
-        uiWeapon.FocusItem();
-        ItemArmory weapon = uiWeapon.Weapon;
-        if (weapon == null) return;
-        UIArmory.Instance.UIArmoryDetail.Show(weapon);
-    }
+    public override void OnPointerClick(PointerEventData eventData) => UIArmory.Instance.SetCurrentItem(GetComponent<UIItemArmory>().Weapon);
 }

@@ -45,13 +45,13 @@ public class Shop : Singleton<Shop>
     public void ResetItem()
     {
         this.listItem.Clear();
-        listItem = getRandomItems();
+        listItem = ResetItems();
         this.UpdateLatestResetTimestamp();
         this.ExcuteResetItemsObservation();
         this.SaveData();
     }
 
-    protected List<ItemShop> getRandomItems()
+    protected List<ItemShop> ResetItems()
     {
         List<ItemShop> randomItems = new List<ItemShop>();
         for (int i = 0; i < 10; i++)
@@ -65,9 +65,9 @@ public class Shop : Singleton<Shop>
 
     public void BuyItem(ItemShop item)
     {
-        item.isBuy = true;
-        this.SaveData();
-        this.ExcuteBuyItemObservation();
+        bool isTransactionSuccessful = item.Buy();
+        if (isTransactionSuccessful) this.SaveData();
+        this.ExcuteBuyItemObservation(item, isTransactionSuccessful);
     }
 
     public bool isResetTimeReached() => GetSecondsBetweenTimestamps(DateTime.Parse(latestResetTimestamp), DateTime.Now) >= resetIntervalInSeconds;
@@ -83,17 +83,9 @@ public class Shop : Singleton<Shop>
 
     public void RemoveObservation(IObservationShop observation) => observations.Remove(observation);
 
-    public void ExcuteBuyItemObservation()
-    {
-        foreach (IObservationShop observation in observations)
-            observation.BuyItem();
-    }
+    public void ExcuteBuyItemObservation(ItemShop item, bool isTransactionSuccessful) { foreach (IObservationShop observation in observations) observation.BuyItem(item, isTransactionSuccessful); }
 
-    public void ExcuteResetItemsObservation()
-    {
-        foreach (IObservationShop observation in observations)
-            observation.ResetItems();
-    }
+    public void ExcuteResetItemsObservation() { foreach (IObservationShop observation in observations) observation.ResetItems(); }
 }
 
 [Serializable]
@@ -116,6 +108,22 @@ public class ItemShop
         this.price = priceData.rangePrice.GetRandomValue();
         this.currencyCode = priceData.currencyCode.currencyCode.ToString();
         isBuy = false;
+    }
+
+    public bool Buy()
+    {
+        CurrencyCode currencyCode;
+
+        if (Enum.TryParse(this.currencyCode, out currencyCode))
+        {
+            if ((currencyCode == CurrencyCode.Silver && Wallet.Instance.DeductSilver(price)) ||
+                (currencyCode == CurrencyCode.Gold && Wallet.Instance.DeductGold(price)))
+            {
+                isBuy = true;
+                return true;
+            }
+        }
+        return false;
     }
 }
 

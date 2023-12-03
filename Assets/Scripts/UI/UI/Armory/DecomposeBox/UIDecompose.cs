@@ -17,12 +17,12 @@ public class UIDecompose : InitMonoBehaviour
 
     public void ShowRecipeDecompose()
     {
-        itemSpawner.ClearRecipeDecomposeLevelUI();
+        itemSpawner.Clear();
 
-        List<WeaponRecipeIngredient> recipePrices = UIArmory.Instance.UIArmoryDetail.Weapon.GetRecipeDecompose();
+        List<WeaponRecipeIngredient> recipePrices = UIArmory.Instance.CurrentItem.GetRecipeDecompose();
 
         if (recipePrices == null) return;
 
-        for (int i = 0; i < recipePrices.Count; i++) itemSpawner.SpawnRecipeDecomposeItemUI(recipePrices[i]);
+        for (int i = 0; i < recipePrices.Count; i++) itemSpawner.Spawn(recipePrices[i]);
     }
 }

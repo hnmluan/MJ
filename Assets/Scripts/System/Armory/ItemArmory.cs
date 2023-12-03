@@ -1,4 +1,3 @@
-using Assets.SimpleLocalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,23 +18,17 @@ public class ItemArmory
     public bool CanUpgrade()
     {
         if (level >= weaponProfile.levels.Count) return false;
-        return weaponProfile.levels[level].weaponRecipe.CanUpgrade();
+        return weaponProfile.levels[level].weaponRecipe.isAvailable();
     }
 
     public bool Upgrade()
     {
-        if (!CanUpgrade())
-        {
-            UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Armory.Upgrade.Check"));
-            return false;
-        }
+        if (!CanUpgrade()) return false;
 
-        List<WeaponRecipeIngredient> recipeIngredients = weaponProfile.levels[level].weaponRecipe.recipeIngredients;
-        List<WeaponRecipePrice> recipePrices = weaponProfile.levels[level].weaponRecipe.recipePrice;
+        foreach (WeaponRecipeIngredient item in weaponProfile.levels[level].weaponRecipe.recipeIngredients)
+            Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
 
-        foreach (WeaponRecipeIngredient item in recipeIngredients) Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
-
-        foreach (WeaponRecipePrice item in recipePrices)
+        foreach (WeaponRecipePrice item in weaponProfile.levels[level].weaponRecipe.recipePrice)
         {
             if (item.data.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.quantity);
             if (item.data.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.quantity);
@@ -43,17 +36,14 @@ public class ItemArmory
 
         level++;
 
-        UITextSpawner.Instance.SpawnUITextWithMousePosition(LocalizationManager.Localize("Armory.Upgrade.Success"));
-
         return true;
     }
 
     public void Decompose()
     {
         foreach (WeaponRecipeIngredient recipeDecompose in GetRecipeDecompose())
-        {
             Inventory.Instance.AddItem(recipeDecompose.itemProfile.itemCode, recipeDecompose.itemCount);
-        }
+
         Armory.Instance.DeductItem(this);
     }
 

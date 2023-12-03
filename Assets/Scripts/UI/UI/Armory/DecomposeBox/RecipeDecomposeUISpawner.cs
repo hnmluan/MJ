@@ -9,9 +9,9 @@ public class RecipeDecomposeUISpawner : Spawner
 
     protected override void LoadHolder() => this.holder = this.content;
 
-    public virtual void ClearRecipeDecomposeLevelUI() { foreach (Transform weapon in this.holder) this.Despawn(weapon); }
+    public virtual void Clear() { foreach (Transform weapon in this.holder) this.Despawn(weapon); }
 
-    public virtual void SpawnRecipeDecomposeItemUI(WeaponRecipeIngredient weaponRecipeIngredient)
+    public virtual void Spawn(WeaponRecipeIngredient weaponRecipeIngredient)
     {
         Transform uiWeapon = this.Spawn(RecipeDecomposeUISpawner.recipeUpdateLevelUI, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);
