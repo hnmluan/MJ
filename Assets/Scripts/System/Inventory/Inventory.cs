@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
@@ -193,27 +194,21 @@ public class Inventory : Singleton<Inventory>
 
     public virtual void RemoveEmptySlot() => Items.RemoveAll(item => item.itemCount == 0);
 
-    public virtual int GetQuantity(ItemCode itemCode)
-    {
-        int quantity = 0;
-        for (int i = 0; i < this.Items.Count; i++)
-        {
-            if (Items[i].itemProfile.itemCode == itemCode) quantity += Items[i].itemCount;
-        }
-        return quantity;
-    }
+    public virtual int GetItemCount(ItemCode itemCode) => items.Where(item => item.itemProfile.itemCode == itemCode).Sum(item => item.itemCount);
 
-    public void AddObservation(IObservationInventory observation) => observations.Add(observation);
+    public virtual int GetItemCount(ItemDataSO itemData) => items.Where(item => item.itemProfile == itemData).Sum(item => item.itemCount);
 
-    public void RemoveObservation(IObservationInventory observation) => observations.Remove(observation);
+    public virtual void AddObservation(IObservationInventory observation) => observations.Add(observation);
 
-    public void ExcuteDeductItemObservation()
+    public virtual void RemoveObservation(IObservationInventory observation) => observations.Remove(observation);
+
+    public virtual void ExcuteDeductItemObservation()
     {
         foreach (IObservationInventory observation in observations)
             observation.DeductItem();
     }
 
-    public void ExcuteAddItemsObservation()
+    public virtual void ExcuteAddItemsObservation()
     {
         foreach (IObservationInventory observation in observations)
             observation.AddItem();

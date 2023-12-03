@@ -71,7 +71,7 @@ public class UIItemInventory : InitMonoBehaviour
     {
         if (itemInventory == null) return;
         UIInventory.Instance.UIInvDetail.SetUIInvDetail(itemInventory);
-        UIInventory.Instance.ClearAllFocus();
+        UIInventory.Instance.UnfocusAllItem();
         focus.gameObject.SetActive(true);
     }
 

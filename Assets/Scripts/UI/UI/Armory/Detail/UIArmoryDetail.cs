@@ -19,11 +19,11 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         UIArmoryDetail.instance = this;
     }
 
-    protected override void OnDisable() => this.SetEmptyUIArmoryDetail();
+    protected override void OnDisable() => this.ClearDetail();
 
-    public virtual void SetUIArmoryDetail(ItemArmory weapon)
+    public virtual void SetDetail(ItemArmory weapon)
     {
-        SetEmptyUIArmoryDetail();
+        ClearDetail();
 
         this.weapon = weapon;
 
@@ -38,7 +38,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         this.ShowButtons();
     }
 
-    public virtual void SetEmptyUIArmoryDetail()
+    public virtual void ClearDetail()
     {
         this.weapon = null;
         uiArmoryDetailCtrl.WeaponImage.sprite = null;
@@ -47,7 +47,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         uiArmoryDetailCtrl.WeaponType.text = "";
         uiArmoryDetailCtrl.WeaponUpgrade.text = "";
 
-        RecipeUpgradeLevelUISpawner.Instance.ClearRecipeUpdateLevelUI();
+        RecipeUpgradeSpawner.Instance.Clear();
 
         this.ShowButtons();
     }
@@ -62,7 +62,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
         List<WeaponRecipeIngredient> recipeIngredients = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipeIngredients;
 
-        for (int i = 0; i < numberOfUpdateRecipeIngredient; i++) RecipeUpgradeLevelUISpawner.Instance.SpawnRecipeUpdateLevelUI(recipeIngredients[i]);
+        for (int i = 0; i < numberOfUpdateRecipeIngredient; i++) RecipeUpgradeSpawner.Instance.Spawn(recipeIngredients[i]);
     }
 
     private void ShowUpgradeRecipePrice()
@@ -75,7 +75,7 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
         List<WeaponRecipePrice> recipePrices = weapon.weaponProfile.levels[weapon.level - 1].weaponRecipe.recipePrice;
 
-        for (int i = 0; i < numberOfUpdateRecipePrice; i++) RecipeUpgradeLevelUISpawner.Instance.SpawnRecipeUpdateLevelUI(recipePrices[i]);
+        for (int i = 0; i < numberOfUpdateRecipePrice; i++) RecipeUpgradeSpawner.Instance.Spawn(recipePrices[i]);
     }
 
     private void ShowUpgradeText()

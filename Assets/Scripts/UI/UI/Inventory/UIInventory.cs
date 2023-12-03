@@ -20,7 +20,7 @@ public class UIInventory : UIBase, IObservationInventory
 
     [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
 
-    [SerializeField] protected UIInvItemSpawner invItemSpawner;
+    [SerializeField] protected UIInvItemSpawner itemSpawner;
 
     [SerializeField] protected UIInvDetail uiInvDetail;
 
@@ -64,7 +64,7 @@ public class UIInventory : UIBase, IObservationInventory
         items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
 
         foreach (ItemInventory item in items)
-            invItemSpawner.SpawnItem(item);
+            itemSpawner.SpawnItem(item);
 
         this.SortItems();
 
@@ -73,19 +73,19 @@ public class UIInventory : UIBase, IObservationInventory
         UpdateInventoryQuantityText();
     }
 
-    protected virtual void ClearItems() => invItemSpawner.ClearItems();
+    protected virtual void ClearItems() => itemSpawner.ClearItems();
 
     protected virtual void SortItems()
     {
         if (this.inventorySort == InventorySort.NoSort) return;
 
-        int itemCount = invItemSpawner.Content.childCount;
+        int itemCount = itemSpawner.Content.childCount;
         bool isSorting = false;
 
         for (int i = 0; i < itemCount - 1; i++)
         {
-            Transform currentItem = invItemSpawner.Content.GetChild(i);
-            Transform nextItem = invItemSpawner.Content.GetChild(i + 1);
+            Transform currentItem = itemSpawner.Content.GetChild(i);
+            Transform nextItem = itemSpawner.Content.GetChild(i + 1);
 
             UIItemInventory currentUIItem = currentItem.GetComponent<UIItemInventory>();
             UIItemInventory nextUIItem = nextItem.GetComponent<UIItemInventory>();
@@ -162,9 +162,9 @@ public class UIInventory : UIBase, IObservationInventory
 
     public void DeductItem() => this.ShowItems();
 
-    public void ClearAllFocus()
+    public void UnfocusAllItem()
     {
-        foreach (Transform item in invItemSpawner.Content)
+        foreach (Transform item in itemSpawner.Content)
         {
             UIItemInventory uiItem = item.GetComponent<UIItemInventory>();
             if (uiItem == null) return;

@@ -9,7 +9,7 @@ public enum ArmorySort
     ByLevel = 2,
 }
 
-public class UIArmory : UIBase
+public class UIArmory : UIBase, IObservationArmory
 {
     private static UIArmory instance;
     public static UIArmory Instance => instance;
@@ -27,7 +27,13 @@ public class UIArmory : UIBase
         UIArmory.instance = this;
     }
 
-    protected override void OnEnable() => ShowItems();
+    protected override void OnEnable()
+    {
+        Armory.Instance.AddObservation(this);
+        ShowItems();
+    }
+
+    protected override void OnDisable() => Armory.Instance.RemoveObservation(this);
 
     public void SetSort(ArmorySort armorySort)
     {
@@ -135,5 +141,31 @@ public class UIArmory : UIBase
 
         currentItem.SetSiblingIndex(nextIndex);
         nextItem.SetSiblingIndex(currentIndex);
+    }
+
+    public void AddItem() => this.ShowItems();
+
+    public void DeductItem() => this.ShowItems();
+
+    public void UpgradeItem()
+    {
+        this.ShowItems();
+        UIArmoryDetail.Instance.SetDetail(UIArmoryDetail.Instance.Weapon);
+    }
+
+    public void DecomposeItem()
+    {
+        this.ShowItems();
+        UIArmoryDetail.Instance.ClearDetail();
+    }
+
+    public void UnfocusAll()
+    {
+        foreach (Transform item in itemSpawner.Content)
+        {
+            UIItemArmory uiItem = item.GetComponent<UIItemArmory>();
+            if (uiItem == null) return;
+            uiItem.UnfocusItem();
+        }
     }
 }

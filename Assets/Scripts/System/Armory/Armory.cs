@@ -25,11 +25,11 @@ public class Armory : Singleton<Armory>
 
         if (armoryData == null)
         {
-            AddItem(WeaponCode.Bow, 3, 3);
-            AddItem(WeaponCode.Lance, 3, 1);
-            AddItem(WeaponCode.Lance, 3, 2);
-            AddItem(WeaponCode.Bow, 3, 3);
-            AddItem(WeaponCode.Bow, 3, 1);
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
             SaveData();
             return;
         }
@@ -46,22 +46,56 @@ public class Armory : Singleton<Armory>
             ItemArmory weapon = new ItemArmory(WeaponDataSO.FindByItemCode(weaponCode), level);
             weapons.Add(weapon);
         }
-        SaveData();
+        this.SaveData();
+        this.ExcuteAddItemsObservation();
     }
 
     public virtual void DeductItem(ItemArmory weapon)
     {
         this.weapons.Remove(weapon);
-        SaveData();
+        this.SaveData();
+        this.ExcuteDeductItemObservation();
     }
 
     public virtual void UpgradeItem(ItemArmory item)
     {
         item.Upgrade();
+        this.SaveData();
+        this.ExcuteUpgradeItemObservation();
     }
 
     public virtual void DecomposeItem(ItemArmory item)
     {
         item.Decompose();
+        this.SaveData();
+        this.ExcuteDecomposeItemObservation();
+    }
+
+    public void AddObservation(IObservationArmory observation) => observations.Add(observation);
+
+    public void RemoveObservation(IObservationArmory observation) => observations.Remove(observation);
+
+    public void ExcuteDeductItemObservation()
+    {
+        foreach (IObservationArmory observation in observations)
+            observation.DeductItem();
+    }
+
+    public void ExcuteAddItemsObservation()
+    {
+        foreach (IObservationArmory observation in observations)
+            observation.AddItem();
+    }
+
+    public void ExcuteUpgradeItemObservation()
+    {
+        foreach (IObservationArmory observation in observations)
+            observation.UpgradeItem();
+    }
+
+    public void ExcuteDecomposeItemObservation()
+    {
+        foreach (IObservationArmory observation in observations)
+            observation.DecomposeItem();
     }
 }

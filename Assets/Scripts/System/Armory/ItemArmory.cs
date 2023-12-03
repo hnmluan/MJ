@@ -37,8 +37,8 @@ public class ItemArmory
 
         foreach (WeaponRecipePrice item in recipePrices)
         {
-            if (item.currencyProfile.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.currencyCout);
-            if (item.currencyProfile.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.currencyCout);
+            if (item.data.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.quantity);
+            if (item.data.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.quantity);
         }
 
         level++;

@@ -2,7 +2,7 @@ using Assets.SimpleLocalization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIItemArmory : InitMonoBehaviour, IObservationArmory
+public class UIItemArmory : InitMonoBehaviour
 {
     [Header("UI Weapon Armory")]
     [SerializeField] protected ItemArmory weapon;
@@ -33,21 +33,21 @@ public class UIItemArmory : InitMonoBehaviour, IObservationArmory
         this.LoadCanUpgrade();
     }
 
-    private void LoadCanUpgrade()
+    protected virtual void LoadCanUpgrade()
     {
         if (this.canUpgrade != null) return;
         this.canUpgrade = transform.Find("CanUpgrade");
         Debug.Log(transform.name + ": LoadCanUpgrade", gameObject);
     }
 
-    private void LoadFocus()
+    protected virtual void LoadFocus()
     {
         if (this.focus != null) return;
         this.focus = transform.Find("Focus").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadFocus", gameObject);
     }
 
-    private void LoadWeaponImage()
+    protected virtual void LoadWeaponImage()
     {
         if (this.weaponImage != null) return;
         this.weaponImage = transform.Find("Image").Find("Image").GetComponent<Image>();
@@ -76,31 +76,13 @@ public class UIItemArmory : InitMonoBehaviour, IObservationArmory
         this.weaponImage.sprite = weapon.weaponProfile.spriteInHand;
         this.weaponLevel.text = "+ " + weapon.level.ToString();
 
-        if (weapon.CanUpgrade())
-        {
-            canUpgrade.gameObject.SetActive(true);
-            return;
-        }
-        canUpgrade.gameObject.SetActive(false);
+        this.focus.gameObject.SetActive(false);
+        if (weapon == UIArmoryDetail.Instance.Weapon) this.FocusItem();
+
+        if (weapon.CanUpgrade()) canUpgrade.gameObject.SetActive(true);
+        else canUpgrade.gameObject.SetActive(false);
     }
 
-    public void AddItem()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void DeductItem()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void UpgradeItem()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void DecomposeItem()
-    {
-        throw new System.NotImplementedException();
-    }
+    public virtual void FocusItem() => this.focus.gameObject.SetActive(true);
+    public virtual void UnfocusItem() => this.focus.gameObject.SetActive(false);
 }

@@ -35,10 +35,10 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 3
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-        currencyCout: 3
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-        currencyCout: 4
+      - data: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        quantity: 3
+      - data: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        quantity: 3
     damage:
       minValue: 0
       maxValue: 0
@@ -54,10 +54,10 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 3
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-        currencyCout: 6
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-        currencyCout: 6
+      - data: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        quantity: 4
+      - data: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        quantity: 4
     damage:
       minValue: 0
       maxValue: 0
@@ -73,10 +73,10 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 8
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-        currencyCout: 8
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-        currencyCout: 8
+      - data: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        quantity: 5
+      - data: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        quantity: 5
     damage:
       minValue: 0
       maxValue: 0
@@ -92,10 +92,10 @@ MonoBehaviour:
       - itemProfile: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
         itemCount: 9
       recipePrice:
-      - currencyProfile: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-        currencyCout: 9
-      - currencyProfile: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-        currencyCout: 9
+      - data: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+        quantity: 6
+      - data: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+        quantity: 6
     damage:
       minValue: 0
       maxValue: 0
