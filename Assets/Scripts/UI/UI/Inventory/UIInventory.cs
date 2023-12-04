@@ -38,6 +38,8 @@ public class UIInventory : UIBase, IObservationInventory
     protected override void OnEnable()
     {
         Inventory.Instance.AddObservation(this);
+        inventorySort = InventorySort.Name;
+        inventoryFilter = ItemType.NoType;
         this.ShowItems();
     }
 
@@ -63,14 +65,13 @@ public class UIInventory : UIBase, IObservationInventory
 
         items = inventoryFilter == ItemType.NoType ? items : items.Where(item => item.itemProfile.itemType == inventoryFilter).ToList();
 
-        foreach (ItemInventory item in items)
-            itemSpawner.SpawnItem(item);
+        foreach (ItemInventory item in items) itemSpawner.SpawnItem(item);
 
         this.SortItems();
 
-        UpdateInventorySlotText();
+        this.UpdateInventorySlotText();
 
-        UpdateInventoryQuantityText();
+        this.UpdateInventoryQuantityText();
     }
 
     protected virtual void ClearItems() => itemSpawner.ClearItems();

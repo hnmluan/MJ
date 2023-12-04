@@ -176,12 +176,12 @@ public class UIArmory : UIBase, IObservationArmory
 
     }
 
-    public void UpgradeItem(bool canUpgrade)
+    public void UpgradeItem(bool isUpgradeSuccessful)
     {
-        UITextSpawner.Instance.SpawnUITextWithMousePosition(canUpgrade
-            ? LocalizationManager.Localize("Armory.Upgrade.Check")
-            : LocalizationManager.Localize("Armory.Upgrade.Success"));
-        if (!canUpgrade) return;
+        UITextSpawner.Instance.SpawnUITextWithMousePosition(isUpgradeSuccessful
+            ? LocalizationManager.Localize("Armory.Upgrade.Success")
+            : LocalizationManager.Localize("Armory.Upgrade.Check"));
+        if (!isUpgradeSuccessful) return;
         this.SetCurrentItem(this.currentItem);
         this.ShowItems();
     }

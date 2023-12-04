@@ -84,9 +84,7 @@ public class Armory : Singleton<Armory>
 
     public virtual void UpgradeItem(ItemArmory item)
     {
-        if (!item.CanUpgrade()) return;
-        item.Upgrade();
-        this.ExcuteUpgradeItemObservation(item.CanUpgrade());
+        this.ExcuteUpgradeItemObservation(item.Upgrade());
         this.SaveData();
     }
 
@@ -105,7 +103,7 @@ public class Armory : Singleton<Armory>
 
     public void ExcuteAddItemsObservation() { foreach (IObservationArmory observation in observations) observation.AddItem(); }
 
-    public void ExcuteUpgradeItemObservation(bool canUpgrade) { foreach (IObservationArmory observation in observations) observation.UpgradeItem(canUpgrade); }
+    public void ExcuteUpgradeItemObservation(bool isUpgradeSuccessful) { foreach (IObservationArmory observation in observations) observation.UpgradeItem(isUpgradeSuccessful); }
 
     public void ExcuteDecomposeItemObservation() { foreach (IObservationArmory observation in observations) observation.DecomposeItem(); }
 }
