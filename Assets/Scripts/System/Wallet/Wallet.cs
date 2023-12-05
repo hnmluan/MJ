@@ -25,8 +25,8 @@ public class Wallet : Singleton<Wallet>
 
         if (walletData == null)
         {
-            this.goldenBalance = 100;
-            this.silverBalance = 100;
+            this.goldenBalance = 99;
+            this.silverBalance = 99;
             return;
         };
 

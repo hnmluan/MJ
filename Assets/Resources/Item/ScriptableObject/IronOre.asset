@@ -17,8 +17,31 @@ MonoBehaviour:
   keyName: Item.IronOre
   itemSprite: {fileID: 21300000, guid: 5030586461672c14b8e6d438a149a4e9, type: 3}
   keyDescription: Item.Description
-  defaultMaxStack: 10
-  datas: []
+  defaultMaxStack: 2147483647
+  itemActionDatas:
+  - rid: 6401894458928660497
+  - rid: 6401894458928660498
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6401894458928660497
+      type: {class: ItemBuyActionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemBuyActionData
+        price:
+        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        quantityToBuy:
+          minValue: 1
+          maxValue: 10
+    - rid: 6401894458928660498
+      type: {class: ItemSellAcctionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemSellAcctionData
+        price: 6

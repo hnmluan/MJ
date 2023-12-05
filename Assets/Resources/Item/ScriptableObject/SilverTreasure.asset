@@ -17,16 +17,55 @@ MonoBehaviour:
   keyName: Item.SilverTreasure
   itemSprite: {fileID: 876198631, guid: 3f07b9cadb53dda4fa133ec773951ce8, type: 3}
   keyDescription: Item.Description
-  defaultMaxStack: 10
-  datas:
-  - rid: 576510825429467212
+  defaultMaxStack: 2147483647
+  itemActionDatas:
+  - rid: 6401894458928660503
+  - rid: 6401894458928660504
+  - rid: 6401894458928660505
   references:
     version: 2
     RefIds:
-    - rid: 576510825429467212
-      type: {class: TreasureItemData, ns: , asm: Assembly-CSharp}
+    - rid: 6401894458928660503
+      type: {class: ItemBuyActionData, ns: , asm: Assembly-CSharp}
       data:
-        name: TreasureItemData
+        name: ItemBuyActionData
+        price:
+        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        quantityToBuy:
+          minValue: 1
+          maxValue: 10
+    - rid: 6401894458928660504
+      type: {class: ItemSellAcctionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemSellAcctionData
+        price: 6
+    - rid: 6401894458928660505
+      type: {class: ItemOpenTreasureData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemOpenTreasureData
         listItemDrop:
         - itemSO: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
-          dropRate: 200000
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: f879b08d7621fd34584c151332539314, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 54241aeacfe0f3047b55d8e63edbbde8, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 2adec4d116ff30d4a9e71e5572db1b6d, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000}
+          dropRate: 100000

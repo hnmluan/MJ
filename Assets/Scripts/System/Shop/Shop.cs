@@ -100,7 +100,7 @@ public class ItemShop
     public ItemShop(ItemDataSO itemDataSO)
     {
         this.itemCode = itemDataSO.itemCode.ToString();
-        BuyableItemData buyableItemData = itemDataSO.datas.OfType<BuyableItemData>().FirstOrDefault();
+        ItemBuyActionData buyableItemData = itemDataSO.itemActionDatas.OfType<ItemBuyActionData>().FirstOrDefault();
         this.quantity = buyableItemData.quantityToBuy.GetRandomValue();
         Random random = new Random();
         int randomIndex = random.Next(0, buyableItemData.price.Count);

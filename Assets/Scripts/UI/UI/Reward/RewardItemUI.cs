@@ -44,7 +44,7 @@ public class RewardItemUI : InitMonoBehaviour
 
     public void ShowItem(ItemCode itemCode, int quantity)
     {
-        ItemDataSO itemDataSO = ItemDataSO.FindByItemCode(itemCode);
+        ItemDataSO itemDataSO = ItemDataSO.FindByCode(itemCode);
         if (itemDataSO == null) return;
 
         itemName.text = LocalizationManager.Localize(itemDataSO.keyName);

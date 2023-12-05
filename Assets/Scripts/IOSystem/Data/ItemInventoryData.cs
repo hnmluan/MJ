@@ -14,7 +14,7 @@ public class ItemInventoryData
         ItemInventory item = new ItemInventory();
         item.maxStack = maxStack;
         item.itemCount = itemCount;
-        item.itemProfile = ItemDataSO.FindByItemCode(ItemCodeParser.FromString(itemCode));
+        item.itemProfile = ItemDataSO.FindByCode(ItemCodeParser.FromString(itemCode));
         return item;
     }
 }

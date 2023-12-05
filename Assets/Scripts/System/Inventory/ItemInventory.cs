@@ -5,8 +5,8 @@
 public class ItemInventory
 {
     public ItemDataSO itemProfile;
-    public int itemCount = 0;
-    public int maxStack = 30;
+    public int itemCount;
+    public int maxStack;
 
     public virtual ItemInventory Clone()
     {

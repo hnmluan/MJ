@@ -25,7 +25,17 @@ public class Inventory : Singleton<Inventory>
         {
             this.maxSlot = 10000;
             this.maxItemCount = 10000;
+
+            AddItem(ItemCode.GoldCup, 100);
             AddItem(ItemCode.CopperSword, 100);
+            AddItem(ItemCode.GoldenTreasure, 100);
+            AddItem(ItemCode.GoldKey, 100);
+            AddItem(ItemCode.GoldOre, 100);
+            AddItem(ItemCode.IronOre, 100);
+            AddItem(ItemCode.SilverKey, 100);
+            AddItem(ItemCode.SilverCup, 100);
+            AddItem(ItemCode.SilverTreasure, 100);
+
             return;
         };
 
@@ -37,65 +47,15 @@ public class Inventory : Singleton<Inventory>
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Inventory, new InventoryData());
 
-    public virtual bool AddItem(ItemCode itemCode, int addCount)
-    {
-        if (GetCurrentItemCount() + addCount > MaxItemCount) return false;
-
-        ItemDataSO itemProfile = this.GetItemProfile(itemCode);
-
-        int addRemain = addCount;
-        int newCount;
-        int itemMaxStack;
-        int addMore;
-        ItemInventory itemExist;
-
-        for (int i = 0; i < this.MaxSlot; i++)
-        {
-            itemExist = this.GetItemNotFullStack(itemCode);
-            if (itemExist == null)
-            {
-                if (this.IsInventoryFull()) return false;
-
-                itemExist = this.CreateEmptyItem(itemProfile);
-                this.Items.Add(itemExist);
-            }
-
-            newCount = itemExist.itemCount + addRemain;
-
-            itemMaxStack = this.GetMaxStack(itemExist);
-            if (newCount > itemMaxStack)
-            {
-                addMore = itemMaxStack - itemExist.itemCount;
-                newCount = itemExist.itemCount + addMore;
-                addRemain -= addMore;
-            }
-            else
-            {
-                addRemain -= newCount;
-            }
-
-            itemExist.itemCount = newCount;
-            if (addRemain < 1) break;
-        }
-        this.SaveData();
-        this.ExcuteAddItemsObservation();
-        return true;
-    }
-
     protected virtual bool IsInventoryFull() => IsInventorySlotFull() || IsInventoryCountFull();
 
-    public virtual bool IsInventorySlotFull() => GetCurrentSlot() >= this.MaxSlot;
+    public virtual bool IsInventorySlotFull() => GetSlotCount() >= this.MaxSlot;
 
-    public virtual bool IsInventoryCountFull() => GetCurrentItemCount() >= this.MaxItemCount;
+    public virtual bool IsInventoryCountFull() => GetItemCount() >= this.MaxItemCount;
 
-    public virtual int GetCurrentSlot() => this.Items.Count;
+    public virtual int GetSlotCount() => this.Items.Count;
 
-    public virtual int GetCurrentItemCount()
-    {
-        int itemCout = 0;
-        foreach (ItemInventory item in Items) itemCout += item.itemCount;
-        return itemCout;
-    }
+    public virtual int GetItemCount() => Items.Sum(item => item.itemCount);
 
     protected virtual int GetMaxStack(ItemInventory itemInventory)
     {
@@ -163,6 +123,16 @@ public class Inventory : Singleton<Inventory>
         return totalCount;
     }
 
+    public virtual void RemoveEmptySlot() => Items.RemoveAll(item => item.itemCount == 0);
+
+    public virtual int GetItemCount(ItemCode itemCode) => items.Where(item => item.itemProfile.itemCode == itemCode).Sum(item => item.itemCount);
+
+    public virtual int GetItemCount(ItemDataSO itemData) => items.Where(item => item.itemProfile == itemData).Sum(item => item.itemCount);
+
+    public virtual void AddObservation(IObservationInventory observation) => observations.Add(observation);
+
+    public virtual void RemoveObservation(IObservationInventory observation) => observations.Remove(observation);
+
     public virtual void DeductItem(ItemCode itemCode, int deductCount)
     {
         ItemInventory itemInventory;
@@ -192,25 +162,88 @@ public class Inventory : Singleton<Inventory>
         this.SaveData();
     }
 
-    public virtual void RemoveEmptySlot() => Items.RemoveAll(item => item.itemCount == 0);
-
-    public virtual int GetItemCount(ItemCode itemCode) => items.Where(item => item.itemProfile.itemCode == itemCode).Sum(item => item.itemCount);
-
-    public virtual int GetItemCount(ItemDataSO itemData) => items.Where(item => item.itemProfile == itemData).Sum(item => item.itemCount);
-
-    public virtual void AddObservation(IObservationInventory observation) => observations.Add(observation);
-
-    public virtual void RemoveObservation(IObservationInventory observation) => observations.Remove(observation);
-
-    public virtual void ExcuteDeductItemObservation()
+    public virtual bool AddItem(ItemCode itemCode, int addCount)
     {
-        foreach (IObservationInventory observation in observations)
-            observation.DeductItem();
+        if (GetItemCount() + addCount > MaxItemCount) return false;
+
+        ItemDataSO itemProfile = this.GetItemProfile(itemCode);
+
+        int addRemain = addCount;
+        int newCount;
+        int itemMaxStack;
+        int addMore;
+        ItemInventory itemExist;
+
+        for (int i = 0; i < this.MaxSlot; i++)
+        {
+            itemExist = this.GetItemNotFullStack(itemCode);
+            if (itemExist == null)
+            {
+                if (this.IsInventoryFull()) return false;
+
+                itemExist = this.CreateEmptyItem(itemProfile);
+                this.Items.Add(itemExist);
+            }
+
+            newCount = itemExist.itemCount + addRemain;
+
+            itemMaxStack = this.GetMaxStack(itemExist);
+            if (newCount > itemMaxStack)
+            {
+                addMore = itemMaxStack - itemExist.itemCount;
+                newCount = itemExist.itemCount + addMore;
+                addRemain -= addMore;
+            }
+            else
+            {
+                addRemain -= newCount;
+            }
+
+            itemExist.itemCount = newCount;
+            if (addRemain < 1) break;
+        }
+        this.SaveData();
+        this.ExcuteAddItemsObservation();
+        return true;
     }
 
-    public virtual void ExcuteAddItemsObservation()
+    public virtual void OpenTreasure(ItemInventory itemInventory)
     {
-        foreach (IObservationInventory observation in observations)
-            observation.AddItem();
+        itemInventory.itemProfile.GetItemActionData<ItemOpenTreasureData>().Open(1);
+        this.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        this.ExcuteOpenTreasureObservation();
     }
+
+    public virtual void OpenAllTreasure(ItemInventory itemInventory)
+    {
+        itemInventory.itemProfile.GetItemActionData<ItemOpenTreasureData>().Open(itemInventory.itemCount);
+        this.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        this.ExcuteOpenAllTreasureObservation();
+    }
+
+    public virtual void SellItem(ItemInventory itemInventory)
+    {
+        itemInventory.itemProfile.GetItemActionData<ItemSellAcctionData>().Sell(1);
+        this.DeductItem(itemInventory.itemProfile.itemCode, 1);
+        this.ExcuteSellItemObservation();
+    }
+
+    public virtual void SellAllItem(ItemInventory itemInventory)
+    {
+        itemInventory.itemProfile.GetItemActionData<ItemSellAcctionData>().Sell(itemInventory.itemCount);
+        this.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
+        this.ExcuteSellAllItemObservation();
+    }
+
+    public virtual void ExcuteDeductItemObservation() { foreach (IObservationInventory observation in observations) observation.DeductItem(); }
+
+    public virtual void ExcuteAddItemsObservation() { foreach (IObservationInventory observation in observations) observation.AddItem(); }
+
+    public virtual void ExcuteOpenTreasureObservation() { foreach (IObservationInventory observation in observations) observation.OpenTreasure(); }
+
+    public virtual void ExcuteOpenAllTreasureObservation() { foreach (IObservationInventory observation in observations) observation.OpenAllTreasure(); }
+
+    public virtual void ExcuteSellItemObservation() { foreach (IObservationInventory observation in observations) observation.SellItem(); }
+
+    public virtual void ExcuteSellAllItemObservation() { foreach (IObservationInventory observation in observations) observation.SellAllItem(); }
 }

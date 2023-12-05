@@ -18,23 +18,29 @@ public class ItemDataSO : ScriptableObject
 
     public string keyDescription;
 
-    public int defaultMaxStack = 10;
+    public int defaultMaxStack;
 
-    [field: SerializeReference] public List<ItemData> datas;
+    [field: SerializeReference] public List<ItemActionData> itemActionDatas;
 
-    public void AddData(ItemData data)
+    public ItemDataSO()
     {
-        if (datas.FirstOrDefault(t => t.GetType() == data.GetType()) != null)
-            return;
-
-        datas.Add(data);
+        itemActionDatas.Add(new ItemSellAcctionData());
+        itemActionDatas.Add(new ItemBuyActionData());
+        itemActionDatas.Add(new ItemOpenTreasureData());
     }
 
-    public bool IsExistItemData<T>() where T : ItemData => GetItemData<T>() != null;
+    public void AddData(ItemActionData data)
+    {
+        if (itemActionDatas.FirstOrDefault(t => t.GetType() == data.GetType()) != null) return;
 
-    public T GetItemData<T>() where T : ItemData => datas.OfType<T>().FirstOrDefault();
+        itemActionDatas.Add(data);
+    }
 
-    public static ItemDataSO FindByItemCode(ItemCode itemCode)
+    public bool IsExistItemData<T>() where T : ItemActionData => GetItemActionData<T>() != null;
+
+    public T GetItemActionData<T>() where T : ItemActionData => itemActionDatas.OfType<T>().FirstOrDefault();
+
+    public static ItemDataSO FindByCode(ItemCode itemCode)
     {
         var profiles = Resources.LoadAll("Item/ScriptableObject", typeof(ItemDataSO));
         foreach (ItemDataSO profile in profiles)
@@ -49,7 +55,7 @@ public class ItemDataSO : ScriptableObject
     {
         ItemCode itemCode;
         Enum.TryParse(name, out itemCode);
-        return FindByItemCode(itemCode);
+        return FindByCode(itemCode);
     }
 
     public static ItemDataSO GetRandomSellableItemSO()
@@ -58,7 +64,7 @@ public class ItemDataSO : ScriptableObject
 
         System.Random random = new System.Random();
 
-        int randomIndex = random.Next(0, GetSellableItemsSO().Count);
+        int randomIndex = (new System.Random()).Next(0, GetSellableItemsSO().Count);
 
         return GetSellableItemsSO()[randomIndex];
     }
@@ -66,7 +72,7 @@ public class ItemDataSO : ScriptableObject
     public static List<ItemDataSO> GetSellableItemsSO()
     {
         ItemDataSO[] allItemDataSO = Resources.LoadAll<ItemDataSO>("Item/ScriptableObject");
-        return allItemDataSO.Where(itemDataSO => itemDataSO.datas.Any(data => data is BuyableItemData)).ToList();
+        return allItemDataSO.Where(itemDataSO => itemDataSO.itemActionDatas.Any(data => data is ItemBuyActionData)).ToList();
     }
 }
 

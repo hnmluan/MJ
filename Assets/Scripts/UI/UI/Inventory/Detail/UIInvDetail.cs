@@ -1,88 +1,37 @@
 using Assets.SimpleLocalization;
-using UnityEngine;
 
 public class UIInvDetail : UIInvDetailAbstract
 {
-    [SerializeField] protected ItemInventory itemInventory = null;
-    public ItemInventory ItemInventory => itemInventory;
-
-    protected override void OnDisable() => this.SetEmptyUIInvDetail();
-
-    public virtual void SetUIInvDetail(ItemInventory item)
+    public virtual void Show()
     {
-        this.itemInventory = item;
+        ItemInventory item = UIInventory.Instance.CurrentItem;
 
-        ShowButtons();
+        uiCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
+        uiCtrl.ItemQuantity.text = item.itemCount.ToString();
+        uiCtrl.ItemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
+        uiCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDescription);
+        uiCtrl.ItemType.text = LocalizationManager.Localize("Item.Type." + item.itemProfile.itemType.ToString());
 
-        uiInvDetailCtrl.ItemImage.sprite = item.itemProfile.itemSprite;
-        uiInvDetailCtrl.ItemQuantity.text = item.itemCount.ToString();
-        uiInvDetailCtrl.ItemName.text = LocalizationManager.Localize(item.itemProfile.keyName);
-        uiInvDetailCtrl.ItemDescription.text = LocalizationManager.Localize(item.itemProfile.keyDescription);
-        uiInvDetailCtrl.ItemType.text = LocalizationManager.Localize("Item.Type." + item.itemProfile.itemType.ToString());
+        uiCtrl.BtnInvUse.transform.gameObject.SetActive(IsTreasureItem());
+        uiCtrl.BtnInvUseAll.transform.gameObject.SetActive(IsTreasureItem() && item.itemCount > 1);
+        uiCtrl.BtnInvBuy.transform.gameObject.SetActive(IsSellableItem());
+        uiCtrl.BtnInvBuyAll.transform.gameObject.SetActive(IsSellableItem() && item.itemCount > 1);
     }
 
-    public virtual void SetEmptyUIInvDetail()
+    public virtual void Clear()
     {
-        ClearButtons();
-        this.itemInventory = null;
-
-        uiInvDetailCtrl.ItemImage.sprite = null;
-        uiInvDetailCtrl.ItemDescription.text = null;
-        uiInvDetailCtrl.ItemName.text = null;
-        uiInvDetailCtrl.ItemQuantity.text = null;
-        uiInvDetailCtrl.ItemType.text = null;
+        uiCtrl.ItemImage.sprite = null;
+        uiCtrl.ItemDescription.text = null;
+        uiCtrl.ItemName.text = null;
+        uiCtrl.ItemQuantity.text = null;
+        uiCtrl.ItemType.text = null;
+        uiCtrl.BtnInvUse.transform.gameObject.SetActive(false);
+        uiCtrl.BtnInvUseAll.transform.gameObject.SetActive(false);
+        uiCtrl.BtnInvBuy.transform.gameObject.SetActive(false);
+        uiCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
     }
 
-    public virtual void UseItem()
-    {
-        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(1);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-    }
+    private bool IsTreasureItem() => UIInventory.Instance.CurrentItem.itemProfile.IsExistItemData<ItemOpenTreasureData>();
 
-    public virtual void UseAllItem()
-    {
-        itemInventory.itemProfile.GetItemData<TreasureItemData>().OpenTreasure(itemInventory.itemCount);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        this.SetEmptyUIInvDetail();
-    }
-
-    public virtual void SellItem()
-    {
-        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(1);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, 1);
-    }
-
-    public virtual void SellAllItem()
-    {
-        itemInventory.itemProfile.GetItemData<SellableItemData>().SellItem(itemInventory.itemCount);
-        Inventory.Instance.DeductItem(itemInventory.itemProfile.itemCode, itemInventory.itemCount);
-        this.SetEmptyUIInvDetail();
-    }
-
-    private void ShowButtons()
-    {
-        ClearButtons();
-        if (IsUsable())
-        {
-            uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(true);
-            if (itemInventory.itemCount > 1) uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(true);
-        }
-        if (IsSellable())
-        {
-            uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(true);
-            if (itemInventory.itemCount > 1) uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(true);
-        }
-    }
-
-    private void ClearButtons()
-    {
-        uiInvDetailCtrl.BtnInvUse.transform.gameObject.SetActive(false);
-        uiInvDetailCtrl.BtnInvUseAll.transform.gameObject.SetActive(false);
-        uiInvDetailCtrl.BtnInvBuy.transform.gameObject.SetActive(false);
-        uiInvDetailCtrl.BtnInvBuyAll.transform.gameObject.SetActive(false);
-    }
-
-    private bool IsUsable() => itemInventory.itemProfile.IsExistItemData<TreasureItemData>();
-
-    private bool IsSellable() => itemInventory.itemProfile.IsExistItemData<SellableItemData>();
+    private bool IsSellableItem() => UIInventory.Instance.CurrentItem.itemProfile.IsExistItemData<ItemSellAcctionData>();
 }

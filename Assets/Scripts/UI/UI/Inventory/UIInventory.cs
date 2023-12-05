@@ -16,18 +16,22 @@ public class UIInventory : UIBase, IObservationInventory
     private static UIInventory instance;
     public static UIInventory Instance => instance;
 
-    [SerializeField] protected InventorySort inventorySort = InventorySort.Name;
+    [SerializeField] protected ItemInventory currentItem;
+    public ItemInventory CurrentItem => currentItem;
 
-    [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
+    [SerializeField] protected UIInvDetail uiDetail;
+    public UIInvDetail UIInvDetail => uiDetail;
 
     [SerializeField] protected UIInvItemSpawner itemSpawner;
-
-    [SerializeField] protected UIInvDetail uiInvDetail;
 
     [SerializeField] protected Text slotItemText;
 
     [SerializeField] protected Text quanityItemText;
-    [SerializeField] public UIInvDetail UIInvDetail => uiInvDetail;
+
+    [SerializeField] protected InventorySort inventorySort = InventorySort.Name;
+
+    [SerializeField] protected ItemType inventoryFilter = ItemType.NoType;
+
     protected override void Awake()
     {
         base.Awake();
@@ -40,21 +44,29 @@ public class UIInventory : UIBase, IObservationInventory
         Inventory.Instance.AddObservation(this);
         inventorySort = InventorySort.Name;
         inventoryFilter = ItemType.NoType;
+        this.uiDetail.Clear();
         this.ShowItems();
     }
 
     protected override void OnDisable() => Inventory.Instance.RemoveObservation(this);
 
-    public void SetInventorySort(InventorySort inventorySort)
+    public void SetSort(InventorySort inventorySort)
     {
         this.inventorySort = inventorySort;
         this.ShowItems();
     }
 
-    public void SetInventoryFilter(ItemType inventoryFilter)
+    public void SetFilter(ItemType inventoryFilter)
     {
         this.inventoryFilter = inventoryFilter;
         this.ShowItems();
+    }
+
+    public void SetCurrentItem(ItemInventory item)
+    {
+        this.currentItem = item;
+        if (item == null) this.uiDetail.Clear();
+        else this.uiDetail.Show();
     }
 
     public virtual void ShowItems()
@@ -69,9 +81,9 @@ public class UIInventory : UIBase, IObservationInventory
 
         this.SortItems();
 
-        this.UpdateInventorySlotText();
+        this.ResetItemSlotText();
 
-        this.UpdateInventoryQuantityText();
+        this.ResetItemCoutText();
     }
 
     protected virtual void ClearItems() => itemSpawner.ClearItems();
@@ -155,9 +167,9 @@ public class UIInventory : UIBase, IObservationInventory
         nextItem.SetSiblingIndex(currentIndex);
     }
 
-    protected void UpdateInventorySlotText() => slotItemText.text = Inventory.Instance.GetCurrentItemCount() + " / " + Inventory.Instance.MaxItemCount;
+    protected void ResetItemSlotText() => slotItemText.text = Inventory.Instance.GetSlotCount() + " / " + Inventory.Instance.MaxItemCount;
 
-    protected void UpdateInventoryQuantityText() => quanityItemText.text = Inventory.Instance.GetCurrentItemCount() + " / " + Inventory.Instance.MaxItemCount;
+    protected void ResetItemCoutText() => quanityItemText.text = Inventory.Instance.GetItemCount() + " / " + Inventory.Instance.MaxItemCount;
 
     public void AddItem() => this.ShowItems();
 
@@ -169,7 +181,15 @@ public class UIInventory : UIBase, IObservationInventory
         {
             UIItemInventory uiItem = item.GetComponent<UIItemInventory>();
             if (uiItem == null) return;
-            uiItem.ClearFocus();
+            uiItem.Focus(false);
         }
     }
+
+    public void SellItem() { if (currentItem.itemCount == 0) uiDetail.Clear(); else uiDetail.Show(); }
+
+    public void SellAllItem() => uiDetail.Clear();
+
+    public void OpenTreasure() { if (currentItem.itemCount == 0) uiDetail.Clear(); else uiDetail.Show(); }
+
+    public void OpenAllTreasure() => uiDetail.Clear();
 }

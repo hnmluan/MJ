@@ -17,33 +17,55 @@ MonoBehaviour:
   keyName: Item.GoldenTreasure
   itemSprite: {fileID: 1130569410, guid: 2e933024671f73d449e539e832ebbc3c, type: 3}
   keyDescription: Item.Description
-  defaultMaxStack: 10
-  datas:
-  - rid: 7794920710231293952
-  - rid: 4828532231772045317
+  defaultMaxStack: 2147483647
+  itemActionDatas:
+  - rid: 6401894458928660490
+  - rid: 6401894458928660491
+  - rid: 6401894458928660492
   references:
     version: 2
     RefIds:
-    - rid: 4828532231772045317
-      type: {class: BuyableItemData, ns: , asm: Assembly-CSharp}
+    - rid: 6401894458928660490
+      type: {class: ItemOpenTreasureData, ns: , asm: Assembly-CSharp}
       data:
-        name: BuyableItemData
-        price:
-        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
-          rangePrice:
-            minValue: 3
-            maxValue: 8
-        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
-          rangePrice:
-            minValue: 8
-            maxValue: 12
-        quantityToBuy:
-          minValue: 4
-          maxValue: 5
-    - rid: 7794920710231293952
-      type: {class: TreasureItemData, ns: , asm: Assembly-CSharp}
-      data:
-        name: TreasureItemData
+        name: ItemOpenTreasureData
         listItemDrop:
+        - itemSO: {fileID: 11400000, guid: a916c2a91fc7e9849aa0a4e87c718e82, type: 2}
+          dropRate: 100000
         - itemSO: {fileID: 11400000, guid: 921b3e0681aa568458dbaaaf0e9fffb3, type: 2}
           dropRate: 100000
+        - itemSO: {fileID: 11400000}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 54241aeacfe0f3047b55d8e63edbbde8, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: e5bf2c2ca09d0d24eb3637e946203fca, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 61286b041005f434db6e08e66e52e6f7, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: 2adec4d116ff30d4a9e71e5572db1b6d, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: fcb0691b0d1faa2488e5160854dd503e, type: 2}
+          dropRate: 100000
+        - itemSO: {fileID: 11400000, guid: cd51dbbcea46544458e6697d2d083d1f, type: 2}
+          dropRate: 100000
+    - rid: 6401894458928660491
+      type: {class: ItemBuyActionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemBuyActionData
+        price:
+        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        quantityToBuy:
+          minValue: 1
+          maxValue: 10
+    - rid: 6401894458928660492
+      type: {class: ItemSellAcctionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemSellAcctionData
+        price: 6

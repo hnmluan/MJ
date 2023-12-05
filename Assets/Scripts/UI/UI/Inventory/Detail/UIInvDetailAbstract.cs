@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class UIInvDetailAbstract : InitMonoBehaviour
 {
-    [SerializeField] protected UIInvDetailCtrl uiInvDetailCtrl;
+    [SerializeField] protected UIInvDetailCtrl uiCtrl;
 
     protected override void LoadComponents()
     {
@@ -12,8 +12,8 @@ public class UIInvDetailAbstract : InitMonoBehaviour
 
     protected virtual void LoadUIInvDetailCtrl()
     {
-        if (uiInvDetailCtrl != null) return;
-        uiInvDetailCtrl = transform.GetComponent<UIInvDetailCtrl>();
+        if (uiCtrl != null) return;
+        uiCtrl = transform.GetComponent<UIInvDetailCtrl>();
         Debug.Log(transform.name + ": LoadUIInvDetailCtrl", gameObject);
     }
 }

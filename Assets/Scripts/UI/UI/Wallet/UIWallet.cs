@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +12,21 @@ public class UIWallet : InitMonoBehaviour, IObservationWallet
     protected override void Awake()
     {
         Wallet.Instance.AddObservation(this);
-        GoldBalance.text = "x " + Wallet.Instance.GoldenBalance;
-        SilverBalance.text = "x " + Wallet.Instance.SilverBalance;
+        GoldBalance.text = GetFormattedBalance(Wallet.Instance.GoldenBalance);
+        SilverBalance.text = GetFormattedBalance(Wallet.Instance.SilverBalance);
         GoldSprite.sprite = CurrencyDataSO.FindByCode(CurrencyCode.Gold).currencySprite;
         SilverSprite.sprite = CurrencyDataSO.FindByCode(CurrencyCode.Silver).currencySprite;
     }
 
-    public void AddGold() => GoldBalance.text = "x " + Wallet.Instance.GoldenBalance;
+    public void AddGold() => GoldBalance.text = GetFormattedBalance(Wallet.Instance.GoldenBalance);
 
-    public void AddSilver() => SilverBalance.text = "x " + Wallet.Instance.SilverBalance;
+    public void AddSilver() => SilverBalance.text = GetFormattedBalance(Wallet.Instance.SilverBalance);
 
-    public void DeductGold() => GoldBalance.text = "x " + Wallet.Instance.GoldenBalance;
+    public void DeductGold() => GoldBalance.text = GetFormattedBalance(Wallet.Instance.GoldenBalance);
 
-    public void DeductSilver() => SilverBalance.text = "x " + Wallet.Instance.SilverBalance;
+    public void DeductSilver() => SilverBalance.text = GetFormattedBalance(Wallet.Instance.SilverBalance);
+
+    public string GetFormattedBalance(int balance)
+        => balance < 1000 ? balance.ToString() : Math.Round(Convert.ToDouble(balance / 1000)) + "k";
+
 }

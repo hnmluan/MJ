@@ -17,8 +17,31 @@ MonoBehaviour:
   keyName: Item.SilverKey
   itemSprite: {fileID: 21300000, guid: 49b1074ef401a3f478b3f297bd7dc536, type: 3}
   keyDescription: Item.Description
-  defaultMaxStack: 10
-  datas: []
+  defaultMaxStack: 2147483647
+  itemActionDatas:
+  - rid: 6401894458928660501
+  - rid: 6401894458928660502
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6401894458928660501
+      type: {class: ItemBuyActionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemBuyActionData
+        price:
+        - currencyCode: {fileID: 11400000, guid: ab412b8765db48244bbc0414a92369b3, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        - currencyCode: {fileID: 11400000, guid: 3388a69894161544db3a41e3f53a5668, type: 2}
+          rangePrice:
+            minValue: 1
+            maxValue: 10
+        quantityToBuy:
+          minValue: 1
+          maxValue: 10
+    - rid: 6401894458928660502
+      type: {class: ItemSellAcctionData, ns: , asm: Assembly-CSharp}
+      data:
+        name: ItemSellAcctionData
+        price: 6
