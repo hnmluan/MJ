@@ -11,15 +11,6 @@ public class Armory : Singleton<Armory>
     [SerializeField] protected List<ItemArmory> weapons;
     public List<ItemArmory> Weapons => weapons;
 
-    [SerializeField] protected ItemArmory equippedWeapon1 = null;
-    public ItemArmory EquippedWeapon1 => equippedWeapon1;
-
-    [SerializeField] protected ItemArmory equippedWeapon2 = null;
-    public ItemArmory EquippedWeapon2 => equippedWeapon2;
-
-    [SerializeField] protected ItemArmory equippedWeapon3 = null;
-    public ItemArmory EquippedWeapon3 => equippedWeapon3;
-
     public static float ratioDecompose = 1f;
 
     protected override void Awake()
@@ -34,39 +25,21 @@ public class Armory : Singleton<Armory>
 
         if (armoryData == null)
         {
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 2));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 1));
             weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 3));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
-
-            equippedWeapon1 = null;
-            equippedWeapon2 = null;
-            equippedWeapon3 = null;
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 2));
 
             SaveData();
             return;
         }
 
         armoryData.weapons.ForEach(item => this.weapons.Add(new ItemArmory(item)));
-        equippedWeapon1 = FindByID(armoryData.equippedWeapon1);
-        equippedWeapon2 = FindByID(armoryData.equippedWeapon2);
-        equippedWeapon3 = FindByID(armoryData.equippedWeapon3);
     }
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Armory, new ArmoryData(this));
 
-    public virtual ItemArmory FindByID(string ID)
-    {
-        ItemArmory item = weapons.FirstOrDefault(weapon => weapon.id == ID);
-        if (item == null) Debug.Log("Null");
-        return item;
-    }
+    public ItemArmory GetEquippedWeapon(int position) => weapons.FirstOrDefault(weapon => weapon.position == position);
 
     public virtual void AddItem(WeaponCode weaponCode, int addCount, int level)
     {
@@ -101,10 +74,8 @@ public class Armory : Singleton<Armory>
 
     public virtual void EquipItem(ItemArmory item, int position)
     {
-        if (position == 1) this.equippedWeapon1 = item;
-        if (position == 2) this.equippedWeapon2 = item;
-        if (position == 3) this.equippedWeapon3 = item;
-
+        if (GetEquippedWeapon(position) != null) this.GetEquippedWeapon(position).position = 0;
+        item.position = position;
         this.ExcuteEquipItemObservation(item, position);
         this.SaveData();
     }

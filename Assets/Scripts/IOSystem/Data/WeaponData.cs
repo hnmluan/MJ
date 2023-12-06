@@ -4,14 +4,16 @@ using System;
 [Serializable]
 public class WeaponData
 {
-    public string id;
-    public string name;
+    public string itemCode;
     public int level;
+    public int position = 0;
+    public bool isFocus = false;
 
     public WeaponData(ItemArmory item)
     {
-        this.name = item.weaponProfile.damageObjectCode.ToString();
+        this.itemCode = item.weaponProfile.damageObjectCode.ToString();
         this.level = item.level;
-        this.id = item.id;
+        this.position = item.position;
+        this.isFocus = false;
     }
 }
