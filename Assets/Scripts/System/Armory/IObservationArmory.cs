@@ -7,4 +7,6 @@ public interface IObservationArmory
     void UpgradeItem(bool isUpgradeSuccessful);
 
     void DecomposeItem();
+
+    void EquipItem(ItemArmory item, int position);
 }

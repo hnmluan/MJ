@@ -48,17 +48,9 @@ public class UIArmory : UIBase, IObservationArmory
 
     protected override void OnDisable() => Armory.Instance.RemoveObservation(this);
 
-    public void SetSort(ArmorySort armorySort)
-    {
-        this.armorySort = armorySort;
-        this.ShowItems();
-    }
+    public void SetSort(ArmorySort armorySort) { this.armorySort = armorySort; this.ShowItems(); }
 
-    public void SetFilter(WeaponType armoryFilter)
-    {
-        this.armoryFilter = armoryFilter;
-        this.ShowItems();
-    }
+    public void SetFilter(WeaponType armoryFilter) { this.armoryFilter = armoryFilter; this.ShowItems(); }
 
     public void ShowItems()
     {
@@ -173,7 +165,6 @@ public class UIArmory : UIBase, IObservationArmory
     {
         this.SetCurrentItem(null);
         this.ShowItems();
-
     }
 
     public void UpgradeItem(bool isUpgradeSuccessful)
@@ -206,4 +197,6 @@ public class UIArmory : UIBase, IObservationArmory
 
         this.uiArmoryDetail.Show(null);
     }
+
+    public void EquipItem(ItemArmory item, int position) { }
 }

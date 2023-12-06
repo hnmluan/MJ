@@ -5,14 +5,24 @@ using System.Linq;
 [Serializable]
 public class ItemArmory
 {
+    public string id;
+
     public WeaponDataSO weaponProfile;
 
     public int level;
 
     public ItemArmory(WeaponDataSO weaponProfile, int level)
     {
+        this.id = Guid.NewGuid().ToString();
         this.weaponProfile = weaponProfile;
         this.level = level;
+    }
+
+    public ItemArmory(WeaponData data)
+    {
+        this.id = data.id;
+        this.weaponProfile = WeaponDataSO.FindByName(data.name);
+        this.level = data.level;
     }
 
     public bool CanUpgrade()
