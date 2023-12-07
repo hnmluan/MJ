@@ -9,4 +9,5 @@ public interface IObservationArmory
     void DecomposeItem();
 
     void EquipItem(ItemArmory item, int position);
+    void FocusItem(int position);
 }

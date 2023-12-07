@@ -80,6 +80,16 @@ public class Armory : Singleton<Armory>
         this.SaveData();
     }
 
+    public virtual void FocusItem(int position)
+    {
+        ItemArmory item = GetEquippedWeapon(position);
+        if (item == null) return;
+        weapons.ForEach(item => item.isFocus = false);
+        item.isFocus = true;
+        this.ExcuteFocusItemObservation(position);
+        this.SaveData();
+    }
+
     public void AddObservation(IObservationArmory observation) => observations.Add(observation);
 
     public void RemoveObservation(IObservationArmory observation) => observations.Remove(observation);
@@ -93,4 +103,6 @@ public class Armory : Singleton<Armory>
     public void ExcuteDecomposeItemObservation() { foreach (IObservationArmory observation in observations) observation.DecomposeItem(); }
 
     public void ExcuteEquipItemObservation(ItemArmory item, int position) { foreach (IObservationArmory observation in observations) observation.EquipItem(item, position); }
+
+    public void ExcuteFocusItemObservation(int position) { foreach (IObservationArmory observation in observations) observation.FocusItem(position); }
 }

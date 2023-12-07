@@ -23,7 +23,7 @@ public class ItemArmory
     {
         this.weaponProfile = WeaponDataSO.FindByName(data.itemCode);
         this.level = data.level;
-        this.position = 0;
+        this.position = data.position;
         this.isFocus = false;
     }
 

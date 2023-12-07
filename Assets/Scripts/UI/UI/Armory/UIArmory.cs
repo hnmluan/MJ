@@ -199,4 +199,6 @@ public class UIArmory : UIBase, IObservationArmory
     }
 
     public void EquipItem(ItemArmory item, int position) { }
+
+    public void FocusItem(int position) { }
 }
