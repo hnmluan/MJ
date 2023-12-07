@@ -27,7 +27,7 @@ public class WeaponDataSO : ScriptableObject
 
     public List<WeaponLevel> levels;
 
-    public static WeaponDataSO FindByItemCode(WeaponCode weaponCode)
+    public static WeaponDataSO FindByCode(WeaponCode weaponCode)
     {
         var profiles = Resources.LoadAll("DamageObject/ScriptableObject", typeof(WeaponDataSO));
         foreach (WeaponDataSO profile in profiles)
@@ -42,7 +42,7 @@ public class WeaponDataSO : ScriptableObject
     {
         WeaponCode weaponCode;
         Enum.TryParse(name, out weaponCode);
-        return FindByItemCode(weaponCode);
+        return FindByCode(weaponCode);
     }
 
     public static List<WeaponDataSO> GetAllSO() => new List<WeaponDataSO>(Resources.LoadAll<WeaponDataSO>("DamageObject/ScriptableObject"));

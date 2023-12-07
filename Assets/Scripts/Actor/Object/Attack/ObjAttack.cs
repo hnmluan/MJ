@@ -4,6 +4,8 @@ public abstract class ObjAttack : InitMonoBehaviour
 {
     [SerializeField] protected WeaponCode damageObject;
 
+    [SerializeField] protected int level;
+
     [SerializeField] protected bool isAttacking = false;
 
     [SerializeField] protected float attackDelay = 0.2f;
@@ -20,11 +22,11 @@ public abstract class ObjAttack : InitMonoBehaviour
 
         if (!this.isAttacking) return;
 
-        WeaponDataSO weaponData = WeaponDataSO.FindByItemCode(this.damageObject);
+        WeaponDataSO weaponData = WeaponDataSO.FindByCode(this.damageObject);
 
         if (weaponData == null) return;
 
-        attackDelay = WeaponDataSO.FindByItemCode(damageObject).attackRate;
+        attackDelay = WeaponDataSO.FindByCode(damageObject).attackRate;
 
         if (this.attackTimer < attackDelay) return;
 
@@ -41,9 +43,10 @@ public abstract class ObjAttack : InitMonoBehaviour
             GetRotation());
 
         if (damageObject == null) return;
+        DOCtrl doCtrl = damageObject.GetComponent<DOCtrl>();
+        doCtrl.SetLevel(level);
 
         damageObject.gameObject.SetActive(true);
-        DOCtrl doCtrl = damageObject.GetComponent<DOCtrl>();
         doCtrl.SetAttacker(transform.parent.tag);
     }
 

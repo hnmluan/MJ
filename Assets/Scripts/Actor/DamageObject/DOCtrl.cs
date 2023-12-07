@@ -2,20 +2,23 @@ using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected WeaponDataSO doSO;
-    public WeaponDataSO DOSO => doSO;
+    [SerializeField] protected WeaponDataSO data;
+    public WeaponDataSO Data => data;
 
-    [SerializeField] protected SpriteRenderer doSR;
-    public SpriteRenderer DOSR => doSR;
+    [SerializeField] protected int level;
+    public int Level => level;
 
-    [SerializeField] protected DamageSender doDamageSender;
-    public DamageSender DODamageSender { get => doDamageSender; }
+    [SerializeField] protected SpriteRenderer sprite;
+    public SpriteRenderer Sprite => sprite;
 
-    [SerializeField] protected DespawnByTime damageObjectDespawn;
-    public DespawnByTime DamageObjectDespawn { get => damageObjectDespawn; }
+    [SerializeField] protected DamageSender damageSender;
+    public DamageSender DamageSender { get => damageSender; }
 
-    [SerializeField] protected DOMovement damageObjectMovement;
-    public DOMovement DamageObjectMovement { get => damageObjectMovement; }
+    [SerializeField] protected DespawnByTime despawn;
+    public DespawnByTime Despawn { get => despawn; }
+
+    [SerializeField] protected DOMovement movement;
+    public DOMovement Movement { get => movement; }
 
     [SerializeField] protected string attacker;
     public string Attacker => attacker;
@@ -23,64 +26,60 @@ public class DOCtrl : InitMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadDamageObjectSR();
-        this.LoadDamageObjectDamageSender();
-        this.LoadDamageObjectDespawn();
-        this.LoadDamageObjectSO();
-        this.LoadDamageObjectMovement();
+        this.LoadSprite();
+        this.LoadDamageSender();
+        this.LoadDespawn();
+        this.LoadData();
+        this.LoadMovement();
     }
 
     protected override void OnEnable()
     {
-        doDamageSender.SetDamage(doSO.levels[0].damage);
+        if (this.data == null) return;
+        damageSender.SetDamage(data.levels[level].damage);
     }
 
     protected override void ResetValue()
     {
-        if (this.doSO == null) return;
-        doSR.sprite = doSO.spriteInAttack;
-        doDamageSender.SetDamage(doSO.levels[0].damage);
-        damageObjectDespawn.SetTimeDespawn(doSO.attackTime);
-        damageObjectMovement.ResetMotionParameters();
+        if (this.data == null) return;
+        sprite.sprite = data.spriteInAttack;
+        damageSender.SetDamage(data.levels[0].damage);
+        despawn.SetTimeDespawn(data.attackTime);
+        movement.ResetMotionParameters();
     }
 
     public virtual void SetAttacker(string attacker) => this.attacker = attacker;
 
-    private void LoadDamageObjectMovement()
+    protected virtual void LoadMovement()
     {
-        if (this.damageObjectMovement != null) return;
-        this.damageObjectMovement = transform.GetComponentInChildren<DOMovement>();
-        Debug.Log(transform.name + ": LoadDamageObjectMovement ", gameObject);
+        if (this.movement != null) return;
+        this.movement = transform.GetComponentInChildren<DOMovement>();
+        Debug.Log(transform.name + ": LoadMovement ", gameObject);
     }
 
-    protected void LoadDamageObjectSR()
+    protected virtual void LoadSprite()
     {
-        if (this.doSR != null) return;
-        this.doSR = transform.GetComponentInChildren<SpriteRenderer>();
-        Debug.Log(transform.name + ": LoadDamageObjectSR ", gameObject);
+        if (this.sprite != null) return;
+        this.sprite = transform.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadSprite ", gameObject);
     }
 
-    protected virtual void LoadDamageObjectDamageSender()
+    protected virtual void LoadDamageSender()
     {
-        if (this.doDamageSender != null) return;
-        this.doDamageSender = transform.GetComponentInChildren<DamageSender>();
-        Debug.Log(transform.name + ": LoadDamageObjectDamageSender", gameObject);
+        if (this.damageSender != null) return;
+        this.damageSender = transform.GetComponentInChildren<DamageSender>();
+        Debug.Log(transform.name + ": LoadDamageSender", gameObject);
     }
 
-    protected virtual void LoadDamageObjectDespawn()
+    protected virtual void LoadDespawn()
     {
-        if (this.damageObjectDespawn != null) return;
-        this.damageObjectDespawn = transform.GetComponentInChildren<DespawnByTime>();
-        Debug.Log(transform.name + ": LoadDamageObjectDespawn", gameObject);
+        if (this.despawn != null) return;
+        this.despawn = transform.GetComponentInChildren<DespawnByTime>();
+        Debug.Log(transform.name + ": LoadDespawn", gameObject);
     }
-    private void LoadDamageObjectSO()
-    {
-        if (this.doSO != null) return;
-        string resPath = "DamageObject/ScriptableObject/" + transform.name;
 
-        this.doSO = Resources.Load<WeaponDataSO>(resPath);
+    protected virtual void LoadData() => this.data = WeaponDataSO.FindByName(transform.name);
 
-        Debug.Log(transform.name + ": LoadDamageObjectSO" + resPath, gameObject);
-    }
+    public virtual void SetLevel(int level) => this.level = level;
 
 }

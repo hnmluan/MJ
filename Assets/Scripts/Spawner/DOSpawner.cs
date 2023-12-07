@@ -1,1 +1,4 @@
-public class DOSpawner : Spawner<DOSpawner> { }
+public class DOSpawner : Spawner<DOSpawner>
+{
+
+}

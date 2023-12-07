@@ -11,6 +11,6 @@ public class DOShoot : DOMovement
     public override void ResetMotionParameters()
     {
         base.ResetMotionParameters();
-        this.movespeed = damageObjectCtrl.DOSO.speed;
+        this.movespeed = damageObjectCtrl.Data.speed;
     }
 }

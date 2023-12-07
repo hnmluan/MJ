@@ -25,10 +25,10 @@ public class Armory : Singleton<Armory>
 
         if (armoryData == null)
         {
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 2));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Bow), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByItemCode(WeaponCode.Lance), 2));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Bow), 2));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Bow), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Lance), 1));
+            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Lance), 2));
 
             SaveData();
             return;
@@ -47,7 +47,7 @@ public class Armory : Singleton<Armory>
     {
         for (int i = 0; i < addCount; i++)
         {
-            ItemArmory weapon = new ItemArmory(WeaponDataSO.FindByItemCode(weaponCode), level);
+            ItemArmory weapon = new ItemArmory(WeaponDataSO.FindByCode(weaponCode), level);
             weapons.Add(weapon);
         }
         this.SaveData();
