@@ -19,7 +19,7 @@ public class Armory : Singleton<Armory>
         this.LoadData();
     }
 
-    public void LoadData()
+    protected void LoadData()
     {
         ArmoryData armoryData = SaveLoadHandler.LoadFromFile<ArmoryData>(FileNameData.Armory);
 
@@ -37,7 +37,7 @@ public class Armory : Singleton<Armory>
         armoryData.weapons.ForEach(item => this.weapons.Add(new ItemArmory(item)));
     }
 
-    public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Armory, new ArmoryData(this));
+    protected void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Armory, new ArmoryData(this));
 
     public ItemArmory GetEquippedWeapon(int position) => weapons.FirstOrDefault(weapon => weapon.position == position);
 
@@ -83,6 +83,7 @@ public class Armory : Singleton<Armory>
     public virtual void UnequipItem(ItemArmory item)
     {
         item.position = 0;
+        item.isFocus = false;
         this.ExcuteUnequipItemObservation(item);
         this.SaveData();
     }
