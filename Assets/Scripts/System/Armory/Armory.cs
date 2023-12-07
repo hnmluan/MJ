@@ -41,6 +41,8 @@ public class Armory : Singleton<Armory>
 
     public ItemArmory GetEquippedWeapon(int position) => weapons.FirstOrDefault(weapon => weapon.position == position);
 
+    public ItemArmory GetFocusEquippedWeapon() => weapons.FirstOrDefault(weapon => weapon.isFocus == true);
+
     public virtual void AddItem(WeaponCode weaponCode, int addCount, int level)
     {
         for (int i = 0; i < addCount; i++)
