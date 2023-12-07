@@ -5,37 +5,53 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
 {
     [Header("UI Armory Detail Ctrl")]
 
-    [SerializeField] protected Image weaponImage;
-    public Image WeaponImage => weaponImage;
+    [SerializeField] protected Image image;
+    public Image Image => image;
 
-    [SerializeField] protected Text weaponName;
-    public Text WeaponName => weaponName;
+    [SerializeField] protected Text name;
+    public Text Name => name;
 
-    [SerializeField] protected Text weaponType;
-    public Text WeaponType => weaponType;
+    [SerializeField] protected Text type;
+    public Text Type => type;
 
-    [SerializeField] protected Text weaponLevel;
-    public Text WeaponLevel => weaponLevel;
+    [SerializeField] protected Text level;
+    public Text Level => level;
 
-    [SerializeField] protected Text weaponUpgrade;
-    public Text WeaponUpgrade => weaponUpgrade;
+    [SerializeField] protected Text upgradeTxt;
+    public Text UpgradeTxt => upgradeTxt;
 
-    [SerializeField] protected Button btnUpgradeWeapon;
-    public Button BtnUpgradeWeapon => btnUpgradeWeapon;
+    [SerializeField] protected Button btnUpgrade;
+    public Button BtnUpgrade => btnUpgrade;
 
     [SerializeField] protected Button btnDecompose;
     public Button BtnDecompose => btnDecompose;
+
+    [SerializeField] protected Button btnEquip;
+    public Button BtnEquip => btnEquip;
+
+    [SerializeField] protected Button btnUnequip;
+    public Button BtnUnequip => btnUnequip;
+
+    [SerializeField] protected Text slotEquippedWeaponTxt;
+    public Text SlotEquippedWeaponTxt => slotEquippedWeaponTxt;
+
+    [SerializeField] protected Transform slotEquippedWeaponBox;
+    public Transform SlotEquippedWeaponBox => slotEquippedWeaponBox;
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadWeaponType();
-        this.LoadWeaponName();
-        this.LoadWeaponLevel();
-        this.LoadWeaponImage();
-        this.LoadWeaponUpgrade();
-        this.LoadBtnUpgradeWeapon();
+        this.LoadName();
+        this.LoadLevel();
+        this.LoadImage();
+        this.LoadUpgradeTxt();
+        this.LoadBtnUpgrade();
         this.LoadBtnDecompose();
+        this.LoadSlotEquippedWeaponTxt();
+        this.LoadSlotEquippedWeaponBox();
+        this.LoadBtnEquip();
+        this.LoadBtnUnequip();
     }
 
     private void LoadBtnDecompose()
@@ -45,45 +61,73 @@ public class UIArmoryDetailCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadWeaponType", gameObject);
     }
 
-    private void LoadBtnUpgradeWeapon()
+    private void LoadBtnUpgrade()
     {
-        if (this.btnUpgradeWeapon != null) return;
-        this.btnUpgradeWeapon = transform.Find("Buttons").Find("BtnUpgrade").GetComponent<Button>();
+        if (this.btnUpgrade != null) return;
+        this.btnUpgrade = transform.Find("Buttons").Find("BtnUpgrade").GetComponent<Button>();
         Debug.Log(transform.name + ": LoadWeaponType", gameObject);
+    }
+
+    private void LoadBtnEquip()
+    {
+        if (this.btnEquip != null) return;
+        this.btnEquip = transform.Find("Buttons").Find("BtnEquip").GetComponent<Button>();
+        Debug.Log(transform.name + ": LoadBtnEquip", gameObject);
+    }
+
+    private void LoadBtnUnequip()
+    {
+        if (this.btnUnequip != null) return;
+        this.btnUnequip = transform.Find("Buttons").Find("BtnUnequip").GetComponent<Button>();
+        Debug.Log(transform.name + ": LoadBtnUnequip", gameObject);
     }
 
     private void LoadWeaponType()
     {
-        if (this.weaponType != null) return;
-        this.weaponType = transform.Find("Information").Find("Grid").Find("WeaponType").GetComponent<Text>();
+        if (this.type != null) return;
+        this.type = transform.Find("Information").Find("Grid").Find("WeaponType").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponType", gameObject);
     }
 
-    private void LoadWeaponName()
+    private void LoadName()
     {
-        if (this.weaponName != null) return;
-        this.weaponName = transform.Find("Information").Find("Grid").Find("WeaponName").GetComponent<Text>();
+        if (this.name != null) return;
+        this.name = transform.Find("Information").Find("Grid").Find("WeaponName").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 
-    private void LoadWeaponUpgrade()
+    private void LoadUpgradeTxt()
     {
-        if (this.weaponUpgrade != null) return;
-        this.weaponUpgrade = transform.Find("Upgrade").Find("Text").GetComponent<Text>();
+        if (this.upgradeTxt != null) return;
+        this.upgradeTxt = transform.Find("RecipeUpgrade").Find("Text").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 
-    private void LoadWeaponLevel()
+    private void LoadLevel()
     {
-        if (this.weaponLevel != null) return;
-        this.weaponLevel = transform.Find("Information").Find("Grid").Find("WeaponLevel").GetComponent<Text>();
+        if (this.level != null) return;
+        this.level = transform.Find("Information").Find("Grid").Find("WeaponLevel").GetComponent<Text>();
         Debug.Log(transform.name + ": LoadWeaponName", gameObject);
     }
 
-    private void LoadWeaponImage()
+    private void LoadImage()
     {
-        if (this.weaponImage != null) return;
-        this.weaponImage = transform.Find("Image").Find("WeaponImage").GetComponent<Image>();
+        if (this.image != null) return;
+        this.image = transform.Find("Image").Find("WeaponImage").GetComponent<Image>();
         Debug.Log(transform.name + ": LoadWeaponImage", gameObject);
+    }
+
+    private void LoadSlotEquippedWeaponTxt()
+    {
+        if (this.slotEquippedWeaponTxt != null) return;
+        this.slotEquippedWeaponTxt = transform.Find("EquipSlot").Find("Slot").GetComponent<Text>();
+        Debug.Log(transform.name + ": LoadSlotEquippedWeaponTxt", gameObject);
+    }
+
+    private void LoadSlotEquippedWeaponBox()
+    {
+        if (this.slotEquippedWeaponBox != null) return;
+        this.slotEquippedWeaponBox = transform.Find("EquipSlot");
+        Debug.Log(transform.name + ": LoadSlotEquippedWeaponBox", gameObject);
     }
 }

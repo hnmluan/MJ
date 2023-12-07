@@ -79,4 +79,5 @@ public class HotKeyEquippedWeapon : Singleton<HotKeyEquippedWeapon>, IObservatio
 
     public void FocusItem(int position) => this.Show();
 
+    public void UnequipItem(ItemArmory item) => this.Show();
 }

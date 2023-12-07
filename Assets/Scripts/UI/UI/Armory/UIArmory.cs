@@ -151,7 +151,7 @@ public class UIArmory : UIBase, IObservationArmory
     public virtual void SetCurrentItem(ItemArmory item)
     {
         this.currentItem = item;
-        uiArmoryDetail.Show(item);
+        uiArmoryDetail.Show();
         this.ShowItems();
     }
 
@@ -195,10 +195,16 @@ public class UIArmory : UIBase, IObservationArmory
 
         this.UIDecompose.gameObject.SetActive(false);
 
-        this.uiArmoryDetail.Show(null);
+        this.uiArmoryDetail.Show();
     }
 
-    public void EquipItem(ItemArmory item, int position) { }
+    public void EquipItem(ItemArmory item, int position)
+    {
+        this.uiArmoryDetail.Show();
+        this.ShowItems();
+    }
 
     public void FocusItem(int position) { }
+
+    public void UnequipItem(ItemArmory item) => this.uiArmoryDetail.Show();
 }
