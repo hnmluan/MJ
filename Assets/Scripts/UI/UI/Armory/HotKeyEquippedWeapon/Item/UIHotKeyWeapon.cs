@@ -67,8 +67,8 @@ public class UIHotKeyWeapon : InitMonoBehaviour
         }
 
         this.weapon = item;
-        this.image.sprite = item.weaponProfile.spriteInHand;
-        this.level.text = "+ " + item.level.ToString();
+        this.image.sprite = item.weapon.dataSO.spriteInHand;
+        this.level.text = "+ " + item.weapon.level.ToString();
         this.Focus(item.isFocus);
         this.SetEquipMode(false);
     }

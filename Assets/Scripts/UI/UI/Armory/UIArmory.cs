@@ -58,7 +58,7 @@ public class UIArmory : UIBase, IObservationArmory
 
         List<ItemArmory> weapons = Armory.Instance.Weapons;
 
-        weapons = armoryFilter == WeaponType.NoType ? weapons : weapons.Where(item => item.weaponProfile.damageObjectType == armoryFilter).ToList();
+        weapons = armoryFilter == WeaponType.NoType ? weapons : weapons.Where(item => item.weapon.dataSO.damageObjectType == armoryFilter).ToList();
 
         foreach (ItemArmory weapon in weapons) itemSpawner.Spawn(weapon);
 
@@ -85,8 +85,8 @@ public class UIArmory : UIBase, IObservationArmory
             ItemArmory currentWeapon = currentUIItem.Weapon;
             ItemArmory nextWeapon = nextUIItem.Weapon;
 
-            WeaponDataSO currentProfile = currentWeapon.weaponProfile;
-            WeaponDataSO nextProfile = nextWeapon.weaponProfile;
+            WeaponDataSO currentProfile = currentWeapon.weapon.dataSO;
+            WeaponDataSO nextProfile = nextWeapon.weapon.dataSO;
 
             bool isSwap = false;
 
@@ -98,8 +98,8 @@ public class UIArmory : UIBase, IObservationArmory
                     isSwap = string.Compare(currentName, nextName) == 1; // Đổi từ -1 thành 1 để đảo ngược thứ tự
                     break;
                 case ArmorySort.ByLevel:
-                    int currentCount = currentWeapon.level;
-                    int nextCount = nextWeapon.level;
+                    int currentCount = currentWeapon.weapon.level;
+                    int nextCount = nextWeapon.weapon.level;
                     isSwap = currentCount < nextCount; // Đổi dấu > thành <
                     break;
             }
@@ -113,14 +113,14 @@ public class UIArmory : UIBase, IObservationArmory
                         // Sắp xếp theo số lượng nếu cùng tên
                         if (currentProfile.keyName == nextProfile.keyName)
                         {
-                            int currentLevel = currentWeapon.level;
-                            int nextLevel = nextWeapon.level;
+                            int currentLevel = currentWeapon.weapon.level;
+                            int nextLevel = nextWeapon.weapon.level;
                             isSwap = currentLevel < nextLevel;
                         }
                         break;
                     case ArmorySort.ByLevel:
                         // Sắp xếp theo tên nếu cùng level
-                        if (currentWeapon.level == nextWeapon.level)
+                        if (currentWeapon.weapon.level == nextWeapon.weapon.level)
                         {
                             string currentName = LocalizationManager.Localize(currentProfile.keyName);
                             string nextName = LocalizationManager.Localize(nextProfile.keyName);

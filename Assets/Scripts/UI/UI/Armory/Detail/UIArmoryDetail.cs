@@ -9,10 +9,10 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
     {
         Clear(); if (weapon == null) return;
 
-        uiArmoryDetailCtrl.Image.sprite = weapon.weaponProfile.spriteInHand;
-        uiArmoryDetailCtrl.Name.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
-        uiArmoryDetailCtrl.Level.text = "+ " + weapon.level.ToString();
-        uiArmoryDetailCtrl.Type.text = LocalizationManager.Localize("Weapon.Type." + weapon.weaponProfile.damageObjectType.ToString());
+        uiArmoryDetailCtrl.Image.sprite = weapon.weapon.dataSO.spriteInHand;
+        uiArmoryDetailCtrl.Name.text = LocalizationManager.Localize(weapon.weapon.dataSO.keyName);
+        uiArmoryDetailCtrl.Level.text = "+ " + weapon.weapon.level.ToString();
+        uiArmoryDetailCtrl.Type.text = LocalizationManager.Localize("Weapon.Type." + weapon.weapon.dataSO.damageObjectType.ToString());
 
         this.ShowUpgradeText();
         this.ShowUpgradeRecipeIngredient();
@@ -36,39 +36,39 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
 
     private void ShowUpgradeRecipeIngredient()
     {
-        if (weapon.weaponProfile.levels.Count <= weapon.level) return;
+        if (weapon.weapon.dataSO.levels.Count <= weapon.weapon.level) return;
 
-        int numberOfUpdateRecipeIngredient = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipeIngredients.Count;
+        int numberOfUpdateRecipeIngredient = weapon.weapon.dataSO.levels[weapon.weapon.level].weaponRecipe.recipeIngredients.Count;
 
         if (numberOfUpdateRecipeIngredient == 0) return;
 
-        List<WeaponRecipeIngredient> recipeIngredients = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipeIngredients;
+        List<WeaponRecipeIngredient> recipeIngredients = weapon.weapon.dataSO.levels[weapon.weapon.level].weaponRecipe.recipeIngredients;
 
         for (int i = 0; i < numberOfUpdateRecipeIngredient; i++) RecipeUpgradeSpawner.Instance.Spawn(recipeIngredients[i]);
     }
 
     private void ShowUpgradeRecipePrice()
     {
-        if (weapon.weaponProfile.levels.Count <= weapon.level) return;
+        if (weapon.weapon.dataSO.levels.Count <= weapon.weapon.level) return;
 
-        int numberOfUpdateRecipePrice = weapon.weaponProfile.levels[weapon.level].weaponRecipe.recipePrice.Count;
+        int numberOfUpdateRecipePrice = weapon.weapon.dataSO.levels[weapon.weapon.level].weaponRecipe.recipePrice.Count;
 
         if (numberOfUpdateRecipePrice == 0) return;
 
-        List<WeaponRecipePrice> recipePrices = weapon.weaponProfile.levels[weapon.level - 1].weaponRecipe.recipePrice;
+        List<WeaponRecipePrice> recipePrices = weapon.weapon.dataSO.levels[weapon.weapon.level - 1].weaponRecipe.recipePrice;
 
         for (int i = 0; i < numberOfUpdateRecipePrice; i++) RecipeUpgradeSpawner.Instance.Spawn(recipePrices[i]);
     }
 
     private void ShowUpgradeText() =>
-        uiArmoryDetailCtrl.UpgradeTxt.text = weapon.weaponProfile.levels.Count > weapon.level
+        uiArmoryDetailCtrl.UpgradeTxt.text = weapon.weapon.dataSO.levels.Count > weapon.weapon.level
         ? LocalizationManager.Localize("Armory.upgrade") :
         LocalizationManager.Localize("Armory.upgradeMax");
 
     private void ShowButtons()
     {
         uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(true);
-        uiArmoryDetailCtrl.BtnUpgrade.gameObject.SetActive(weapon.weaponProfile.levels.Count > weapon.level);
+        uiArmoryDetailCtrl.BtnUpgrade.gameObject.SetActive(weapon.weapon.dataSO.levels.Count > weapon.weapon.level);
         uiArmoryDetailCtrl.BtnEquip.gameObject.SetActive(weapon.position == 0);
         uiArmoryDetailCtrl.BtnUnequip.gameObject.SetActive(weapon.position != 0);
     }

@@ -25,11 +25,10 @@ public class Armory : Singleton<Armory>
 
         if (armoryData == null)
         {
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Bow), 2));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Bow), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Lance), 1));
-            weapons.Add(new ItemArmory(WeaponDataSO.FindByCode(WeaponCode.Lance), 2));
-
+            weapons.Add(new ItemArmory(WeaponCode.Bow, 1));
+            weapons.Add(new ItemArmory(WeaponCode.Lance, 2));
+            weapons.Add(new ItemArmory(WeaponCode.Bow, 3));
+            weapons.Add(new ItemArmory(WeaponCode.Lance, 4));
             SaveData();
             return;
         }
@@ -43,11 +42,11 @@ public class Armory : Singleton<Armory>
 
     public ItemArmory GetFocusEquippedWeapon() => weapons.FirstOrDefault(weapon => weapon.isFocus == true);
 
-    public virtual void AddItem(WeaponCode weaponCode, int addCount, int level)
+    public virtual void AddItem(WeaponCode code, int addCount, int level)
     {
         for (int i = 0; i < addCount; i++)
         {
-            ItemArmory weapon = new ItemArmory(WeaponDataSO.FindByCode(weaponCode), level);
+            ItemArmory weapon = new ItemArmory(code, level);
             weapons.Add(weapon);
         }
         this.SaveData();

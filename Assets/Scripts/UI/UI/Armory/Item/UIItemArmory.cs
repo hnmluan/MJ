@@ -72,9 +72,9 @@ public class UIItemArmory : InitMonoBehaviour
     {
         if (weapon == null) return;
         this.weapon = weapon;
-        this.weaponName.text = LocalizationManager.Localize(weapon.weaponProfile.keyName);
-        this.weaponImage.sprite = weapon.weaponProfile.spriteInHand;
-        this.weaponLevel.text = "+ " + weapon.level.ToString();
+        this.weaponName.text = LocalizationManager.Localize(weapon.weapon.dataSO.keyName);
+        this.weaponImage.sprite = weapon.weapon.dataSO.spriteInHand;
+        this.weaponLevel.text = "+ " + weapon.weapon.level.ToString();
         this.upgradeIndicator.gameObject.SetActive(weapon.CanUpgrade());
         this.focus.gameObject.SetActive(weapon == UIArmory.Instance.CurrentItem);
     }

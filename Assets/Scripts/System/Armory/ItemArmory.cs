@@ -5,48 +5,46 @@ using System.Linq;
 [Serializable]
 public class ItemArmory
 {
-    public WeaponDataSO weaponProfile;
-
-    public int level = 0;
+    public Weapon weapon;
 
     public int position = 0;
 
     public bool isFocus = false;
 
-    public ItemArmory(WeaponDataSO weaponProfile, int level)
+    public ItemArmory(WeaponCode code, int level)
     {
-        this.weaponProfile = weaponProfile;
-        this.level = level;
+        this.weapon = new Weapon(WeaponDataSO.FindByCode(code), level);
+        this.position = 0;
+        this.isFocus = false;
     }
 
-    public ItemArmory(WeaponData data)
+    public ItemArmory(ItemArmoryData data)
     {
-        this.weaponProfile = WeaponDataSO.FindByName(data.itemCode);
-        this.level = data.level;
+        this.weapon = new Weapon(data.weapon);
         this.position = data.position;
         this.isFocus = false;
     }
 
     public bool CanUpgrade()
     {
-        if (level >= weaponProfile.levels.Count) return false;
-        return weaponProfile.levels[level].weaponRecipe.isAvailable();
+        if (weapon.level >= weapon.dataSO.levels.Count) return false;
+        return weapon.dataSO.levels[weapon.level].weaponRecipe.isAvailable();
     }
 
     public bool Upgrade()
     {
         if (!CanUpgrade()) return false;
 
-        foreach (WeaponRecipeIngredient item in weaponProfile.levels[level].weaponRecipe.recipeIngredients)
+        foreach (WeaponRecipeIngredient item in weapon.dataSO.levels[weapon.level].weaponRecipe.recipeIngredients)
             Inventory.Instance.DeductItem(item.itemProfile.itemCode, item.itemCount);
 
-        foreach (WeaponRecipePrice item in weaponProfile.levels[level].weaponRecipe.recipePrice)
+        foreach (WeaponRecipePrice item in weapon.dataSO.levels[weapon.level].weaponRecipe.recipePrice)
         {
             if (item.data.currencyCode == CurrencyCode.Gold) Wallet.Instance.DeductGold(item.quantity);
             if (item.data.currencyCode == CurrencyCode.Silver) Wallet.Instance.DeductSilver(item.quantity);
         }
 
-        level++;
+        weapon.level++;
 
         return true;
     }
@@ -65,7 +63,7 @@ public class ItemArmory
         {
             List<WeaponRecipeIngredient> recipeDecomposes = new List<WeaponRecipeIngredient>();
 
-            for (int i = 0; i < level; i++) recipeDecomposes.AddRange(this.weaponProfile.levels[i].weaponRecipe.recipeIngredients);
+            for (int i = 0; i < weapon.level; i++) recipeDecomposes.AddRange(this.weapon.dataSO.levels[i].weaponRecipe.recipeIngredients);
 
             recipeDecomposes = SimplifyRecipe(recipeDecomposes);
 

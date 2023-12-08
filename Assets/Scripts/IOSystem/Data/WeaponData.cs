@@ -1,19 +1,15 @@
-
 using System;
 
 [Serializable]
+
 public class WeaponData
 {
-    public string itemCode;
+    public string weaponCode;
     public int level;
-    public int position = 0;
-    public bool isFocus = false;
 
-    public WeaponData(ItemArmory item)
+    public WeaponData(Weapon weapon)
     {
-        this.itemCode = item.weaponProfile.damageObjectCode.ToString();
-        this.level = item.level;
-        this.position = item.position;
-        this.isFocus = false;
+        this.weaponCode = weapon.dataSO.damageObjectCode.ToString();
+        this.level = weapon.level;
     }
 }
