@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Seeker))]
-public class ObjMoveToTarget : InitMonoBehaviour
+public class ObjFollowTarget : InitMonoBehaviour
 {
     [SerializeField] protected Transform target;
     public Transform Target => target;

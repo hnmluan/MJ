@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public abstract class ObjAttack : InitMonoBehaviour
 {
     [SerializeField] protected WeaponCode damageObject;

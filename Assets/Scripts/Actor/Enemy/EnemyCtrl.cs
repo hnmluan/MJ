@@ -2,41 +2,41 @@ using UnityEngine;
 
 public class EnemyCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected Animator animator;
-    public Animator Animator { get => animator; }
+    [SerializeField] protected EnemyDataSO dataSO;
+    public EnemyDataSO DataSO => dataSO;
 
     [SerializeField] protected SpriteRenderer model;
     public SpriteRenderer Model { get => model; }
 
-    [SerializeField] protected EnemyDespawn enemyDespawn;
-    public EnemyDespawn EnemyDespawn { get => enemyDespawn; }
+    [SerializeField] protected Animator animator;
+    public Animator Animator { get => animator; }
 
-    [SerializeField] protected EnemyDataSO enemySO;
-    public EnemyDataSO EnemySO => enemySO;
+    [SerializeField] protected EnemyDespawn despawn;
+    public EnemyDespawn Despawn { get => despawn; }
 
     [SerializeField] protected DamageReceiver damageReceiver;
     public DamageReceiver DamageReceiver => damageReceiver;
 
-    [SerializeField] protected ObjAttackByDistance enemyAttack;
-    public ObjAttackByDistance EnemyAttack => enemyAttack;
+    [SerializeField] protected ObjAttackByDistance attack;
+    public ObjAttackByDistance Attack => attack;
 
-    [SerializeField] protected ObjMoveToPlayer enemyMoveToPlayer;
-    public ObjMoveToPlayer EnemyMoveToPlayer => enemyMoveToPlayer;
+    [SerializeField] protected ObjFollowPlayer followPlayer;
+    public ObjFollowPlayer FollowPlayer => followPlayer;
 
-    [SerializeField] protected ObjMoveFree enemyMoveFree;
-    public ObjMoveFree EnemyMoveFree => enemyMoveFree;
+    [SerializeField] protected ObjMoveFree moveFree;
+    public ObjMoveFree MoveFree => moveFree;
 
     private void Update()
     {
-        if (Vector3.Distance(enemyMoveToPlayer.Target.position, transform.position) > enemySO.trackRange)
+        if (Vector3.Distance(followPlayer.Target.position, transform.position) > dataSO.trackRange)
         {
-            enemyMoveFree.gameObject.SetActive(true);
-            enemyMoveToPlayer.gameObject.SetActive(false);
+            moveFree.gameObject.SetActive(true);
+            followPlayer.gameObject.SetActive(false);
         }
         else
         {
-            enemyMoveFree.gameObject.SetActive(false);
-            enemyMoveToPlayer.gameObject.SetActive(true);
+            moveFree.gameObject.SetActive(false);
+            followPlayer.gameObject.SetActive(true);
         }
     }
 
@@ -44,64 +44,64 @@ public class EnemyCtrl : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadAnimator();
-        this.LoadEnemyDespawn();
-        this.LoadVisual();
+        this.LoadDespawn();
+        this.LoadModel();
         this.LoadDamageReceiver();
-        this.LoadEnemyAttack();
-        this.LoadEnemyMoveToPlayer();
-        this.LoadEnemyMoveFree();
+        this.LoadAttack();
+        this.LoadFollowPlayer();
+        this.LoadMoveFree();
     }
 
     protected override void ResetValue()
     {
-        enemySO = EnemyDataSO.FindByName(transform.name);
-        if (enemySO == null)
+        dataSO = EnemyDataSO.FindByName(transform.name);
+        if (dataSO == null)
         {
             Debug.Log("Don't find " + transform.name + " SO");
             return;
         }
-        damageReceiver.SetHPMax(enemySO.hpMax);
-        enemyAttack.SetRangeAttack(enemySO.acttackRange);
-        enemyMoveFree.SetSpeed(enemySO.speed);
-        enemyMoveToPlayer.SetSpeed(enemySO.speed);
-        enemyMoveToPlayer.SetOutline(enemySO.nonMoveableRange);
-        model.sprite = enemySO.visual;
-        animator.runtimeAnimatorController = enemySO.animator;
+        damageReceiver.SetHPMax(dataSO.hpMax);
+        attack.SetRangeAttack(dataSO.acttackRange);
+        moveFree.SetSpeed(dataSO.speed);
+        followPlayer.SetSpeed(dataSO.speed);
+        followPlayer.SetOutline(dataSO.nonMoveableRange);
+        model.sprite = dataSO.visual;
+        animator.runtimeAnimatorController = dataSO.animator;
     }
 
-    protected virtual void LoadVisual()
+    protected virtual void LoadModel()
     {
         if (this.model != null) return;
         this.model = transform.GetComponentInChildren<SpriteRenderer>();
         Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 
-    protected virtual void LoadEnemyAttack()
+    protected virtual void LoadAttack()
     {
-        if (this.enemyAttack != null) return;
-        this.enemyAttack = transform.GetComponentInChildren<ObjAttackByDistance>();
-        Debug.Log(transform.name + ": LoadEnemyAttack", gameObject);
+        if (this.attack != null) return;
+        this.attack = transform.GetComponentInChildren<ObjAttackByDistance>();
+        Debug.Log(transform.name + ": LoadAttack", gameObject);
     }
 
-    protected virtual void LoadEnemyMoveToPlayer()
+    protected virtual void LoadFollowPlayer()
     {
-        if (this.enemyMoveToPlayer != null) return;
-        this.enemyMoveToPlayer = transform.GetComponentInChildren<ObjMoveToPlayer>();
-        Debug.Log(transform.name + ": LoadEnemyMoveToPlayer", gameObject);
+        if (this.followPlayer != null) return;
+        this.followPlayer = transform.GetComponentInChildren<ObjFollowPlayer>();
+        Debug.Log(transform.name + ": LoadFollowPlayer", gameObject);
     }
 
-    protected virtual void LoadEnemyMoveFree()
+    protected virtual void LoadMoveFree()
     {
-        if (this.enemyMoveFree != null) return;
-        this.enemyMoveFree = transform.GetComponentInChildren<ObjMoveFree>();
-        Debug.Log(transform.name + ": LoadEnemyMoveFree", gameObject);
+        if (this.moveFree != null) return;
+        this.moveFree = transform.GetComponentInChildren<ObjMoveFree>();
+        Debug.Log(transform.name + ": LoadMoveFree", gameObject);
     }
 
-    protected virtual void LoadEnemyDespawn()
+    protected virtual void LoadDespawn()
     {
-        if (this.enemyDespawn != null) return;
-        this.enemyDespawn = transform.GetComponentInChildren<EnemyDespawn>();
-        Debug.Log(transform.name + ": LoadEnemyDespawn", gameObject);
+        if (this.despawn != null) return;
+        this.despawn = transform.GetComponentInChildren<EnemyDespawn>();
+        Debug.Log(transform.name + ": LoadDespawn", gameObject);
     }
 
     protected virtual void LoadAnimator()
@@ -121,6 +121,6 @@ public class EnemyCtrl : InitMonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, enemySO.trackRange);
+        Gizmos.DrawWireSphere(transform.position, dataSO.trackRange);
     }
 }

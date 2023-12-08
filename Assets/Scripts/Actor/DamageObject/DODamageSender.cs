@@ -40,6 +40,7 @@ public class DODamageSender : DamageSender
         if (damageObjectCtrl.Data.damageObjectType == WeaponType.Melee) return;
         this.DestroyDO();
     }
+
     protected virtual void DestroyDO() => this.damageObjectCtrl.Despawn.DespawnObject();
 
     protected virtual void OnTriggerEnter(Collider other)

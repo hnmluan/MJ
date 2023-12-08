@@ -34,15 +34,15 @@ public class EnemyDamageReceiver : DamageReceiver
     {
         this.OnDeadFX();
         this.OnDeadDrop();
-        this.enemyCtrl.EnemyDespawn.DespawnObject();
-        Dictionary.Instance.AddItem(enemyCtrl.EnemySO);
+        this.enemyCtrl.Despawn.DespawnObject();
+        Dictionary.Instance.AddItem(enemyCtrl.DataSO);
     }
 
     protected virtual void OnDeadDrop()
     {
         Vector3 dropPos = transform.position;
         Quaternion dropRot = transform.rotation;
-        ItemDropSpawner.Instance.Drop(this.enemyCtrl.EnemySO.dropListItem, transform.position, dropRot, dropDistance);
+        ItemDropSpawner.Instance.Drop(this.enemyCtrl.DataSO.dropListItem, transform.position, dropRot, dropDistance);
     }
 
     protected virtual void OnDeadFX() { }
@@ -50,7 +50,7 @@ public class EnemyDamageReceiver : DamageReceiver
     public override void Reborn()
     {
         enemyCtrl.Model.enabled = true;
-        this.hpMax = this.enemyCtrl.EnemySO.hpMax;
+        this.hpMax = this.enemyCtrl.DataSO.hpMax;
         base.Reborn();
     }
 

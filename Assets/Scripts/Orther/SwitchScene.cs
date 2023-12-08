@@ -18,7 +18,7 @@ public class SwitchScene : InitMonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Scene mới đã được tải!");
-        PlayerCtrl.Instance.PlayerMovement.MoveToPoint(loadToPositionOnSence);
+        PlayerCtrl.Instance.Movement.MoveToPoint(loadToPositionOnSence);
         CameraCtrl.Instance.CameraMovement.ResetPositionCamera();
     }
 

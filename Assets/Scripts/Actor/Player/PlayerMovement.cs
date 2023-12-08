@@ -115,8 +115,8 @@ public class PlayerMovement : PlayerAbstract
     {
         while (true)
         {
-            Transform ghost = FXSpawner.Instance.Spawn("PlayerGhost", playerCtrl.PlayerSprite.transform.position, Quaternion.identity);
-            ghost.GetComponentInChildren<SpriteRenderer>().sprite = playerCtrl.PlayerSprite.sprite;
+            Transform ghost = FXSpawner.Instance.Spawn("PlayerGhost", playerCtrl.Model.transform.position, Quaternion.identity);
+            ghost.GetComponentInChildren<SpriteRenderer>().sprite = playerCtrl.Model.sprite;
             ghost.gameObject.SetActive(true);
 
             yield return new WaitForSeconds(ghostDelaySeconds);

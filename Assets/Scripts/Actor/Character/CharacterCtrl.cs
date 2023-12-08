@@ -10,8 +10,8 @@ public class CharacterCtrl : InitMonoBehaviour
 
     [SerializeField] protected LocalizedText keyName;
 
-    [SerializeField] protected ObjMoveToPlayer enemyMoveToPlayer;
-    public ObjMoveToPlayer ObjMoveToPlayer => enemyMoveToPlayer;
+    [SerializeField] protected ObjFollowPlayer enemyMoveToPlayer;
+    public ObjFollowPlayer ObjMoveToPlayer => enemyMoveToPlayer;
 
     [SerializeField] protected ObjMoveFree enemyMoveFree;
     public ObjMoveFree ObjMoveFree => enemyMoveFree;
@@ -48,7 +48,7 @@ public class CharacterCtrl : InitMonoBehaviour
     protected virtual void LoadObjMoveToPlayer()
     {
         if (this.enemyMoveToPlayer != null) return;
-        this.enemyMoveToPlayer = transform.GetComponentInChildren<ObjMoveToPlayer>();
+        this.enemyMoveToPlayer = transform.GetComponentInChildren<ObjFollowPlayer>();
         Debug.Log(transform.name + ": LoadObjMoveToPlayer", gameObject);
     }
 

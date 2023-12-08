@@ -9,25 +9,27 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] protected Rigidbody2D rb;
     public Rigidbody2D Rb { get => rb; }
 
-    [SerializeField] protected ObjAttack objAttack;
-    public ObjAttack ObjAttack { get => objAttack; }
+    [SerializeField] protected ObjAttack attack;
+    public ObjAttack Attack { get => attack; }
 
-    [SerializeField] protected PlayerMovement playerMovement;
-    public PlayerMovement PlayerMovement { get => playerMovement; }
+    [SerializeField] protected PlayerMovement movement;
+    public PlayerMovement Movement { get => movement; }
 
     [SerializeField] protected Slider hpBar;
     public Slider HPBar { get => hpBar; }
 
-    [SerializeField] protected SpriteRenderer playerSprite;
-    public SpriteRenderer PlayerSprite { get => playerSprite; }
+    [SerializeField] protected SpriteRenderer model;
+    public SpriteRenderer Model { get => model; }
+
+    protected override void ResetValue() => this.tag = "Player";
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
         this.LoadAnimator();
-        this.LoadPlayerAttack();
-        this.LoadPlayerMovement();
-        this.LoadPlayerSprite();
+        this.LoadAttack();
+        this.LoadMovement();
+        this.LoadModel();
         this.LoadRigidbody2D();
     }
 
@@ -45,24 +47,24 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         Debug.Log(transform.name + ": LoadRigidbody2D", gameObject);
     }
 
-    protected virtual void LoadPlayerAttack()
+    protected virtual void LoadAttack()
     {
-        if (this.objAttack != null) return;
-        this.objAttack = transform.GetComponentInChildren<ObjAttack>();
-        Debug.Log(transform.name + ": LoadPlayerAttack", gameObject);
+        if (this.attack != null) return;
+        this.attack = transform.GetComponentInChildren<ObjAttack>();
+        Debug.Log(transform.name + ": LoadAttack", gameObject);
     }
 
-    protected virtual void LoadPlayerMovement()
+    protected virtual void LoadMovement()
     {
-        if (this.playerMovement != null) return;
-        this.playerMovement = transform.GetComponentInChildren<PlayerMovement>();
-        Debug.Log(transform.name + ": LoadPlayerMovement", gameObject);
+        if (this.movement != null) return;
+        this.movement = transform.GetComponentInChildren<PlayerMovement>();
+        Debug.Log(transform.name + ": LoadMovement", gameObject);
     }
 
-    protected virtual void LoadPlayerSprite()
+    protected virtual void LoadModel()
     {
-        if (this.playerSprite != null) return;
-        this.playerSprite = transform.GetComponentInChildren<SpriteRenderer>();
-        Debug.Log(transform.name + ": LoadPlayerSprite", gameObject);
+        if (this.model != null) return;
+        this.model = transform.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 }

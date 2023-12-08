@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObjMoveToPlayer : ObjMoveToTarget
+public class ObjFollowPlayer : ObjFollowTarget
 {
     protected override void LoadTarget()
     {
