@@ -12,6 +12,6 @@ public class ItemArmoryData
     {
         this.weapon = new WeaponData(item.weapon);
         this.position = item.position;
-        this.isFocus = false;
+        this.isFocus = item.isFocus;
     }
 }
