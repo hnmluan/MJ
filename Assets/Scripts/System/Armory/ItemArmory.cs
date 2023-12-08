@@ -22,7 +22,7 @@ public class ItemArmory
     {
         this.weapon = new Weapon(data.weapon);
         this.position = data.position;
-        this.isFocus = false;
+        this.isFocus = data.isFocus;
     }
 
     public bool CanUpgrade()

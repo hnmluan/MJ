@@ -50,6 +50,8 @@ public class DOCtrl : InitMonoBehaviour
 
     public virtual void SetAttacker(string attacker) => this.attacker = attacker;
 
+    public virtual void SetLevel(int level) => this.level = level;
+
     protected virtual void LoadMovement()
     {
         if (this.movement != null) return;
@@ -80,6 +82,5 @@ public class DOCtrl : InitMonoBehaviour
 
     protected virtual void LoadData() => this.data = WeaponDataSO.FindByName(transform.name);
 
-    public virtual void SetLevel(int level) => this.level = level;
 
 }
