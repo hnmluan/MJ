@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected WeaponDataSO data;
-    public WeaponDataSO Data => data;
+    [SerializeField] protected WeaponDataSO dataSO;
+    public WeaponDataSO Data => dataSO;
 
     [SerializeField] protected int level;
     public int Level => level;
 
-    [SerializeField] protected SpriteRenderer sprite;
-    public SpriteRenderer Sprite => sprite;
+    [SerializeField] protected SpriteRenderer model;
+    public SpriteRenderer Model => model;
 
-    [SerializeField] protected DamageSender damageSender;
-    public DamageSender DamageSender { get => damageSender; }
+    [SerializeField] protected DODamageSender damageSender;
+    public DODamageSender DamageSender { get => damageSender; }
 
     [SerializeField] protected DespawnByTime despawn;
     public DespawnByTime Despawn { get => despawn; }
@@ -26,7 +26,7 @@ public class DOCtrl : InitMonoBehaviour
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadSprite();
+        this.LoadModel();
         this.LoadDamageSender();
         this.LoadDespawn();
         this.LoadData();
@@ -35,16 +35,16 @@ public class DOCtrl : InitMonoBehaviour
 
     protected override void OnEnable()
     {
-        if (this.data == null) return;
-        damageSender.SetDamage(data.levels[level].damage);
+        if (this.dataSO == null) return;
+        damageSender.SetDamage(dataSO.levels[level].damage);
     }
 
     protected override void ResetValue()
     {
-        if (this.data == null) return;
-        sprite.sprite = data.spriteInAttack;
-        damageSender.SetDamage(data.levels[0].damage);
-        despawn.SetTimeDespawn(data.attackTime);
+        if (this.dataSO == null) return;
+        model.sprite = dataSO.spriteInAttack;
+        damageSender.SetDamage(dataSO.levels[0].damage);
+        despawn.SetTimeDespawn(dataSO.attackTime);
         movement.ResetMotionParameters();
     }
 
@@ -59,11 +59,11 @@ public class DOCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadMovement ", gameObject);
     }
 
-    protected virtual void LoadSprite()
+    protected virtual void LoadModel()
     {
-        if (this.sprite != null) return;
-        this.sprite = transform.GetComponentInChildren<SpriteRenderer>();
-        Debug.Log(transform.name + ": LoadSprite ", gameObject);
+        if (this.model != null) return;
+        this.model = transform.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadModel ", gameObject);
     }
 
     protected virtual void LoadDamageSender()
@@ -80,7 +80,5 @@ public class DOCtrl : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadDespawn", gameObject);
     }
 
-    protected virtual void LoadData() => this.data = WeaponDataSO.FindByName(transform.name);
-
-
+    protected virtual void LoadData() => this.dataSO = WeaponDataSO.FindByName(transform.name);
 }
