@@ -28,17 +28,13 @@ public class EnemyCtrl : InitMonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(followPlayer.Target.position, transform.position) > dataSO.trackRange)
-        {
-            moveFree.gameObject.SetActive(true);
-            followPlayer.gameObject.SetActive(false);
-        }
-        else
-        {
-            moveFree.gameObject.SetActive(false);
-            followPlayer.gameObject.SetActive(true);
-        }
+        bool isPlayerInTrackRange = Vector3.Distance(followPlayer.Target.position, transform.position) < dataSO.trackRange;
+
+        moveFree.gameObject.SetActive(!isPlayerInTrackRange);
+        followPlayer.gameObject.SetActive(isPlayerInTrackRange);
     }
+
+    public void SetWeapon(Weapon weapon) => attack.SetWeapon(weapon);
 
     protected override void LoadComponents()
     {

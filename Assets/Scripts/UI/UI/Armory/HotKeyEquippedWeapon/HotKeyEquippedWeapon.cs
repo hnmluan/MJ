@@ -60,11 +60,11 @@ public class HotKeyEquippedWeapon : Singleton<HotKeyEquippedWeapon>, IObservatio
         Weapon3.Show(Armory.Instance.GetEquippedWeapon(3));
     }
 
-    public void ActiveEquipMode()
+    public void SetEquipMode(bool isActive)
     {
-        Weapon1.SetEquipMode(true);
-        Weapon2.SetEquipMode(true);
-        Weapon3.SetEquipMode(true);
+        Weapon1.SetEquipMode(isActive);
+        Weapon2.SetEquipMode(isActive);
+        Weapon3.SetEquipMode(isActive);
     }
 
     public void AddItem() => this.Show();

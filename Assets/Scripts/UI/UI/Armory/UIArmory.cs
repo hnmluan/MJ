@@ -204,7 +204,14 @@ public class UIArmory : UIBase, IObservationArmory
         this.ShowItems();
     }
 
-    public void FocusItem(int position) { }
+    public void FocusItem(int position)
+    {
+        ItemArmory itemArmory = Armory.Instance.GetEquippedWeapon(position);
+
+        if (itemArmory == null) return;
+
+        this.SetCurrentItem(itemArmory);
+    }
 
     public void UnequipItem(ItemArmory item) => this.uiArmoryDetail.Show();
 }

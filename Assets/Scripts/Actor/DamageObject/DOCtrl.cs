@@ -69,7 +69,7 @@ public class DOCtrl : InitMonoBehaviour
     protected virtual void LoadDamageSender()
     {
         if (this.damageSender != null) return;
-        this.damageSender = transform.GetComponentInChildren<DamageSender>();
+        this.damageSender = transform.GetComponentInChildren<DODamageSender>();
         Debug.Log(transform.name + ": LoadDamageSender", gameObject);
     }
 
