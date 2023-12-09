@@ -22,7 +22,7 @@ public abstract class BaseButton : InitMonoBehaviour
     {
         if (this.button != null) return;
         this.button = GetComponent<Button>();
-        Debug.LogWarning(transform.name + ": LoadButton", gameObject);
+        Debug.Log(transform.name + ": LoadButton", gameObject);
     }
 
     protected virtual void AddOnClickEvent()

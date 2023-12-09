@@ -30,6 +30,8 @@ public class UIArmoryDetail : UIArmoryDetailAbstract
         uiArmoryDetailCtrl.UpgradeTxt.text = "";
         uiArmoryDetailCtrl.BtnDecompose.gameObject.SetActive(false);
         uiArmoryDetailCtrl.BtnUpgrade.gameObject.SetActive(false);
+        uiArmoryDetailCtrl.BtnEquip.gameObject.SetActive(false);
+        uiArmoryDetailCtrl.BtnUnequip.gameObject.SetActive(false);
         uiArmoryDetailCtrl.SlotEquippedWeaponBox.gameObject.SetActive(false);
         RecipeUpgradeSpawner.Instance.Clear();
     }
