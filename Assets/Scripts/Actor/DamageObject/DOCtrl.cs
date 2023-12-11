@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DOCtrl : InitMonoBehaviour
@@ -33,24 +34,28 @@ public class DOCtrl : InitMonoBehaviour
         this.LoadMovement();
     }
 
-    protected override void OnEnable()
+    public void InitDamageObject(int level, string attacker)
     {
-        if (this.dataSO == null) return;
-        damageSender.SetDamage(dataSO.levels[level].damage);
+        this.attacker = attacker;
+        try
+        {
+            this.damageSender.SetDamage(dataSO.levels[level - 1].damage);
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(transform.name + ":Dont found in4 of " + level + " level");
+            this.damageSender.SetDamage(0);
+        }
     }
 
     protected override void ResetValue()
     {
         if (this.dataSO == null) return;
-        model.sprite = dataSO.spriteInAttack;
-        damageSender.SetDamage(dataSO.levels[0].damage);
-        despawn.SetTimeDespawn(dataSO.attackTime);
-        movement.ResetMotionParameters();
+        this.model.sprite = dataSO.spriteInAttack;
+        this.damageSender.SetDamage(dataSO.levels[0].damage);
+        this.despawn.SetTimeDespawn(dataSO.attackTime);
+        this.movement.ResetMotionParameters();
     }
-
-    public virtual void SetAttacker(string attacker) => this.attacker = attacker;
-
-    public virtual void SetLevel(int level) => this.level = level;
 
     protected virtual void LoadMovement()
     {

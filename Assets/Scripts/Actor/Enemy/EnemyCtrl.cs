@@ -26,6 +26,12 @@ public class EnemyCtrl : InitMonoBehaviour
     [SerializeField] protected ObjMoveFree moveFree;
     public ObjMoveFree MoveFree => moveFree;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        this.transform.tag = "Enemy";
+    }
+
     private void Update()
     {
         bool isPlayerInTrackRange = Vector3.Distance(followPlayer.Target.position, transform.position) < dataSO.trackRange;
@@ -34,7 +40,7 @@ public class EnemyCtrl : InitMonoBehaviour
         followPlayer.gameObject.SetActive(isPlayerInTrackRange);
     }
 
-    public void SetWeapon(Weapon weapon) => attack.SetWeapon(weapon);
+    public void InitWithWeapon(Weapon weapon) => attack.SetWeapon(weapon);
 
     protected override void LoadComponents()
     {
@@ -50,19 +56,19 @@ public class EnemyCtrl : InitMonoBehaviour
 
     protected override void ResetValue()
     {
-        dataSO = EnemyDataSO.FindByName(transform.name);
+        this.dataSO = EnemyDataSO.FindByName(transform.name);
         if (dataSO == null)
         {
             Debug.Log("Don't find " + transform.name + " SO");
             return;
         }
-        damageReceiver.SetHPMax(dataSO.hpMax);
-        attack.SetRangeAttack(dataSO.acttackRange);
-        moveFree.SetSpeed(dataSO.speed);
-        followPlayer.SetSpeed(dataSO.speed);
-        followPlayer.SetOutline(dataSO.nonMoveableRange);
-        model.sprite = dataSO.visual;
-        animator.runtimeAnimatorController = dataSO.animator;
+        this.damageReceiver.SetHPMax(dataSO.hpMax);
+        this.attack.SetRangeAttack(dataSO.acttackRange);
+        this.moveFree.SetSpeed(dataSO.speed);
+        this.followPlayer.SetSpeed(dataSO.speed);
+        this.followPlayer.SetOutline(dataSO.nonMoveableRange);
+        this.model.sprite = dataSO.visual;
+        this.animator.runtimeAnimatorController = dataSO.animator;
     }
 
     protected virtual void LoadModel()

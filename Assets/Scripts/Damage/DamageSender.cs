@@ -6,6 +6,8 @@ public class DamageSender : InitMonoBehaviour
 
     public void SetDamage(IntRange damage) => this.damage = damage.GetRandomValue();
 
+    public void SetDamage(int damage) => this.damage = damage;
+
     public virtual void Send(Transform obj)
     {
         DamageReceiver damageReceiver = obj.GetComponentInChildren<DamageReceiver>();

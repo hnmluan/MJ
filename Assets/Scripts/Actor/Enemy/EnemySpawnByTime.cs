@@ -35,7 +35,7 @@ public class EnemySpawnByTime : MonoBehaviour
 
         EnemyCtrl enemyCtrl = enemy.GetComponent<EnemyCtrl>();
 
-        enemyCtrl.SetWeapon(new Weapon(WeaponDataSO.FindByCode(weaponCode), level));
+        enemyCtrl.InitWithWeapon(new Weapon(WeaponDataSO.FindByCode(weaponCode), level));
 
         if (enemyCtrl != null) return;
 

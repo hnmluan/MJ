@@ -13,9 +13,9 @@ public abstract class ObjAttack : InitMonoBehaviour
 
     [SerializeField] protected float attackTimer = 0f;
 
-    void Update() => this.IsAttacking();
+    protected virtual void Update() => this.IsAttacking();
 
-    private void FixedUpdate() => this.Attacking();
+    protected virtual void FixedUpdate() => this.Attacking();
 
     protected virtual void Attacking()
     {
@@ -46,9 +46,7 @@ public abstract class ObjAttack : InitMonoBehaviour
 
         DOCtrl doCtrl = damageObject.GetComponent<DOCtrl>();
 
-        doCtrl.SetLevel(level);
-
-        doCtrl.SetAttacker(transform.parent.tag);
+        doCtrl.InitDamageObject(level, transform.parent.tag);
 
         damageObject.gameObject.SetActive(true);
     }
