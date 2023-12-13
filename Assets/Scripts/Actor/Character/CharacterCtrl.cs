@@ -4,19 +4,20 @@ using UnityEngine.UI;
 
 public class CharacterCtrl : InitMonoBehaviour
 {
-    [SerializeField] protected SpriteRenderer visual;
+    [SerializeField] protected CharacterDataSO dataSO;
+    public CharacterDataSO DataSO => dataSO;
+
+    [SerializeField] protected SpriteRenderer model;
+    public SpriteRenderer Model => model;
 
     [SerializeField] protected Animator animator;
+    public Animator Animator => animator;
 
-    [SerializeField] protected LocalizedText keyName;
+    [SerializeField] protected ObjFollowPlayer followPlayer;
+    public ObjFollowPlayer FollowPlayer => followPlayer;
 
-    [SerializeField] protected ObjFollowPlayer enemyMoveToPlayer;
-    public ObjFollowPlayer ObjMoveToPlayer => enemyMoveToPlayer;
-
-    [SerializeField] protected ObjMoveFree enemyMoveFree;
-    public ObjMoveFree ObjMoveFree => enemyMoveFree;
-
-    [SerializeField] protected CharacterDataSO characterData;
+    [SerializeField] protected ObjMoveFree moveFree;
+    public ObjMoveFree MoveFree => moveFree;
 
     [SerializeField] private GameObject visualCue;
     public GameObject VisualCue => visualCue;
@@ -24,56 +25,65 @@ public class CharacterCtrl : InitMonoBehaviour
     [SerializeField] private Animator emoteAnimator;
     public Animator EmoteAnimator => emoteAnimator;
 
+    [SerializeField] protected LocalizedText keyName;
+    public LocalizedText KeyName => keyName;
+
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        this.LoadVisual();
+        this.LoadDataSO();
+        this.LoadModel();
         this.LoadAnimator();
-        this.LoadKeyName();
-        this.LoadObjMoveToPlayer();
-        this.LoadObjMoveFree();
+        this.LoadName();
+        this.LoadFollowPlayer();
+        this.LoadMoveFree();
         this.LoadVisualCue();
         this.LoadEmoteAnimator();
     }
 
     protected override void ResetValue()
     {
-        characterData = CharacterDataSO.FindByName(transform.name);
-        visual.sprite = characterData.visual;
-        animator.runtimeAnimatorController = characterData.animator;
-        keyName.LocalizationKey = characterData.keyName;
-        GetComponentInChildren<Text>().text = LocalizationManager.Localize(characterData.keyName);
+        if (dataSO == null) return;
+        model.sprite = dataSO.visual;
+        animator.runtimeAnimatorController = dataSO.animator;
+        keyName.LocalizationKey = dataSO.keyName;
+        GetComponentInChildren<Text>().text = LocalizationManager.Localize(dataSO.keyName);
+    }
+    protected virtual void LoadDataSO()
+    {
+        this.dataSO = CharacterDataSO.FindByName(transform.name);
+        if (dataSO == null) Debug.Log(transform.name + ": Dont found DataSO", gameObject);
     }
 
-    protected virtual void LoadObjMoveToPlayer()
+    protected virtual void LoadFollowPlayer()
     {
-        if (this.enemyMoveToPlayer != null) return;
-        this.enemyMoveToPlayer = transform.GetComponentInChildren<ObjFollowPlayer>();
+        if (this.followPlayer != null) return;
+        this.followPlayer = transform.GetComponentInChildren<ObjFollowPlayer>();
         Debug.Log(transform.name + ": LoadObjMoveToPlayer", gameObject);
     }
 
-    protected virtual void LoadObjMoveFree()
+    protected virtual void LoadMoveFree()
     {
-        if (this.enemyMoveFree != null) return;
-        this.enemyMoveFree = transform.GetComponentInChildren<ObjMoveFree>();
+        if (this.moveFree != null) return;
+        this.moveFree = transform.GetComponentInChildren<ObjMoveFree>();
         Debug.Log(transform.name + ": LoadObjMoveFree", gameObject);
     }
 
-    protected virtual void LoadVisual()
+    protected virtual void LoadModel()
     {
-        if (this.visual != null) return;
-        visual = transform.Find("Visual").GetComponent<SpriteRenderer>();
-        Debug.Log(transform.name + ": LoadVisual", gameObject);
+        if (this.model != null) return;
+        model = transform.Find("Model").GetComponent<SpriteRenderer>();
+        Debug.Log(transform.name + ": LoadModel", gameObject);
     }
 
     protected virtual void LoadAnimator()
     {
         if (this.animator != null) return;
-        animator = transform.Find("Visual").GetComponent<Animator>();
+        animator = transform.Find("Model").GetComponent<Animator>();
         Debug.Log(transform.name + ": LoadAnimator", gameObject);
     }
 
-    protected virtual void LoadKeyName()
+    protected virtual void LoadName()
     {
         if (this.keyName != null) return;
         keyName = GetComponentInChildren<LocalizedText>();

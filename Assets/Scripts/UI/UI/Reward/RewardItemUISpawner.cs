@@ -5,7 +5,7 @@ public class RewardItemUISpawner : Spawner
     private static RewardItemUISpawner instance;
     public static RewardItemUISpawner Instance => instance;
 
-    public static string rewardItemUI = "RewardItemUI";
+    public static string item = "Item";
 
     protected override void Awake()
     {
@@ -20,14 +20,11 @@ public class RewardItemUISpawner : Spawner
         Debug.LogWarning(transform.name + ": LoadHodler", gameObject);
     }
 
-    public virtual void ClearRewardItemUI()
-    {
-        foreach (Transform weapon in this.holder) this.Despawn(weapon);
-    }
+    public virtual void Clear() { foreach (Transform weapon in this.holder) this.Despawn(weapon); }
 
-    public virtual void SpawnRewardItemUI(ItemCode itemCode, int quantity)
+    public virtual void Spawn(ItemCode itemCode, int quantity)
     {
-        Transform uiWeapon = this.Spawn(RewardItemUISpawner.rewardItemUI, Vector3.zero, Quaternion.identity);
+        Transform uiWeapon = this.Spawn(RewardItemUISpawner.item, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);
 
         RewardItemUI uiRecipeUpdateLevel = uiWeapon.GetComponent<RewardItemUI>();

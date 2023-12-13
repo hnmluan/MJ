@@ -36,8 +36,8 @@ public class DialogueTrigger : InitMonoBehaviour
             }
         }
 
-        characterCtrl.ObjMoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying);
-        characterCtrl.ObjMoveToPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying);
+        characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying);
+        characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)

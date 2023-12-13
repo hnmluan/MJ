@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerCtrl : Singleton<PlayerCtrl>
 {
@@ -14,9 +13,6 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
 
     [SerializeField] protected PlayerMovement movement;
     public PlayerMovement Movement { get => movement; }
-
-    [SerializeField] protected Slider hpBar;
-    public Slider HPBar { get => hpBar; }
 
     [SerializeField] protected SpriteRenderer model;
     public SpriteRenderer Model { get => model; }

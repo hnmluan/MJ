@@ -1,5 +1,4 @@
 ﻿using Ink.Runtime;
-using System;
 using UnityEngine;
 
 public class InkExternalFunctions
@@ -8,7 +7,7 @@ public class InkExternalFunctions
     {
         if (emoteAnimator != null) story.BindExternalFunction("playEmote", (string emoteName) => PlayEmote(emoteName, emoteAnimator));
         story.BindExternalFunction("rewardItem", (string itemName, int quantity) => RewardItem(itemName, quantity));
-        story.BindExternalFunction("switchTask", () => TaskManager.Instance.Switch2NextTaskEnumCode());
+        story.BindExternalFunction("switchTask", () => TaskManager.Instance.Switch2NextTask());
     }
 
     public void Unbind(Story story)
@@ -25,18 +24,20 @@ public class InkExternalFunctions
     }
     public void RewardItem(string itemName, int quantity)
     {
-        RewardItemUISpawner.Instance.ClearRewardItemUI();
+        RewardItemUISpawner.Instance.Clear();
 
-        ItemCode itemCode;
-        if (!Enum.TryParse(itemName, out itemCode))
+        ItemCode itemCode = ItemCodeParser.FromString(itemName);
+
+        if (itemCode == ItemCode.NoItem)
         {
-            Debug.Log("Don't find " + itemName);
+            Debug.Log("Dont found information " + itemName + " for reward item");
             return;
         }
-        Inventory.Instance.AddItem(itemCode, quantity);
-        RewardItemUISpawner.Instance.SpawnRewardItemUI(itemCode, quantity);
-        UIReward.Instance.Open();
-        Debug.Log("Reward x" + quantity + " " + itemName);
-    }
 
+        RewardItemUISpawner.Instance.Spawn(itemCode, quantity);
+
+        Inventory.Instance.AddItem(itemCode, quantity);
+
+        UIReward.Instance.Open();
+    }
 }
