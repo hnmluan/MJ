@@ -45,12 +45,10 @@ public class DialogueManager : Singleton<DialogueManager>
     private const string LAYOUT_TAG = "layout";
     private const string AUDIO_TAG = "audio";
 
-    private DialogueVariables dialogueVariables;
     private InkExternalFunctions inkExternalFunctions;
 
     protected override void Awake()
     {
-        dialogueVariables = new DialogueVariables(loadGlobalsJSON);
         inkExternalFunctions = new InkExternalFunctions();
 
         currentAudioInfo = defaultAudioInfo;
@@ -124,7 +122,6 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        dialogueVariables.StartListening(currentStory);
         inkExternalFunctions.Bind(currentStory, emoteAnimator);
 
         // reset portrait, layout, and speaker
@@ -139,7 +136,6 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         yield return new WaitForSeconds(0.2f);
 
-        dialogueVariables.StopListening(currentStory);
         inkExternalFunctions.Unbind(currentStory);
 
         dialogueIsPlaying = false;
@@ -345,7 +341,7 @@ public class DialogueManager : Singleton<DialogueManager>
         foreach (Choice choice in currentChoices)
         {
             choices[index].gameObject.SetActive(true);
-            choicesText[index].text = choice.text;
+            choicesText[index].text = LocalizationManager.Localize(choice.text);
             index++;
         }
         // go through the remaining choices the UI supports and make sure they're hidden
@@ -376,23 +372,4 @@ public class DialogueManager : Singleton<DialogueManager>
             ContinueStory();
         }
     }
-
-    public Ink.Runtime.Object GetVariableState(string variableName)
-    {
-        Ink.Runtime.Object variableValue = null;
-        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
-        if (variableValue == null)
-        {
-            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
-        }
-        return variableValue;
-    }
-
-    // This method will get called anytime the application exits.
-    // Depending on your game, you may want to save variable state in other places.
-    public void OnApplicationQuit()
-    {
-        dialogueVariables.SaveVariables();
-    }
-
 }

@@ -1,4 +1,4 @@
 public class BtnAgreeTask : BaseButton
 {
-    protected override void OnClick() => UITask.Instance.Close();
+    protected override void OnClick() => Task.Instance.AcceptTask();
 }

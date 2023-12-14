@@ -1,17 +1,20 @@
 ﻿using Assets.SimpleLocalization;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UITask : UIBase
+public class UITask : UIBase, IObservationTask
 {
     private static UITask instance;
     public static UITask Instance => instance;
-
 
     [SerializeField] protected LocalizedText content;
     public LocalizedText Content => content;
 
     [SerializeField] protected LocalizedText title;
     public LocalizedText Title => title;
+
+    [SerializeField] protected Button btnAccept;
+    public Button BtnAccept => btnAccept;
 
     protected override void Awake()
     {
@@ -25,6 +28,7 @@ public class UITask : UIBase
         base.LoadComponents();
         this.LoadTitle();
         this.LoadContent();
+        this.LoadBtnAccept();
     }
 
     private void LoadTitle()
@@ -41,11 +45,29 @@ public class UITask : UIBase
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
+    private void LoadBtnAccept()
+    {
+        if (this.btnAccept != null) return;
+        this.btnAccept = transform.GetComponentInChildren<Button>();
+        Debug.Log(transform.name + ": LoadBtnAccept", gameObject);
+    }
+
     public void ShowTask(string title, string content)
     {
         LocalizationManager.Localize(title);
         this.title.LocalizationKey = title;
         this.content.LocalizationKey = content;
+        this.btnAccept.gameObject.SetActive(Task.Instance.currentTask.status == TaskStatus.start);
         this.Open();
     }
+
+    public void DoneTask()
+    {
+    }
+
+    public void Switch2NextTask()
+    {
+    }
+
+    public void AcceptTask() => this.Close();
 }

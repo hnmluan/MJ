@@ -34,7 +34,7 @@ public class TaskInformation
 
 public class Task : Singleton<Task>
 {
-    public List<IObservationTask> observations;
+    private List<IObservationTask> observations = new List<IObservationTask>();
 
     [SerializeField] public TaskInformation currentTask;
 

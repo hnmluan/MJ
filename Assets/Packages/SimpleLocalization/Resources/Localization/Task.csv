@@ -15,3 +15,10 @@ Task.Greeting11,"[Gently....] Sometimes, those who don't believe in miracles can
 Task.Greeting12,[Relaxed...] Okay! What can I do to return to my world?,[Thả lõng...] Thôi được rồi! Cháu có thể làm gì để trở về thế giới của cháu ?
 Task.Greeting13,"[Patience....] You will carry out the tasks I give you, it will be the key to bringing you back to your home.","[Nhẫn nại....] Cháu sẽ thực hiện những nhiệm vụ do ta đưa ra, nó sẽ là mấu chốt để đưa cháu trở về ngôi nhà của cháu"
 Task.Greeting14,"[Patience....] First, let's start by getting to know the members of this village?",[Nhẫn nại....] Đầu tiên cháu hãy bắt đầu bằng việc làm quen với các thành viên trong ngôi làng này ?
+Task.Greeting15,Please complete the mission soon so we can continue our journey to explore the village.,Hãy hoàn thành nhiệm vụ sớm để chúng ta cũng tiếp tục hành trình khám phá ngôi làng.
+Task.Greeting16,[Happy...] Wow! You did very well. The people in the village seem to like you very much!,[Vui vẻ...] Chà! Cháu làm tốt lắm. Những người dân trong làng có vẽ rất thích cháu!
+Task.Greeting17,"[Happy...] Let's start the journey to explore the village, I will give you useful weapons.",[Vui vẻ...] Nào để bắt đầu hành trình khám phá ngôi làng ta sẽ tặng cháu những món vũ khí hữu ích.
+Task.Greeting18,[Fun...] It will help you support the characters in their fairy tales.,[Vui vẻ...] Nó sẽ giúp cháu hỗ trợ các nhân vật trong các câu chuyện cổ tích của họ.
+Task.Greeting19,[Gently....] Let's choose one of the following two weapons.,[Nhẹ nhàng....] Nào hãy lựa chon một trong hai vũ khí sau.
+Task.Greeting19.choice1,Bow,Cung
+Task.Greeting19.choice2,Lance,Thương
