@@ -59,14 +59,14 @@ public class CharacterCtrl : InitMonoBehaviour
     {
         if (this.followPlayer != null) return;
         this.followPlayer = transform.GetComponentInChildren<ObjFollowPlayer>();
-        Debug.Log(transform.name + ": LoadObjMoveToPlayer", gameObject);
+        Debug.Log(transform.name + ": LoadFollowPlayer", gameObject);
     }
 
     protected virtual void LoadMoveFree()
     {
         if (this.moveFree != null) return;
         this.moveFree = transform.GetComponentInChildren<ObjMoveFree>();
-        Debug.Log(transform.name + ": LoadObjMoveFree", gameObject);
+        Debug.Log(transform.name + ": LoadMoveFree", gameObject);
     }
 
     protected virtual void LoadModel()

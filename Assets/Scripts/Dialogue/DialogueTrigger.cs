@@ -1,10 +1,13 @@
 using UnityEngine;
 
+[RequireComponent(typeof(CircleCollider2D))]
 public class DialogueTrigger : InitMonoBehaviour
 {
     [SerializeField] private CharacterCtrl characterCtrl;
 
     [SerializeField] private TextAsset inkJSON;
+
+    [SerializeField] private CircleCollider2D collider;
 
     private bool playerInRange = false;
 
@@ -12,8 +15,16 @@ public class DialogueTrigger : InitMonoBehaviour
     {
         base.LoadComponents();
         this.LoadEnemyCtrl();
-
+        this.LoadCollider();
     }
+
+    private void LoadCollider()
+    {
+        if (this.collider != null) return;
+        this.collider = transform.GetComponent<CircleCollider2D>();
+        Debug.Log(transform.name + ": LoadCollider", gameObject);
+    }
+
 
     protected virtual void LoadEnemyCtrl()
     {
@@ -22,33 +33,20 @@ public class DialogueTrigger : InitMonoBehaviour
         Debug.Log(transform.name + ": LoadEnemyCtrl", gameObject);
     }
 
-
-
     private void Update()
     {
+        if (inkJSON == null) return;
+
         characterCtrl.VisualCue.SetActive(playerInRange && !DialogueManager.Instance.dialogueIsPlaying);
 
-        if (playerInRange && !DialogueManager.Instance.dialogueIsPlaying)
-        {
-            if (InputManager.Instance.StartInteract())
-            {
-                DialogueManager.Instance.EnterDialogueMode(inkJSON, characterCtrl.EmoteAnimator);
-            }
-        }
+        if (playerInRange && !DialogueManager.Instance.dialogueIsPlaying && InputManager.Instance.StartInteract())
+            DialogueManager.Instance.EnterDialogueMode(inkJSON, characterCtrl.EmoteAnimator);
 
         characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying);
         characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player") playerInRange = true;
-    }
+    private void OnTriggerEnter2D(Collider2D collider) => playerInRange = collider.gameObject.tag == "Player";
 
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player") playerInRange = false;
-    }
-
+    private void OnTriggerExit2D(Collider2D collider) => playerInRange = !(collider.gameObject.tag == "Player");
 }
-

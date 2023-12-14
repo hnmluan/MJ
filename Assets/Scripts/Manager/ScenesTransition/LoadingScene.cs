@@ -32,12 +32,12 @@ public class LoadingScene : Singleton<LoadingScene>
 
         do
         {
-            await Task.Delay(100);
+            await System.Threading.Tasks.Task.Delay(100);
             loadingProcess.value = scene.progress;
             processText.text = scene.progress * 100 + " %";
         } while (scene.progress < 0.9f);
 
-        await Task.Delay(1000);
+        await System.Threading.Tasks.Task.Delay(1000);
 
         scene.allowSceneActivation = true;
         loadingUI.SetActive(false);

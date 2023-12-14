@@ -17,6 +17,8 @@ public class CharacterDataSO : ScriptableObject
 
     public RuntimeAnimatorController animator;
 
+    public List<Dialogue> dialogues = new List<Dialogue>();
+
     public static CharacterDataSO FindByItemCode(CharacterCode characterCode)
     {
         var datas = Resources.LoadAll("Character/ScriptableObject", typeof(CharacterDataSO));
@@ -36,4 +38,13 @@ public class CharacterDataSO : ScriptableObject
     }
 
     public static List<CharacterDataSO> GetAllSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("Character/ScriptableObject"));
+
+}
+
+[Serializable]
+
+public class Dialogue
+{
+    public TaskInformation task;
+    public TextAsset dialogueJSON;
 }

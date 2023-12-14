@@ -7,7 +7,7 @@ public class InkExternalFunctions
     {
         if (emoteAnimator != null) story.BindExternalFunction("playEmote", (string emoteName) => PlayEmote(emoteName, emoteAnimator));
         story.BindExternalFunction("rewardItem", (string itemName, int quantity) => RewardItem(itemName, quantity));
-        story.BindExternalFunction("switchTask", () => TaskManager.Instance.Switch2NextTask());
+        story.BindExternalFunction("switchTask", () => Task.Instance.Switch2NextTask());
     }
 
     public void Unbind(Story story)

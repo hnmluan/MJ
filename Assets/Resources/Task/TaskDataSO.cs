@@ -4,11 +4,11 @@
 
 public class TaskDataSO : ScriptableObject
 {
-    public TaskCode taskCode = TaskCode.NoTask;
+    public TaskCode taskCode = TaskCode.Greeting;
 
-    public string keyName;
+    public string title;
 
-    public string keyDescription;
+    public string content;
 
     public static TaskDataSO FindByItemCode(TaskCode taskCode)
     {
