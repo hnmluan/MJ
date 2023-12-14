@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Greeting
   m_EditorClassIdentifier: 
   taskCode: 1
-  keyDescription: Task.Greeting.Discription
-  keyName: Task.Greeting
+  title: Task.Greeting
+  content: Task.Greeting.Discription

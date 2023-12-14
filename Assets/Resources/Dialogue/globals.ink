@@ -1,5 +1,5 @@
 VAR pokemon_name = ""
 
 EXTERNAL playEmote(emoteName)
-EXTERNAL switchTask()
+EXTERNAL showTaskPanel()
 EXTERNAL rewardItem(itemName, quantity)

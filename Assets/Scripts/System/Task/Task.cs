@@ -14,8 +14,9 @@ public enum TaskCode
 
 public enum TaskStatus
 {
-    processing = 0,
-    done = 1
+    start = 0,
+    processing = 1,
+    done = 2
 }
 
 [Serializable]
@@ -64,11 +65,19 @@ public class Task : Singleton<Task>
         if (currentTask.code == TaskCode.Ending) return;
         if (this.currentTask.status != TaskStatus.done) return;
         currentTask.code++;
-        currentTask.status = TaskStatus.processing;
+        currentTask.status = TaskStatus.start;
         this.ShowPanel();
         this.ExcuteSwitchTaskObservation();
         this.SaveData();
     }
+
+    public void AcceptTask()
+    {
+        this.currentTask.status = TaskStatus.processing;
+        this.ExcuteAcceptTaskObservation();
+        this.SaveData();
+    }
+
     public void DoneTask()
     {
         currentTask.status = TaskStatus.done;
@@ -93,4 +102,5 @@ public class Task : Singleton<Task>
 
     public virtual void ExcuteSwitchTaskObservation() { foreach (IObservationTask observation in observations) observation.Switch2NextTask(); }
 
+    public virtual void ExcuteAcceptTaskObservation() { foreach (IObservationTask observation in observations) observation.AcceptTask(); }
 }

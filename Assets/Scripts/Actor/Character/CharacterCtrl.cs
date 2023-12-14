@@ -52,7 +52,7 @@ public class CharacterCtrl : InitMonoBehaviour
     protected virtual void LoadDataSO()
     {
         this.dataSO = CharacterDataSO.FindByName(transform.name);
-        if (dataSO == null) Debug.Log(transform.name + ": Dont found DataSO", gameObject);
+        if (dataSO == null) Debug.Log(transform.name + ": Dont found dataSO", gameObject);
     }
 
     protected virtual void LoadFollowPlayer()

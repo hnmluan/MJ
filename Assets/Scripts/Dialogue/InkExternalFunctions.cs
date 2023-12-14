@@ -7,14 +7,14 @@ public class InkExternalFunctions
     {
         if (emoteAnimator != null) story.BindExternalFunction("playEmote", (string emoteName) => PlayEmote(emoteName, emoteAnimator));
         story.BindExternalFunction("rewardItem", (string itemName, int quantity) => RewardItem(itemName, quantity));
-        story.BindExternalFunction("switchTask", () => Task.Instance.Switch2NextTask());
+        story.BindExternalFunction("showTaskPanel", () => Task.Instance.ShowPanel());
     }
 
     public void Unbind(Story story)
     {
         story.UnbindExternalFunction("playEmote");
         story.UnbindExternalFunction("rewardItem");
-        story.UnbindExternalFunction("switchTask");
+        story.UnbindExternalFunction("showTaskPanel");
     }
 
     public void PlayEmote(string emoteName, Animator emoteAnimator)
@@ -22,6 +22,7 @@ public class InkExternalFunctions
         if (emoteAnimator != null) emoteAnimator.Play(emoteName);
         else Debug.LogWarning("Tried to play emote, but emote animator was " + "not initialized when entering dialogue mode.");
     }
+
     public void RewardItem(string itemName, int quantity)
     {
         RewardItemUISpawner.Instance.Clear();

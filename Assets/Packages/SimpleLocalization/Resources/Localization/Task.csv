@@ -1,3 +1,17 @@
-Key,English,Vietnamese,
-Task.Greeting,Greeting task,Nhiệm vụ mở đầu,1
-Task.Greeting.Discription,"This is the first task the village chief assigns to you. When completed, it will receive high appreciation from the village chief. Dong also received a gift to start his journey of discovery from the village hall.","Đây là nhiệm vị đầu tiên trưỡng làng giao cho bạn, khi hoàn thành nó sẽ nhận được sự đánh giá cao từ trưỡng làng. Đông thời nhận được món quà để bắt đầu hành trình khám phá từ trưỡng làng.",1
+Key,English,Vietnamese
+Task.Greeting,Greeting task,Nhiệm vụ mở đầu
+Task.Greeting.Discription,"This is the first task the village chief assigns to you. When completed, it will receive high appreciation from the village chief. Dong also received a gift to start his journey of discovery from the village hall.","Đây là nhiệm vị đầu tiên trưỡng làng giao cho bạn, khi hoàn thành nó sẽ nhận được sự đánh giá cao từ trưỡng làng. Đông thời nhận được món quà để bắt đầu hành trình khám phá từ trưỡng làng."
+Task.Greeting01,"[gently ....] Oh, are you awake?","[nhẹ nhàng....] Oh, cậu đã tỉnh rồi à?"
+Task.Greeting02,"[Surprised....] Oh, I... I'm here. But... but where is this?","[Ngạc nhiên....] Ồ, tôi... Tôi đây. Nhưng... nhưng đây là đâu vậy ạ?"
+Task.Greeting03,"[Patiently....] Well, you're lucky you woke up. We found you at the village gate. We think you lost your family.","[Nhẫn nại....] Chà, thật may là cậu tỉnh dậy. Chúng tôi tìm thấy cậu ở cổng làng. Chúng tôi nghĩ cậu bị lạc mất gia đình."
+Task.Greeting04,[Eyes round....] Village gate? I remember I was reading a book and suddenly appeared here.,[Mắt tròn....] Cổng làng? Cháu nhớ là mình đang đọc sách và đột nhiên xuất hiện tại đây.
+Task.Greeting05,But can you tell me where this is?,Nhưng ông có thể có cháu biết đây là đâu không?
+Task.Greeting06,This is Phu Nong village and I am village elder.,Đây là làng Phú Nông và ông là trưởng làng tại đây.
+Task.Greeting07,[Surprised....] Isn't Phu Nong village the village in the story you're reading???,[Ngạc nhiên....] Chẳng phải làng Phú Nông là ngôi làng trong câu chuyện của cháu đang đọc hay sao ???
+Task.Greeting08,[Laughs loudly....] Maybe you understand what happened. So a new journey will continue. You will be the one to discover the meaning of this village.,[Cười to....] Có lẽ ông đã hiểu chuyện gì xảy ra rồi. Vậy ra lại một hành trình mới sẽ được tiếp diễn. Cháu sẽ là người khám phá nên ý nghĩa của ngôi làng này.
+Task.Greeting09,[Surprised...] You mean I have to explore this village so I can return to my world.,[Ngạc nhiên...] Ý ông là cháu đang phải khám phá ngôi làng này để có thể trở về thế giới của cháu à.
+Task.Greeting10,[Surprised...] But why me? You don't even believe in fairy tales?,[Ngạc nhiên...] Nhưng tại sao lại là cháu? Cháu còn chẳng tin vào những câu chuyện cổ tích ?
+Task.Greeting11,"[Gently....] Sometimes, those who don't believe in miracles can bring about the most miracles.","[Nhẹ nhàng....] Đôi khi, những người không tin vào điều kì diệu mới có thể mang lại điều kì diệu nhất."
+Task.Greeting12,[Relaxed...] Okay! What can I do to return to my world?,[Thả lõng...] Thôi được rồi! Cháu có thể làm gì để trở về thế giới của cháu ?
+Task.Greeting13,"[Patience....] You will carry out the tasks I give you, it will be the key to bringing you back to your home.","[Nhẫn nại....] Cháu sẽ thực hiện những nhiệm vụ do ta đưa ra, nó sẽ là mấu chốt để đưa cháu trở về ngôi nhà của cháu"
+Task.Greeting14,"[Patience....] First, let's start by getting to know the members of this village?",[Nhẫn nại....] Đầu tiên cháu hãy bắt đầu bằng việc làm quen với các thành viên trong ngôi làng này ?

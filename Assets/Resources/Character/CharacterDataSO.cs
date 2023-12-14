@@ -39,10 +39,17 @@ public class CharacterDataSO : ScriptableObject
 
     public static List<CharacterDataSO> GetAllSO() => new List<CharacterDataSO>(Resources.LoadAll<CharacterDataSO>("Character/ScriptableObject"));
 
+    public TextAsset GetDialogueJSONOf(TaskInformation taskInformation)
+    {
+        foreach (Dialogue item in dialogues)
+        {
+            if (item.task.code == taskInformation.code && item.task.status == taskInformation.status) return item.dialogueJSON;
+        }
+        return null;
+    }
 }
 
 [Serializable]
-
 public class Dialogue
 {
     public TaskInformation task;
