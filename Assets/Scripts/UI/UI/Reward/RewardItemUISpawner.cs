@@ -27,8 +27,19 @@ public class RewardItemUISpawner : Spawner
         Transform uiWeapon = this.Spawn(RewardItemUISpawner.item, Vector3.zero, Quaternion.identity);
         uiWeapon.transform.localScale = new Vector3(1, 1, 1);
 
-        RewardItemUI uiRecipeUpdateLevel = uiWeapon.GetComponent<RewardItemUI>();
-        uiRecipeUpdateLevel.ShowItem(itemCode, quantity);
+        RewardItemUI rewardItemUI = uiWeapon.GetComponent<RewardItemUI>();
+        rewardItemUI.ShowItem(itemCode, quantity);
+
+        uiWeapon.gameObject.SetActive(true);
+    }
+
+    public virtual void Spawn(WeaponCode weaponCode, int level)
+    {
+        Transform uiWeapon = this.Spawn(RewardItemUISpawner.item, Vector3.zero, Quaternion.identity);
+        uiWeapon.transform.localScale = new Vector3(1, 1, 1);
+
+        RewardItemUI rewardItemUI = uiWeapon.GetComponent<RewardItemUI>();
+        rewardItemUI.ShowWeapon(weaponCode, level);
 
         uiWeapon.gameObject.SetActive(true);
     }

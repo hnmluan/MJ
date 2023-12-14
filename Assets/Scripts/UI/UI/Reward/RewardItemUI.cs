@@ -51,4 +51,14 @@ public class RewardItemUI : InitMonoBehaviour
         itemQuantity.text = "x" + quantity;
         itemImage.sprite = itemDataSO.itemSprite;
     }
+
+    public void ShowWeapon(WeaponCode weaponCode, int level)
+    {
+        WeaponDataSO dataSO = WeaponDataSO.FindByCode(weaponCode);
+        if (dataSO == null) return;
+
+        itemName.text = LocalizationManager.Localize(dataSO.keyName);
+        itemQuantity.text = "+" + level;
+        itemImage.sprite = dataSO.spriteInHand;
+    }
 }

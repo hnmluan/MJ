@@ -6,7 +6,8 @@ public class InkExternalFunctions
     public void Bind(Story story, Animator emoteAnimator)
     {
         if (emoteAnimator != null) story.BindExternalFunction("playEmote", (string emoteName) => PlayEmote(emoteName, emoteAnimator));
-        story.BindExternalFunction("rewardItem", (string itemName, int quantity) => RewardItem(itemName, quantity));
+        story.BindExternalFunction("rewardItem", (string itemCode, int quantity) => RewardItem(itemCode, quantity));
+        story.BindExternalFunction("rewardWeapon", (string weaponCode, int level) => RewardWeapon(weaponCode, level));
         story.BindExternalFunction("showTaskPanel", () => Task.Instance.ShowPanel());
     }
 
@@ -14,6 +15,7 @@ public class InkExternalFunctions
     {
         story.UnbindExternalFunction("playEmote");
         story.UnbindExternalFunction("rewardItem");
+        story.UnbindExternalFunction("rewardWeapon");
         story.UnbindExternalFunction("showTaskPanel");
     }
 
@@ -23,21 +25,40 @@ public class InkExternalFunctions
         else Debug.LogWarning("Tried to play emote, but emote animator was " + "not initialized when entering dialogue mode.");
     }
 
-    public void RewardItem(string itemName, int quantity)
+    public void RewardItem(string itemCode, int quantity)
     {
         RewardItemUISpawner.Instance.Clear();
 
-        ItemCode itemCode = ItemCodeParser.FromString(itemName);
+        ItemCode code = ItemCodeParser.FromString(itemCode);
 
-        if (itemCode == ItemCode.NoItem)
+        if (code == ItemCode.NoItem)
         {
-            Debug.Log("Dont found information " + itemName + " for reward item");
+            Debug.Log("Dont found information " + itemCode + " for reward item");
             return;
         }
 
-        RewardItemUISpawner.Instance.Spawn(itemCode, quantity);
+        RewardItemUISpawner.Instance.Spawn(code, quantity);
 
-        Inventory.Instance.AddItem(itemCode, quantity);
+        Inventory.Instance.AddItem(code, quantity);
+
+        UIReward.Instance.Open();
+    }
+
+    public void RewardWeapon(string weaponCode, int level)
+    {
+        RewardItemUISpawner.Instance.Clear();
+
+        WeaponCode code = WeaponCodeParser.FromString(weaponCode);
+
+        if (code == WeaponCode.NoWeapon)
+        {
+            Debug.Log("Dont found information " + weaponCode + " for reward item");
+            return;
+        }
+
+        RewardItemUISpawner.Instance.Spawn(code, level);
+
+        Armory.Instance.AddItem(code, 1, level);
 
         UIReward.Instance.Open();
     }
