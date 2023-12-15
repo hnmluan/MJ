@@ -9,7 +9,7 @@ public abstract class Weather : InitMonoBehaviour
     {
         for (int i = 0; i < numberOfWeatherElement; i++)
         {
-            Transform weatherElemnet = WeatherSpawner.Instance.Spawn(weatherElemnetName[Random.Range(0, weatherElemnetName.Count - 1)], GetRandomPointInGame(), Quaternion.identity);
+            Transform weatherElemnet = WeatherSpawner.Instance.Spawn(weatherElemnetName[Random.Range(0, weatherElemnetName.Count - 1)], GetRandomPoint(), Quaternion.identity);
             if (weatherElemnet == null) return;
             weatherElemnet.gameObject.SetActive(true);
         }
@@ -19,13 +19,13 @@ public abstract class Weather : InitMonoBehaviour
     {
         for (int i = 0; i < numberOfWeatherElement; i++)
         {
-            Transform weatherElemnet = WeatherSpawner.Instance.Spawn(weatherElemnetName, GetRandomPointInGame(), Quaternion.identity);
+            Transform weatherElemnet = WeatherSpawner.Instance.Spawn(weatherElemnetName, GetRandomPoint(), Quaternion.identity);
             if (weatherElemnet == null) return;
             weatherElemnet.gameObject.SetActive(true);
         }
     }
 
-    private Vector3 GetRandomPointInGame()
+    private Vector3 GetRandomPoint()
     {
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
