@@ -8,7 +8,8 @@ public class InkExternalFunctions
         if (emoteAnimator != null) story.BindExternalFunction("playEmote", (string emoteName) => PlayEmote(emoteName, emoteAnimator));
         story.BindExternalFunction("rewardItem", (string itemCode, int quantity) => RewardItem(itemCode, quantity));
         story.BindExternalFunction("rewardWeapon", (string weaponCode, int level) => RewardWeapon(weaponCode, level));
-        story.BindExternalFunction("showTaskPanel", () => Task.Instance.ShowPanel());
+        story.BindExternalFunction("showTaskPanel", () => UITask.Instance.Open());
+        story.BindExternalFunction("switch2NextTask", () => Task.Instance.Switch2NextTask());
     }
 
     public void Unbind(Story story)
@@ -17,6 +18,7 @@ public class InkExternalFunctions
         story.UnbindExternalFunction("rewardItem");
         story.UnbindExternalFunction("rewardWeapon");
         story.UnbindExternalFunction("showTaskPanel");
+        story.UnbindExternalFunction("switch2NextTask");
     }
 
     public void PlayEmote(string emoteName, Animator emoteAnimator)

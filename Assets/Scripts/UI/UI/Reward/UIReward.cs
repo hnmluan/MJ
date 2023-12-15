@@ -12,4 +12,9 @@ public class UIReward : UIBase
         if (UIReward.instance != null) Debug.LogError("Only 1 UIReward allow to exist");
         UIReward.instance = this;
     }
+
+    protected void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)) this.Close();
+    }
 }

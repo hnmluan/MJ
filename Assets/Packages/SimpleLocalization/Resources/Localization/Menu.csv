@@ -35,3 +35,6 @@ Reward,Reward,Phần thưởng
 Receive,Receive,Nhận
 Use,Use,Dùng
 Drop,Drop,Bán
+Task.Accept,(OR Space to accept),(Hoặc Space để nhận nhiệm vụ)
+Task.Done,"(Nhiệm vụ đã hoàn thành, mau chóng đi tìm già làng để nhận thưởng và nhận nhiệm vụ tiếp theo)","(The mission has been completed, quickly go find the village elder to receive the reward and receive the next mission)"
+Task.Countinue,(OR Space to countinue),(Hoặc Space để tiếp tục)

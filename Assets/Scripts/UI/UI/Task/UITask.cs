@@ -16,11 +16,33 @@ public class UITask : UIBase, IObservationTask
     [SerializeField] protected Button btnAccept;
     public Button BtnAccept => btnAccept;
 
+    [SerializeField] protected LocalizedText note;
+
     protected override void Awake()
     {
         base.Awake();
         if (UITask.instance != null) Debug.LogError("Only 1 UITask allow to exist");
         UITask.instance = this;
+    }
+
+    public override void Open()
+    {
+        this.btnAccept.gameObject.SetActive(Task.Instance.CurrentTask.status == TaskStatus.start);
+        this.note.LocalizationKey =
+            Task.Instance.CurrentTask.status == TaskStatus.start ? "Task.Accept" :
+            Task.Instance.CurrentTask.status == TaskStatus.processing ? "Task.Countinue" : "Task.done";
+        TaskDataSO taskDataSO = Task.Instance.GetDataSO();
+        this.title.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.title;
+        this.content.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.content;
+        base.Open();
+
+    }
+
+    protected void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Task.Instance.CurrentTask.status == TaskStatus.start) Task.Instance.AcceptTask();
+        if (Input.GetKeyDown(KeyCode.Space) && Task.Instance.CurrentTask.status == TaskStatus.processing) this.Close();
+        if (Input.GetKeyDown(KeyCode.Space) && Task.Instance.CurrentTask.status == TaskStatus.done) this.Close();
     }
 
     protected override void LoadComponents()
@@ -29,6 +51,7 @@ public class UITask : UIBase, IObservationTask
         this.LoadTitle();
         this.LoadContent();
         this.LoadBtnAccept();
+        this.LoadNote();
     }
 
     private void LoadTitle()
@@ -36,6 +59,13 @@ public class UITask : UIBase, IObservationTask
         if (this.title != null) return;
         this.title = transform.Find("Title").Find("Title").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadItemType", gameObject);
+    }
+
+    private void LoadNote()
+    {
+        if (this.note != null) return;
+        this.note = transform.Find("Note").GetComponent<LocalizedText>();
+        Debug.Log(transform.name + ": LoadNote", gameObject);
     }
 
     private void LoadContent()
@@ -52,22 +82,9 @@ public class UITask : UIBase, IObservationTask
         Debug.Log(transform.name + ": LoadBtnAccept", gameObject);
     }
 
-    public void ShowTask(string title, string content)
-    {
-        LocalizationManager.Localize(title);
-        this.title.LocalizationKey = title;
-        this.content.LocalizationKey = content;
-        this.btnAccept.gameObject.SetActive(Task.Instance.currentTask.status == TaskStatus.start);
-        this.Open();
-    }
+    public void DoneTask() { }
 
-    public void DoneTask()
-    {
-    }
-
-    public void Switch2NextTask()
-    {
-    }
+    public void Switch2NextTask() { }
 
     public void AcceptTask() => this.Close();
 }

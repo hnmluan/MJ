@@ -62,7 +62,7 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
         if (collider.gameObject.tag == "Player") inConversationRange = false;
     }
 
-    protected void ResetJSONDialogue() => this.inkJSONDialogue = characterCtrl.DataSO.GetDialogueJSONOf(Task.Instance.currentTask);
+    protected void ResetJSONDialogue() => this.inkJSONDialogue = characterCtrl.DataSO.GetDialogueJSONOf(Task.Instance.CurrentTask);
 
     public void DoneTask() => this.ResetJSONDialogue();
 

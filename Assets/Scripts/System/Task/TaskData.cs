@@ -9,7 +9,7 @@ public class TaskData
 
     public TaskData()
     {
-        this.code = Task.Instance.currentTask.code.ToString();
-        this.status = Task.Instance.currentTask.status.ToString();
+        this.code = Task.Instance.CurrentTask.code.ToString();
+        this.status = Task.Instance.CurrentTask.status.ToString();
     }
 }

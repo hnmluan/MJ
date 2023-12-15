@@ -36,7 +36,8 @@ public class Task : Singleton<Task>
 {
     private List<IObservationTask> observations = new List<IObservationTask>();
 
-    [SerializeField] public TaskInformation currentTask;
+    [SerializeField] protected TaskInformation currentTask;
+    public TaskInformation CurrentTask => currentTask;
 
     protected override void Awake() => this.LoadData();
 
@@ -54,7 +55,10 @@ public class Task : Singleton<Task>
         this.currentTask.code = (TaskCode)Enum.Parse(typeof(TaskCode), data.code);
         this.currentTask.status = (TaskStatus)Enum.Parse(typeof(TaskStatus), data.status);
     }
+
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Task, new TaskData());
+
+    public TaskDataSO GetDataSO() => TaskDataSO.FindByItemCode(this.currentTask.code);
 
     public virtual void AddObservation(IObservationTask observation) => observations.Add(observation);
 
@@ -64,9 +68,8 @@ public class Task : Singleton<Task>
     {
         if (currentTask.code == TaskCode.Ending) return;
         if (this.currentTask.status != TaskStatus.done) return;
-        currentTask.code++;
-        currentTask.status = TaskStatus.start;
-        this.ShowPanel();
+        this.currentTask.code++;
+        this.currentTask.status = TaskStatus.start;
         this.ExcuteSwitchTaskObservation();
         this.SaveData();
     }
@@ -83,19 +86,6 @@ public class Task : Singleton<Task>
         currentTask.status = TaskStatus.done;
         this.ExcuteDoneTaskObservation();
         this.SaveData();
-    }
-
-    public void ShowPanel()
-    {
-        TaskDataSO dataSO = TaskDataSO.FindByItemCode(currentTask.code);
-
-        if (dataSO == null)
-        {
-            Debug.Log(transform.name + "Don't found task's data");
-            return;
-        };
-
-        UITask.Instance.ShowTask(dataSO.title, dataSO.content);
     }
 
     public virtual void ExcuteDoneTaskObservation() { foreach (IObservationTask observation in observations) observation.DoneTask(); }

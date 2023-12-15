@@ -10,8 +10,7 @@ public class WeatherManager : Singleton<WeatherManager>
     private void Update()
     {
         if (state == WeatherState.Rain) Rain.Instance.HandleUpdate();
-        else if (state == WeatherState.Sunny) Sunny.Instance.HandleUpdate();
+        if (state == WeatherState.Sunny) Sunny.Instance.HandleUpdate();
     }
-
 }
 
