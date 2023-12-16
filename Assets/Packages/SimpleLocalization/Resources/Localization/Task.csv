@@ -1,6 +1,6 @@
 Key,English,Vietnamese
 Task.Greeting,Greeting task,Nhiệm vụ mở đầu
-Task.Greeting.Discription,"This is the first task the village chief assigns to you. When completed, it will receive high appreciation from the village chief. Dong also received a gift to start his journey of discovery from the village hall.","Đây là nhiệm vị đầu tiên trưỡng làng giao cho bạn, khi hoàn thành nó sẽ nhận được sự đánh giá cao từ trưỡng làng. Đông thời nhận được món quà để bắt đầu hành trình khám phá từ trưỡng làng."
+Task.Greeting.Discription,"This is the first mission the village chief gives you, get to know the members of the village.","Đây là nhiệm vị đầu tiên trưỡng làng giao cho bạn, hãy làm quen với các thành viên trong ngôi làng."
 Task.Greeting01,"[gently ....] Oh, are you awake?","[nhẹ nhàng....] Oh, cậu đã tỉnh rồi à?"
 Task.Greeting02,"[Surprised....] Oh, I... I'm here. But... but where is this?","[Ngạc nhiên....] Ồ, tôi... Tôi đây. Nhưng... nhưng đây là đâu vậy ạ?"
 Task.Greeting03,"[Patiently....] Well, you're lucky you woke up. We found you at the village gate. We think you lost your family.","[Nhẫn nại....] Chà, thật may là cậu tỉnh dậy. Chúng tôi tìm thấy cậu ở cổng làng. Chúng tôi nghĩ cậu bị lạc mất gia đình."
@@ -22,3 +22,13 @@ Task.Greeting18,[Fun...] It will help you support the characters in their fairy 
 Task.Greeting19,[Gently....] Let's choose one of the following two weapons.,[Nhẹ nhàng....] Nào hãy lựa chon một trong hai vũ khí sau.
 Task.Greeting19.choice1,Bow,Cung
 Task.Greeting19.choice2,Lance,Thương
+Task.Greeting.Criteria1,Get acquainted with Tam,Làm quen với cô Tấm
+Task.Greeting.Criteria2,Get acquainted with Lua,Làm quen với Lụa
+Task.Greeting20,"[Happy] Hello! You are the boy found by the village elder, right?",[Vui vẻ] Chào cậu! Cậu là cậu nhóc được trưởng làng tìm thấy phải không
+Task.Greeting21,"[Happy] I'm Lua, nice to meet you",[Vui vẻ] Tớ là Lụa rất vui được làm quen cậu
+Task.Greeting22,[Happy] I'm Ty and I'm happy to meet you,[Vui vẻ] Tớ là Tý cũng vui khi làm quen cậu
+Task.Greeting23,"[Happy] Hello kid! You're the boy the purple village elder saw, right?",[Vui vẻ] Chào nhóc! Nhóc là cậu bé được già làng tím thấy phải không ?
+Task.Greeting24,"[Happy] I'm Tam, if you have any difficulties, please tell me!","[Vui vẻ] Chị là Tấm, có gì khó khăn hãy nói với chị nhá !"
+Task.Greeting25,"[Happy] Hello sister named Ty, nice to meet you!","[Vui vẻ] Chào chị em tên Tý, rất vui được biết chị!"
+Task.Greeting26,"[Happy] Nice to meet you, kid",[Vui vẻ] Rất vui được biết nhóc
+Task.Greeting27,[Happy] Nice to meet you,[Vui vẻ] Rất vui được biết cậu

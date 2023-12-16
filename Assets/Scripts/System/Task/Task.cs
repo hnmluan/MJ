@@ -60,6 +60,7 @@ public class Task : Singleton<Task>
         {
             this.currentTask = new TaskInformation(TaskCode.Greeting, TaskStatus.start);
             TaskDataSO.FindByItemCode(TaskCode.Greeting).criterias.ForEach(p => { this.criterias.Add(CriteriaStatus.processing); });
+            this.SaveData();
             return;
         };
 

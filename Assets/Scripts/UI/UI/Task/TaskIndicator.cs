@@ -54,6 +54,7 @@ public class TaskIndicator : InitMonoBehaviour, IObservationTask
         if (status == TaskStatus.done) iconTask.color = Color.green;
         this.btnTask.gameObject.SetActive(status != TaskStatus.start);
         this.progress.text = Task.Instance.GetProgress() + "%";
+        this.progress.gameObject.SetActive(!(Task.Instance.CurrentTask.status == TaskStatus.start));
     }
 
     public void DoneCriteriaTask() => SwitchToTaskStatus(Task.Instance.CurrentTask.status);

@@ -1,0 +1,1 @@
+Task.Greeting27 #layout:left #speaker:Lua #audio:animal_crossing_mid #portrait:lua

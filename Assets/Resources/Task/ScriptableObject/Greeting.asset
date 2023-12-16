@@ -18,4 +18,3 @@ MonoBehaviour:
   criterias:
   - Task.Greeting.Criteria1
   - Task.Greeting.Criteria2
-  - Task.Greeting.Criteria3

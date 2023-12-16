@@ -1,4 +1,5 @@
 ﻿using Assets.SimpleLocalization;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +8,17 @@ public class UITask : UIBase, IObservationTask
     private static UITask instance;
     public static UITask Instance => instance;
 
-    [SerializeField] protected LocalizedText content;
-    public LocalizedText Content => content;
+    [SerializeField] protected LocalizedText discription;
+    public LocalizedText Discription => discription;
 
     [SerializeField] protected LocalizedText title;
     public LocalizedText Title => title;
 
     [SerializeField] protected Button btnAccept;
     public Button BtnAccept => btnAccept;
+
+    [SerializeField] protected CriteriaTaskTextSpawner criteriaTaskTextSpawner;
+    public CriteriaTaskTextSpawner CriteriaTaskTextSpawner => criteriaTaskTextSpawner;
 
     [SerializeField] protected LocalizedText note;
 
@@ -27,15 +31,8 @@ public class UITask : UIBase, IObservationTask
 
     public override void Open()
     {
-        this.btnAccept.gameObject.SetActive(Task.Instance.CurrentTask.status == TaskStatus.start);
-        this.note.LocalizationKey =
-            Task.Instance.CurrentTask.status == TaskStatus.start ? "Task.Accept" :
-            Task.Instance.CurrentTask.status == TaskStatus.processing ? "Task.Countinue" : "Task.done";
-        TaskDataSO taskDataSO = Task.Instance.GetDataSO();
-        this.title.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.title;
-        this.content.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.content;
+        this.ResetContent();
         base.Open();
-
     }
 
     protected void Update()
@@ -49,37 +46,45 @@ public class UITask : UIBase, IObservationTask
     {
         base.LoadComponents();
         this.LoadTitle();
-        this.LoadContent();
+        this.LoadDiscription();
         this.LoadBtnAccept();
         this.LoadNote();
+        this.LoadCriteriaTaskTextSpawner();
     }
 
-    private void LoadTitle()
+    protected void LoadTitle()
     {
         if (this.title != null) return;
         this.title = transform.Find("Title").Find("Title").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadItemType", gameObject);
     }
 
-    private void LoadNote()
+    protected void LoadNote()
     {
         if (this.note != null) return;
         this.note = transform.Find("Note").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadNote", gameObject);
     }
 
-    private void LoadContent()
+    protected void LoadDiscription()
     {
-        if (this.content != null) return;
-        this.content = transform.Find("Content").GetComponent<LocalizedText>();
+        if (this.discription != null) return;
+        this.discription = transform.Find("Discription").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadItemName", gameObject);
     }
 
-    private void LoadBtnAccept()
+    protected void LoadBtnAccept()
     {
         if (this.btnAccept != null) return;
         this.btnAccept = transform.GetComponentInChildren<Button>();
         Debug.Log(transform.name + ": LoadBtnAccept", gameObject);
+    }
+
+    protected void LoadCriteriaTaskTextSpawner()
+    {
+        if (this.criteriaTaskTextSpawner != null) return;
+        this.criteriaTaskTextSpawner = transform.GetComponentInChildren<CriteriaTaskTextSpawner>();
+        Debug.Log(transform.name + ": LoadCriteriaTaskTextSpawner", gameObject);
     }
 
     public void DoneCriteriaTask() { }
@@ -87,4 +92,26 @@ public class UITask : UIBase, IObservationTask
     public void Switch2NextTask() { }
 
     public void AcceptTask() => this.Close();
+
+    protected void ResetContent()
+    {
+        this.btnAccept.gameObject.SetActive(Task.Instance.CurrentTask.status == TaskStatus.start);
+        this.note.LocalizationKey =
+            Task.Instance.CurrentTask.status == TaskStatus.start ? "Task.Accept" :
+            Task.Instance.CurrentTask.status == TaskStatus.processing ? "Task.Countinue" : "Task.Done";
+        TaskDataSO taskDataSO = Task.Instance.GetDataSO();
+        this.title.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.title;
+        this.discription.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.content;
+
+        this.ResetCriteriaContent();
+    }
+
+    protected void ResetCriteriaContent()
+    {
+        criteriaTaskTextSpawner.Clear();
+
+        List<string> criterias = TaskDataSO.FindByItemCode(Task.Instance.CurrentTask.code).criterias;
+
+        for (int i = 0; i < criterias.Count; i++) criteriaTaskTextSpawner.Spawn(criterias[i], Task.Instance.criterias[i]);
+    }
 }
