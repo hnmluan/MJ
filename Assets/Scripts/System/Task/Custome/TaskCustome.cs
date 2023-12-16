@@ -27,7 +27,7 @@ public class TaskCustome : InitMonoBehaviour, IObservationTask
         }
     }
 
-    public void DoneTask() => this.Custome();
+    public void DoneCriteriaTask() => this.Custome();
 
     public void Switch2NextTask() => this.Custome();
 

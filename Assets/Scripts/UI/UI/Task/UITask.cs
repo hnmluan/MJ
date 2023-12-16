@@ -82,7 +82,7 @@ public class UITask : UIBase, IObservationTask
         Debug.Log(transform.name + ": LoadBtnAccept", gameObject);
     }
 
-    public void DoneTask() { }
+    public void DoneCriteriaTask() { }
 
     public void Switch2NextTask() { }
 

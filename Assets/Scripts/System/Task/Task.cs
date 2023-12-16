@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum TaskCode
@@ -19,11 +20,19 @@ public enum TaskStatus
     done = 2
 }
 
+public enum CriteriaStatus
+{
+    processing = 0,
+    done = 2
+}
+
 [Serializable]
 public class TaskInformation
 {
     public TaskCode code;
+
     public TaskStatus status;
+
 
     public TaskInformation(TaskCode code, TaskStatus status)
     {
@@ -39,6 +48,8 @@ public class Task : Singleton<Task>
     [SerializeField] protected TaskInformation currentTask;
     public TaskInformation CurrentTask => currentTask;
 
+    public List<CriteriaStatus> criterias = new List<CriteriaStatus>();
+
     protected override void Awake() => this.LoadData();
 
     public void LoadData()
@@ -47,18 +58,23 @@ public class Task : Singleton<Task>
 
         if (data == null)
         {
-            this.currentTask = new TaskInformation(TaskCode.Greeting, TaskStatus.processing);
-            this.SaveData();
+            this.currentTask = new TaskInformation(TaskCode.Greeting, TaskStatus.start);
+            TaskDataSO.FindByItemCode(TaskCode.Greeting).criterias.ForEach(p => { this.criterias.Add(CriteriaStatus.processing); });
             return;
         };
 
         this.currentTask.code = (TaskCode)Enum.Parse(typeof(TaskCode), data.code);
         this.currentTask.status = (TaskStatus)Enum.Parse(typeof(TaskStatus), data.status);
+        data.process.ForEach(p => { this.criterias.Add((CriteriaStatus)Enum.Parse(typeof(CriteriaStatus), p)); });
     }
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Task, new TaskData());
 
     public TaskDataSO GetDataSO() => TaskDataSO.FindByItemCode(this.currentTask.code);
+
+    public int GetProgress()
+        => criterias.Count(x => x == CriteriaStatus.done) == 0 ? 0 :
+        (int)Math.Round((double)(criterias.Count(x => x == CriteriaStatus.done)) / criterias.Count * 100);
 
     public virtual void AddObservation(IObservationTask observation) => observations.Add(observation);
 
@@ -70,6 +86,8 @@ public class Task : Singleton<Task>
         if (this.currentTask.status != TaskStatus.done) return;
         this.currentTask.code++;
         this.currentTask.status = TaskStatus.start;
+        TaskDataSO.FindByItemCode(currentTask.code).criterias.
+            ForEach(p => { this.criterias.Add((CriteriaStatus)Enum.Parse(typeof(CriteriaStatus), p)); });
         this.ExcuteSwitchTaskObservation();
         this.SaveData();
     }
@@ -81,14 +99,16 @@ public class Task : Singleton<Task>
         this.SaveData();
     }
 
-    public void DoneTask()
+    public void DoneCriteriaTask(int critera)
     {
-        currentTask.status = TaskStatus.done;
+        if (critera > criterias.Count) return;
+        criterias[critera - 1] = CriteriaStatus.done;
+        if (GetProgress() == 100) this.currentTask.status = TaskStatus.done;
         this.ExcuteDoneTaskObservation();
         this.SaveData();
     }
 
-    public virtual void ExcuteDoneTaskObservation() { foreach (IObservationTask observation in observations) observation.DoneTask(); }
+    public virtual void ExcuteDoneTaskObservation() { foreach (IObservationTask observation in observations) observation.DoneCriteriaTask(); }
 
     public virtual void ExcuteSwitchTaskObservation() { foreach (IObservationTask observation in observations) observation.Switch2NextTask(); }
 

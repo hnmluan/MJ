@@ -41,15 +41,14 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
 
     protected void Update()
     {
-        if (inkJSONDialogue == null) return;
+        characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
+        characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
+        characterCtrl.VisualCue.SetActive(inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
 
-        characterCtrl.VisualCue.SetActive(inConversationRange && !DialogueManager.Instance.dialogueIsPlaying);
+        if (inkJSONDialogue == null) return;
 
         if (inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && InputManager.Instance.StartInteract())
             DialogueManager.Instance.EnterDialogueMode(inkJSONDialogue, characterCtrl.EmoteAnimator);
-
-        characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying);
-        characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying);
     }
 
     protected void OnTriggerEnter2D(Collider2D collider)
@@ -64,7 +63,7 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
 
     protected void ResetJSONDialogue() => this.inkJSONDialogue = characterCtrl.DataSO.GetDialogueJSONOf(Task.Instance.CurrentTask);
 
-    public void DoneTask() => this.ResetJSONDialogue();
+    public void DoneCriteriaTask() => this.ResetJSONDialogue();
 
     public void Switch2NextTask() => this.ResetJSONDialogue();
 

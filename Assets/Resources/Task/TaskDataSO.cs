@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "Task", menuName = "ScriptableObject/Task")]
 
@@ -9,6 +10,8 @@ public class TaskDataSO : ScriptableObject
     public string title;
 
     public string content;
+
+    public List<string> criterias;
 
     public static TaskDataSO FindByItemCode(TaskCode taskCode)
     {

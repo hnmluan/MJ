@@ -15,3 +15,7 @@ MonoBehaviour:
   taskCode: 1
   title: Task.Greeting
   content: Task.Greeting.Discription
+  criterias:
+  - Task.Greeting.Criteria1
+  - Task.Greeting.Criteria2
+  - Task.Greeting.Criteria3

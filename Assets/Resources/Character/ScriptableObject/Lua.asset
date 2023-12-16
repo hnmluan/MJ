@@ -18,3 +18,8 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 673fd1605b35d19429d244de6ffaf969, type: 3}
   visual: {fileID: 1136524739, guid: f0c5ab68afcd0e8469d5961721e15ddc, type: 3}
   animator: {fileID: 9100000, guid: b287f4991b024154992fab1824c87669, type: 2}
+  dialogues:
+  - task:
+      code: 1
+      status: 1
+    dialogueJSON: {fileID: 4900000, guid: 7d0176ef14d11d14796317d567208253, type: 3}

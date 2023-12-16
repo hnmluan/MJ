@@ -1,6 +1,6 @@
 public interface IObservationTask
 {
-    public void DoneTask();
+    public void DoneCriteriaTask();
     public void Switch2NextTask();
     public void AcceptTask();
 }
