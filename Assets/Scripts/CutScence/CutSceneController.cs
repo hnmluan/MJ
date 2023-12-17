@@ -123,10 +123,7 @@ public class CutSceneController : MonoBehaviour
         _camareSizeCoroutine = StartCoroutine(ChangeCameraSizeCoroutine(size));
     }
 
-    public void SetAnimatorDialog(Animator animator)
-    {
-        animatorEmote = animator;
-    }
+    public void SetAnimatorDialog(Animator animator) => animatorEmote = animator;
 
     private IEnumerator ChangeCameraSizeCoroutine(float size)
     {
@@ -168,7 +165,7 @@ public class CutSceneController : MonoBehaviour
 
     private IEnumerator SkipCutSceneCoroutine()
     {
-        SetFade(true);  
+        SetFade(true);
         yield return 2f.Wait();
         DOTween.KillAll();
         SceneManager.LoadSceneAsync("Game");
