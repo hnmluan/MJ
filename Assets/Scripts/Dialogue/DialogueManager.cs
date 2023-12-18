@@ -101,19 +101,14 @@ public class DialogueManager : Singleton<DialogueManager>
     private void Update()
     {
         // return right away if dialogue isn't playing
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
+        if (!dialogueIsPlaying) return;
 
         // handle continuing to the next line in the dialogue when submit is pressed
         // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0
             && InputManager.Instance.GetSubmitPressed())
-        {
             ContinueStory();
-        }
     }
 
     public void EnterDialogueMode(TextAsset inkJSON, Animator emoteAnimator = null)
@@ -205,10 +200,7 @@ public class DialogueManager : Singleton<DialogueManager>
             if (letter == '<' || isAddingRichTextTag)
             {
                 isAddingRichTextTag = true;
-                if (letter == '>')
-                {
-                    isAddingRichTextTag = false;
-                }
+                if (letter == '>') isAddingRichTextTag = false;
             }
             // if not rich text, add the next letter and wait a small time
             else
@@ -296,10 +288,8 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             // parse the tag
             string[] splitTag = tag.Split(':');
-            if (splitTag.Length != 2)
-            {
-                Debug.LogError("Tag could not be appropriately parsed: " + tag);
-            }
+            if (splitTag.Length != 2) Debug.LogError("Tag could not be appropriately parsed: " + tag);
+
             string tagKey = splitTag[0].Trim();
             string tagValue = splitTag[1].Trim();
 
@@ -332,8 +322,7 @@ public class DialogueManager : Singleton<DialogueManager>
         // defensive check to make sure our UI can support the number of choices coming in
         if (currentChoices.Count > choices.Length)
         {
-            Debug.LogError("More choices were given than the UI can support. Number of choices given: "
-                + currentChoices.Count);
+            Debug.LogError("More choices were given than the UI can support. Number of choices given: " + currentChoices.Count);
         }
 
         int index = 0;
@@ -345,10 +334,7 @@ public class DialogueManager : Singleton<DialogueManager>
             index++;
         }
         // go through the remaining choices the UI supports and make sure they're hidden
-        for (int i = index; i < choices.Length; i++)
-        {
-            choices[i].gameObject.SetActive(false);
-        }
+        for (int i = index; i < choices.Length; i++) choices[i].gameObject.SetActive(false);
 
         StartCoroutine(SelectFirstChoice());
     }
@@ -371,5 +357,11 @@ public class DialogueManager : Singleton<DialogueManager>
             InputManager.Instance.RegisterSubmitPressed(); // this is specific to my InputManager script
             ContinueStory();
         }
+    }
+
+    public void ShowGuide()
+    {
+        var guide = Resources.Load<GameObject>("Guide Canvas");
+        if (guide != null) Instantiate(guide);
     }
 }

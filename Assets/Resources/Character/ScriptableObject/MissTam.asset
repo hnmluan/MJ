@@ -20,10 +20,10 @@ MonoBehaviour:
   animator: {fileID: 9100000, guid: 174631b5db25a5e4f855c7e9179833f8, type: 2}
   dialogues:
   - task:
-      code: 1
+      code: 0
       status: 1
     dialogueJSON: {fileID: 4900000, guid: 0d14cc0cf7e1267418dbd2403acd1ca6, type: 3}
   - task:
-      code: 1
+      code: 0
       status: 2
     dialogueJSON: {fileID: 4900000, guid: c626a3e2c27043f40ab9b922514459f2, type: 3}
