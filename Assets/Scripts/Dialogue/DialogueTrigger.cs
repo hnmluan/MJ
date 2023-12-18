@@ -9,8 +9,6 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
 
     [SerializeField] private CircleCollider2D collider;
 
-    private bool inConversationRange = false;
-
     protected override void Start()
     {
         base.Start();
@@ -39,26 +37,34 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
         Debug.Log(transform.name + ": LoadEnemyCtrl", gameObject);
     }
 
-    protected void Update()
-    {
-        characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
-        characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
-        characterCtrl.VisualCue.SetActive(inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
-
-        if (inkJSONDialogue == null) return;
-
-        if (inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && InputManager.Instance.StartInteract())
-            DialogueManager.Instance.EnterDialogueMode(inkJSONDialogue, characterCtrl.EmoteAnimator);
-    }
-
     protected void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") inConversationRange = true;
+        if (collider.gameObject.tag == "Player")
+        {
+            characterCtrl.VisualCue.SetActive(inkJSONDialogue != null);
+
+            if (!DialogueManager.Instance.dialogueIsPlaying && InputManager.Instance.StartInteract() && inkJSONDialogue != null)
+            {
+                DialogueManager.Instance.EnterDialogueMode(inkJSONDialogue, characterCtrl.EmoteAnimator);
+                characterCtrl.MoveFree.gameObject.SetActive(false);
+                characterCtrl.FollowPlayer.gameObject.SetActive(true);
+            }
+            else
+            {
+                characterCtrl.MoveFree.gameObject.SetActive(true);
+                characterCtrl.FollowPlayer.gameObject.SetActive(false);
+            }
+        }
     }
 
     protected void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Player") inConversationRange = false;
+        if (collider.gameObject.tag == "Player")
+        {
+            characterCtrl.VisualCue.SetActive(false);
+            characterCtrl.FollowPlayer.gameObject.SetActive(false);
+            characterCtrl.MoveFree.gameObject.SetActive(true);
+        }
     }
 
     protected void ResetJSONDialogue() => this.inkJSONDialogue = characterCtrl.DataSO.GetDialogueJSONOf(Task.Instance.CurrentTask);

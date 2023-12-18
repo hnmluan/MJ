@@ -83,7 +83,6 @@ public class Task : Singleton<Task>
 
     public void Switch2NextTask()
     {
-        if (currentTask.code == TaskCode.Ending) return;
         if (this.currentTask.status != TaskStatus.done) return;
         this.currentTask.code++;
         this.currentTask.status = TaskStatus.start;
