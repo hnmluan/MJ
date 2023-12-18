@@ -6,30 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prefabs.unity
+    path: Assets/Scenes/Dont Use/Prefabs.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/A_Scence.unity
+    path: Assets/Scenes/MainScene.unity
     guid: 9ef1a25e4edbe6f45b4a9db9631d6d9e
   - enabled: 1
-    path: Assets/Scenes/Map_02.unity
+    path: Assets/Scenes/Dont Use/Map_02.unity
     guid: 0b7edf734042cf84784717ed78fc4400
   - enabled: 1
-    path: Assets/Scenes/VillageElderHouse.unity
+    path: Assets/Scenes/VillageElderHouseScene.unity
     guid: b58bdf09ebaa13d46a334d04a2b3198f
   - enabled: 1
-    path: Assets/Scenes/A_to_B_1_Scence.unity
+    path: Assets/Scenes/Dont Use/A_to_B_1_Scence.unity
     guid: 97a92b4d0f55db94699070e828b8bc16
   - enabled: 1
-    path: Assets/Scenes/A_to_B_2_Scence.unity
+    path: Assets/Scenes/Dont Use/A_to_B_2_Scence.unity
     guid: 22a7c2f14c39c7b40bbf1746966a9159
   - enabled: 1
-    path: Assets/Scenes/A_to_B_3_Scence.unity
+    path: Assets/Scenes/Dont Use/A_to_B_3_Scence.unity
     guid: 9e2773095d9da9e4e81a6469da4acab8
   - enabled: 1
-    path: Assets/Scenes/A_to_B_4_Scence.unity
+    path: Assets/Scenes/Dont Use/A_to_B_4_Scence.unity
     guid: 676871c06a767dc4aa9a5d36b23caf88
   - enabled: 1
-    path: Assets/Scenes/B_Scence.unity
+    path: Assets/Scenes/Dont Use/B_Scence.unity
     guid: d700c3d5600cf3c448e25eead9879956
   m_configObjects: {}

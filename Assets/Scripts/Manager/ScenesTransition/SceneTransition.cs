@@ -3,7 +3,7 @@
 [RequireComponent(typeof(BoxCollider2D))]
 public class SceneTransition : InitMonoBehaviour
 {
-    [SerializeField] private Scenes scene = Scenes.NoScene;
+    [SerializeField] private Scenes scene;
 
     [SerializeField] private Vector3 position;
 

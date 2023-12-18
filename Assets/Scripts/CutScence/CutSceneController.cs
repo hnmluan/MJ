@@ -1,4 +1,4 @@
-using Cinemachine;
+﻿using Cinemachine;
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
@@ -13,6 +13,7 @@ public class CutSceneController : MonoBehaviour
     [SerializeField] private TextAsset[] dialoguesStorage;
     [SerializeField] private Image fadingImage;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private Scenes sceneSkip;
     [Space]
     [Header("Core thread")]
     [SerializeField] private UnityEvent[] actionQueue;
@@ -37,7 +38,7 @@ public class CutSceneController : MonoBehaviour
             actionQueue[_currentAction++].Invoke();
             yield return new WaitWhile(() => _runningAction > 0);
         }
-        //SkipCutScene();
+        SkipCutScene();
     }
 
     public void SkipCutScene()
@@ -57,30 +58,22 @@ public class CutSceneController : MonoBehaviour
         _movingCoroutine = StartCoroutine(MoveToCoroutine(target));
     }
 
-    public void SetMoveSpeed(float moveSpeed)
-    {
-        _moveSpeed = moveSpeed;
-    }
+    public void SetMoveSpeed(float moveSpeed) => _moveSpeed = moveSpeed;
 
     public void SetAction(int index)
     {
-        if (index < 0 || index >= actionQueue.Length)
-        {
-            Debug.Log($"Invalid action index: {index}");
-        }
+        if (index < 0 || index >= actionQueue.Length) Debug.Log($"Invalid action index: {index}");
         _currentAction = Mathf.Clamp(index, 0, actionQueue.Length - 1);
     }
+
     public void PlayDialogue(int index)
     {
-        if (DialogueManager.Instance.dialogueIsPlaying)
-        {
-            _runningAction--;
-        }
+        if (DialogueManager.Instance.dialogueIsPlaying) _runningAction--;
+
         _runningAction++;
-        if (index > dialoguesStorage.Length || index < 0)
-        {
-            Debug.LogWarning($"Don't have this dialogue with this index {index}");
-        }
+
+        if (index > dialoguesStorage.Length || index < 0) Debug.LogWarning($"Don't have this dialogue with this index {index}");
+
         StartCoroutine(PlayDialogueCoroutine(Mathf.Clamp(index, 0, dialoguesStorage.Length - 1)));
     }
 
@@ -95,10 +88,7 @@ public class CutSceneController : MonoBehaviour
         _delayActionCoroutine = StartCoroutine(EndActionDelayCoroutine(delay));
     }
 
-    public void SetFade(bool state)
-    {
-        SetFade(state, duration: 1f);
-    }
+    public void SetFade(bool state) => SetFade(state, duration: 1f);
 
     public void SetFade(bool state, float duration)
     {
@@ -107,10 +97,7 @@ public class CutSceneController : MonoBehaviour
         _fadingTweener = fadingImage.DOFade(alpha, duration);
     }
 
-    public void SetCameraChangeSizeSpeed(float speed)
-    {
-        _cameraChangeSizeSpeed = speed;
-    }
+    public void SetCameraChangeSizeSpeed(float speed) => _cameraChangeSizeSpeed = speed;
 
     public void ChangeCameraSize(float size)
     {
@@ -168,6 +155,6 @@ public class CutSceneController : MonoBehaviour
         SetFade(true);
         yield return 2f.Wait();
         DOTween.KillAll();
-        SceneManager.LoadSceneAsync("Game");
+        SceneManager.LoadSceneAsync(sceneSkip.ToString());
     }
 }

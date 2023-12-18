@@ -1,18 +1,14 @@
-﻿using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum Scenes
 {
     NoScene = 0,
-    A_Scence = 1,
-    A_to_B_1_Scence = 2,
-    A_to_B_2_Scence = 3,
-    A_to_B_3_Scence = 4,
-    A_to_B_4_Scence = 5,
-    VillageElderHouse = 6,
-    B_Scence = 7,
+    StartGameMenu = 1,
+    CutScene = 2,
+    MainScene = 3,
+    VillageElderHouseScene = 4
 }
 
 public class LoadingScene : Singleton<LoadingScene>
