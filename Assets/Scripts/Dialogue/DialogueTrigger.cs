@@ -56,6 +56,7 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
         {
             DialogueManager.Instance.EnterDialogueMode(inkJSONDialogue, characterCtrl.EmoteAnimator);
             DialogueManager.Instance.SetSpeaker(transform.parent.ToString());
+            Dictionary.Instance.AddItem(CharacterDataSO.FindByItemCode(CharacterCodeParser.FromString(transform.parent.name)));
         }
     }
 

@@ -287,7 +287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 502841079142648877}
   rb: {fileID: 502841079705126633}
-  attack: {fileID: 7423342616158661550}
   movement: {fileID: 502841078973107637}
   model: {fileID: 502841079142648876}
 --- !u!1 &502841079869488811
@@ -480,7 +479,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7423342616158661456
 Transform:
   m_ObjectHideFlags: 0

@@ -82,8 +82,8 @@ public class Task : Singleton<Task>
         if (this.currentTask.status != TaskStatus.done) return;
         this.currentTask.code++;
         this.currentTask.status = TaskStatus.start;
-        TaskDataSO.FindByItemCode(currentTask.code).criterias.
-            ForEach(p => { this.criterias.Add((CriteriaStatus)Enum.Parse(typeof(CriteriaStatus), p)); });
+        this.criterias.Clear();
+        TaskDataSO.FindByItemCode(currentTask.code).criterias.ForEach(p => this.criterias.Add(CriteriaStatus.processing));
         this.ExcuteSwitchTaskObservation();
         this.SaveData();
     }

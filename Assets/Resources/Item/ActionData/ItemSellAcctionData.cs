@@ -9,8 +9,6 @@ public class ItemSellAcctionData : ItemActionData
 {
     public int price;
 
-    public ItemSellAcctionData() => price = 6;
-
     public void Sell(int quantity)
     {
         List<string> listPrice = new List<string>();
@@ -18,7 +16,7 @@ public class ItemSellAcctionData : ItemActionData
         for (int i = 0; i < quantity; i++)
         {
             Wallet.Instance.AddSilver(this.price);
-            string price = LocalizationManager.Localize("Currency.Silver") + " +" + this.price;
+            string price = LocalizationManager.Localize("Currency.Silver") + " + " + this.price;
             listPrice.Add(price);
         }
 

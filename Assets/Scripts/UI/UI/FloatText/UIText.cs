@@ -1,11 +1,11 @@
+using Assets.SimpleLocalization;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIText : InitMonoBehaviour
 {
-    [SerializeField] protected Text content;
-    public Text Content => content;
+    [SerializeField] protected LocalizedText content;
+    public LocalizedText Content => content;
 
     [SerializeField] protected float speed = 2f;
 
@@ -31,9 +31,13 @@ public class UIText : InitMonoBehaviour
     protected virtual void LoadContent()
     {
         if (this.content != null) return;
-        this.content = transform.Find("Text").GetComponent<Text>();
+        this.content = transform.Find("Text").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadContent", gameObject);
     }
 
-    public void SetText(string content) => this.content.text = content;
+    public void SetText(string content)
+    {
+        this.content.LocalizationKey = content;
+        this.content.Localize();
+    }
 }

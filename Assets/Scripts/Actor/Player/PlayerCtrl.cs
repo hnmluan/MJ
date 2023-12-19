@@ -8,8 +8,8 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     [SerializeField] protected Rigidbody2D rb;
     public Rigidbody2D Rb { get => rb; }
 
-    [SerializeField] protected ObjAttack attack;
-    public ObjAttack Attack { get => attack; }
+    /*    [SerializeField] protected ObjAttack attack;
+        public ObjAttack Attack { get => attack; }*/
 
     [SerializeField] protected PlayerMovement movement;
     public PlayerMovement Movement { get => movement; }
@@ -23,7 +23,7 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
     {
         base.LoadComponents();
         this.LoadAnimator();
-        this.LoadAttack();
+        /*        this.LoadAttack();*/
         this.LoadMovement();
         this.LoadModel();
         this.LoadRigidbody2D();
@@ -43,12 +43,12 @@ public class PlayerCtrl : Singleton<PlayerCtrl>
         Debug.Log(transform.name + ": LoadRigidbody2D", gameObject);
     }
 
-    protected virtual void LoadAttack()
-    {
-        if (this.attack != null) return;
-        this.attack = transform.GetComponentInChildren<ObjAttack>();
-        Debug.Log(transform.name + ": LoadAttack", gameObject);
-    }
+    /*    protected virtual void LoadAttack()
+        {
+            if (this.attack != null) return;
+            this.attack = transform.GetComponentInChildren<ObjAttack>();
+            Debug.Log(transform.name + ": LoadAttack", gameObject);
+        }*/
 
     protected virtual void LoadMovement()
     {

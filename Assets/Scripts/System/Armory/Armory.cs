@@ -49,6 +49,7 @@ public class Armory : Singleton<Armory>
             ItemArmory weapon = new ItemArmory(code, level);
             weapons.Add(weapon);
         }
+        Dictionary.Instance.AddItem(WeaponDataSO.FindByCode(code));
         this.SaveData();
         this.ExcuteAddItemsObservation();
     }

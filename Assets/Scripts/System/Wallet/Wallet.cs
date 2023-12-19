@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,13 +25,15 @@ public class Wallet : Singleton<Wallet>
 
         if (walletData == null)
         {
-            this.goldenBalance = 99;
-            this.silverBalance = 99;
+            this.goldenBalance = 9999;
+            this.silverBalance = 999;
+            this.SaveData();
             return;
         };
 
         this.goldenBalance = walletData.goldenBalance;
         this.silverBalance = walletData.silverBalance;
+        this.SaveData();
     }
 
     public void SaveData() => SaveLoadHandler.SaveToFile(FileNameData.Wallet, this);

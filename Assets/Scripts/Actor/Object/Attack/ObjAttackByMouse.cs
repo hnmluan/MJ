@@ -4,13 +4,15 @@ public class ObjAttackByMouse : ObjAttack
 {
     protected override Quaternion GetRotation() => GetQuaternionToMouse();
 
-    private Quaternion GetQuaternionToMouse()
+    protected virtual Quaternion GetQuaternionToMouse()
     {
         float angle = Mathf.Atan2(GetDirectionToMouse().y, GetDirectionToMouse().x) * Mathf.Rad2Deg;
         return Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    public Vector3 GetDirectionToMouse()
+    protected override void Start() => SetWeapon(Armory.Instance.GetFocusEquippedWeapon().weapon);
+
+    protected virtual Vector3 GetDirectionToMouse()
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = -Camera.main.transform.position.z;

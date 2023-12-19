@@ -9,9 +9,10 @@ public class UIWallet : InitMonoBehaviour, IObservationWallet
     [SerializeField] protected Image GoldSprite;
     [SerializeField] protected Image SilverSprite;
 
-    protected override void Awake()
+    protected override void Awake() => Wallet.Instance.AddObservation(this);
+
+    protected override void Start()
     {
-        Wallet.Instance.AddObservation(this);
         GoldBalance.text = GetFormattedBalance(Wallet.Instance.GoldenBalance);
         SilverBalance.text = GetFormattedBalance(Wallet.Instance.SilverBalance);
         GoldSprite.sprite = CurrencyDataSO.FindByCode(CurrencyCode.Gold).currencySprite;
@@ -26,7 +27,5 @@ public class UIWallet : InitMonoBehaviour, IObservationWallet
 
     public void DeductSilver() => SilverBalance.text = GetFormattedBalance(Wallet.Instance.SilverBalance);
 
-    public string GetFormattedBalance(int balance)
-        => balance < 1000 ? balance.ToString() : Math.Round(Convert.ToDouble(balance / 1000)) + "k";
-
+    public string GetFormattedBalance(int balance) => balance < 1000 ? balance.ToString() : Math.Round(Convert.ToDouble(balance / 1000)) + "k";
 }

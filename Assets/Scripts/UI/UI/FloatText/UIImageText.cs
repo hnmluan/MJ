@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -5,8 +6,8 @@ using UnityEngine.UI;
 
 public class UIImageText : InitMonoBehaviour
 {
-    [SerializeField] protected Text content;
-    public Text Content => content;
+    [SerializeField] protected LocalizedText content;
+    public LocalizedText Content => content;
 
     [SerializeField] protected Image image;
     public Image Image => image;
@@ -36,7 +37,7 @@ public class UIImageText : InitMonoBehaviour
     protected virtual void LoadContent()
     {
         if (this.content != null) return;
-        this.content = transform.Find("Layout").Find("Text").GetComponent<Text>();
+        this.content = transform.Find("Layout").Find("Text").GetComponent<LocalizedText>();
         Debug.Log(transform.name + ": LoadContent", gameObject);
     }
     protected virtual void LoadImage()
@@ -49,7 +50,8 @@ public class UIImageText : InitMonoBehaviour
 
     public void SetContent(string content, Sprite image)
     {
-        this.content.text = content;
+        this.content.LocalizationKey = content;
+        this.content.Localize();
         this.image.sprite = image;
     }
 }

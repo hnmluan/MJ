@@ -22,8 +22,8 @@ Task.Greeting18,[Fun...] It will help you support the characters in their fairy 
 Task.Greeting19,[Gently....] Let's choose one of the following two weapons.,[Nhẹ nhàng....] Nào hãy lựa chon một trong hai vũ khí sau.
 Task.Greeting19.choice1,Bow,Cung
 Task.Greeting19.choice2,Lance,Thương
-Task.Greeting.Criteria1,Get acquainted with Tam,Làm quen với cô Tấm
-Task.Greeting.Criteria2,Get acquainted with Lua,Làm quen với Lụa
+Task.Greeting.Criteria1,>> Get acquainted with Tam,>> Làm quen với cô Tấm
+Task.Greeting.Criteria2,>> Get acquainted with Lua,>> Làm quen với Lụa
 Task.Greeting20,"[Happy] Hello! You are the boy found by the village elder, right?",[Vui vẻ] Chào cậu! Cậu là cậu nhóc được trưởng làng tìm thấy phải không
 Task.Greeting21,"[Happy] I'm Lua, nice to meet you",[Vui vẻ] Tớ là Lụa rất vui được làm quen cậu
 Task.Greeting22,[Happy] I'm Ty and I'm happy to meet you,[Vui vẻ] Tớ là Tý cũng vui khi làm quen cậu
@@ -38,7 +38,7 @@ Task.Greeting30,[Seriously] This is also your next mission.,[Nghiêm nghị] Đ�
 Task.Greeting31,[Seriously] You can use the following useful functions.,[Nghiêm nghị] Cháu có thể sử dụng các chức năng hữu ích sau.
 Task.DefeatFirstEnemy,Defeat First Enemy,Cuộc chiến đầu tiên
 Task.DefeatFirstEnemy.Discription,"Monsters are attacking the village, please help the villagers by defeating them","Một quái vật đang tràn vào ngôi làng, hãy giúp đỡ người làng bằng các đánh bại nó"
-Task.DefeatFirstEnemy.Criteria1,Defeat the first monster,Đánh bại quái vật đầu tiên
+Task.DefeatFirstEnemy.Criteria1,>> Defeat the first monster,>> Đánh bại quái vật đầu tiên
 Task.DefeatFirstEnemy01,Please help the villagers repel monsters.,Cháu hãy giúp đỡ người làng đẩy lùi quái vật.
 Task.DefeatFirstEnemy02,"It's dangerous Ty, monsters are attacking the village","Nguy hiểm đấy Tý, quái vật đang tấn công vào làng"
 Task.DefeatFirstEnemy03,Lua stay calm because I have received the weapon from the village elder. Then everything will be okay.,Lụa cứ yên tâm mình đã nhận được vũ khí từ già làng. Rồi mội chuyện sẽ ổn thôi.

@@ -22,13 +22,6 @@ public class ItemDataSO : ScriptableObject
 
     [field: SerializeReference] public List<ItemActionData> itemActionDatas;
 
-    public ItemDataSO()
-    {
-        itemActionDatas.Add(new ItemSellAcctionData());
-        itemActionDatas.Add(new ItemBuyActionData());
-        itemActionDatas.Add(new ItemOpenTreasureData());
-    }
-
     public void AddData(ItemActionData data)
     {
         if (itemActionDatas.FirstOrDefault(t => t.GetType() == data.GetType()) != null) return;
