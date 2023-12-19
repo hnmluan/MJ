@@ -99,6 +99,6 @@ public class RegisterPanel : MonoBehaviour
     {
         FileNameData.AddUser(inputField.text);
         FileNameData.SetUser(inputField.text);
-        SceneManager.LoadSceneAsync("VillageElderHouse");
+        SceneManager.LoadSceneAsync(Scenes.CutScene.ToString());
     }
 }

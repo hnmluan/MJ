@@ -55,8 +55,15 @@ public class ObjMoveFree : InitMonoBehaviour
 
     protected override void OnEnable()
     {
+        base.OnEnable();
         isMoving = false;
         StartCoroutine(MoveTo());
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        StopAllCoroutines();
     }
 
     protected virtual void SetAnimation(Vector3 direction)
@@ -116,7 +123,6 @@ public class ObjMoveFree : InitMonoBehaviour
 
     protected virtual void Update()
     {
-
         if (isMoving && currentPath != null)
         {
             if (currentWaypointIndex >= currentPath.vectorPath.Count)

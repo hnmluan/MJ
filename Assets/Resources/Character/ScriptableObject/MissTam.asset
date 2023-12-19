@@ -27,3 +27,7 @@ MonoBehaviour:
       code: 0
       status: 2
     dialogueJSON: {fileID: 4900000, guid: c626a3e2c27043f40ab9b922514459f2, type: 3}
+  - task:
+      code: 1
+      status: 1
+    dialogueJSON: {fileID: 4900000, guid: 71bf9012297ba1e45bc01cdce8190d19, type: 3}

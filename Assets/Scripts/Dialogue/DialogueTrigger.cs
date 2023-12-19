@@ -41,14 +41,22 @@ public class DialogueTrigger : InitMonoBehaviour, IObservationTask
 
     protected void Update()
     {
-        characterCtrl.MoveFree.gameObject.SetActive(!DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
-        characterCtrl.FollowPlayer.gameObject.SetActive(DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
+        bool inConversationMode =
+            DialogueManager.Instance.speaker == transform.parent.ToString()
+            && DialogueManager.Instance.dialogueIsPlaying;
+
+        characterCtrl.MoveFree.gameObject.SetActive(!inConversationMode);
+        characterCtrl.FollowPlayer.gameObject.SetActive(inConversationMode);
+
         characterCtrl.VisualCue.SetActive(inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && inkJSONDialogue != null);
 
         if (inkJSONDialogue == null) return;
 
         if (inConversationRange && !DialogueManager.Instance.dialogueIsPlaying && InputManager.Instance.StartInteract())
+        {
             DialogueManager.Instance.EnterDialogueMode(inkJSONDialogue, characterCtrl.EmoteAnimator);
+            DialogueManager.Instance.SetSpeaker(transform.parent.ToString());
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collider)

@@ -1,0 +1,1 @@
+Task.DefeatFirstEnemy05 #layout:left #speaker:Tam #audio:animal_crossing_mid #portrait:tam

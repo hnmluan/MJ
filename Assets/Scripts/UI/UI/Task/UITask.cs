@@ -102,6 +102,10 @@ public class UITask : UIBase, IObservationTask
         TaskDataSO taskDataSO = Task.Instance.GetDataSO();
         this.title.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.title;
         this.discription.LocalizationKey = taskDataSO == null ? "Dont found task SO" : taskDataSO.content;
+        this.discription.Localize();
+        this.title.Localize();
+        this.note.Localize();
+
 
         this.ResetCriteriaContent();
     }

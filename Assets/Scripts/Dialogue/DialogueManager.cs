@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class DialogueManager : Singleton<DialogueManager>
 {
     [Header("Params")]
-    [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private float typingSpeed = 0.000000000000000000004f;
 
     [Header("Load Globals JSON")]
     [SerializeField] private TextAsset loadGlobalsJSON;
@@ -35,6 +35,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
+    public string speaker { get; private set; }
 
     private bool canContinueToNextLine = false;
 
@@ -136,6 +137,7 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        speaker = "";
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
@@ -364,4 +366,6 @@ public class DialogueManager : Singleton<DialogueManager>
         var guide = Resources.Load<GameObject>("Guide Canvas");
         if (guide != null) Instantiate(guide);
     }
+
+    public void SetSpeaker(string name) => this.speaker = name;
 }

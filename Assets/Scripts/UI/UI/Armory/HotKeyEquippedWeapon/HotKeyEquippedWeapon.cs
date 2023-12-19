@@ -40,6 +40,7 @@ public class HotKeyEquippedWeapon : Singleton<HotKeyEquippedWeapon>, IObservatio
 
     protected virtual void LoadHotKey2()
     {
+        if (this.weapon2 != null) return;
         this.weapon2 = transform.Find("HotKey2").GetComponent<UIHotKeyWeapon>();
         weapon2.SetPosition(2);
         Debug.Log(transform.name + ": LoadWeapon2", gameObject);

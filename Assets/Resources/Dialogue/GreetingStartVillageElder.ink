@@ -13,5 +13,6 @@ Task.Greeting10 #layout:right #speaker:Me #audio:animal_crossing_high #portrait:
 Task.Greeting11 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder
 Task.Greeting12 #layout:right #speaker:Me #audio:animal_crossing_high #portrait:me
 Task.Greeting13 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder
-Task.Greeting14 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder
 ~ showTaskPanel()
+Task.Greeting14 #layout:left #speaker:VillageElder #audio:animal_crossing_mid #portrait:village_elder
+

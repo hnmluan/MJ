@@ -19,6 +19,7 @@ public class CriteriaTaskTextSpawner : Spawner
 
         LocalizedText localizedText = uiItem.GetComponent<LocalizedText>();
         localizedText.LocalizationKey = LocalizationKey;
+        localizedText.Localize();
         Text text = uiItem.GetComponent<Text>();
         text.color = new Color(0.7412f, 0.4157f, 0.3882f);
         if (criteriaStatus == CriteriaStatus.done) text.color = new Color(0f, 0.4235f, 0f); ;

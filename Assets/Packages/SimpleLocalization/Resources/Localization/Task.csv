@@ -32,3 +32,16 @@ Task.Greeting24,"[Happy] I'm Tam, if you have any difficulties, please tell me!"
 Task.Greeting25,"[Happy] Hello sister named Ty, nice to meet you!","[Vui vẻ] Chào chị em tên Tý, rất vui được biết chị!"
 Task.Greeting26,"[Happy] Nice to meet you, kid",[Vui vẻ] Rất vui được biết nhóc
 Task.Greeting27,[Happy] Nice to meet you,[Vui vẻ] Rất vui được biết cậu
+Task.Greeting28,[Seriously] Right now the demons are destroying the people in the village.,[Nghiêm nghị] Hiện giờ các yêu quái đang quái phá người dân trong làng.
+Task.Greeting29,[Seriously] Please help the villagers repel them with the weapons I have given you.,[Nghiêm nghị] Cháu hãy giúp người làng đẩy lùi chúng bằng vũ khí ta đã cho.
+Task.Greeting30,[Seriously] This is also your next mission.,[Nghiêm nghị] Đây cũng là nhiệm vụ tiếp theo của nhóc.
+Task.Greeting31,[Seriously] You can use the following useful functions.,[Nghiêm nghị] Cháu có thể sử dụng các chức năng hữu ích sau.
+Task.DefeatFirstEnemy,Defeat First Enemy,Cuộc chiến đầu tiên
+Task.DefeatFirstEnemy.Discription,"Monsters are attacking the village, please help the villagers by defeating them","Một quái vật đang tràn vào ngôi làng, hãy giúp đỡ người làng bằng các đánh bại nó"
+Task.DefeatFirstEnemy.Criteria1,Defeat the first monster,Đánh bại quái vật đầu tiên
+Task.DefeatFirstEnemy01,Please help the villagers repel monsters.,Cháu hãy giúp đỡ người làng đẩy lùi quái vật.
+Task.DefeatFirstEnemy02,"It's dangerous Ty, monsters are attacking the village","Nguy hiểm đấy Tý, quái vật đang tấn công vào làng"
+Task.DefeatFirstEnemy03,Lua stay calm because I have received the weapon from the village elder. Then everything will be okay.,Lụa cứ yên tâm mình đã nhận được vũ khí từ già làng. Rồi mội chuyện sẽ ổn thôi.
+Task.DefeatFirstEnemy04,Be careful Ty.,Tý hãy cẩn thận.
+Task.DefeatFirstEnemy05,"Very brave, boy. I wish you luck",Dũng cảm lắm chành trai. Chị chúc em mai mắn
+Task.DefeatFirstEnemy06,,

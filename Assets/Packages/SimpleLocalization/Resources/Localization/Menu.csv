@@ -36,5 +36,13 @@ Receive,Receive,Nhận
 Use,Use,Dùng
 Drop,Drop,Bán
 Task.Accept,(OR Space to accept),(Hoặc Space để nhận nhiệm vụ)
-Task.Done,"(Nhiệm vụ đã hoàn thành, mau chóng đi tìm già làng để nhận thưởng và nhận nhiệm vụ tiếp theo)","(The mission has been completed, quickly go find the village elder to receive the reward and receive the next mission)"
+Task.Done,"(Nhiệm vụ đã hoàn thành, mau chóng đi tìm già làng để nhận nhiệm vụ tiếp theo)","(The mission has been completed, quickly go find the village elder to receive the reward and receive the next mission)"
 Task.Countinue,(Space to countinue),(Space để tiếp tục)
+Skip,Skip >>,Bỏ qua >>
+click,Click any where to move next! >>,Nhấp vào bất kỳ nơi nào để di chuyển tiếp theo! >>
+intro.inventory,This is inventory. It contains items you can loot from events,Nó chứa đựng các vật phẩm cháu loot được từ các sự kiện.
+intro.shop,This is shop. You can purchase the necessary items here.,Đây là cửa hàng. Bạn có thể mua những vật dụng cần thiết tại đây.
+intro.dictionary,"The dictionary contains information about weapons, village members, and enemies.","Từ điển chứa các thông tin về vũ khí, các thành viên trong làng, và các quái."
+intro.armory,"The armory contains your weapons. It performs upgrades, resolutions, and armaments here.","Kho vũ khí chứa các vũ khí của bạn. Nó thực hiện các nâng cấp, phân giải và trang bị vũ khí tại đây."
+intro.weaponSlot,These are your own equipment boxes. You can equip yourself with 3 weapons at the same time.,Đây là các ô trang bị của bản thân. Bản thân được cùng lúc trang bị 3 vũ khí.
+Task.Enter,Space to skip,Space để bỏ qua.

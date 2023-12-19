@@ -57,10 +57,15 @@ public abstract class ObjAttack : InitMonoBehaviour
 
     public void SetWeapon(Weapon weapon)
     {
-        if (weapon == null) return;
-
-        this.damageObject = weapon.dataSO.damageObjectCode;
-
-        this.level = weapon.level;
+        if (weapon == null)
+        {
+            this.damageObject = WeaponCode.NoWeapon;
+            this.level = 0;
+        }
+        else
+        {
+            this.damageObject = weapon.dataSO.damageObjectCode;
+            this.level = weapon.level;
+        }
     }
 }

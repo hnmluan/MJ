@@ -11,7 +11,12 @@ public class PlayerActtack : ObjAttackByMouse, IObservationArmory
 
     protected override void Start()
     {
-        this.SetWeapon(Armory.Instance.GetFocusEquippedWeapon().weapon);
+        base.Start();
+        /*        SetWeapon(
+                Armory.
+                Instance.
+                GetFocusEquippedWeapon().
+                weapon);*/
         Armory.Instance.AddObservation(this);
     }
 

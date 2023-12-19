@@ -46,7 +46,7 @@ public class SelectorController : MonoBehaviour
             return;
 
         FileNameData.SetUser(currentUserText.text);
-        SceneManager.LoadSceneAsync("VillageElderHouse");
+        SceneManager.LoadSceneAsync(Scenes.VillageElderHouseScene.ToString());
     }
 
     private void OnEnable()
